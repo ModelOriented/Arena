@@ -1,0 +1,198 @@
+<template>
+  <div class="feature-importance--plot" v-resize:throttle.100="onResize">
+    <Plotly v-bind="{ traces, config, layout, layoutPatches }" @plotly_click="onPlotlyClick" ref="plot"/>
+  </div>
+</template>
+<script>
+import Resize from '@/utils/Resize.js'
+import format from '@/utils/format.js'
+import { mapGetters } from 'vuex'
+const Plotly = () => import('@/components/Plotly.vue')
+
+export default {
+  name: 'FeatureImportance',
+  mixins: [Resize],
+  props: {
+    data: Array,
+    plotType: String
+  },
+  data () {
+    return {
+      selectedModel: null
+    }
+  },
+  computed: {
+    trimmed () {
+      let variables = new Set(this.data.map(d => d.plotData.variables.slice(0, this.maxVariables)).flat())
+      return this.data.map(d => {
+        if (d.plotData.variables.length <= this.maxVariables) return d
+        let filter = (v, i) => variables.has(d.plotData.variables[i])
+        return Object.assign({}, d, {
+          plotData: {
+            variables: d.plotData.variables.filter(filter),
+            dropout_loss: d.plotData.dropout_loss.filter(filter),
+            min: d.plotData.min.filter(filter),
+            max: d.plotData.max.filter(filter),
+            q1: d.plotData.q1.filter(filter),
+            q3: d.plotData.q3.filter(filter),
+            base: d.plotData.base
+          }
+        })
+      })
+    },
+    traces () {
+      return this.trimmed.map((d, i) => {
+        return {
+          name: d.params.model.name,
+          type: 'bar',
+          orientation: 'h',
+          y: d.plotData.variables.map(y => format.addNewLines(y, this.leftMargin)),
+          base: d.plotData.base,
+          x: d.plotData.dropout_loss.map(x => x - d.plotData.base),
+          text: d.plotData.dropout_loss.map(x => format.formatValue(x - d.plotData.base, true, '  ')),
+          textposition: this.displayBoxplots ? 'inside' : 'outside',
+          hovertext: d.plotData.variables,
+          textfont: {
+            color: this.displayBoxplots ? 'white' : '#371ea3'
+          },
+          hoverinfo: 'template',
+          hovertemplate: d.plotData.dropout_loss.map((x, i) => format.formatValue(d.plotData.base) + ' => ' + format.formatValue(x)),
+          hoverlabel: {
+            bgcolor: this.modelsBarsColor[d.params.model.uuid],
+            font: { family: 'FiraSansBold', size: 16, color: 'white' }
+          },
+          marker: {
+            color: this.modelsBarsColor[d.params.model.uuid]
+          },
+          insidetextanchor: 'start',
+          selectedpoints: (this.selectedModel === d.params.model.uuid || this.selectedModel === null) ? undefined : [] // undefined - all selected, [] - all unselected
+        }
+      }).concat(!this.displayBoxplots ? [] : this.trimmed.map((d, i) => {
+        return {
+          name: d.params.model.name,
+          type: 'box',
+          orientation: 'h',
+          y: d.plotData.variables.map(y => format.addNewLines(y, this.leftMargin)),
+          q1: d.plotData.q1,
+          median: d.plotData.q1, // median is invisible, but need to be between q1 and q3
+          q3: d.plotData.q3,
+          marker: {
+            color: (this.selectedModel === d.params.model.uuid || this.selectedModel === null) ? '#371ea3' : 'transparent'
+          },
+          line: {
+            width: 1
+          },
+          fillcolor: (this.selectedModel === d.params.model.uuid || this.selectedModel === null) ? '#371ea3' : 'transparent',
+          lowerfence: d.plotData.min,
+          upperfence: d.plotData.max,
+          showlegend: false,
+          hoverinfo: 'none',
+          whiskerwidth: 0
+        }
+      }))
+    },
+    layout () {
+      return {
+        yaxis: {
+          type: 'category',
+          autorange: 'reversed',
+          gridwidth: 2,
+          fixedrange: true,
+          zeroline: false
+        },
+        xaxis: {
+          type: 'linear',
+          title: {
+            text: 'dropout loss',
+            standoff: 10
+          },
+          gridwidth: 2,
+          range: this.range,
+          fixedrange: true,
+          zeroline: false
+        },
+        font: {
+          family: 'FiraSansBold',
+          size: 14,
+          color: '#371ea3'
+        },
+        hovermode: 'closest',
+        boxgap: 0.2,
+        boxgroupgap: 0.6,
+        bargap: 0.2,
+        boxmode: 'group',
+        showlegend: false,
+        margin: { l: this.leftMargin, t: 0, b: 45, r: 5 },
+        dragmode: 'pan',
+        shapes: this.trimmed.map(d => {
+          return {
+            type: 'line',
+            x0: d.plotData.base,
+            x1: d.plotData.base,
+            y0: 0,
+            y1: 1,
+            yref: 'paper',
+            xref: 'x',
+            line: {
+              color: 'black',
+              width: 2,
+              dash: 'dot'
+            }
+          }
+        })
+      }
+    },
+    config () {
+      return {
+        displaylogo: false,
+        displayModeBar: false,
+        staticPlot: false,
+        modeBarButtonsToRemove: ['lasso2d', 'autoScale2d', 'select2d2', 'hoverCompareCartesian', 'hoverClosestCartesian', 'toImage']
+      }
+    },
+    minimalValue () {
+      return Math.min(...this.trimmed.map(d => {
+        return Math.min(...d.plotData.min, d.plotData.base)
+      }))
+    },
+    maximalValue () {
+      return Math.max(...this.trimmed.map(d => {
+        return Math.max(...d.plotData.max)
+      }))
+    },
+    range () {
+      let len = this.maximalValue - this.minimalValue
+      // margin = 0.5 * totalMarginInPixels * rangeInScale / ( rangeInPixels = width - totalMarginInPixels - plotlyMargin )
+      let margin = 0.5 * 100 * len / (this.width - 100 - this.leftMargin - 5)
+      return [this.minimalValue - margin, this.maximalValue + margin]
+    },
+    layoutPatches () {
+      return { 'xaxis.range': this.range, 'margin.l': this.leftMargin }
+    },
+    maxVariables () { return this.$store.getters.getOption('featureimportance_max_variables') },
+    leftMargin () { return this.$store.getters.getOption('left_margin') },
+    displayBoxplots () { return this.$store.getters.getOption('featureimportance_boxplots') },
+    ...mapGetters(['modelsBarsColor'])
+  },
+  methods: {
+    onPlotlyClick (e) {
+      let points = e.data.points.filter(p => p.curveNumber < this.trimmed.length) // Boxplots are after all bars
+      if (points.length === 0) return
+      let yaxis = points[0].yaxis // All points have the same
+      // I do not know why it works, I just found this by experiments
+      let barWidth = (yaxis._length - yaxis._m - yaxis._b) / (this.trimmed.length * yaxis._categories.length)
+      let barsTop = yaxis.d2p(points[0].y) - (0.5 * barWidth * this.trimmed.length) // Center - half of widths sum
+      let curveNum = Math.floor((e.data.event.pointerY - barsTop) / barWidth) // Assuming plot is at top:0
+      if (curveNum >= this.trimmed.length || curveNum < 0) return
+      let model = this.trimmed[curveNum].params.model.uuid
+      // If this model is already selected, then unselect
+      this.selectedModel = this.selectedModel === model ? null : model
+    }
+  },
+  components: {
+    Plotly
+  }
+}
+</script>
+<style>
+</style>

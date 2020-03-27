@@ -1,0 +1,63 @@
+/* File for common css rules */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Fira Sans';
+  user-select: none;
+}
+.right {
+  float: right;
+}
+.blured {
+  filter: blur(2px);
+}
+
+/* dropdown */
+.dropdown > .dropdown-toggle {
+  background: #f1f1f1;
+}
+.dropdown > .dropdown-toggle:hover {
+  background: #e1e1e1;
+}
+.dropdown-menu {
+  width: 100%;
+  z-index: 10001;
+}
+
+/* Fonts */
+@font-face {
+  font-family: 'Fira Sans';
+  src: url('assets/FiraSans-Regular.otf');
+}
+@font-face {
+  font-family: 'FiraSansBold';
+  src: url('assets/FiraSans-Bold.otf');
+}
+
+/* Tooltips */
+.tooltiped {
+  position: relative;
+}
+.tooltiped > span.tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(100% + 5px);
+  max-width: 300px;
+  min-width: 150px;
+  background: #4378bf;
+  border-radius: 5px;
+  box-shadow: 0 0 2px 0 #4378bf;
+  padding: 5px;
+  color: white;
+  text-align: left;
+  z-index: 10000000;
+  font-size: 14px;
+  line-height: 14px;
+  display: none;
+  white-space: normal;
+  text-align: center;
+}
+.tooltiped:hover > span.tooltip {
+  display: block;
+}
