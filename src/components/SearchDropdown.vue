@@ -98,9 +98,11 @@ div.search-dropdown > input {
   transition: opacity 0.3s;
   z-index: 2;
   outline: none;
+  cursor: pointer;
 }
 div.search-dropdown.open > input {
   opacity: 1;
+  cursor: auto;
 }
 div.search-dropdown > span.param-name {
   z-index: 1;
