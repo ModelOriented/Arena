@@ -723,12 +723,12 @@ var Navbarvue_type_template_id_27eb949a_staticRenderFns = []
 
 // CONCATENATED MODULE: ./src/components/Navbar.vue?vue&type=template&id=27eb949a&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SearchDropdown.vue?vue&type=template&id=678e4ba1&
-var SearchDropdownvue_type_template_id_678e4ba1_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"search-dropdown",class:{ open: _vm.open },on:{"click":function($event){_vm.open = true}}},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.editText),expression:"editText"}],attrs:{"type":"text"},domProps:{"value":(_vm.editText)},on:{"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"escape",undefined,$event.key,undefined)){ return null; }_vm.open = false},"input":function($event){if($event.target.composing){ return; }_vm.editText=$event.target.value}}}),_c('span',{staticClass:"param-name"},[_vm._v(_vm._s(_vm.displayedParamName))]),_c('span',{staticClass:"param-value"},[_vm._v(_vm._s(_vm.displayedValue))]),(_vm.open && _vm.availableOptions.length > 0)?_c('div',{staticClass:"options-list"},_vm._l((_vm.availableOptions),function(o){return _c('div',{key:o.uuid,staticClass:"option",on:{"click":function($event){return _vm.setParam(o)}}},[_vm._v(" "+_vm._s(_vm._f("formatTitle")(o.name))+" ")])}),0):_vm._e()])}
-var SearchDropdownvue_type_template_id_678e4ba1_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SearchDropdown.vue?vue&type=template&id=63db4ebd&
+var SearchDropdownvue_type_template_id_63db4ebd_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"search-dropdown",class:{ open: _vm.open },on:{"click":function($event){_vm.open = true}}},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.editText),expression:"editText"}],attrs:{"type":"text"},domProps:{"value":(_vm.editText)},on:{"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"escape",undefined,$event.key,undefined)){ return null; }_vm.open = false},"input":function($event){if($event.target.composing){ return; }_vm.editText=$event.target.value}}}),_c('span',{staticClass:"param-name"},[_vm._v(_vm._s(_vm.displayedParamName))]),_c('span',{staticClass:"param-value"},[_vm._v(_vm._s(_vm.displayedValue))]),(_vm.open && _vm.availableOptions.length > 0)?_c('div',{staticClass:"options-list"},_vm._l((_vm.availableOptions),function(o){return _c('div',{key:o.uuid,staticClass:"option",on:{"click":function($event){return _vm.setParam(o)}}},[_vm._v(" "+_vm._s(_vm._f("formatTitle")(o.name))+" ")])}),0):_vm._e()])}
+var SearchDropdownvue_type_template_id_63db4ebd_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/SearchDropdown.vue?vue&type=template&id=678e4ba1&
+// CONCATENATED MODULE: ./src/components/SearchDropdown.vue?vue&type=template&id=63db4ebd&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.slice.js
 var es_array_slice = __webpack_require__("fb6a");
@@ -920,8 +920,8 @@ var SearchDropdownvue_type_style_index_0_lang_css_ = __webpack_require__("9efa")
 
 var SearchDropdown_component = Object(componentNormalizer["a" /* default */])(
   components_SearchDropdownvue_type_script_lang_js_,
-  SearchDropdownvue_type_template_id_678e4ba1_render,
-  SearchDropdownvue_type_template_id_678e4ba1_staticRenderFns,
+  SearchDropdownvue_type_template_id_63db4ebd_render,
+  SearchDropdownvue_type_template_id_63db4ebd_staticRenderFns,
   false,
   null,
   null,
@@ -5502,4 +5502,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.8892fabb.js.map
+//# sourceMappingURL=app.8913724d.js.map
