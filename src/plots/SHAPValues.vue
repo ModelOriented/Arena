@@ -29,6 +29,7 @@ export default {
         let filter = (v, i) => variables.has(d.plotData.variables[i])
         return Object.assign({}, d, {
           plotData: {
+            variables_value: d.plotData.variables_value.filter(filter),
             variables: d.plotData.variables.filter(filter),
             mean: d.plotData.mean.filter(filter),
             min: d.plotData.min.filter(filter),
