@@ -2700,12 +2700,12 @@ var CategoricalCeterisParibus_component = Object(componentNormalizer["a" /* defa
 )
 
 /* harmony default export */ var CategoricalCeterisParibus = (CategoricalCeterisParibus_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/SHAPValues.vue?vue&type=template&id=7929f033&
-var SHAPValuesvue_type_template_id_7929f033_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"resize",rawName:"v-resize:throttle.100",value:(_vm.onResize),expression:"onResize",arg:"throttle",modifiers:{"100":true}}],staticClass:"shap-values-plot"},[_c('Plotly',_vm._b({ref:"plot",on:{"plotly_click":_vm.onPlotlyClick}},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout, layoutPatches: _vm.layoutPatches },false))],1)}
-var SHAPValuesvue_type_template_id_7929f033_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/SHAPValues.vue?vue&type=template&id=04670861&
+var SHAPValuesvue_type_template_id_04670861_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"resize",rawName:"v-resize:throttle.100",value:(_vm.onResize),expression:"onResize",arg:"throttle",modifiers:{"100":true}}],staticClass:"shap-values-plot"},[_c('Plotly',_vm._b({ref:"plot",on:{"plotly_click":_vm.onPlotlyClick}},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout, layoutPatches: _vm.layoutPatches },false))],1)}
+var SHAPValuesvue_type_template_id_04670861_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/plots/SHAPValues.vue?vue&type=template&id=7929f033&
+// CONCATENATED MODULE: ./src/plots/SHAPValues.vue?vue&type=template&id=04670861&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/SHAPValues.vue?vue&type=script&lang=js&
 
@@ -2762,6 +2762,7 @@ var SHAPValuesvue_type_script_lang_js_Plotly = function Plotly() {
 
         return Object.assign({}, d, {
           plotData: {
+            variables_value: d.plotData.variables_value.filter(filter),
             variables: d.plotData.variables.filter(filter),
             mean: d.plotData.mean.filter(filter),
             min: d.plotData.min.filter(filter),
@@ -2985,8 +2986,8 @@ var SHAPValuesvue_type_script_lang_js_Plotly = function Plotly() {
 
 var SHAPValues_component = Object(componentNormalizer["a" /* default */])(
   plots_SHAPValuesvue_type_script_lang_js_,
-  SHAPValuesvue_type_template_id_7929f033_render,
-  SHAPValuesvue_type_template_id_7929f033_staticRenderFns,
+  SHAPValuesvue_type_template_id_04670861_render,
+  SHAPValuesvue_type_template_id_04670861_staticRenderFns,
   false,
   null,
   null,
@@ -5502,4 +5503,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.8913724d.js.map
+//# sourceMappingURL=app.7978014a.js.map
