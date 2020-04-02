@@ -8,6 +8,7 @@ loadFontAwesome()
 
 let appendURL = new URLSearchParams(window.location.search).get('append')
 if (appendURL) {
+  localStorage.setItem('append', '')
   localStorage.setItem('append', appendURL)
   document.write('You can close this window')
 } else {
