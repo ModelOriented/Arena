@@ -3538,12 +3538,12 @@ var PlotProxy_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var PlotProxy = (PlotProxy_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/BlockHead.vue?vue&type=template&id=0367e452&
-var BlockHeadvue_type_template_id_0367e452_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"block-head"},[_c('div',{staticClass:"main-title-box"},[(!_vm.titleEdit)?_c('span',{staticClass:"title tooltiped",on:{"dblclick":function($event){_vm.titleEdit = true}}},[_c('span',{staticClass:"tooltip"},[_vm._v("Double click to edit")]),_c('span',{staticClass:"title-text"},[_vm._v(_vm._s(_vm.slotv.name))])]):_vm._e(),(_vm.description && !_vm.titleEdit)?_c('span',{staticClass:"tooltiped plot-help-box"},[_c('span',{staticClass:"tooltip"},[_vm._v(_vm._s(_vm.description))]),_c('font-awesome-icon',{attrs:{"icon":['far', 'question-circle']}})],1):_vm._e(),(_vm.titleEdit)?_c('input',{ref:"titleInput",staticClass:"title-input",attrs:{"type":"text"},domProps:{"value":_vm.slotv.name},on:{"blur":_vm.saveTitle,"keyup":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.saveTitle($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"escape",undefined,$event.key,undefined)){ return null; }_vm.titleEdit = false}]}}):_vm._e(),_c('div',{staticClass:"subtitle",domProps:{"innerHTML":_vm._s(_vm.usedModels)}})]),_c('div',{staticClass:"locks"},[_vm._l((_vm.lockableParams),function(p){return _c('span',{key:p.name,staticClass:"tooltiped",on:{"click":function($event){return _vm.lockUnlockParam(p.name)},"contextmenu":function($event){$event.preventDefault();return _vm.openParamSearch(p.name, $event)}}},[_vm._m(0,true),_vm._v(" "+_vm._s(_vm._f("titleFormat")(p.value ? p.value.name : p.name))+" "+_vm._s(p.value ? '🔒' : '🔓')+" ")])}),(_vm.isMerged)?_c('span',{on:{"click":function($event){return _vm.splitSlot(_vm.slotv)}}},[_vm._v("Split 💥")]):_vm._e(),(_vm.searchMenuParam)?_c('SearchMenu',{style:(_vm.searchManuStyle),attrs:{"paramName":_vm.searchMenuParam},on:{"close":function($event){_vm.searchMenuParam = ''},"setParam":function($event){return _vm.setSlotParam($event)}}}):_vm._e()],2)])}
-var BlockHeadvue_type_template_id_0367e452_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"tooltip"},[_vm._v("Left click to lock"),_c('br'),_vm._v("Right click to choose")])}]
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/BlockHead.vue?vue&type=template&id=9deccd44&
+var BlockHeadvue_type_template_id_9deccd44_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"block-head"},[_c('div',{staticClass:"main-title-box"},[(!_vm.titleEdit)?_c('span',{staticClass:"title tooltiped",on:{"dblclick":function($event){_vm.titleEdit = true}}},[_c('span',{staticClass:"tooltip"},[_vm._v("Double click to edit")]),_c('span',{staticClass:"title-text"},[_vm._v(_vm._s(_vm.slotv.name))])]):_vm._e(),(_vm.description && !_vm.titleEdit)?_c('span',{staticClass:"tooltiped plot-help-box"},[_c('span',{staticClass:"tooltip"},[_vm._v(_vm._s(_vm.description))]),_c('font-awesome-icon',{attrs:{"icon":['far', 'question-circle']}})],1):_vm._e(),(_vm.titleEdit)?_c('input',{ref:"titleInput",staticClass:"title-input",attrs:{"type":"text"},domProps:{"value":_vm.slotv.name},on:{"blur":_vm.saveTitle,"keyup":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.saveTitle($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"escape",undefined,$event.key,undefined)){ return null; }_vm.titleEdit = false}]}}):_vm._e(),_c('div',{staticClass:"subtitle",domProps:{"innerHTML":_vm._s(_vm.usedModels)}})]),_c('div',{staticClass:"locks"},[(_vm.isMerged)?_c('span',{on:{"click":function($event){return _vm.splitSlot(_vm.slotv)}}},[_vm._v("Split "),_c('font-awesome-icon',{attrs:{"icon":['far', 'clone']}})],1):_vm._e(),_vm._l((_vm.lockableParams),function(p){return _c('span',{key:p.name,staticClass:"tooltiped",on:{"click":function($event){return _vm.lockUnlockParam(p.name)},"contextmenu":function($event){$event.preventDefault();return _vm.openParamSearch(p.name, $event)}}},[_vm._m(0,true),_vm._v(" "+_vm._s(_vm._f("titleFormat")(p.value ? p.value.name : p.name))+" "+_vm._s(p.value ? '🔒' : '🔓')+" ")])}),(_vm.searchMenuParam)?_c('SearchMenu',{style:(_vm.searchManuStyle),attrs:{"paramName":_vm.searchMenuParam},on:{"close":function($event){_vm.searchMenuParam = ''},"setParam":function($event){return _vm.setSlotParam($event)}}}):_vm._e()],2)])}
+var BlockHeadvue_type_template_id_9deccd44_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"tooltip"},[_vm._v("Left click to lock"),_c('br'),_vm._v("Right click to choose")])}]
 
 
-// CONCATENATED MODULE: ./src/components/BlockHead.vue?vue&type=template&id=0367e452&
+// CONCATENATED MODULE: ./src/components/BlockHead.vue?vue&type=template&id=9deccd44&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SearchMenu.vue?vue&type=template&id=ea239fe2&
 var SearchMenuvue_type_template_id_ea239fe2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"search-menu"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.editText),expression:"editText"}],attrs:{"type":"text"},domProps:{"value":(_vm.editText)},on:{"input":function($event){if($event.target.composing){ return; }_vm.editText=$event.target.value}}}),_vm._l((_vm.availableOptions),function(o){return _c('div',{key:o.uuid,staticClass:"entry",on:{"click":function($event){return _vm.$emit('setParam', o)}}},[_vm._v(" "+_vm._s(_vm._f("formatTitle")(o.name))+" ")])}),_c('div',{staticClass:"entry",on:{"click":function($event){return _vm.$emit('close')}}},[_vm._v("Close")])],2)}
@@ -3642,6 +3642,7 @@ var SearchMenu_component = Object(componentNormalizer["a" /* default */])(
 
 
 
+
 //
 //
 //
@@ -3700,10 +3701,15 @@ var SearchMenu_component = Object(componentNormalizer["a" /* default */])(
     lockableParams: function lockableParams() {
       var _this2 = this;
 
-      if (!this.slotv || this.slotv.localParams.length !== 1) return []; // Locking is available only in single plot (not merged)
+      if (this.slotv.localParams.length === 0) return [];
+      var available = PlotsInfo.lockableParams[this.slotv.plotType] || []; // Use only those params, that have identical value (including undefined) in all sub plots
 
-      var available = PlotsInfo.lockableParams[this.slotv.plotType] || [];
-      return available.map(function (p) {
+      var sameValueParams = available.filter(function (avail) {
+        return !_this2.slotv.localParams.find(function (local) {
+          return local[avail] !== _this2.slotv.localParams[0][avail];
+        });
+      });
+      return sameValueParams.map(function (p) {
         return {
           name: p,
           value: _this2.slotv.localParams[0][p]
@@ -3772,8 +3778,8 @@ var BlockHeadvue_type_style_index_0_lang_css_ = __webpack_require__("7675");
 
 var BlockHead_component = Object(componentNormalizer["a" /* default */])(
   components_BlockHeadvue_type_script_lang_js_,
-  BlockHeadvue_type_template_id_0367e452_render,
-  BlockHeadvue_type_template_id_0367e452_staticRenderFns,
+  BlockHeadvue_type_template_id_9deccd44_render,
+  BlockHeadvue_type_template_id_9deccd44_staticRenderFns,
   false,
   null,
   null,
@@ -5592,7 +5598,7 @@ var vue_fontawesome_index_es = __webpack_require__("ad3d");
 
 function loadFontAwesome() {
   index_es["c" /* library */].add(free_solid_svg_icons_index_es["c" /* faArchive */], free_solid_svg_icons_index_es["h" /* faGripVertical */], free_solid_svg_icons_index_es["k" /* faMinusSquare */], free_solid_svg_icons_index_es["m" /* faPlusSquare */], free_solid_svg_icons_index_es["f" /* faCompressArrowsAlt */], free_solid_svg_icons_index_es["i" /* faLayerGroup */], free_solid_svg_icons_index_es["g" /* faExpand */], free_solid_svg_icons_index_es["d" /* faBars */], free_solid_svg_icons_index_es["a" /* faAngleDown */], free_solid_svg_icons_index_es["e" /* faCaretDown */], free_solid_svg_icons_index_es["l" /* faPlus */], free_solid_svg_icons_index_es["j" /* faMinus */], free_solid_svg_icons_index_es["b" /* faAngleUp */], free_solid_svg_icons_index_es["n" /* faSquare */]);
-  index_es["c" /* library */].add(free_regular_svg_icons_index_es["b" /* faQuestionCircle */], free_regular_svg_icons_index_es["d" /* faTimesCircle */], free_regular_svg_icons_index_es["a" /* faCheckSquare */], free_regular_svg_icons_index_es["c" /* faSquare */]);
+  index_es["c" /* library */].add(free_regular_svg_icons_index_es["c" /* faQuestionCircle */], free_regular_svg_icons_index_es["e" /* faTimesCircle */], free_regular_svg_icons_index_es["a" /* faCheckSquare */], free_regular_svg_icons_index_es["d" /* faSquare */], free_regular_svg_icons_index_es["b" /* faClone */]);
   vue_runtime_esm["a" /* default */].component('font-awesome-icon', vue_fontawesome_index_es["a" /* FontAwesomeIcon */]);
 }
 // CONCATENATED MODULE: ./src/main.js
@@ -5869,4 +5875,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.99d5f987.js.map
+//# sourceMappingURL=app.dd987056.js.map
