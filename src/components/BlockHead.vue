@@ -10,11 +10,11 @@
       <div class="subtitle" v-html="usedModels"></div>
     </div>
     <div class="locks">
+      <span v-if="isMerged" @click="splitSlot(slotv)">Split <font-awesome-icon :icon="['far', 'clone']"/></span>
       <span v-for="p in lockableParams" :key="p.name" @click="lockUnlockParam(p.name)" @contextmenu.prevent="openParamSearch(p.name, $event)" class="tooltiped">
         <span class="tooltip">Left click to lock<br>Right click to choose</span>
         {{ p.value ? p.value.name : p.name | titleFormat }} {{ p.value ? '&#x1f512;' : '&#x1f513;' }}
       </span>
-      <span v-if="isMerged" @click="splitSlot(slotv)">Split &#x1f4a5;</span>
       <SearchMenu v-if="searchMenuParam" :paramName="searchMenuParam" :style="searchManuStyle" @close="searchMenuParam = ''" @setParam="setSlotParam($event)"/>
     </div>
   </div>
@@ -50,9 +50,11 @@ export default {
       return this.slotv && this.slotv.localParams.length > 1
     },
     lockableParams () {
-      if (!this.slotv || this.slotv.localParams.length !== 1) return [] // Locking is available only in single plot (not merged)
+      if (this.slotv.localParams.length === 0) return []
       let available = PlotsInfo.lockableParams[this.slotv.plotType] || []
-      return available.map(p => { return { name: p, value: this.slotv.localParams[0][p] } })
+      // Use only those params, that have identical value (including undefined) in all sub plots
+      let sameValueParams = available.filter(avail => !this.slotv.localParams.find(local => local[avail] !== this.slotv.localParams[0][avail]))
+      return sameValueParams.map(p => { return { name: p, value: this.slotv.localParams[0][p] } })
     },
     description () {
       if (!this.slotv) return ''
