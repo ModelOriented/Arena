@@ -3,6 +3,7 @@
     <input type="text" v-model="editText" @keyup.escape="open = false">
     <span class="param-name">{{ displayedParamName }}</span>
     <span class="param-value">{{ displayedValue }}</span>
+    <font-awesome-icon icon="angle-down" class="caret"/>
     <div class="options-list" v-if="open && availableOptions.length > 0">
       <div class="option" v-for="o in availableOptions" :key="o.uuid" @click="setParam(o)">
         {{ o.name | formatTitle }}
@@ -137,6 +138,13 @@ div.search-dropdown > span.param-value {
 }
 div.search-dropdown.open > span.param-name {
   opacity: 0;
+}
+div.search-dropdown > .caret {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  color: #555;
 }
 div.search-dropdown > div.options-list {
   position: absolute;

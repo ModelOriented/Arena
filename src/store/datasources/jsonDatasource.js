@@ -23,11 +23,11 @@ const getters = {
   variables (state) {
     return state.variables
   },
-  availableSlots (state, getters, rootState, rootGetters) {
+  getAvailableSlots: (state, getters) => (fullParams) => {
     let params = {}
-    params.model = state.models.find(m => (rootGetters.getGlobalParam('model') || {}).uuid === m.uuid)
-    params.observation = state.observations.find(o => (rootGetters.getGlobalParam('observation') || {}).uuid === o.uuid)
-    params.variable = state.variables.find(v => (rootGetters.getGlobalParam('variable') || {}).uuid === v.uuid)
+    params.model = state.models.find(m => (fullParams.model || {}).uuid === m.uuid)
+    params.observation = state.observations.find(o => (fullParams.observation || {}).uuid === o.uuid)
+    params.variable = state.variables.find(v => (fullParams.variable || {}).uuid === v.uuid)
     if (!params.model || !params.observation || !params.variable) return []
 
     return state.plotsData.filter(d => {

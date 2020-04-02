@@ -42,7 +42,7 @@ export default {
     titleFormat: format.formatTitle
   },
   computed: {
-    fullParams () { return this.slotsFullParams[this.slotv.uuid] },
+    fullParams () { return this.getSlotFullParams(this.slotv.localParams) },
     usedModels () {
       return [...new Set(this.fullParams.map(p => '<span style="color: ' + this.modelsColors[p.model.uuid] + '">' + p.model.name + '</span>'))].join(', ')
     },
@@ -58,7 +58,7 @@ export default {
       if (!this.slotv) return ''
       return PlotsInfo.getPlotDesc(this.slotv.plotType)
     },
-    ...mapGetters(['slotsFullParams', 'modelsColors', 'availableParams'])
+    ...mapGetters(['getSlotFullParams', 'modelsColors', 'availableParams'])
   },
   methods: {
     saveTitle () {

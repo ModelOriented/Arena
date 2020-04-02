@@ -4,8 +4,7 @@
       <span class="title"><font-awesome-icon :icon="['fas', 'archive']"/>CLIPBOARD</span>
     </div>
     <div class="arrow-button" @click="open=!open">{{ open ? "▶" : "◀" }}</div>
-    <dropdown v-if="getGlobalParam('model')" :options="modelsDropdown" :selected="getGlobalParam('model')" @updateOption="setGlobalParam({ name: 'model', value: $event })"
-    class="dropdown" :key="getGlobalParam('model').uuid"/>
+    <SidepanelDropdown @updateSlotsList="slotsList = $event"/>
     <div class="sidepanel-list" v-if="slotsList != null">
       <div v-for="c in slotsCategories" :key="c">
         <span class="category-name">{{ c }}</span>
@@ -16,34 +15,28 @@
 </template>
 <script>
 import MiniBlock from '@/components/MiniBlock.vue'
-import dropdown from 'vue-dropdowns'
+import SidepanelDropdown from '@/components/SidepanelDropdown.vue'
 import interact from 'interactjs'
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'Sidepanel',
   components: {
     MiniBlock,
-    dropdown
+    SidepanelDropdown
   },
   data () {
     return {
       open: true,
       dropzoneActive: false,
-      dropzoneVisible: false
+      dropzoneVisible: false,
+      slotsList: []
     }
   },
   computed: {
-    modelsDropdown () {
-      return [...this.availableParams.model, { name: 'Clipboard', uuid: -1 }]
-    },
-    slotsList () {
-      return (this.getGlobalParam('model') || {}).uuid === -1 ? this.archivedSlots : this.availableSlots
-    },
     slotsCategories () {
       return [...this.slotsList.reduce((set, x) => set.add(x.plotCategory), new Set())]
-    },
-    ...mapGetters(['getGlobalParam', 'availableSlots', 'availableParams', 'archivedSlots'])
+    }
   },
   methods: {
     initDropzone () {
@@ -70,7 +63,7 @@ export default {
     onDrop (target) {
       if (target.slotv) this.archiveSlot(target.slotv)
     },
-    ...mapMutations(['setGlobalParam', 'archiveSlot'])
+    ...mapMutations(['archiveSlot'])
   },
   mounted () {
     this.initDropzone()
@@ -87,7 +80,8 @@ export default {
   border-top: 1px solid #ccc;
   box-sizing: border-box;
   transition: right 0.6s;
-  padding: 10px 0px;
+  flex-direction: column;
+  display: flex;
 }
 .sidepanel.closed {
   right: -320px;
@@ -109,14 +103,11 @@ export default {
   font-size: 13px;
   color: rgba(130, 130, 130, 1);
 }
-.sidepanel > .dropdown {
-  width: calc(100% - 80px);
-  left: 40px;
-}
 .sidepanel > .sidepanel-list {
   width: 100%;
-  height: 100%;
+  margin-top: 20px;
   overflow-y: auto;
+  flex: 1;
 }
 .sidepanel > .sidepanel-list > div > span.category-name {
   margin-left: 40px;

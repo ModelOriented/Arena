@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import uuid from 'uuid/v4'
 import jsonDatasource from '@/store/datasources/jsonDatasource.js'
 import arenarLiveDatasource from '@/store/datasources/arenarLiveDatasource.js'
-import equal from 'fast-deep-equal/es6'
 import format from '@/utils/format.js'
 import OptionsSchemas from '@/components/OptionsSchemas.js'
 
@@ -55,9 +54,10 @@ const getters = {
   nextNameConflicts (state) {
     return state.nameConflicts.length > 0 ? state.nameConflicts[0] : null
   },
-  availableSlots (state, getters) {
+  getAvailableSlots: (state, getters) => (params) => {
+    let fullParams = Object.assign({}, getters.globalParams, params)
     let slots = []
-    state.datasources.forEach(ds => { slots = slots.concat(getters[ds + '/availableSlots']) })
+    state.datasources.forEach(ds => { slots = slots.concat(getters[ds + '/getAvailableSlots'](fullParams)) })
     slots = slots.map(s => {
       return {
         ...s,
@@ -70,7 +70,7 @@ const getters = {
         pageNumber: state.pageNumber
       }
     })
-    return slots.filter(a => getters.visibleSlots.findIndex(b => equal([a.localParams, a.plotType], [b.localParams, b.plotType])) === -1)
+    return slots
   },
   visibleSlots (state) {
     return state.slots.filter(s => !s.archived && s.pageNumber === state.pageNumber)
@@ -78,11 +78,11 @@ const getters = {
   archivedSlots (state) {
     return state.slots.filter(s => s.archived)
   },
-  slotsFullParams (state, getters) {
-    return [...state.slots, ...getters.availableSlots].reduce((acu, value) => {
-      acu[value.uuid] = value.localParams.map(p => Object.assign({}, getters.globalParams, p))
-      return acu
-    }, {})
+  allSlots (state) {
+    return state.slots
+  },
+  getSlotFullParams: (state, getters) => (localParams) => {
+    return localParams.map(p => Object.assign({}, getters.globalParams, p))
   },
   modelsColors (state, getters) {
     let colors = palette.slice(0)

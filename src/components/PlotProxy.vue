@@ -53,7 +53,7 @@ export default {
   },
   computed: {
     // Slot localParams merged with globalParams
-    fullParams () { return this.slotsFullParams[this.slotv.uuid] },
+    fullParams () { return this.getSlotFullParams(this.slotv.localParams) },
     /* Each data object specify plotComponent, we make sure all are equal and return the value or '' if not */
     plotComponent () {
       if (!this.slotData || this.slotData.length === 0) return ''
@@ -64,7 +64,7 @@ export default {
     renderPlot () {
       return this.plotVisible && this.plotComponent
     },
-    ...mapGetters(['slotsFullParams'])
+    ...mapGetters(['getSlotFullParams'])
   },
   methods: {
     loadSlotData () {
