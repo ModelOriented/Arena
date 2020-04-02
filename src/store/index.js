@@ -9,8 +9,6 @@ import OptionsSchemas from '@/components/OptionsSchemas.js'
 
 Vue.use(Vuex)
 
-const useUniColors = true
-
 const state = {
   datasources: ['jsonDatasource', 'arenarLiveDatasource'],
   globalParams: {
@@ -22,7 +20,8 @@ const state = {
   pageNumber: 0,
   preview: null,
   nameConflicts: [],
-  options: {}
+  options: {},
+  manualColors: {}
 }
 
 const getters = {
@@ -85,23 +84,16 @@ const getters = {
       return acu
     }, {})
   },
-  modelsLineColor (state, getters) {
-    let n = getters.availableParams.model.length
-    let colors = n > lineColors.length ? lineColors[lineColors.length - 1].slice(0) : lineColors[n - 1].slice(0)
-    if (useUniColors) colors = universalColors.slice(0)
-    return getters.availableParams.model.reduce((acc, m) => {
-      acc[m.uuid] = colors.shift() || '#000000'
+  modelsColors (state, getters) {
+    let colors = palette.slice(0)
+    let defaultColors = getters.availableParams.model.reduce((acc, m) => {
+      acc[m.uuid] = colors.shift() || color.h
       return acc
     }, {})
+    return Object.assign({}, defaultColors, state.manualColors)
   },
-  modelsBarsColor (state, getters) {
-    let n = getters.availableParams.model.length
-    let colors = n > catColors.length ? catColors[catColors.length - 1].slice(0) : catColors[n - 1].slice(0)
-    if (useUniColors) colors = universalColors.slice(0)
-    return getters.availableParams.model.reduce((acc, m) => {
-      acc[m.uuid] = colors.shift() || '#000000'
-      return acc
-    }, {})
+  palette (state, getters) {
+    return palette
   },
   preview (state) {
     return state.preview
@@ -204,6 +196,9 @@ const mutations = {
   },
   setPreview (state, slot) {
     state.preview = slot
+  },
+  setColor (state, { uuid, color }) {
+    Vue.set(state.manualColors, uuid, color)
   }
 }
 
@@ -302,27 +297,8 @@ const color = {
   d: '#46bac2',
   e: '#ae2c87',
   f: '#ffa58c',
-  g: '#4378bf'
+  g: '#4378bf',
+  h: '#160e3b'
 }
 
-const lineColors = [
-  [color.d],
-  [color.a, color.g],
-  [color.a, color.b, color.g],
-  [color.a, color.b, color.g, color.f],
-  [color.a, color.b, color.g, color.e, color.f],
-  [color.a, color.b, color.d, color.e, color.f, color.g],
-  [color.a, color.b, color.c, color.d, color.e, color.f, color.g]
-]
-
-const catColors = [
-  [color.d],
-  [color.a, color.g],
-  [color.a, color.g, color.d],
-  [color.d, color.c, color.a, color.g],
-  [color.a, color.b, color.c, color.d, color.f],
-  [color.a, color.b, color.c, color.d, color.e, color.f],
-  [color.a, color.b, color.c, color.d, color.e, color.f, color.g]
-]
-
-const universalColors = [color.a, color.b, color.g, color.d, color.e, color.f, color.c]
+const palette = [color.a, color.b, color.g, color.d, color.e, color.f, color.c, color.h]

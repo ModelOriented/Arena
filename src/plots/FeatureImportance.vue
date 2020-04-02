@@ -58,11 +58,11 @@ export default {
           hoverinfo: 'template',
           hovertemplate: d.plotData.dropout_loss.map((x, i) => format.formatValue(d.plotData.base) + ' => ' + format.formatValue(x)),
           hoverlabel: {
-            bgcolor: this.modelsBarsColor[d.params.model.uuid],
+            bgcolor: this.modelsColors[d.params.model.uuid],
             font: { family: 'FiraSansBold', size: 16, color: 'white' }
           },
           marker: {
-            color: this.modelsBarsColor[d.params.model.uuid]
+            color: this.modelsColors[d.params.model.uuid]
           },
           insidetextanchor: 'start',
           selectedpoints: (this.selectedModel === d.params.model.uuid || this.selectedModel === null) ? undefined : [] // undefined - all selected, [] - all unselected
@@ -172,7 +172,7 @@ export default {
     maxVariables () { return this.$store.getters.getOption('featureimportance_max_variables') },
     leftMargin () { return this.$store.getters.getOption('left_margin') },
     displayBoxplots () { return this.$store.getters.getOption('featureimportance_boxplots') },
-    ...mapGetters(['modelsBarsColor'])
+    ...mapGetters(['modelsColors'])
   },
   methods: {
     onPlotlyClick (e) {

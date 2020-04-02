@@ -44,8 +44,7 @@ export default {
   computed: {
     fullParams () { return this.slotsFullParams[this.slotv.uuid] },
     usedModels () {
-      let colors = PlotsInfo.isLinear(this.plotComponent) ? this.modelsLineColor : this.modelsBarsColor
-      return [...new Set(this.fullParams.map(p => '<span style="color: ' + colors[p.model.uuid] + '">' + p.model.name + '</span>'))].join(', ')
+      return [...new Set(this.fullParams.map(p => '<span style="color: ' + this.modelsColors[p.model.uuid] + '">' + p.model.name + '</span>'))].join(', ')
     },
     isMerged () {
       return this.slotv && this.slotv.localParams.length > 1
@@ -59,7 +58,7 @@ export default {
       if (!this.slotv) return ''
       return PlotsInfo.getPlotDesc(this.slotv.plotType)
     },
-    ...mapGetters(['slotsFullParams', 'modelsLineColor', 'modelsBarsColor', 'availableParams'])
+    ...mapGetters(['slotsFullParams', 'modelsColors', 'availableParams'])
   },
   methods: {
     saveTitle () {

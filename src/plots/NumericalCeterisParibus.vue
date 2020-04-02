@@ -26,7 +26,7 @@ export default {
           hoverinfo: 'none',
           line: { shape: 'spline' },
           marker: {
-            color: this.modelsLineColor[d.params.model.uuid]
+            color: this.modelsColors[d.params.model.uuid]
           }
         }, {
           name: d.params.model.name + ' - ' + d.params.variable.name,
@@ -94,7 +94,7 @@ export default {
         modeBarButtonsToRemove: ['lasso2d', 'autoScale2d', 'select2d', 'hoverCompareCartesian', 'hoverClosestCartesian', 'toImage']
       }
     },
-    ...mapGetters(['modelsLineColor'])
+    ...mapGetters(['modelsColors'])
   },
   methods: {
     onPlotlyClick () {
