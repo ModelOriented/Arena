@@ -20,7 +20,8 @@ const state = {
   preview: null,
   nameConflicts: [],
   options: {},
-  manualColors: {}
+  manualColors: {},
+  closedElements: []
 }
 
 const getters = {
@@ -97,6 +98,9 @@ const getters = {
   },
   preview (state) {
     return state.preview
+  },
+  isElementClosed: (state, getters) => (name) => {
+    return !!state.closedElements.find(f => f === name)
   }
 }
 
@@ -199,11 +203,26 @@ const mutations = {
   },
   setColor (state, { uuid, color }) {
     Vue.set(state.manualColors, uuid, color)
+  },
+  closeElement (state, name) {
+    state.closedElements = [...state.closedElements.filter(e => e !== name), name]
+    localStorage.setItem('closedElements', JSON.stringify(state.closedElements))
   }
 }
 
 const actions = {
-  init ({ commit, state, dispatch }) {},
+  init ({ commit, state, dispatch }) {
+    try {
+      let closed = JSON.parse(localStorage.getItem('closedElements'))
+      if (!closed) return
+      if (!Array.isArray(closed)) throw new Error('value is not an array')
+      closed.forEach(name => {
+        if (typeof name === 'string' || name instanceof String) commit('closeElement', name)
+      })
+    } catch (e) {
+      console.error('Failed to read closedElements from localStorage', e)
+    }
+  },
   query ({ state, dispatch }, query) {
     // array of promises and raw objects (Promise.all will handle them)
     let promises = state.datasources.map(ds => {

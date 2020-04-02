@@ -4,7 +4,9 @@
       <span class="title"><font-awesome-icon :icon="['fas', 'archive']"/>CLIPBOARD</span>
     </div>
     <div class="arrow-button" @click="open=!open">{{ open ? "▶" : "◀" }}</div>
+    <SidepanelHelp :num="1" text="Select one or more models to create plots for them" @close="closeElement('help-1')" v-if="!isElementClosed('help-1')"/>
     <SidepanelDropdown @updateSlotsList="slotsList = $event"/>
+    <SidepanelHelp :num="2" text="Hold any of generated plots to open it" @close="closeElement('help-2')" v-if="!isElementClosed('help-2')"/>
     <div class="sidepanel-list" v-if="slotsList != null">
       <div v-for="c in slotsCategories" :key="c">
         <span class="category-name">{{ c }}</span>
@@ -16,14 +18,16 @@
 <script>
 import MiniBlock from '@/components/MiniBlock.vue'
 import SidepanelDropdown from '@/components/SidepanelDropdown.vue'
+import SidepanelHelp from '@/components/SidepanelHelp.vue'
 import interact from 'interactjs'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 
 export default {
   name: 'Sidepanel',
   components: {
     MiniBlock,
-    SidepanelDropdown
+    SidepanelDropdown,
+    SidepanelHelp
   },
   data () {
     return {
@@ -36,7 +40,8 @@ export default {
   computed: {
     slotsCategories () {
       return [...this.slotsList.reduce((set, x) => set.add(x.plotCategory), new Set())]
-    }
+    },
+    ...mapGetters(['isElementClosed'])
   },
   methods: {
     initDropzone () {
@@ -63,7 +68,7 @@ export default {
     onDrop (target) {
       if (target.slotv) this.archiveSlot(target.slotv)
     },
-    ...mapMutations(['archiveSlot'])
+    ...mapMutations(['archiveSlot', 'closeElement'])
   },
   mounted () {
     this.initDropzone()

@@ -144,6 +144,7 @@ div.sidepanel-dropdown > div.options-list > div.option:hover {
 div.sidepanel-dropdown > div.options-list > div.option.selected {
   background: #eee;
   color: #371ea8;
+  font-family: "FiraSansBold";
 }
 div.sidepanel-dropdown > div.options-list > div.option > .left-button > * {
   position: absolute;
