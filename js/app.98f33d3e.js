@@ -480,12 +480,12 @@ var es_promise_finally = __webpack_require__("a79d");
 // EXTERNAL MODULE: ./node_modules/vue/dist/vue.runtime.esm.js
 var vue_runtime_esm = __webpack_require__("2b0e");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=5cbea057&
-var Appvue_type_template_id_5cbea057_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('Navbar',{class:{ blured: _vm.settingsVisible },on:{"openSettings":function($event){_vm.settingsVisible = true}}}),_c('Sidepanel',{class:{ blured: _vm.settingsVisible },attrs:{"id":"sidepanel"},on:{"addToPlayground":_vm.addToPlayground}}),_c('div',{class:{ blured: _vm.settingsVisible },attrs:{"id":"playground"}},_vm._l((_vm.visibleSlots),function(slot){return _c('Block',{key:slot.uuid,attrs:{"slotv":slot,"startMoving":slot === _vm.movingBlock.slot ? _vm.movingBlock.mouseEvent : null},on:{"took":function($event){_vm.movingBlock = {}},"openFullscreen":function($event){_vm.fullscreenSlot = slot}}})}),1),_c('DeleteZone'),(_vm.settingsVisible)?_c('div',{staticClass:"overlay",on:{"click":function($event){_vm.settingsVisible = false}}}):_vm._e(),(_vm.settingsVisible)?_c('Settings',{on:{"close":function($event){_vm.settingsVisible = false}}}):_vm._e(),(_vm.nextNameConflicts)?_c('div',{staticClass:"overlay"}):_vm._e(),(_vm.nextNameConflicts)?_c('NameConflicts'):_vm._e(),(_vm.fullscreenSlot)?_c('FullscreenBlock',{attrs:{"slotv":_vm.fullscreenSlot},on:{"close":function($event){_vm.fullscreenSlot = null}}}):_vm._e(),(_vm.preview)?_c('Preview',{attrs:{"slotv":_vm.preview}}):_vm._e()],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=780801ee&
+var Appvue_type_template_id_780801ee_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('Navbar',{class:{ blured: _vm.settingsVisible },on:{"openSettings":function($event){_vm.settingsVisible = true}}}),_c('Sidepanel',{class:{ blured: _vm.settingsVisible },attrs:{"id":"sidepanel"},on:{"addToPlayground":_vm.addToPlayground}}),_c('div',{class:{ blured: _vm.settingsVisible },attrs:{"id":"playground"}},_vm._l((_vm.visibleSlots),function(slot){return _c('Block',{key:slot.uuid,attrs:{"slotv":slot,"startMoving":slot === _vm.movingBlock.slot ? _vm.movingBlock.mouseEvent : null},on:{"took":function($event){_vm.movingBlock = {}},"openFullscreen":function($event){_vm.fullscreenSlot = slot}}})}),1),_c('DeleteZone'),(_vm.settingsVisible)?_c('div',{staticClass:"overlay",on:{"click":function($event){_vm.settingsVisible = false}}}):_vm._e(),(_vm.settingsVisible)?_c('Settings',{on:{"close":function($event){_vm.settingsVisible = false}}}):_vm._e(),(_vm.nextNameConflicts)?_c('div',{staticClass:"overlay"}):_vm._e(),(_vm.nextNameConflicts)?_c('NameConflicts'):_vm._e(),(_vm.welcomeScreenVisible)?_c('div',{staticClass:"overlay",on:{"click":function($event){_vm.displayWelcomeScreen = false}}}):_vm._e(),(_vm.welcomeScreenVisible)?_c('WelcomeScreen',{on:{"close":function($event){_vm.displayWelcomeScreen = false}}}):_vm._e(),(_vm.fullscreenSlot)?_c('FullscreenBlock',{attrs:{"slotv":_vm.fullscreenSlot},on:{"close":function($event){_vm.fullscreenSlot = null}}}):_vm._e(),(_vm.preview)?_c('Preview',{attrs:{"slotv":_vm.preview}}):_vm._e()],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=5cbea057&
+// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=780801ee&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js
 var objectSpread2 = __webpack_require__("5530");
@@ -4405,6 +4405,118 @@ var NameConflicts_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var NameConflicts = (NameConflicts_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/WelcomeScreen.vue?vue&type=template&id=16a4feb9&
+var WelcomeScreenvue_type_template_id_16a4feb9_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"welcome-screen-container"},[_c('div',{staticClass:"close-button",on:{"click":function($event){return _vm.$emit('close')}}},[_c('font-awesome-icon',{attrs:{"icon":['far', 'times-circle']}})],1),_c('div',{staticClass:"welcome-screen-content"},[_c('span',{staticClass:"welcome"},[_vm._v("Welcome to Arena - Interactive XAI dashboard")]),_c('h2',[_vm._v("About")]),_vm._m(0),_c('h2',[_vm._v("See demo")]),_vm._l((_vm.examples),function(e){return _c('div',{key:e.name,staticClass:"example"},[_c('a',{attrs:{"href":_vm.baseURL + '/?data=' + e.url},on:{"click":function($event){$event.preventDefault();return _vm.openExample(e.url)}}},[_vm._v(_vm._s(e.name))]),(_vm.loadingExample === e.url)?_c('span',[_vm._v(" (Loading...)")]):_vm._e()])}),_c('h2',[_vm._v("Test on your data")]),_vm._m(1),_c('h2',[_vm._v("See also")]),_vm._m(2)],2),_c('div',{staticClass:"buttons"},[_c('button',{staticClass:"close-permanent",on:{"click":function($event){return _vm.closeElement('welcome-screen')}}},[_vm._v("Do not show again")]),_c('button',{staticClass:"close",on:{"click":function($event){return _vm.$emit('close')}}},[_vm._v("Close")])])])}
+var WelcomeScreenvue_type_template_id_16a4feb9_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('p',[_c('b',[_vm._v("Arena")]),_vm._v(" is an interactive dashboard to compare "),_c('b',[_vm._v("AI explanations")]),_vm._v(" for multiple predictive models at once. You can work with static precalculated data from one or more sources and with a live server that calculates plots on demand.")])},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('p',[_c('a',{attrs:{"href":"https://github.com/ModelOriented/ArenaR"}},[_vm._v("Use Arena with R")])])},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('p',[_c('b',[_vm._v("Arena")]),_vm._v(" is a part of "),_c('a',{attrs:{"href":"https://drwhy.ai"}},[_c('b',[_vm._v("DrWhy.AI")])]),_vm._v(" family. Check it out."),_c('br'),_vm._v(" Source code is available at "),_c('a',{attrs:{"href":"https://github.com/ModelOriented/Arena"}},[_vm._v("Github")])])}]
+
+
+// CONCATENATED MODULE: ./src/components/WelcomeScreen.vue?vue&type=template&id=16a4feb9&
+
+// CONCATENATED MODULE: ./src/utils/config.js
+/* harmony default export */ var config = ({
+  examples: [{
+    name: 'Apartments from 2009-2010 price per m2',
+    url: 'https://gist.githubusercontent.com/piotrpiatyszek/0129c6dce4c332dccb820b2e709465f3/raw/9644f61d9c977f5c8a4634ad633bb11f65a71efa/data.json'
+  }, {
+    name: 'FIFA Players Value',
+    url: 'https://gist.githubusercontent.com/piotrpiatyszek/8f93ce2e36adea23a02ceceed0b33882/raw/a1f15984e628c33381b1988e3b7766f1d478d9ab/data.json'
+  }, {
+    name: 'Employees status classification',
+    url: 'https://gist.githubusercontent.com/piotrpiatyszek/d56bae7c2721e4202eba8454b6d9e5f6/raw/413cecf098f953fc46ca6c4087112b5e73bda505/data.json'
+  }],
+  url: 'https://arena.drwhy.ai'
+});
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/WelcomeScreen.vue?vue&type=script&lang=js&
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ var WelcomeScreenvue_type_script_lang_js_ = ({
+  name: 'WelcomeScreen',
+  data: function data() {
+    return {
+      loadingExample: null
+    };
+  },
+  computed: {
+    baseURL: function baseURL() {
+      return config.url;
+    },
+    examples: function examples() {
+      return config.examples;
+    }
+  },
+  methods: Object(objectSpread2["a" /* default */])({
+    openExample: function openExample(url) {
+      var _this = this;
+
+      if (this.loadingExample) return;
+      this.loadingExample = url;
+      this.$http.get(url).then(function (response) {
+        _this.$store.dispatch('loadData', {
+          data: response.body,
+          src: url
+        });
+
+        _this.$emit('close');
+      }).catch(function (e) {
+        _this.loadingExample = null;
+        console.error(e);
+      });
+    }
+  }, Object(vuex_esm["d" /* mapMutations */])(['closeElement']))
+});
+// CONCATENATED MODULE: ./src/components/WelcomeScreen.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_WelcomeScreenvue_type_script_lang_js_ = (WelcomeScreenvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./src/components/WelcomeScreen.vue?vue&type=style&index=0&lang=css&
+var WelcomeScreenvue_type_style_index_0_lang_css_ = __webpack_require__("e53e");
+
+// CONCATENATED MODULE: ./src/components/WelcomeScreen.vue
+
+
+
+
+
+
+/* normalize component */
+
+var WelcomeScreen_component = Object(componentNormalizer["a" /* default */])(
+  components_WelcomeScreenvue_type_script_lang_js_,
+  WelcomeScreenvue_type_template_id_16a4feb9_render,
+  WelcomeScreenvue_type_template_id_16a4feb9_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var WelcomeScreen = (WelcomeScreen_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=script&lang=js&
 
 
@@ -4430,6 +4542,9 @@ var NameConflicts_component = Object(componentNormalizer["a" /* default */])(
 //
 //
 //
+//
+//
+
 
 
 
@@ -4449,16 +4564,22 @@ var NameConflicts_component = Object(componentNormalizer["a" /* default */])(
     Settings: Settings,
     FullscreenBlock: FullscreenBlock,
     Preview: Preview,
-    NameConflicts: NameConflicts
+    NameConflicts: NameConflicts,
+    WelcomeScreen: WelcomeScreen
   },
   data: function data() {
     return {
       movingBlock: {},
       settingsVisible: false,
-      fullscreenSlot: null
+      fullscreenSlot: null,
+      displayWelcomeScreen: true
     };
   },
-  computed: Object(objectSpread2["a" /* default */])({}, Object(vuex_esm["c" /* mapGetters */])(['visibleSlots', 'preview', 'nextNameConflicts'])),
+  computed: Object(objectSpread2["a" /* default */])({
+    welcomeScreenVisible: function welcomeScreenVisible() {
+      return this.displayWelcomeScreen && !this.isElementClosed('welcome-screen');
+    }
+  }, Object(vuex_esm["c" /* mapGetters */])(['visibleSlots', 'preview', 'nextNameConflicts', 'isElementClosed'])),
   methods: Object(objectSpread2["a" /* default */])({
     addToPlayground: function addToPlayground(_ref) {
       var slot = _ref.slot,
@@ -4485,6 +4606,7 @@ var NameConflicts_component = Object(componentNormalizer["a" /* default */])(
           src: dataURL
         });
       }).catch(console.error);
+      this.displayWelcomeScreen = false;
     }
 
     window.addEventListener('storage', function (e) {
@@ -4515,7 +4637,7 @@ var Appvue_type_style_index_0_lang_css_ = __webpack_require__("034f");
 
 var App_component = Object(componentNormalizer["a" /* default */])(
   src_Appvue_type_script_lang_js_,
-  Appvue_type_template_id_5cbea057_render,
+  Appvue_type_template_id_780801ee_render,
   staticRenderFns,
   false,
   null,
@@ -5824,6 +5946,17 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 
 /***/ }),
 
+/***/ "e53e":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WelcomeScreen_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("f74a");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WelcomeScreen_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WelcomeScreen_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WelcomeScreen_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "ea04":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5867,6 +6000,13 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 
 /***/ }),
 
+/***/ "f74a":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "ff6e":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5875,4 +6015,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.dd987056.js.map
+//# sourceMappingURL=app.98f33d3e.js.map
