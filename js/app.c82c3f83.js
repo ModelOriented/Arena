@@ -487,12 +487,12 @@ var es_promise_finally = __webpack_require__("a79d");
 // EXTERNAL MODULE: ./node_modules/vue/dist/vue.runtime.esm.js
 var vue_runtime_esm = __webpack_require__("2b0e");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=780801ee&
-var Appvue_type_template_id_780801ee_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('Navbar',{class:{ blured: _vm.settingsVisible },on:{"openSettings":function($event){_vm.settingsVisible = true}}}),_c('Sidepanel',{class:{ blured: _vm.settingsVisible },attrs:{"id":"sidepanel"},on:{"addToPlayground":_vm.addToPlayground}}),_c('div',{class:{ blured: _vm.settingsVisible },attrs:{"id":"playground"}},_vm._l((_vm.visibleSlots),function(slot){return _c('Block',{key:slot.uuid,attrs:{"slotv":slot,"startMoving":slot === _vm.movingBlock.slot ? _vm.movingBlock.mouseEvent : null},on:{"took":function($event){_vm.movingBlock = {}},"openFullscreen":function($event){_vm.fullscreenSlot = slot}}})}),1),_c('DeleteZone'),(_vm.settingsVisible)?_c('div',{staticClass:"overlay",on:{"click":function($event){_vm.settingsVisible = false}}}):_vm._e(),(_vm.settingsVisible)?_c('Settings',{on:{"close":function($event){_vm.settingsVisible = false}}}):_vm._e(),(_vm.nextNameConflicts)?_c('div',{staticClass:"overlay"}):_vm._e(),(_vm.nextNameConflicts)?_c('NameConflicts'):_vm._e(),(_vm.welcomeScreenVisible)?_c('div',{staticClass:"overlay",on:{"click":function($event){_vm.displayWelcomeScreen = false}}}):_vm._e(),(_vm.welcomeScreenVisible)?_c('WelcomeScreen',{on:{"close":function($event){_vm.displayWelcomeScreen = false}}}):_vm._e(),(_vm.fullscreenSlot)?_c('FullscreenBlock',{attrs:{"slotv":_vm.fullscreenSlot},on:{"close":function($event){_vm.fullscreenSlot = null}}}):_vm._e(),(_vm.preview)?_c('Preview',{attrs:{"slotv":_vm.preview}}):_vm._e()],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=7ba4b0a9&
+var Appvue_type_template_id_7ba4b0a9_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('Navbar',{class:{ blured: _vm.settingsVisible },on:{"openSettings":function($event){_vm.settingsVisible = true}}}),_c('Sidepanel',{class:{ blured: _vm.settingsVisible },attrs:{"id":"sidepanel"},on:{"addToPlayground":_vm.addToPlayground}}),_c('div',{class:{ blured: _vm.settingsVisible },attrs:{"id":"playground"}},_vm._l((_vm.visibleSlots),function(slot){return _c('Block',{key:slot.uuid,attrs:{"slotv":slot,"startMoving":slot === _vm.movingBlock.slot ? _vm.movingBlock.mouseEvent : null},on:{"took":function($event){_vm.movingBlock = {}},"openFullscreen":function($event){_vm.fullscreenSlot = slot}}})}),1),_c('DeleteZone'),(_vm.settingsVisible)?_c('div',{staticClass:"overlay",on:{"click":function($event){_vm.settingsVisible = false}}}):_vm._e(),(_vm.settingsVisible)?_c('Settings',{on:{"close":function($event){_vm.settingsVisible = false}}}):_vm._e(),(_vm.nextNameConflicts)?_c('div',{staticClass:"overlay"}):_vm._e(),(_vm.nextNameConflicts)?_c('NameConflicts'):_vm._e(),(_vm.welcomeScreenVisible)?_c('div',{staticClass:"overlay",on:{"click":function($event){_vm.displayWelcomeScreen = false}}}):_vm._e(),(_vm.welcomeScreenVisible)?_c('WelcomeScreen',{on:{"close":function($event){_vm.displayWelcomeScreen = false}}}):_vm._e(),(_vm.fullscreenSlot)?_c('FullscreenBlock',{attrs:{"slotv":_vm.fullscreenSlot},on:{"close":function($event){_vm.fullscreenSlot = null}}}):_vm._e(),(_vm.preview)?_c('Preview',{attrs:{"slotv":_vm.preview}}):_vm._e()],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=780801ee&
+// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=7ba4b0a9&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js
 var objectSpread2 = __webpack_require__("5530");
@@ -4079,12 +4079,12 @@ var SettingsTabSessions_component = Object(componentNormalizer["a" /* default */
 )
 
 /* harmony default export */ var SettingsTabSessions = (SettingsTabSessions_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SettingsTabSources.vue?vue&type=template&id=4c391c82&
-var SettingsTabSourcesvue_type_template_id_4c391c82_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"settings-tab-sources settings-tab"},[_c('div',{staticClass:"add-sources-row"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.inputURL),expression:"inputURL"}],attrs:{"type":"text","placeholder":"Enter URL here"},domProps:{"value":(_vm.inputURL)},on:{"input":function($event){if($event.target.composing){ return; }_vm.inputURL=$event.target.value}}}),_c('input',{ref:"fileinput",staticStyle:{"display":"none"},attrs:{"type":"file","multiple":""},on:{"change":_vm.loadFiles}}),_c('button',{staticClass:"add-url",on:{"click":_vm.loadURL}},[_vm._v("Add URL")]),_c('button',{staticClass:"add-file",on:{"click":function($event){return _vm.$refs.fileinput.click()}}},[_vm._v("Add File")]),(_vm.addSourceError)?_c('div',{staticClass:"error"},[_vm._v(_vm._s(_vm.addSourceError))]):_vm._e()])])}
-var SettingsTabSourcesvue_type_template_id_4c391c82_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SettingsTabSources.vue?vue&type=template&id=75528c1c&
+var SettingsTabSourcesvue_type_template_id_75528c1c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"settings-tab-sources settings-tab"},[_c('div',{staticClass:"add-sources-row"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.inputURL),expression:"inputURL"}],attrs:{"type":"text","placeholder":"Enter URL here"},domProps:{"value":(_vm.inputURL)},on:{"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.loadURL($event)},"input":function($event){if($event.target.composing){ return; }_vm.inputURL=$event.target.value}}}),_c('input',{ref:"fileinput",staticStyle:{"display":"none"},attrs:{"type":"file","multiple":""},on:{"change":_vm.loadFiles}}),_c('button',{staticClass:"add-url",on:{"click":_vm.loadURL}},[_vm._v("Add URL")]),_c('button',{staticClass:"add-file",on:{"click":function($event){return _vm.$refs.fileinput.click()}}},[_vm._v("Add File")]),(_vm.addSourceError)?_c('div',{staticClass:"error"},[_vm._v(_vm._s(_vm.addSourceError))]):_vm._e(),(_vm.sourceAdded)?_c('div',{staticClass:"ok"},[_vm._v("Data loaded")]):_vm._e()]),_c('div',{staticClass:"recently-used"},[_c('span',[_vm._v("Recenty used")]),_vm._l((_vm.recentURLSources),function(s){return _c('div',{key:s.time},[_c('a',{attrs:{"href":_vm.baseURL + '/?data=' + s.url},on:{"click":function($event){$event.preventDefault();return _vm.loadURL(s.url)}}},[_vm._v(_vm._s(s.url))]),_c('span',{staticClass:"date"},[_vm._v(_vm._s(new Date(s.time).toString().split(' ').slice(0,5).join(' ')))])])})],2)])}
+var SettingsTabSourcesvue_type_template_id_75528c1c_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/SettingsTabSources.vue?vue&type=template&id=4c391c82&
+// CONCATENATED MODULE: ./src/components/SettingsTabSources.vue?vue&type=template&id=75528c1c&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js + 3 modules
 var slicedToArray = __webpack_require__("3835");
@@ -4092,12 +4092,27 @@ var slicedToArray = __webpack_require__("3835");
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/createForOfIteratorHelper.js
 var createForOfIteratorHelper = __webpack_require__("b85c");
 
+// CONCATENATED MODULE: ./src/utils/config.js
+/* harmony default export */ var config = ({
+  examples: [{
+    name: 'Apartments from 2009-2010 price per m2',
+    url: 'https://gist.githubusercontent.com/piotrpiatyszek/0129c6dce4c332dccb820b2e709465f3/raw/9644f61d9c977f5c8a4634ad633bb11f65a71efa/data.json'
+  }, {
+    name: 'FIFA Players Value',
+    url: 'https://gist.githubusercontent.com/piotrpiatyszek/8f93ce2e36adea23a02ceceed0b33882/raw/a1f15984e628c33381b1988e3b7766f1d478d9ab/data.json'
+  }, {
+    name: 'Employees status classification',
+    url: 'https://gist.githubusercontent.com/piotrpiatyszek/d56bae7c2721e4202eba8454b6d9e5f6/raw/413cecf098f953fc46ca6c4087112b5e73bda505/data.json'
+  }],
+  url: 'https://arena.drwhy.ai'
+});
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SettingsTabSources.vue?vue&type=script&lang=js&
 
 
 
 
 
+
 //
 //
 //
@@ -4109,16 +4124,35 @@ var createForOfIteratorHelper = __webpack_require__("b85c");
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ var SettingsTabSourcesvue_type_script_lang_js_ = ({
   name: 'SettingsTabSources',
   data: function data() {
     return {
       addSourceError: null,
+      sourceAdded: false,
       inputURL: ''
     };
   },
+  computed: Object(objectSpread2["a" /* default */])({
+    baseURL: function baseURL() {
+      return config.url;
+    }
+  }, Object(vuex_esm["c" /* mapGetters */])(['recentURLSources'])),
   methods: {
     loadFiles: function loadFiles(event) {
+      this.sourceAdded = false;
+      this.addSourceError = null;
+
       var _iterator = Object(createForOfIteratorHelper["a" /* default */])(event.target.files),
           _step;
 
@@ -4153,6 +4187,8 @@ var createForOfIteratorHelper = __webpack_require__("b85c");
             _this.$store.dispatch('loadData', {
               data: parsed,
               src: 'UPLOAD-' + file.name
+            }).then(function () {
+              _this.sourceAdded = true;
             });
           } catch (e) {
             _this.addSourceError = 'Cannot parse the file. Look to console for more details.';
@@ -4165,19 +4201,20 @@ var createForOfIteratorHelper = __webpack_require__("b85c");
 
       reader.readAsDataURL(file);
     },
-    loadURL: function loadURL() {
+    loadURL: function loadURL(url) {
       var _this2 = this;
 
-      if (!this.inputURL) {
+      this.sourceAdded = false;
+      this.addSourceError = null;
+      if (!url) url = this.inputURL;
+
+      if (!url) {
         this.addSourceError = 'Empty URL';
         return;
       }
 
-      this.$http.get(this.inputURL).then(function (response) {
-        _this2.$store.dispatch('loadData', {
-          data: response.body,
-          src: _this2.inputURL
-        });
+      this.$store.dispatch('loadURL', url).then(function () {
+        _this2.sourceAdded = true;
       }).catch(function (e) {
         _this2.addSourceError = 'Cannot load the file. Look to console for more details.';
         console.error(e);
@@ -4201,8 +4238,8 @@ var SettingsTabSourcesvue_type_style_index_0_lang_css_ = __webpack_require__("7f
 
 var SettingsTabSources_component = Object(componentNormalizer["a" /* default */])(
   components_SettingsTabSourcesvue_type_script_lang_js_,
-  SettingsTabSourcesvue_type_template_id_4c391c82_render,
-  SettingsTabSourcesvue_type_template_id_4c391c82_staticRenderFns,
+  SettingsTabSourcesvue_type_template_id_75528c1c_render,
+  SettingsTabSourcesvue_type_template_id_75528c1c_staticRenderFns,
   false,
   null,
   null,
@@ -4515,20 +4552,6 @@ var WelcomeScreenvue_type_template_id_16a4feb9_staticRenderFns = [function () {v
 
 // CONCATENATED MODULE: ./src/components/WelcomeScreen.vue?vue&type=template&id=16a4feb9&
 
-// CONCATENATED MODULE: ./src/utils/config.js
-/* harmony default export */ var config = ({
-  examples: [{
-    name: 'Apartments from 2009-2010 price per m2',
-    url: 'https://gist.githubusercontent.com/piotrpiatyszek/0129c6dce4c332dccb820b2e709465f3/raw/9644f61d9c977f5c8a4634ad633bb11f65a71efa/data.json'
-  }, {
-    name: 'FIFA Players Value',
-    url: 'https://gist.githubusercontent.com/piotrpiatyszek/8f93ce2e36adea23a02ceceed0b33882/raw/a1f15984e628c33381b1988e3b7766f1d478d9ab/data.json'
-  }, {
-    name: 'Employees status classification',
-    url: 'https://gist.githubusercontent.com/piotrpiatyszek/d56bae7c2721e4202eba8454b6d9e5f6/raw/413cecf098f953fc46ca6c4087112b5e73bda505/data.json'
-  }],
-  url: 'https://arena.drwhy.ai'
-});
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/WelcomeScreen.vue?vue&type=script&lang=js&
 
 //
@@ -4703,24 +4726,14 @@ var WelcomeScreen_component = Object(componentNormalizer["a" /* default */])(
     var dataURL = new URLSearchParams(window.location.search).get('data');
 
     if (dataURL) {
-      this.$http.get(dataURL).then(function (response) {
-        _this.$store.dispatch('loadData', {
-          data: response.body,
-          src: dataURL
-        });
-      }).catch(console.error);
+      this.$store.dispatch('loadURL', dataURL).catch(console.error);
       this.displayWelcomeScreen = false;
     }
 
     window.addEventListener('storage', function (e) {
       if (e.key !== 'append' && e.newValue) return;
 
-      _this.$http.get(e.newValue).then(function (response) {
-        _this.$store.dispatch('loadData', {
-          data: response.body,
-          src: e.newValue
-        });
-      }).catch(console.error);
+      _this.$store.dispatch('loadURL', e.newValue).catch(console.error);
     });
   }
 });
@@ -4740,7 +4753,7 @@ var Appvue_type_style_index_0_lang_css_ = __webpack_require__("034f");
 
 var App_component = Object(componentNormalizer["a" /* default */])(
   src_Appvue_type_script_lang_js_,
-  Appvue_type_template_id_780801ee_render,
+  Appvue_type_template_id_7ba4b0a9_render,
   staticRenderFns,
   false,
   null,
@@ -5315,7 +5328,10 @@ var arenarLiveDatasource_actions = {
 
 
 
+
 vue_runtime_esm["a" /* default */].use(vuex_esm["a" /* default */]);
+var store_ajv = new ajv_default.a();
+store_ajv.addMetaSchema(__webpack_require__("0e0d"));
 var store_state = {
   datasources: ['jsonDatasource', 'arenarLiveDatasource'],
   globalParams: {
@@ -5329,7 +5345,8 @@ var store_state = {
   nameConflicts: [],
   options: {},
   manualColors: {},
-  closedElements: []
+  closedElements: [],
+  recentURLSources: []
 };
 var store_getters = {
   getOption: function getOption(srare, getters) {
@@ -5446,6 +5463,9 @@ var store_getters = {
         return f === name;
       });
     };
+  },
+  recentURLSources: function recentURLSources(state) {
+    return state.recentURLSources;
   }
 };
 var store_mutations = {
@@ -5586,6 +5606,24 @@ var store_mutations = {
       return e !== name;
     })), [name]);
     localStorage.setItem('closedElements', JSON.stringify(state.closedElements));
+  },
+  addRecentURL: function addRecentURL(state, url) {
+    state.recentURLSources = [].concat(Object(toConsumableArray["a" /* default */])(state.recentURLSources.filter(function (s) {
+      return s.url !== url;
+    })), [{
+      time: new Date().getTime(),
+      url: url
+    }]).sort(function (a, b) {
+      return b.time - a.time;
+    }).slice(0, 5); // get last 5 urls
+
+    localStorage.setItem('recentURLSources', JSON.stringify({
+      version: '1.0.0',
+      sources: state.recentURLSources
+    }));
+  },
+  loadRecentURLSources: function loadRecentURLSources(state, sources) {
+    state.recentURLSources = sources;
   }
 };
 var store_actions = {
@@ -5596,13 +5634,26 @@ var store_actions = {
 
     try {
       var closed = JSON.parse(localStorage.getItem('closedElements'));
-      if (!closed) return;
-      if (!Array.isArray(closed)) throw new Error('value is not an array');
-      closed.forEach(function (name) {
-        if (typeof name === 'string' || name instanceof String) commit('closeElement', name);
-      });
+
+      if (closed) {
+        if (!Array.isArray(closed)) throw new Error('value is not an array');
+        closed.forEach(function (name) {
+          if (typeof name === 'string' || name instanceof String) commit('closeElement', name);
+        });
+      }
     } catch (e) {
       console.error('Failed to read closedElements from localStorage', e);
+    }
+
+    try {
+      var validatorRecentURLSources = store_ajv.compile(__webpack_require__("9452"));
+      var recentURLSources = JSON.parse(localStorage.getItem('recentURLSources'));
+
+      if (validatorRecentURLSources(recentURLSources)) {
+        commit('loadRecentURLSources', recentURLSources.sources);
+      }
+    } catch (e) {
+      console.error('Failed to read recentURLSources from localStorage', e);
     }
   },
   query: function query(_ref12, _query) {
@@ -5623,75 +5674,105 @@ var store_actions = {
       if (results.length >= 1) return results[0];
     });
   },
-  loadData: function loadData(_ref13, data) {
+  loadURL: function loadURL(_ref13, url) {
     return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var state, dispatch, _iterator, _step, ds;
-
+      var state, dispatch, commit, response;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              state = _ref13.state, dispatch = _ref13.dispatch;
+              state = _ref13.state, dispatch = _ref13.dispatch, commit = _ref13.commit;
+              _context.next = 3;
+              return vue_runtime_esm["a" /* default */].http.get(url);
+
+            case 3:
+              response = _context.sent;
+              _context.next = 6;
+              return dispatch('loadData', {
+                data: response.body,
+                src: url
+              });
+
+            case 6:
+              commit('addRecentURL', url);
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+  loadData: function loadData(_ref14, data) {
+    return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      var state, dispatch, _iterator, _step, ds;
+
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              state = _ref14.state, dispatch = _ref14.dispatch;
               _iterator = Object(createForOfIteratorHelper["a" /* default */])(state.datasources);
-              _context.prev = 2;
+              _context2.prev = 2;
 
               _iterator.s();
 
             case 4:
               if ((_step = _iterator.n()).done) {
-                _context.next = 12;
+                _context2.next = 12;
                 break;
               }
 
               ds = _step.value;
-              _context.next = 8;
+              _context2.next = 8;
               return dispatch(ds + '/loadData', data);
 
             case 8:
-              if (!_context.sent) {
-                _context.next = 10;
+              if (!_context2.sent) {
+                _context2.next = 10;
                 break;
               }
 
-              return _context.abrupt("return");
+              return _context2.abrupt("return");
 
             case 10:
-              _context.next = 4;
+              _context2.next = 4;
               break;
 
             case 12:
-              _context.next = 17;
+              _context2.next = 17;
               break;
 
             case 14:
-              _context.prev = 14;
-              _context.t0 = _context["catch"](2);
+              _context2.prev = 14;
+              _context2.t0 = _context2["catch"](2);
 
-              _iterator.e(_context.t0);
+              _iterator.e(_context2.t0);
 
             case 17:
-              _context.prev = 17;
+              _context2.prev = 17;
 
               _iterator.f();
 
-              return _context.finish(17);
+              return _context2.finish(17);
 
             case 20:
               console.error('Failed to load data');
 
             case 21:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee, null, [[2, 14, 17, 20]]);
+      }, _callee2, null, [[2, 14, 17, 20]]);
     }))();
   },
-  setGlobalParamByName: function setGlobalParamByName(_ref14, _ref15) {
-    var commit = _ref14.commit,
-        getters = _ref14.getters;
-    var paramName = _ref15.paramName,
-        valueName = _ref15.valueName;
+  setGlobalParamByName: function setGlobalParamByName(_ref15, _ref16) {
+    var commit = _ref15.commit,
+        getters = _ref15.getters;
+    var paramName = _ref16.paramName,
+        valueName = _ref16.valueName;
     var param = (getters.availableParams[paramName] || []).find(function (p) {
       return p.name === valueName;
     });
@@ -5707,9 +5788,9 @@ var store_actions = {
    * @return Promise with object in which keys are uuids of params that should be replaced
    * by keys' value
    */
-  removeNameConflicts: function removeNameConflicts(_ref16, params) {
-    var commit = _ref16.commit,
-        getters = _ref16.getters;
+  removeNameConflicts: function removeNameConflicts(_ref17, params) {
+    var commit = _ref17.commit,
+        getters = _ref17.getters;
     var toResolve = {
       params: {}
     };
@@ -5738,9 +5819,9 @@ var store_actions = {
       commit('addNameConflictsToResolve', toResolve);
     });
   },
-  arrangeSlots: function arrangeSlots(_ref17) {
-    var commit = _ref17.commit,
-        getters = _ref17.getters;
+  arrangeSlots: function arrangeSlots(_ref18) {
+    var commit = _ref18.commit,
+        getters = _ref18.getters;
     var slots = getters.visibleSlots;
     var width = Math.floor(document.getElementById('playground').offsetWidth / 32);
     var height = Math.floor(document.getElementById('playground').offsetHeight / 32);
@@ -5982,6 +6063,13 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 
 /***/ }),
 
+/***/ "9452":
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/schema#\",\"title\":\"recentURLSources\",\"description\":\"Simple structure to save recently used source URLs\",\"type\":\"object\",\"properties\":{\"version\":{\"type\":\"string\",\"const\":\"1.0.0\"},\"sources\":{\"type\":\"array\",\"title\":\"Array of sources\",\"items\":{\"type\":\"object\",\"title\":\"Single source\",\"properties\":{\"url\":{\"type\":\"string\",\"title\":\"URL of source\"},\"time\":{\"type\":\"number\",\"title\":\"timestamp of last usage in miliseconds\"}},\"required\":[\"url\",\"time\"]}}},\"required\":[\"version\",\"sources\"]}");
+
+/***/ }),
+
 /***/ "9e16":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6126,4 +6214,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.6eb60cd3.js.map
+//# sourceMappingURL=app.c82c3f83.js.map
