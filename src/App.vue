@@ -11,6 +11,8 @@
     <Settings v-if="settingsVisible" @close="settingsVisible = false"/>
     <div class="overlay" v-if="nextNameConflicts"/>
     <NameConflicts v-if="nextNameConflicts" />
+    <div class="overlay" v-if="welcomeScreenVisible" @click="displayWelcomeScreen = false"/>
+    <WelcomeScreen v-if="welcomeScreenVisible" @close="displayWelcomeScreen = false"/>
     <FullscreenBlock v-if="fullscreenSlot" :slotv="fullscreenSlot" @close="fullscreenSlot = null"/>
     <Preview :slotv="preview" v-if="preview" />
   </div>
@@ -25,6 +27,7 @@ import FullscreenBlock from '@/components/FullscreenBlock.vue'
 import { mapMutations, mapGetters } from 'vuex'
 import Preview from '@/components/Preview.vue'
 import NameConflicts from '@/components/NameConflicts.vue'
+import WelcomeScreen from '@/components/WelcomeScreen.vue'
 
 export default {
   name: 'app',
@@ -36,17 +39,20 @@ export default {
     Settings,
     FullscreenBlock,
     Preview,
-    NameConflicts
+    NameConflicts,
+    WelcomeScreen
   },
   data () {
     return {
       movingBlock: {},
       settingsVisible: false,
-      fullscreenSlot: null
+      fullscreenSlot: null,
+      displayWelcomeScreen: true
     }
   },
   computed: {
-    ...mapGetters(['visibleSlots', 'preview', 'nextNameConflicts'])
+    welcomeScreenVisible () { return this.displayWelcomeScreen && !this.isElementClosed('welcome-screen') },
+    ...mapGetters(['visibleSlots', 'preview', 'nextNameConflicts', 'isElementClosed'])
   },
   methods: {
     addToPlayground ({ slot, mouseEvent }) {
@@ -65,6 +71,7 @@ export default {
       this.$http.get(dataURL).then(response => {
         this.$store.dispatch('loadData', { data: response.body, src: dataURL })
       }).catch(console.error)
+      this.displayWelcomeScreen = false
     }
 
     window.addEventListener('storage', e => {
