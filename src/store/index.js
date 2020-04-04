@@ -5,8 +5,11 @@ import jsonDatasource from '@/store/datasources/jsonDatasource.js'
 import arenarLiveDatasource from '@/store/datasources/arenarLiveDatasource.js'
 import format from '@/utils/format.js'
 import OptionsSchemas from '@/components/OptionsSchemas.js'
+import Ajv from 'ajv'
 
 Vue.use(Vuex)
+const ajv = new Ajv()
+ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-06.json'))
 
 const state = {
   datasources: ['jsonDatasource', 'arenarLiveDatasource'],
@@ -21,7 +24,8 @@ const state = {
   nameConflicts: [],
   options: {},
   manualColors: {},
-  closedElements: []
+  closedElements: [],
+  recentURLSources: []
 }
 
 const getters = {
@@ -101,6 +105,9 @@ const getters = {
   },
   isElementClosed: (state, getters) => (name) => {
     return !!state.closedElements.find(f => f === name)
+  },
+  recentURLSources (state) {
+    return state.recentURLSources
   }
 }
 
@@ -207,6 +214,16 @@ const mutations = {
   closeElement (state, name) {
     state.closedElements = [...state.closedElements.filter(e => e !== name), name]
     localStorage.setItem('closedElements', JSON.stringify(state.closedElements))
+  },
+  addRecentURL (state, url) {
+    state.recentURLSources = [
+      ...state.recentURLSources.filter(s => s.url !== url),
+      { time: new Date().getTime(), url }
+    ].sort((a, b) => b.time - a.time).slice(0, 5) // get last 5 urls
+    localStorage.setItem('recentURLSources', JSON.stringify({ version: '1.0.0', sources: state.recentURLSources }))
+  },
+  loadRecentURLSources (state, sources) {
+    state.recentURLSources = sources
   }
 }
 
@@ -214,13 +231,23 @@ const actions = {
   init ({ commit, state, dispatch }) {
     try {
       let closed = JSON.parse(localStorage.getItem('closedElements'))
-      if (!closed) return
-      if (!Array.isArray(closed)) throw new Error('value is not an array')
-      closed.forEach(name => {
-        if (typeof name === 'string' || name instanceof String) commit('closeElement', name)
-      })
+      if (closed) {
+        if (!Array.isArray(closed)) throw new Error('value is not an array')
+        closed.forEach(name => {
+          if (typeof name === 'string' || name instanceof String) commit('closeElement', name)
+        })
+      }
     } catch (e) {
       console.error('Failed to read closedElements from localStorage', e)
+    }
+    try {
+      const validatorRecentURLSources = ajv.compile(require('@/utils/recentURLSources.schema.json'))
+      let recentURLSources = JSON.parse(localStorage.getItem('recentURLSources'))
+      if (validatorRecentURLSources(recentURLSources)) {
+        commit('loadRecentURLSources', recentURLSources.sources)
+      }
+    } catch (e) {
+      console.error('Failed to read recentURLSources from localStorage', e)
     }
   },
   query ({ state, dispatch }, query) {
@@ -235,6 +262,11 @@ const actions = {
       if (results.length === 0) return null
       if (results.length >= 1) return results[0]
     })
+  },
+  async loadURL ({ state, dispatch, commit }, url) {
+    let response = await Vue.http.get(url)
+    await dispatch('loadData', { data: response.body, src: url })
+    commit('addRecentURL', url)
   },
   async loadData ({ state, dispatch }, data) {
     for (let ds of state.datasources) {

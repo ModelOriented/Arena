@@ -68,17 +68,13 @@ export default {
     this.$store.dispatch('init')
     let dataURL = new URLSearchParams(window.location.search).get('data')
     if (dataURL) {
-      this.$http.get(dataURL).then(response => {
-        this.$store.dispatch('loadData', { data: response.body, src: dataURL })
-      }).catch(console.error)
+      this.$store.dispatch('loadURL', dataURL).catch(console.error)
       this.displayWelcomeScreen = false
     }
 
     window.addEventListener('storage', e => {
       if (e.key !== 'append' && e.newValue) return
-      this.$http.get(e.newValue).then(response => {
-        this.$store.dispatch('loadData', { data: response.body, src: e.newValue })
-      }).catch(console.error)
+      this.$store.dispatch('loadURL', e.newValue).catch(console.error)
     })
   }
 }

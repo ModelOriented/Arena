@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "title": "recentURLSources",
+  "description": "Simple structure to save recently used source URLs",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "sources": {
+      "type": "array",
+      "title": "Array of sources",
+      "items": {
+        "type": "object",
+        "title": "Single source",
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "URL of source"
+          },
+          "time": {
+            "type": "number",
+            "title": "timestamp of last usage in miliseconds"
+          }
+        },
+        "required": ["url", "time"]
+      }
+    }
+  },
+  "required": ["version", "sources"]
+}
