@@ -43,8 +43,7 @@ export default {
     openExample (url) {
       if (this.loadingExample) return
       this.loadingExample = url
-      this.$http.get(url).then(response => {
-        this.$store.dispatch('loadData', { data: response.body, src: url })
+      this.$store.dispatch('loadURL', url).then(() => {
         this.$emit('close')
       }).catch(e => {
         this.loadingExample = null
