@@ -1,7 +1,7 @@
 <template>
   <div class="miniblock tooltiped" ref="miniblock">
     <span class="tooltip">Hold to pick it</span>
-    <span class="grab-icon"><font-awesome-icon icon="grip-vertical"/></span>
+    <span class="grab-icon"><font-awesome-icon icon="chart-bar"/></span>
     <span v-if="slotv" class="name">{{ slotv.name }}</span>
   </div>
 </template>
@@ -43,9 +43,8 @@ export default {
 <style>
 div.miniblock {
   position: relative;
-  padding: 0;
+  padding: 15px 0;
   box-sizing: border-box;
-  height: 70px;
   opacity: 1;
   margin: 0;
   cursor: grab;
@@ -57,22 +56,19 @@ div.miniblock:hover {
   color: #371ea8;
 }
 div.miniblock > span.grab-icon {
-  font-size: 20px;
-  line-height: 70px;
-  padding-left: 20px;
+  font-size: 16px;
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 div.miniblock > span.name {
   text-align: left;
   font-size: 16px;
-  width: calc(100% - 70px);
-  left: 50px;
-  position: absolute;
+  width: calc(100% - 60px);
+  padding-left: 30px;
   display: block;
-  z-index: 10;
-  top: 50%;
-  transform: translateY(-50%);
   word-wrap: break-word;
-  max-height: 100%;
   overflow: hidden;
 }
 </style>
