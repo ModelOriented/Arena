@@ -4079,12 +4079,12 @@ var SettingsTabSessions_component = Object(componentNormalizer["a" /* default */
 )
 
 /* harmony default export */ var SettingsTabSessions = (SettingsTabSessions_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SettingsTabSources.vue?vue&type=template&id=75528c1c&
-var SettingsTabSourcesvue_type_template_id_75528c1c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"settings-tab-sources settings-tab"},[_c('div',{staticClass:"add-sources-row"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.inputURL),expression:"inputURL"}],attrs:{"type":"text","placeholder":"Enter URL here"},domProps:{"value":(_vm.inputURL)},on:{"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.loadURL($event)},"input":function($event){if($event.target.composing){ return; }_vm.inputURL=$event.target.value}}}),_c('input',{ref:"fileinput",staticStyle:{"display":"none"},attrs:{"type":"file","multiple":""},on:{"change":_vm.loadFiles}}),_c('button',{staticClass:"add-url",on:{"click":_vm.loadURL}},[_vm._v("Add URL")]),_c('button',{staticClass:"add-file",on:{"click":function($event){return _vm.$refs.fileinput.click()}}},[_vm._v("Add File")]),(_vm.addSourceError)?_c('div',{staticClass:"error"},[_vm._v(_vm._s(_vm.addSourceError))]):_vm._e(),(_vm.sourceAdded)?_c('div',{staticClass:"ok"},[_vm._v("Data loaded")]):_vm._e()]),_c('div',{staticClass:"recently-used"},[_c('span',[_vm._v("Recenty used")]),_vm._l((_vm.recentURLSources),function(s){return _c('div',{key:s.time},[_c('a',{attrs:{"href":_vm.baseURL + '/?data=' + s.url},on:{"click":function($event){$event.preventDefault();return _vm.loadURL(s.url)}}},[_vm._v(_vm._s(s.url))]),_c('span',{staticClass:"date"},[_vm._v(_vm._s(new Date(s.time).toString().split(' ').slice(0,5).join(' ')))])])})],2)])}
-var SettingsTabSourcesvue_type_template_id_75528c1c_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SettingsTabSources.vue?vue&type=template&id=58e8da66&
+var SettingsTabSourcesvue_type_template_id_58e8da66_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"settings-tab-sources settings-tab"},[_c('div',{staticClass:"add-sources-row"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.inputURL),expression:"inputURL"}],attrs:{"type":"text","placeholder":"Enter URL here"},domProps:{"value":(_vm.inputURL)},on:{"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.loadURL()},"input":function($event){if($event.target.composing){ return; }_vm.inputURL=$event.target.value}}}),_c('input',{ref:"fileinput",staticStyle:{"display":"none"},attrs:{"type":"file","multiple":""},on:{"change":_vm.loadFiles}}),_c('button',{staticClass:"add-url",on:{"click":function($event){return _vm.loadURL()}}},[_vm._v("Add URL")]),_c('button',{staticClass:"add-file",on:{"click":function($event){return _vm.$refs.fileinput.click()}}},[_vm._v("Add File")]),(_vm.addSourceError)?_c('div',{staticClass:"error"},[_vm._v(_vm._s(_vm.addSourceError))]):_vm._e(),(_vm.sourceAdded)?_c('div',{staticClass:"ok"},[_vm._v("Data loaded")]):_vm._e()]),_c('div',{staticClass:"recently-used"},[_c('span',[_vm._v("Recenty used")]),_vm._l((_vm.recentURLSources),function(s){return _c('div',{key:s.time},[_c('a',{attrs:{"href":_vm.baseURL + '/?data=' + s.url},on:{"click":function($event){$event.preventDefault();return _vm.loadURL(s.url)}}},[_vm._v(_vm._s(s.url))]),_c('span',{staticClass:"date"},[_vm._v(_vm._s(new Date(s.time).toString().split(' ').slice(0,5).join(' ')))])])})],2)])}
+var SettingsTabSourcesvue_type_template_id_58e8da66_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/SettingsTabSources.vue?vue&type=template&id=75528c1c&
+// CONCATENATED MODULE: ./src/components/SettingsTabSources.vue?vue&type=template&id=58e8da66&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js + 3 modules
 var slicedToArray = __webpack_require__("3835");
@@ -4238,8 +4238,8 @@ var SettingsTabSourcesvue_type_style_index_0_lang_css_ = __webpack_require__("7f
 
 var SettingsTabSources_component = Object(componentNormalizer["a" /* default */])(
   components_SettingsTabSourcesvue_type_script_lang_js_,
-  SettingsTabSourcesvue_type_template_id_75528c1c_render,
-  SettingsTabSourcesvue_type_template_id_75528c1c_staticRenderFns,
+  SettingsTabSourcesvue_type_template_id_58e8da66_render,
+  SettingsTabSourcesvue_type_template_id_58e8da66_staticRenderFns,
   false,
   null,
   null,
@@ -5324,6 +5324,7 @@ var arenarLiveDatasource_actions = {
 
 
 
+
 vue_runtime_esm["a" /* default */].use(vuex_esm["a" /* default */]);
 var store_ajv = new ajv_default.a();
 store_ajv.addMetaSchema(__webpack_require__("0e0d"));
@@ -5367,26 +5368,17 @@ var store_getters = {
   },
   availableParams: function availableParams(state, getters) {
     var params = {
-      model: [],
-      variable: [],
-      observation: []
+      model: {},
+      variable: {},
+      observation: {}
     };
-    state.datasources.forEach(function (ds) {
-      params.model = params.model.concat(getters[ds + '/models'].filter(function (a) {
-        return params.model.findIndex(function (b) {
-          return a.uuid === b.uuid;
-        }) === -1;
-      }));
-      params.observation = params.observation.concat(getters[ds + '/observations'].filter(function (a) {
-        return params.observation.findIndex(function (b) {
-          return a.uuid === b.uuid;
-        }) === -1;
-      }));
-      params.variable = params.variable.concat(getters[ds + '/variables'].filter(function (a) {
-        return params.variable.findIndex(function (b) {
-          return a.uuid === b.uuid;
-        }) === -1;
-      }));
+    Object.keys(params).forEach(function (key) {
+      state.datasources.forEach(function (ds) {
+        getters[ds + '/' + key + 's'].forEach(function (a) {
+          params[key][a.uuid] = a; // make sure we have only one param for one uuid
+        });
+      });
+      params[key] = Object.values(params[key]); // make array from object
     });
     return params;
   },
@@ -6209,4 +6201,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.d56330c8.js.map
+//# sourceMappingURL=app.e802296d.js.map
