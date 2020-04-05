@@ -45,11 +45,14 @@ const getters = {
     }, {})
   },
   availableParams (state, getters) {
-    let params = { model: [], variable: [], observation: [] }
-    state.datasources.forEach(ds => {
-      params.model = params.model.concat(getters[ds + '/models'].filter(a => params.model.findIndex(b => a.uuid === b.uuid) === -1))
-      params.observation = params.observation.concat(getters[ds + '/observations'].filter(a => params.observation.findIndex(b => a.uuid === b.uuid) === -1))
-      params.variable = params.variable.concat(getters[ds + '/variables'].filter(a => params.variable.findIndex(b => a.uuid === b.uuid) === -1))
+    let params = { model: {}, variable: {}, observation: {} }
+    Object.keys(params).forEach(key => {
+      state.datasources.forEach(ds => {
+        getters[ds + '/' + key + 's'].forEach(a => {
+          params[key][a.uuid] = a // make sure we have only one param for one uuid
+        })
+      })
+      params[key] = Object.values(params[key]) // make array from object
     })
     return params
   },
