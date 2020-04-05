@@ -513,12 +513,12 @@ var es_set = __webpack_require__("6062");
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js + 3 modules
 var toConsumableArray = __webpack_require__("2909");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/MiniBlock.vue?vue&type=template&id=ba2c9934&
-var MiniBlockvue_type_template_id_ba2c9934_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"miniblock",staticClass:"miniblock tooltiped"},[_c('span',{staticClass:"tooltip"},[_vm._v("Hold to pick it")]),_c('span',{staticClass:"grab-icon"},[_c('font-awesome-icon',{attrs:{"icon":"grip-vertical"}})],1),(_vm.slotv)?_c('span',{staticClass:"name"},[_vm._v(_vm._s(_vm.slotv.name))]):_vm._e()])}
-var MiniBlockvue_type_template_id_ba2c9934_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/MiniBlock.vue?vue&type=template&id=30fbf50e&
+var MiniBlockvue_type_template_id_30fbf50e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"miniblock",staticClass:"miniblock tooltiped"},[_c('span',{staticClass:"tooltip"},[_vm._v("Hold to pick it")]),_c('span',{staticClass:"grab-icon"},[_c('font-awesome-icon',{attrs:{"icon":"chart-bar"}})],1),(_vm.slotv)?_c('span',{staticClass:"name"},[_vm._v(_vm._s(_vm.slotv.name))]):_vm._e()])}
+var MiniBlockvue_type_template_id_30fbf50e_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/MiniBlock.vue?vue&type=template&id=ba2c9934&
+// CONCATENATED MODULE: ./src/components/MiniBlock.vue?vue&type=template&id=30fbf50e&
 
 // EXTERNAL MODULE: ./node_modules/interactjs/dist/interact.min.js
 var interact_min = __webpack_require__("5014");
@@ -600,8 +600,8 @@ var componentNormalizer = __webpack_require__("2877");
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_MiniBlockvue_type_script_lang_js_,
-  MiniBlockvue_type_template_id_ba2c9934_render,
-  MiniBlockvue_type_template_id_ba2c9934_staticRenderFns,
+  MiniBlockvue_type_template_id_30fbf50e_render,
+  MiniBlockvue_type_template_id_30fbf50e_staticRenderFns,
   false,
   null,
   null,
@@ -5887,7 +5887,7 @@ var vue_fontawesome_index_es = __webpack_require__("ad3d");
 
 
 function loadFontAwesome() {
-  index_es["c" /* library */].add(free_solid_svg_icons_index_es["c" /* faArchive */], free_solid_svg_icons_index_es["h" /* faGripVertical */], free_solid_svg_icons_index_es["k" /* faMinusSquare */], free_solid_svg_icons_index_es["m" /* faPlusSquare */], free_solid_svg_icons_index_es["f" /* faCompressArrowsAlt */], free_solid_svg_icons_index_es["i" /* faLayerGroup */], free_solid_svg_icons_index_es["g" /* faExpand */], free_solid_svg_icons_index_es["d" /* faBars */], free_solid_svg_icons_index_es["a" /* faAngleDown */], free_solid_svg_icons_index_es["e" /* faCaretDown */], free_solid_svg_icons_index_es["l" /* faPlus */], free_solid_svg_icons_index_es["j" /* faMinus */], free_solid_svg_icons_index_es["b" /* faAngleUp */], free_solid_svg_icons_index_es["n" /* faSquare */]);
+  index_es["c" /* library */].add(free_solid_svg_icons_index_es["c" /* faArchive */], free_solid_svg_icons_index_es["i" /* faGripVertical */], free_solid_svg_icons_index_es["l" /* faMinusSquare */], free_solid_svg_icons_index_es["n" /* faPlusSquare */], free_solid_svg_icons_index_es["g" /* faCompressArrowsAlt */], free_solid_svg_icons_index_es["j" /* faLayerGroup */], free_solid_svg_icons_index_es["h" /* faExpand */], free_solid_svg_icons_index_es["d" /* faBars */], free_solid_svg_icons_index_es["a" /* faAngleDown */], free_solid_svg_icons_index_es["e" /* faCaretDown */], free_solid_svg_icons_index_es["m" /* faPlus */], free_solid_svg_icons_index_es["k" /* faMinus */], free_solid_svg_icons_index_es["b" /* faAngleUp */], free_solid_svg_icons_index_es["o" /* faSquare */], free_solid_svg_icons_index_es["f" /* faChartBar */]);
   index_es["c" /* library */].add(free_regular_svg_icons_index_es["c" /* faQuestionCircle */], free_regular_svg_icons_index_es["e" /* faTimesCircle */], free_regular_svg_icons_index_es["a" /* faCheckSquare */], free_regular_svg_icons_index_es["d" /* faSquare */], free_regular_svg_icons_index_es["b" /* faClone */]);
   vue_runtime_esm["a" /* default */].component('font-awesome-icon', vue_fontawesome_index_es["a" /* FontAwesomeIcon */]);
 }
@@ -6201,4 +6201,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.d343e4ae.js.map
+//# sourceMappingURL=app.7558d650.js.map
