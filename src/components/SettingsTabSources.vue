@@ -1,9 +1,9 @@
 <template>
   <div class="settings-tab-sources settings-tab">
     <div class="add-sources-row">
-      <input type="text" placeholder="Enter URL here" v-model="inputURL" @keyup.enter="loadURL">
+      <input type="text" placeholder="Enter URL here" v-model="inputURL" @keyup.enter="loadURL()">
       <input type="file" style="display: none" ref="fileinput" @change="loadFiles" multiple>
-      <button class="add-url" @click="loadURL">Add URL</button>
+      <button class="add-url" @click="loadURL()">Add URL</button>
       <button class="add-file" @click="$refs.fileinput.click()">Add File</button>
       <div class="error" v-if="addSourceError">{{ addSourceError }}</div>
       <div class="ok" v-if="sourceAdded">Data loaded</div>
@@ -101,10 +101,16 @@ div.settings-tab-sources > div.add-sources-row > button {
   margin-left: 15px;
   font-weight: 800;
 }
+div.settings-tab-sources > div.add-sources-row > button:hover {
+  box-shadow: 0 0 5px 0 #46bac2;
+}
 div.settings-tab-sources > div.add-sources-row > button.add-url {
   margin-left: 0;
   border-radius: 0 4px 4px 0;
   background: #4378bf;
+}
+div.settings-tab-sources > div.add-sources-row > button.add-url:hover {
+  box-shadow: 0 0 5px 0 #4378bf;
 }
 div.settings-tab-sources > div.add-sources-row > div.error {
   width: 100%;
