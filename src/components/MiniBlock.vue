@@ -16,7 +16,7 @@ export default {
   },
   mounted () {
     interact(this.$refs.miniblock).pointerEvents({
-      holdDuration: 10
+      holdDuration: 100
     }).on('hold', event => {
       event.stopPropagation()
       event.preventDefault()
@@ -45,31 +45,27 @@ div.miniblock {
   position: relative;
   padding: 0;
   box-sizing: border-box;
-  box-shadow: 0 0 5px 0 #ccc6;
-  border: 1px solid #ccc;
-  height: 90px;
+  height: 70px;
   opacity: 1;
-  margin: 20px 40px;
+  margin: 0;
   cursor: grab;
-  border-radius: 10px;
-  background: #4378bf;
+  background: white;
+  width: 100%;
 }
 div.miniblock:hover {
-  box-shadow: 0 0 5px 0 #4378bf;
-  border: 1px solid #4378bf;
+  background: #eee;
+  color: #371ea8;
 }
 div.miniblock > span.grab-icon {
-  font-size: 30px;
-  line-height: 90px;
-  padding-left: 10px;
-  color: white;
+  font-size: 20px;
+  line-height: 70px;
+  padding-left: 20px;
 }
 div.miniblock > span.name {
   text-align: left;
-  font-size: 23px;
-  color: white;
-  width: calc(100% - 55px);
-  left: 45px;
+  font-size: 16px;
+  width: calc(100% - 70px);
+  left: 50px;
   position: absolute;
   display: block;
   z-index: 10;

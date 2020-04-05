@@ -110,20 +110,17 @@ export default {
 }
 .sidepanel > .sidepanel-list {
   width: 100%;
-  margin-top: 20px;
   overflow-y: auto;
   flex: 1;
 }
 .sidepanel > .sidepanel-list > div > span.category-name {
-  margin-left: 40px;
   display: block;
-  width: calc(100% - 80px);
-  font-size: 18px;
-  color: #371ea3;
-  border-bottom: 1px solid #371ea3;
-}
-.sidepanel > .sidepanel-list > div > .miniblock {
-  width: calc(100% - 80px);
+  width: calc(100% - 60px);
+  padding: 15px 30px 5px 30px;
+  font-size: 14px;
+  line-height: 14px;
+  background: white;
+  color: #4378bf;
 }
 .sidepanel > .overlay {
   position: absolute;
