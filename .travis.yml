@@ -16,6 +16,11 @@ deploy:
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_d496dfbd0e99_key -iv $encrypted_d496dfbd0e99_iv
   -in deploy_key.enc -out ./deploy_key -d
+- chmod 600 ./deploy_key
+- ssh -i ./deploy_key -T git@github.com 2>&1 | grep successful > /dev/null
+- echo 'ssh -i ./deploy_key "$@"' > use_ssh.sh
+- chmod +x use_ssh.sh
+- export GIT_SSH="./use_ssh.sh"
 - git clone --quiet --branch="gh-pages" --depth=1 "git@github.com:ModelOriented/Arena.git" repo
 - mkdir -p repo/branch build
 - cp -R repo/branch build/
