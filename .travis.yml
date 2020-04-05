@@ -7,12 +7,18 @@ script:
 deploy:
   provider: pages:git
   edge: true
-  local_dir: dist
+  local_dir: build
   deploy_key: deploy_key
-  skip_cleanup: true
+  cleanup: false
   on:
-    branch: master
+    all_branches: true
     repo: ModelOriented/Arena
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_d496dfbd0e99_key -iv $encrypted_d496dfbd0e99_iv
   -in deploy_key.enc -out ./deploy_key -d
+- git clone --quiet --branch="gh-pages" --depth=1 "git@github.com:ModelOriented/Arena.git" repo
+- mkdir -p repo/branch build
+- cp -R repo/branch build/
+- rm -rf build/branch/$TRAVIS_BRANCH
+- cp -R dist build/branch/$TRAVIS_BRANCH
+- cp -R build/branch/master/* build/
