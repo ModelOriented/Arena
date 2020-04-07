@@ -43,7 +43,7 @@ export default {
           this.$emit('took', this.slotv) // Clear startMoving in parent
         })
       }
-      // Firefox triggers pointerup on MiniBlock, so we catch it from document
+      // Firefox triggers pointerup on SlotsListElement, so we catch it from document
       document.addEventListener('pointerup', event => {
         if (this.mode === 'moving') this.mode = 'normal'
       })

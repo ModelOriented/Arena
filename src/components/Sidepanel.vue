@@ -5,18 +5,20 @@
     </div>
     <div class="arrow-button" @click="open=!open">{{ open ? "▶" : "◀" }}</div>
     <SidepanelHelp :num="1" text="Select one or more models to create plots for them" @close="closeElement('help-1')" v-if="!isElementClosed('help-1')"/>
+    <span class="section-title"><font-awesome-icon icon="list-alt"/> Models</span>
     <SidepanelDropdown @updateSlotsList="slotsList = $event"/>
     <SidepanelHelp :num="2" text="Hold any of generated plots to open it" @close="closeElement('help-2')" v-if="!isElementClosed('help-2')"/>
+    <span class="section-title"><font-awesome-icon icon="poll"/> Plots</span>
     <div class="sidepanel-list" v-if="slotsList != null">
       <div v-for="c in slotsCategories" :key="c">
         <span class="category-name">{{ c }}</span>
-        <MiniBlock v-for="slot in slotsList.filter(s => s.plotCategory === c)" :key="slot.uuid" @take="$emit('addToPlayground', $event)" :slotv="slot"/>
+        <SlotsListElement v-for="slot in slotsList.filter(s => s.plotCategory === c)" :key="slot.uuid" @take="$emit('addToPlayground', $event)" :slotv="slot"/>
       </div>
     </div>
   </div>
 </template>
 <script>
-import MiniBlock from '@/components/MiniBlock.vue'
+import SlotsListElement from '@/components/SlotsListElement.vue'
 import SidepanelDropdown from '@/components/SidepanelDropdown.vue'
 import SidepanelHelp from '@/components/SidepanelHelp.vue'
 import interact from 'interactjs'
@@ -25,7 +27,7 @@ import { mapMutations, mapGetters } from 'vuex'
 export default {
   name: 'Sidepanel',
   components: {
-    MiniBlock,
+    SlotsListElement,
     SidepanelDropdown,
     SidepanelHelp
   },
@@ -39,7 +41,7 @@ export default {
   },
   computed: {
     slotsCategories () {
-      return [...this.slotsList.reduce((set, x) => set.add(x.plotCategory), new Set())]
+      return [...this.slotsList.reduce((set, x) => set.add(x.plotCategory), new Set())].sort()
     },
     ...mapGetters(['isElementClosed'])
   },
@@ -107,6 +109,13 @@ export default {
   border-radius: 6px 0 0 6px;
   font-size: 13px;
   color: rgba(130, 130, 130, 1);
+}
+.sidepanel > span.section-title {
+  color: #555;
+  font-weight: 800;
+  font-size: 20px;
+  padding: 15px 0 0 0;
+  text-align: center;
 }
 .sidepanel > .sidepanel-list {
   width: 100%;
