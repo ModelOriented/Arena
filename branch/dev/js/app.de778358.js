@@ -5508,6 +5508,7 @@ var store_mutations = {
       return {
         name: slot.name,
         plotType: slot.plotType,
+        plotCategory: slot.plotCategory,
         localParams: [props],
         uuid: v4_default()(),
         archived: false,
@@ -6201,4 +6202,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.7558d650.js.map
+//# sourceMappingURL=app.de778358.js.map
