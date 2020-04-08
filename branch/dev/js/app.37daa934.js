@@ -493,12 +493,12 @@ var staticRenderFns = []
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js
 var objectSpread2 = __webpack_require__("5530");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Sidepanel.vue?vue&type=template&id=79848a7f&
-var Sidepanelvue_type_template_id_79848a7f_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"sidepanel",class:{ closed: !_vm.open }},[_c('div',{staticClass:"overlay",class:{ visible: _vm.dropzoneVisible, active: _vm.dropzoneActive }},[_c('span',{staticClass:"title"},[_c('font-awesome-icon',{attrs:{"icon":['fas', 'archive']}}),_vm._v("CLIPBOARD")],1)]),_c('div',{staticClass:"arrow-button",on:{"click":function($event){_vm.open=!_vm.open}}},[_vm._v(_vm._s(_vm.open ? "▶" : "◀"))]),(!_vm.isElementClosed('help-1'))?_c('SidepanelHelp',{attrs:{"num":1,"text":"Select one or more models to create plots for them"},on:{"close":function($event){return _vm.closeElement('help-1')}}}):_vm._e(),_c('span',{staticClass:"section-title"},[_c('font-awesome-icon',{attrs:{"icon":"list-alt"}}),_vm._v(" Models")],1),_c('SidepanelDropdown',{on:{"updateSlotsList":function($event){_vm.slotsList = $event}}}),(!_vm.isElementClosed('help-2'))?_c('SidepanelHelp',{attrs:{"num":2,"text":"Hold any of generated plots to open it"},on:{"close":function($event){return _vm.closeElement('help-2')}}}):_vm._e(),_c('span',{staticClass:"section-title"},[_c('font-awesome-icon',{attrs:{"icon":"poll"}}),_vm._v(" Plots")],1),(_vm.slotsList != null)?_c('div',{staticClass:"sidepanel-list"},_vm._l((_vm.slotsCategories),function(c){return _c('div',{key:c},[_c('span',{staticClass:"category-name"},[_vm._v(_vm._s(c))]),_vm._l((_vm.slotsList.filter(function (s) { return s.plotCategory === c; })),function(slot){return _c('SlotsListElement',{key:slot.uuid,attrs:{"slotv":slot},on:{"take":function($event){return _vm.$emit('addToPlayground', $event)}}})})],2)}),0):_vm._e()],1)}
-var Sidepanelvue_type_template_id_79848a7f_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Sidepanel.vue?vue&type=template&id=3f8132b8&
+var Sidepanelvue_type_template_id_3f8132b8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"sidepanel",class:{ closed: !_vm.open }},[_c('div',{staticClass:"overlay",class:{ visible: _vm.dropzoneVisible, active: _vm.dropzoneActive }},[_c('span',{staticClass:"title"},[_c('font-awesome-icon',{attrs:{"icon":['fas', 'archive']}}),_vm._v("CLIPBOARD")],1)]),_c('div',{staticClass:"arrow-button",on:{"click":function($event){_vm.open=!_vm.open}}},[_vm._v(_vm._s(_vm.open ? "▶" : "◀"))]),(!_vm.isElementClosed('help-1'))?_c('SidepanelHelp',{attrs:{"num":1,"text":"Select one or more models to create plots for them"},on:{"close":function($event){return _vm.closeElement('help-1')}}}):_vm._e(),_c('span',{staticClass:"section-title"},[_c('font-awesome-icon',{attrs:{"icon":"list-alt"}}),_vm._v(" Models")],1),_c('SidepanelDropdown',{on:{"updateSlotsList":function($event){_vm.slotsList = $event}}}),(!_vm.isElementClosed('help-2'))?_c('SidepanelHelp',{attrs:{"num":2,"text":"Hold any of generated plots to open it"},on:{"close":function($event){return _vm.closeElement('help-2')}}}):_vm._e(),_c('span',{staticClass:"section-title"},[_c('font-awesome-icon',{attrs:{"icon":"poll"}}),_vm._v(" Plots")],1),(_vm.slotsList != null)?_c('div',{staticClass:"sidepanel-list"},_vm._l((_vm.slotsCategories),function(c){return _c('div',{key:c},[_c('span',{staticClass:"category-name"},[_vm._v(_vm._s(c))]),_vm._l((_vm.slotsList.filter(function (s) { return s.plotCategory === c; })),function(slot){return _c('SlotsListElement',{key:slot.uuid,attrs:{"slotv":slot},on:{"take":function($event){return _vm.$emit('addToPlayground', $event)}}})})],2)}),0):_vm._e()],1)}
+var Sidepanelvue_type_template_id_3f8132b8_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Sidepanel.vue?vue&type=template&id=79848a7f&
+// CONCATENATED MODULE: ./src/components/Sidepanel.vue?vue&type=template&id=3f8132b8&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.reduce.js
 var es_array_reduce = __webpack_require__("13d5");
@@ -2728,7 +2728,7 @@ var SidepanelHelp_component = Object(componentNormalizer["a" /* default */])(
       return function (e) {
         if (!e.relatedTarget.block) return;
         var target = e.relatedTarget.block;
-        if (target.mode !== 'moving' && mustBeMoving) return;
+        if (!target.moving && mustBeMoving) return;
         return f(target);
       };
     },
@@ -2756,8 +2756,8 @@ var Sidepanelvue_type_style_index_0_lang_css_ = __webpack_require__("ea04");
 
 var Sidepanel_component = Object(componentNormalizer["a" /* default */])(
   components_Sidepanelvue_type_script_lang_js_,
-  Sidepanelvue_type_template_id_79848a7f_render,
-  Sidepanelvue_type_template_id_79848a7f_staticRenderFns,
+  Sidepanelvue_type_template_id_3f8132b8_render,
+  Sidepanelvue_type_template_id_3f8132b8_staticRenderFns,
   false,
   null,
   null,
@@ -3066,12 +3066,12 @@ var Navbar_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var Navbar = (Navbar_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/DeleteZone.vue?vue&type=template&id=d16b2650&
-var DeleteZonevue_type_template_id_d16b2650_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"deletezone",class:{ active: _vm.active, visible: _vm.visible },style:({ zIndex: _vm.zIndex })},[_c('span',{staticClass:"title"},[_vm._v("Delete")])])}
-var DeleteZonevue_type_template_id_d16b2650_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/DeleteZone.vue?vue&type=template&id=048ba35e&
+var DeleteZonevue_type_template_id_048ba35e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"deletezone",class:{ active: _vm.active, visible: _vm.visible },style:({ zIndex: _vm.zIndex })},[_c('span',{staticClass:"title"},[_vm._v("Delete")])])}
+var DeleteZonevue_type_template_id_048ba35e_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/DeleteZone.vue?vue&type=template&id=d16b2650&
+// CONCATENATED MODULE: ./src/components/DeleteZone.vue?vue&type=template&id=048ba35e&
 
 // CONCATENATED MODULE: ./src/components/zIndexIncrementor.js
 var z = 100;
@@ -3137,7 +3137,7 @@ var z = 100;
       return function (e) {
         if (!e.relatedTarget.block) return;
         var target = e.relatedTarget.block;
-        if (target.mode !== 'moving' && mustBeMoving) return;
+        if (!target.moving && mustBeMoving) return;
         return f(target);
       };
     },
@@ -3165,8 +3165,8 @@ var DeleteZonevue_type_style_index_0_lang_css_ = __webpack_require__("8369");
 
 var DeleteZone_component = Object(componentNormalizer["a" /* default */])(
   components_DeleteZonevue_type_script_lang_js_,
-  DeleteZonevue_type_template_id_d16b2650_render,
-  DeleteZonevue_type_template_id_d16b2650_staticRenderFns,
+  DeleteZonevue_type_template_id_048ba35e_render,
+  DeleteZonevue_type_template_id_048ba35e_staticRenderFns,
   false,
   null,
   null,
@@ -3175,12 +3175,12 @@ var DeleteZone_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var DeleteZone = (DeleteZone_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Block.vue?vue&type=template&id=f6659982&
-var Blockvue_type_template_id_f6659982_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"block",staticClass:"block",class:{ moving: this.mode === 'moving', dropzone: _vm.mode.indexOf('dropzone') != -1 },style:(_vm.style)},[_c('div',{staticClass:"overlay full",class:{ visible: _vm.singleDropzone, active: _vm.activeDropzone === 'full' }},[_c('span',{staticClass:"overlay-title"},[_c('font-awesome-icon',{attrs:{"icon":"compress-arrows-alt"}}),_c('br'),_vm._v("REPLACE")],1)]),_c('div',{ref:"leftdropzone",staticClass:"overlay left",class:{ visible: _vm.dualDropzone, active: _vm.activeDropzone === 'left' }},[_c('span',{staticClass:"overlay-title"},[_c('font-awesome-icon',{attrs:{"icon":"layer-group"}}),_c('br'),_vm._v("MERGE")],1)]),_c('div',{ref:"rightdropzone",staticClass:"overlay right",class:{ visible: _vm.dualDropzone, active: _vm.activeDropzone === 'right' }},[_c('span',{staticClass:"overlay-title"},[_c('font-awesome-icon',{attrs:{"icon":"compress-arrows-alt"}}),_c('br'),_vm._v("REPLACE")],1)]),_c('BlockHead',{attrs:{"slotv":_vm.slotv,"plotComponent":_vm.plotComponent}}),_c('PlotProxy',{ref:"plot",attrs:{"slotv":_vm.slotv},on:{"plotComponentUpdate":function($event){_vm.plotComponent = $event}}}),_c('span',{staticClass:"fullscreen-toggle tooltiped",on:{"click":function($event){return _vm.$emit('openFullscreen')}}},[_c('span',{staticClass:"tooltip"},[_vm._v("Fullscreen")]),_c('span',[_c('font-awesome-icon',{attrs:{"icon":"expand"}})],1)])],1)}
-var Blockvue_type_template_id_f6659982_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Block.vue?vue&type=template&id=4c2a74ac&
+var Blockvue_type_template_id_4c2a74ac_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"block",staticClass:"block",class:{ moving: _vm.moving, dropzone: _vm.mode.indexOf('dropzone') != -1 },style:(_vm.style)},[_c('div',{staticClass:"overlay full",class:{ visible: _vm.singleDropzone, active: _vm.activeDropzone === 'full' }},[_c('span',{staticClass:"overlay-title"},[_c('font-awesome-icon',{attrs:{"icon":"compress-arrows-alt"}}),_c('br'),_vm._v("REPLACE")],1)]),_c('div',{ref:"leftdropzone",staticClass:"overlay left",class:{ visible: _vm.dualDropzone, active: _vm.activeDropzone === 'left' }},[_c('span',{staticClass:"overlay-title"},[_c('font-awesome-icon',{attrs:{"icon":"layer-group"}}),_c('br'),_vm._v("MERGE")],1)]),_c('div',{ref:"rightdropzone",staticClass:"overlay right",class:{ visible: _vm.dualDropzone, active: _vm.activeDropzone === 'right' }},[_c('span',{staticClass:"overlay-title"},[_c('font-awesome-icon',{attrs:{"icon":"compress-arrows-alt"}}),_c('br'),_vm._v("REPLACE")],1)]),_c('BlockHead',{attrs:{"slotv":_vm.slotv,"plotComponent":_vm.plotComponent}}),_c('PlotProxy',{ref:"plot",attrs:{"slotv":_vm.slotv},on:{"plotComponentUpdate":function($event){_vm.plotComponent = $event}}}),_c('span',{staticClass:"fullscreen-toggle tooltiped",on:{"click":function($event){return _vm.$emit('openFullscreen')}}},[_c('span',{staticClass:"tooltip"},[_vm._v("Fullscreen")]),_c('span',[_c('font-awesome-icon',{attrs:{"icon":"expand"}})],1)])],1)}
+var Blockvue_type_template_id_4c2a74ac_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Block.vue?vue&type=template&id=f6659982&
+// CONCATENATED MODULE: ./src/components/Block.vue?vue&type=template&id=4c2a74ac&
 
 // CONCATENATED MODULE: ./src/components/Block.config.js
 
@@ -3268,7 +3268,7 @@ var Blockvue_type_template_id_f6659982_staticRenderFns = []
 
       // Link to component from dom element
       this.$el.block = this;
-      interact_min_default()(this.$refs.block).pointerEvents({
+      this.interactable = interact_min_default()(this.$refs.block).pointerEvents({
         holdDuration: 150
       }).draggable({
         interia: true,
@@ -3277,15 +3277,19 @@ var Blockvue_type_template_id_f6659982_staticRenderFns = []
         onmove: function onmove(event) {
           return _this.dragOnMove(event);
         },
+        onstart: function onstart(event) {
+          return _this.dragOnStart(event);
+        },
         onend: function onend(event) {
-          _this.mode = 'normal';
+          return _this.dragOnEnd(event);
+        },
+        cursorChecker: function cursorChecker(action, interactable, element, interacting) {
+          return interacting ? 'grabbing' : 'grab';
         }
-      }).resizable(Block_config.resizeConfig).on('hold', function (event) {
-        _this.mode = 'moving';
-      }).on('up', function (event) {
-        _this.mode = 'normal';
-      }, true).on('resizemove', function (event) {
+      }).resizable(Block_config.resizeConfig).on('resizemove', function (event) {
         return _this.resizeOnMove(event);
+      }).on('hold', function (event) {
+        return _this.onHold(event);
       }); // Init component moving, startMoving - pointerdown event triggering move
 
       if (this.startMoving) {
@@ -3302,33 +3306,24 @@ var Blockvue_type_template_id_f6659982_staticRenderFns = []
 
           _this.$refs.block.dispatchEvent(event);
 
-          _this.mode = 'moving';
-
           _this.$emit('took', _this.slotv); // Clear startMoving in parent
 
         });
-      } // Firefox triggers pointerup on SlotsListElement, so we catch it from document
-
-
-      document.addEventListener('pointerup', function (event) {
-        if (_this.mode === 'moving') _this.mode = 'normal';
-      }); // Blocks plotly
-
-      document.addEventListener('mousemove', function (event) {
-        if (_this.mode === 'moving') event.stopPropagation();
-      }, true);
+        this.moving = true;
+      }
       /* Init dropzone */
+
 
       var dropzoneCommonProperties = {
         overlap: 'pointer',
         accept: '.block',
         ondropactivate: this.validateAndRun(function (target) {
-          if (_this.mode !== 'normal') return;
+          if (_this.moving) return;
           /* Do not run placeholder on moving block */
 
           _this.mode = _this.canMerge(target) ? 'dual-dropzone' : 'single-dropzone';
           _this.activeDropzone = 'none';
-        }),
+        }, true, false),
         ondropdeactivate: function ondropdeactivate(e) {
           if (e.relatedTarget.block) _this.mode = 'normal';
         }
@@ -3350,7 +3345,7 @@ var Blockvue_type_template_id_f6659982_staticRenderFns = []
         }),
         ondragleave: this.validateAndRun(function (target) {
           if (_this.singleDropzone || _this.activeRightDropzone) _this.activeDropzone = 'none';
-        }),
+        }, false),
         ondrop: this.validateAndRun(this.onSwapDrop, false)
       }));
     },
@@ -3358,23 +3353,39 @@ var Blockvue_type_template_id_f6659982_staticRenderFns = []
       return Math.round(x / 32) * 32;
     },
     validateAndRun: function validateAndRun(f) {
+      var _this2 = this;
+
       var mustBeMoving = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var checkMode = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       return function (e) {
+        if (_this2.mode === 'normal' && checkMode) return;
         if (!e.relatedTarget.block) return;
         var target = e.relatedTarget.block;
-        if (target.mode !== 'moving' && mustBeMoving) return;
+        if (!target.moving && mustBeMoving) return;
         return f(target);
       };
     },
     dragOnMove: function dragOnMove(event) {
-      if (this.mode !== 'moving') return; // Draging plot
-
       event.stopPropagation();
       event.preventDefault();
       this.updateTargetProperties(event);
     },
+    dragOnStart: function dragOnStart(event) {
+      this.moving = true;
+    },
+    dragOnEnd: function dragOnEnd(event) {
+      this.moving = false;
+    },
+    onHold: function onHold(event) {
+      var interaction = event.interaction;
+
+      if (!interaction.interacting()) {
+        interaction.start({
+          name: 'drag'
+        }, event.interactable, event.currentTarget);
+      }
+    },
     resizeOnMove: function resizeOnMove(event) {
-      this.mode = 'normal';
       event.preventDefault();
       this.updateTargetProperties(event);
     },
@@ -3567,12 +3578,12 @@ var PlotProxy_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var PlotProxy = (PlotProxy_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/BlockHead.vue?vue&type=template&id=9deccd44&
-var BlockHeadvue_type_template_id_9deccd44_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"block-head"},[_c('div',{staticClass:"main-title-box"},[(!_vm.titleEdit)?_c('span',{staticClass:"title tooltiped",on:{"dblclick":function($event){_vm.titleEdit = true}}},[_c('span',{staticClass:"tooltip"},[_vm._v("Double click to edit")]),_c('span',{staticClass:"title-text"},[_vm._v(_vm._s(_vm.slotv.name))])]):_vm._e(),(_vm.description && !_vm.titleEdit)?_c('span',{staticClass:"tooltiped plot-help-box"},[_c('span',{staticClass:"tooltip"},[_vm._v(_vm._s(_vm.description))]),_c('font-awesome-icon',{attrs:{"icon":['far', 'question-circle']}})],1):_vm._e(),(_vm.titleEdit)?_c('input',{ref:"titleInput",staticClass:"title-input",attrs:{"type":"text"},domProps:{"value":_vm.slotv.name},on:{"blur":_vm.saveTitle,"keyup":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.saveTitle($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"escape",undefined,$event.key,undefined)){ return null; }_vm.titleEdit = false}]}}):_vm._e(),_c('div',{staticClass:"subtitle",domProps:{"innerHTML":_vm._s(_vm.usedModels)}})]),_c('div',{staticClass:"locks"},[(_vm.isMerged)?_c('span',{on:{"click":function($event){return _vm.splitSlot(_vm.slotv)}}},[_vm._v("Split "),_c('font-awesome-icon',{attrs:{"icon":['far', 'clone']}})],1):_vm._e(),_vm._l((_vm.lockableParams),function(p){return _c('span',{key:p.name,staticClass:"tooltiped",on:{"click":function($event){return _vm.lockUnlockParam(p.name)},"contextmenu":function($event){$event.preventDefault();return _vm.openParamSearch(p.name, $event)}}},[_vm._m(0,true),_vm._v(" "+_vm._s(_vm._f("titleFormat")(p.value ? p.value.name : p.name))+" "+_vm._s(p.value ? '🔒' : '🔓')+" ")])}),(_vm.searchMenuParam)?_c('SearchMenu',{style:(_vm.searchManuStyle),attrs:{"paramName":_vm.searchMenuParam},on:{"close":function($event){_vm.searchMenuParam = ''},"setParam":function($event){return _vm.setSlotParam($event)}}}):_vm._e()],2)])}
-var BlockHeadvue_type_template_id_9deccd44_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"tooltip"},[_vm._v("Left click to lock"),_c('br'),_vm._v("Right click to choose")])}]
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/BlockHead.vue?vue&type=template&id=c2f35396&
+var BlockHeadvue_type_template_id_c2f35396_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"block-head"},[_c('div',{staticClass:"main-title-box"},[(!_vm.titleEdit)?_c('span',{staticClass:"title tooltiped",on:{"dblclick":function($event){_vm.titleEdit = true}}},[_c('span',{staticClass:"tooltip"},[_vm._v("Double click to edit")]),_c('span',{staticClass:"title-text"},[_vm._v(_vm._s(_vm.slotv.name))])]):_vm._e(),(_vm.description && !_vm.titleEdit)?_c('span',{staticClass:"tooltiped plot-help-box"},[_c('span',{staticClass:"tooltip"},[_vm._v(_vm._s(_vm.description))]),_c('font-awesome-icon',{attrs:{"icon":['far', 'question-circle']}})],1):_vm._e(),(_vm.titleEdit)?_c('input',{ref:"titleInput",staticClass:"title-input",attrs:{"type":"text"},domProps:{"value":_vm.slotv.name},on:{"blur":_vm.saveTitle,"keyup":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.saveTitle($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"escape",undefined,$event.key,undefined)){ return null; }_vm.titleEdit = false}]}}):_vm._e(),_c('div',{staticClass:"subtitle",domProps:{"innerHTML":_vm._s(_vm.usedModels)}})]),_c('div',{staticClass:"locks"},[(_vm.isMerged)?_c('span',{on:{"click":function($event){return _vm.splitSlot(_vm.slotv)}}},[_vm._v("Split "),_c('font-awesome-icon',{attrs:{"icon":['far', 'clone']}})],1):_vm._e(),_vm._l((_vm.lockableParams),function(p){return _c('span',{key:p.name,staticClass:"tooltiped",on:{"click":function($event){return _vm.lockUnlockParam(p.name)},"contextmenu":function($event){$event.preventDefault();return _vm.openParamSearch(p.name, $event)}}},[_vm._m(0,true),_vm._v(" "+_vm._s(_vm._f("titleFormat")(p.value ? p.value.name : p.name))+" "+_vm._s(p.value ? '🔒' : '🔓')+" ")])}),(_vm.searchMenuParam)?_c('SearchMenu',{style:(_vm.searchManuStyle),attrs:{"paramName":_vm.searchMenuParam},on:{"close":function($event){_vm.searchMenuParam = ''},"setParam":function($event){return _vm.setSlotParam($event)}}}):_vm._e()],2)])}
+var BlockHeadvue_type_template_id_c2f35396_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"tooltip"},[_vm._v("Left click to lock"),_c('br'),_vm._v("Right click to choose")])}]
 
 
-// CONCATENATED MODULE: ./src/components/BlockHead.vue?vue&type=template&id=9deccd44&
+// CONCATENATED MODULE: ./src/components/BlockHead.vue?vue&type=template&id=c2f35396&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SearchMenu.vue?vue&type=template&id=ea239fe2&
 var SearchMenuvue_type_template_id_ea239fe2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"search-menu"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.editText),expression:"editText"}],attrs:{"type":"text"},domProps:{"value":(_vm.editText)},on:{"input":function($event){if($event.target.composing){ return; }_vm.editText=$event.target.value}}}),_vm._l((_vm.availableOptions),function(o){return _c('div',{key:o.uuid,staticClass:"entry",on:{"click":function($event){return _vm.$emit('setParam', o)}}},[_vm._v(" "+_vm._s(_vm._f("formatTitle")(o.name))+" ")])}),_c('div',{staticClass:"entry",on:{"click":function($event){return _vm.$emit('close')}}},[_vm._v("Close")])],2)}
@@ -3807,8 +3818,8 @@ var BlockHeadvue_type_style_index_0_lang_css_ = __webpack_require__("7675");
 
 var BlockHead_component = Object(componentNormalizer["a" /* default */])(
   components_BlockHeadvue_type_script_lang_js_,
-  BlockHeadvue_type_template_id_9deccd44_render,
-  BlockHeadvue_type_template_id_9deccd44_staticRenderFns,
+  BlockHeadvue_type_template_id_c2f35396_render,
+  BlockHeadvue_type_template_id_c2f35396_staticRenderFns,
   false,
   null,
   null,
@@ -3817,6 +3828,10 @@ var BlockHead_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var BlockHead = (BlockHead_component.exports);
+// EXTERNAL MODULE: ./node_modules/uuid/v4.js
+var v4 = __webpack_require__("c64e");
+var v4_default = /*#__PURE__*/__webpack_require__.n(v4);
+
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Block.vue?vue&type=script&lang=js&
 
 //
@@ -3841,32 +3856,37 @@ var BlockHead_component = Object(componentNormalizer["a" /* default */])(
 
 
 
+
 /* harmony default export */ var Blockvue_type_script_lang_js_ = ({
   name: 'Block',
   mixins: [Block_interactions],
   data: function data() {
     return {
       mode: 'normal',
-      // normal, moving,  single-dropzone, dual-dropzone
+      // normal, single-dropzone, dual-dropzone
       activeDropzone: 'none',
       // none, left, right, full
       zIndex: zIndexIncrementor.get(),
-      plotComponent: '' // for legend colors
-
+      plotComponent: '',
+      // for legend colors
+      uuid: v4_default()(),
+      // should never be changed
+      moving: false,
+      interactable: null
     };
   },
   props: {
     slotv: Object
   },
   watch: {
-    mode: function mode(newValue, oldValue) {
-      if (newValue === 'moving') this.zIndex = zIndexIncrementor.get();
+    moving: function moving() {
+      if (this.moving) this.zIndex = zIndexIncrementor.get();
     }
   },
   computed: {
     style: function style() {
       return {
-        zIndex: this.mode === 'moving' ? 10000 : this.zIndex,
+        zIndex: this.moving ? 10000 : this.zIndex,
         transform: 'translate(' + this.slotv.positionX + 'px, ' + this.slotv.positionY + 'px)',
         width: this.slotv.width + 'px',
         height: this.slotv.height + 'px'
@@ -3914,8 +3934,8 @@ var Blockvue_type_style_index_0_lang_css_ = __webpack_require__("424a");
 
 var Block_component = Object(componentNormalizer["a" /* default */])(
   components_Blockvue_type_script_lang_js_,
-  Blockvue_type_template_id_f6659982_render,
-  Blockvue_type_template_id_f6659982_staticRenderFns,
+  Blockvue_type_template_id_4c2a74ac_render,
+  Blockvue_type_template_id_4c2a74ac_staticRenderFns,
   false,
   null,
   null,
@@ -4791,10 +4811,6 @@ var asyncToGenerator = __webpack_require__("1da1");
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
 var defineProperty = __webpack_require__("ade3");
-
-// EXTERNAL MODULE: ./node_modules/uuid/v4.js
-var v4 = __webpack_require__("c64e");
-var v4_default = /*#__PURE__*/__webpack_require__.n(v4);
 
 // EXTERNAL MODULE: ./node_modules/ajv/lib/ajv.js
 var ajv = __webpack_require__("783b");
@@ -6229,4 +6245,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.f99f1f9b.js.map
+//# sourceMappingURL=app.37daa934.js.map
