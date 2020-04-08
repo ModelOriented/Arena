@@ -76,9 +76,6 @@ div.block {
   z-index: 100;
   position: absolute;
 }
-div.block.moving {
-  filter: blur(2px);
-}
 div.block > .overlay {
   position: absolute;
   z-index: 20;

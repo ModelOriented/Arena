@@ -17,13 +17,14 @@ export default {
     initInteractions () {
       // Link to component from dom element
       this.$el.block = this
-      interact(this.$refs.block).pointerEvents({ holdDuration: 150 })
+      interact(this.$refs.block).pointerEvents({ holdDuration: 0 })
         .draggable({
           interia: true,
           autoScroll: true,
           modifiers: BlockConfig.dragModifiers,
           onmove: event => this.dragOnMove(event),
-          onend: event => { this.mode = 'normal' }
+          onend: event => { this.mode = 'normal' },
+          cursorChecker: (action, interactable, element, interacting) => interacting ? 'grabbing' : 'grab'
         }).resizable(BlockConfig.resizeConfig)
         .on('hold', event => { this.mode = 'moving' })
         .on('up', event => { this.mode = 'normal' }, true)
