@@ -40,7 +40,7 @@ export default {
       return e => {
         if (!e.relatedTarget.block) return
         let target = e.relatedTarget.block
-        if (target.mode !== 'moving' && mustBeMoving) return
+        if (!target.moving && mustBeMoving) return
         return f(target)
       }
     },

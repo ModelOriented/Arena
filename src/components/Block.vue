@@ -1,5 +1,5 @@
 <template>
-  <div class="block" ref="block" :style="style" :class="{ moving: this.mode === 'moving', dropzone: mode.indexOf('dropzone') != -1 }">
+  <div class="block" ref="block" :style="style" :class="{ moving, dropzone: mode.indexOf('dropzone') != -1 }">
     <div class="overlay full" :class="{ visible: singleDropzone, active: activeDropzone === 'full' }">
       <span class="overlay-title"><font-awesome-icon icon="compress-arrows-alt"/><br>REPLACE</span>
     </div>
@@ -15,36 +15,40 @@
   </div>
 </template>
 <script>
-import zIndexIncrementor from '@/components/zIndexIncrementor.js'
 import { mapMutations } from 'vuex'
 import BlockInteractions from '@/components/Block.interactions.js'
 import PlotsInfo from '@/plots/PlotsInfo.js'
 import PlotProxy from '@/components/PlotProxy.vue'
 import BlockHead from '@/components/BlockHead.vue'
+import zIndexIncrementor from '@/components/zIndexIncrementor.js'
+import uuid from 'uuid/v4'
 
 export default {
   name: 'Block',
   mixins: [BlockInteractions],
   data () {
     return {
-      mode: 'normal', // normal, moving,  single-dropzone, dual-dropzone
+      mode: 'normal', // normal, single-dropzone, dual-dropzone
       activeDropzone: 'none', // none, left, right, full
       zIndex: zIndexIncrementor.get(),
-      plotComponent: '' // for legend colors
+      plotComponent: '', // for legend colors
+      uuid: uuid(), // should never be changed
+      moving: false,
+      interactable: null
     }
   },
   props: {
     slotv: Object
   },
   watch: {
-    mode (newValue, oldValue) {
-      if (newValue === 'moving') this.zIndex = zIndexIncrementor.get()
+    moving () {
+      if (this.moving) this.zIndex = zIndexIncrementor.get()
     }
   },
   computed: {
     style () {
       return {
-        zIndex: this.mode === 'moving' ? 10000 : this.zIndex,
+        zIndex: this.moving ? 10000 : this.zIndex,
         transform: 'translate(' + this.slotv.positionX + 'px, ' + this.slotv.positionY + 'px)',
         width: this.slotv.width + 'px',
         height: this.slotv.height + 'px'
@@ -75,6 +79,9 @@ div.block {
   height: 384px;
   z-index: 100;
   position: absolute;
+}
+div.block.moving {
+  filter: blur(2px);
 }
 div.block > .overlay {
   position: absolute;
