@@ -1,6 +1,6 @@
 # Arena - Interactive XAI dashboard
 
-![](docs/animated_images.png)
+![](docs/animated_images.gif)
 
 ## Examples
 [Apartments from 2009-2010 price per m2](https://arena.drwhy.ai/?data=https://gist.githubusercontent.com/piotrpiatyszek/e90d62f8896637001b9110cbe143956f/raw/15a1c75488122580dc5766e3ca7474949ba89678/data.json)  
