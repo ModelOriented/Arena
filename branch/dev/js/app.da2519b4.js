@@ -3296,19 +3296,10 @@ var Blockvue_type_template_id_4c2a74ac_staticRenderFns = []
         var target = this.$refs.block;
         var x = this.startMoving.pageX - target.parentElement.offsetLeft - target.offsetWidth / 2;
         var y = this.startMoving.pageY - target.parentElement.offsetTop - target.offsetHeight / 2;
-        this.updateTargetPosition(target, x, y); // We need to wait for position update
-
-        this.$nextTick(function () {
-          var event = new MouseEvent('pointerdown', Object.assign({}, _this.startMoving, {
-            offsetX: target.offsetWidth / 2,
-            offsetY: target.offsetHeight / 2
-          }));
-
-          _this.$refs.block.dispatchEvent(event);
-
-          _this.$emit('took', _this.slotv); // Clear startMoving in parent
-
-        });
+        this.updateTargetPosition(target, x, y);
+        this.startMoving.interaction.start({
+          name: 'drag'
+        }, this.interactable, this.$el);
         this.moving = true;
       }
       /* Init dropzone */
@@ -6245,4 +6236,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.37daa934.js.map
+//# sourceMappingURL=app.da2519b4.js.map
