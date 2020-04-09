@@ -3423,6 +3423,7 @@ var Blockvue_type_template_id_4c2a74ac_staticRenderFns = []
           name: 'drag'
         }, this.interactable, this.$el);
         this.moving = true;
+        this.$emit('took', this.slotv); // Clear startMoving in parent
       }
       /* Init dropzone */
 
@@ -6368,4 +6369,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.ec8da3c8.js.map
+//# sourceMappingURL=app.48e6ef39.js.map
