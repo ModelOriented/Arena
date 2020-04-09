@@ -38,6 +38,7 @@ export default {
         this.updateTargetPosition(target, x, y)
         this.startMoving.interaction.start({ name: 'drag' }, this.interactable, this.$el)
         this.moving = true
+        this.$emit('took', this.slotv) // Clear startMoving in parent
       }
 
       /* Init dropzone */
