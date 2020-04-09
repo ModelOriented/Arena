@@ -49,7 +49,10 @@ export default {
           this.mode = this.canMerge(target) ? 'dual-dropzone' : 'single-dropzone'
           this.activeDropzone = 'none'
         }, true, false),
-        ondropdeactivate: e => { if (e.relatedTarget.block) this.mode = 'normal' }
+        ondropdeactivate: e => { if (e.relatedTarget.block) this.mode = 'normal' },
+        checker: (dragEvent, event, dropped, dropzone, dropElement, draggable, draggableElement) => {
+          return dropped && draggableElement !== this.$el
+        }
       }
 
       interact(this.$refs.leftdropzone).dropzone(Object.assign({}, dropzoneCommonProperties, {
