@@ -3317,6 +3317,9 @@ var Blockvue_type_template_id_4c2a74ac_staticRenderFns = []
         }, true, false),
         ondropdeactivate: function ondropdeactivate(e) {
           if (e.relatedTarget.block) _this.mode = 'normal';
+        },
+        checker: function checker(dragEvent, event, dropped, dropzone, dropElement, draggable, draggableElement) {
+          return dropped && draggableElement !== _this.$el;
         }
       };
       interact_min_default()(this.$refs.leftdropzone).dropzone(Object.assign({}, dropzoneCommonProperties, {
@@ -6236,4 +6239,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.da2519b4.js.map
+//# sourceMappingURL=app.1372c6ee.js.map
