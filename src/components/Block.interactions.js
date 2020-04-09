@@ -36,12 +36,7 @@ export default {
         let x = this.startMoving.pageX - target.parentElement.offsetLeft - (target.offsetWidth / 2)
         let y = this.startMoving.pageY - target.parentElement.offsetTop - (target.offsetHeight / 2)
         this.updateTargetPosition(target, x, y)
-        // We need to wait for position update
-        this.$nextTick(() => {
-          let event = new MouseEvent('pointerdown', Object.assign({}, this.startMoving, { offsetX: target.offsetWidth / 2, offsetY: target.offsetHeight / 2 }))
-          this.$refs.block.dispatchEvent(event)
-          this.$emit('took', this.slotv) // Clear startMoving in parent
-        })
+        this.startMoving.interaction.start({ name: 'drag' }, this.interactable, this.$el)
         this.moving = true
       }
 
