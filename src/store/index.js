@@ -160,6 +160,7 @@ const mutations = {
       return {
         name: slot.name,
         plotType: slot.plotType,
+        plotCategory: slot.plotCategory,
         localParams: [props],
         uuid: uuid(),
         archived: false,

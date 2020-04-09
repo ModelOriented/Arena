@@ -17,17 +17,18 @@ export default {
     initInteractions () {
       // Link to component from dom element
       this.$el.block = this
-      interact(this.$refs.block).pointerEvents({ holdDuration: 150 })
+      this.interactable = interact(this.$refs.block).pointerEvents({ holdDuration: 150 })
         .draggable({
           interia: true,
           autoScroll: true,
           modifiers: BlockConfig.dragModifiers,
           onmove: event => this.dragOnMove(event),
-          onend: event => { this.mode = 'normal' }
+          onstart: event => this.dragOnStart(event),
+          onend: event => this.dragOnEnd(event),
+          cursorChecker: (action, interactable, element, interacting) => interacting ? 'grabbing' : 'grab'
         }).resizable(BlockConfig.resizeConfig)
-        .on('hold', event => { this.mode = 'moving' })
-        .on('up', event => { this.mode = 'normal' }, true)
         .on('resizemove', event => this.resizeOnMove(event))
+        .on('hold', event => this.onHold(event))
 
       // Init component moving, startMoving - pointerdown event triggering move
       if (this.startMoving) {
@@ -35,33 +36,23 @@ export default {
         let x = this.startMoving.pageX - target.parentElement.offsetLeft - (target.offsetWidth / 2)
         let y = this.startMoving.pageY - target.parentElement.offsetTop - (target.offsetHeight / 2)
         this.updateTargetPosition(target, x, y)
-        // We need to wait for position update
-        this.$nextTick(() => {
-          let event = new MouseEvent('pointerdown', Object.assign({}, this.startMoving, { offsetX: target.offsetWidth / 2, offsetY: target.offsetHeight / 2 }))
-          this.$refs.block.dispatchEvent(event)
-          this.mode = 'moving'
-          this.$emit('took', this.slotv) // Clear startMoving in parent
-        })
+        this.startMoving.interaction.start({ name: 'drag' }, this.interactable, this.$el)
+        this.moving = true
       }
-      // Firefox triggers pointerup on MiniBlock, so we catch it from document
-      document.addEventListener('pointerup', event => {
-        if (this.mode === 'moving') this.mode = 'normal'
-      })
-      // Blocks plotly
-      document.addEventListener('mousemove', event => {
-        if (this.mode === 'moving') event.stopPropagation()
-      }, true)
 
       /* Init dropzone */
       let dropzoneCommonProperties = {
         overlap: 'pointer',
         accept: '.block',
         ondropactivate: this.validateAndRun(target => {
-          if (this.mode !== 'normal') return /* Do not run placeholder on moving block */
+          if (this.moving) return /* Do not run placeholder on moving block */
           this.mode = this.canMerge(target) ? 'dual-dropzone' : 'single-dropzone'
           this.activeDropzone = 'none'
-        }),
-        ondropdeactivate: e => { if (e.relatedTarget.block) this.mode = 'normal' }
+        }, true, false),
+        ondropdeactivate: e => { if (e.relatedTarget.block) this.mode = 'normal' },
+        checker: (dragEvent, event, dropped, dropzone, dropElement, draggable, draggableElement) => {
+          return dropped && draggableElement !== this.$el
+        }
       }
 
       interact(this.$refs.leftdropzone).dropzone(Object.assign({}, dropzoneCommonProperties, {
@@ -71,29 +62,40 @@ export default {
       }))
       interact(this.$refs.rightdropzone).dropzone(Object.assign({}, dropzoneCommonProperties, {
         ondragenter: this.validateAndRun(target => { this.activeDropzone = this.dualDropzone ? 'right' : 'full' }),
-        ondragleave: this.validateAndRun(target => { if (this.singleDropzone || this.activeRightDropzone) this.activeDropzone = 'none' }),
+        ondragleave: this.validateAndRun(target => { if (this.singleDropzone || this.activeRightDropzone) this.activeDropzone = 'none' }, false),
         ondrop: this.validateAndRun(this.onSwapDrop, false)
       }))
     },
     roundToGrid (x) {
       return Math.round(x / 32) * 32
     },
-    validateAndRun (f, mustBeMoving = true) {
+    validateAndRun (f, mustBeMoving = true, checkMode = true) {
       return e => {
+        if (this.mode === 'normal' && checkMode) return
         if (!e.relatedTarget.block) return
         let target = e.relatedTarget.block
-        if (target.mode !== 'moving' && mustBeMoving) return
+        if (!target.moving && mustBeMoving) return
         return f(target)
       }
     },
     dragOnMove (event) {
-      if (this.mode !== 'moving') return // Draging plot
       event.stopPropagation()
       event.preventDefault()
       this.updateTargetProperties(event)
     },
+    dragOnStart (event) {
+      this.moving = true
+    },
+    dragOnEnd (event) {
+      this.moving = false
+    },
+    onHold (event) {
+      let interaction = event.interaction
+      if (!interaction.interacting()) {
+        interaction.start({ name: 'drag' }, event.interactable, event.currentTarget)
+      }
+    },
     resizeOnMove (event) {
-      this.mode = 'normal'
       event.preventDefault()
       this.updateTargetProperties(event)
     },

@@ -94,7 +94,6 @@ div.block-head {
   font-weight: 800;
   white-space: nowrap;
   color: #371ea3;
-  cursor: grab;
 }
 div.block-head > div.main-title-box {
   position: absolute;

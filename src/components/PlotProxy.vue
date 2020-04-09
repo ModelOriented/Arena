@@ -18,7 +18,7 @@ export default {
   },
   data () {
     return {
-      plotVisible: false, // It is very important to render plot after component is mounted, to make picking MiniBlock faster
+      plotVisible: false, // It is very important to render plot after component is mounted, to make picking SlotsListElement faster
       error: null, // type of error
       loading: null, // time of last pending query
       slotData: [] // data returned from query(fullParams)
