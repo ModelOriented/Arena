@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar @openSettings="settingsVisible = true" :class="{ blured: settingsVisible }"/>
+    <Navbar @openSettings="settingsVisible = true" :class="{ blured: settingsVisible }" @addToPlayground="addToPlayground"/>
     <Sidepanel id="sidepanel" @addToPlayground="addToPlayground" :class="{ blured: settingsVisible }"/>
     <div id="playground" :class="{ blured: settingsVisible }">
       <Block v-for="slot in visibleSlots" :key="slot.uuid" :slotv="slot" :startMoving="slot === movingBlock.slot ? movingBlock.mouseEvent : null"

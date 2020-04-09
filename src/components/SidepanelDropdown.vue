@@ -91,6 +91,7 @@ export default {
     select (group, value) {
       this.selectedGroup = group
       this.selectedValues = [value]
+      if (Object.keys(this.availableParams).includes(group)) this.$store.commit('setGlobalParam', { name: group, value })
     },
     addSelect (group, value) {
       if (this.selectedGroup !== group) this.select(group, value)
