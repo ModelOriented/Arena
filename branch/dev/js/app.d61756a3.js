@@ -4254,13 +4254,13 @@ var createForOfIteratorHelper = __webpack_require__("b85c");
 /* harmony default export */ var config = ({
   examples: [{
     name: 'Apartments from 2009-2010 price per m2',
-    url: 'https://gist.githubusercontent.com/piotrpiatyszek/0129c6dce4c332dccb820b2e709465f3/raw/9644f61d9c977f5c8a4634ad633bb11f65a71efa/data.json'
+    url: 'https://gist.githubusercontent.com/piotrpiatyszek/e90d62f8896637001b9110cbe143956f/raw/15a1c75488122580dc5766e3ca7474949ba89678/data.json'
   }, {
     name: 'FIFA Players Value',
-    url: 'https://gist.githubusercontent.com/piotrpiatyszek/8f93ce2e36adea23a02ceceed0b33882/raw/a1f15984e628c33381b1988e3b7766f1d478d9ab/data.json'
+    url: 'https://gist.githubusercontent.com/piotrpiatyszek/db055c7ba325c964b22e52dc87a0019f/raw/ce3687e1d6e595d792f84bca0f07dd216f161d75/data.json'
   }, {
     name: 'Employees status classification',
-    url: 'https://gist.githubusercontent.com/piotrpiatyszek/d56bae7c2721e4202eba8454b6d9e5f6/raw/413cecf098f953fc46ca6c4087112b5e73bda505/data.json'
+    url: 'https://gist.githubusercontent.com/piotrpiatyszek/42841017d32d89e1ca9ca0c89da94b88/raw/052bbed2b8a519e833663940225f16792cf337ca/data.json'
   }],
   url: 'https://arena.drwhy.ai'
 });
@@ -6368,4 +6368,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.dc5a0eb5.js.map
+//# sourceMappingURL=app.d61756a3.js.map
