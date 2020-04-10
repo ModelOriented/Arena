@@ -2799,12 +2799,12 @@ var SearchDropdownvue_type_template_id_7992103a_staticRenderFns = []
 var dist_fuse = __webpack_require__("ffe7");
 var fuse_default = /*#__PURE__*/__webpack_require__.n(dist_fuse);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SearchDropdownElement.vue?vue&type=template&id=5e4712d8&
-var SearchDropdownElementvue_type_template_id_5e4712d8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"search-dropdown-element",class:{ active: _vm.isActive }},[_vm._v(" "+_vm._s(_vm._f("formatTitle")(_vm.paramValue.name))+" ")])}
-var SearchDropdownElementvue_type_template_id_5e4712d8_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SearchDropdownElement.vue?vue&type=template&id=349b765a&
+var SearchDropdownElementvue_type_template_id_349b765a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"search-dropdown-element",class:{ active: _vm.isActive }},[_vm._v(" "+_vm._s(_vm._f("formatTitle")(_vm.paramValue.name))+" ")])}
+var SearchDropdownElementvue_type_template_id_349b765a_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/SearchDropdownElement.vue?vue&type=template&id=5e4712d8&
+// CONCATENATED MODULE: ./src/components/SearchDropdownElement.vue?vue&type=template&id=349b765a&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SearchDropdownElement.vue?vue&type=script&lang=js&
 
@@ -2837,7 +2837,7 @@ var SearchDropdownElementvue_type_template_id_5e4712d8_staticRenderFns = []
     var _this = this;
 
     interact_min_default()(this.$el).pointerEvents({
-      holdDuration: 150
+      holdDuration: 250
     }).on('hold', function (event) {
       event.preventDefault();
       var slot = null;
@@ -2869,7 +2869,7 @@ var SearchDropdownElementvue_type_template_id_5e4712d8_staticRenderFns = []
     }).on('up', function (event) {
       if (!_this.downEvent) return;
       var timeDiff = event.timeStamp - _this.downEvent.timeStamp;
-      if (timeDiff < 150) _this.$emit('setParam'); // when timeDiff < holdDuration it is click
+      if (timeDiff < 250) _this.$emit('setParam'); // when timeDiff < holdDuration it is click
 
       _this.downEvent = null;
     }).on('down', function (event) {
@@ -2896,8 +2896,8 @@ var SearchDropdownElementvue_type_style_index_0_lang_css_ = __webpack_require__(
 
 var SearchDropdownElement_component = Object(componentNormalizer["a" /* default */])(
   components_SearchDropdownElementvue_type_script_lang_js_,
-  SearchDropdownElementvue_type_template_id_5e4712d8_render,
-  SearchDropdownElementvue_type_template_id_5e4712d8_staticRenderFns,
+  SearchDropdownElementvue_type_template_id_349b765a_render,
+  SearchDropdownElementvue_type_template_id_349b765a_staticRenderFns,
   false,
   null,
   null,
@@ -6382,4 +6382,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.4cd077e9.js.map
+//# sourceMappingURL=app.f03e8e37.js.map
