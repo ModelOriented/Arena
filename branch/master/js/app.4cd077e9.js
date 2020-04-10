@@ -3297,12 +3297,12 @@ var DeleteZone_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var DeleteZone = (DeleteZone_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Block.vue?vue&type=template&id=4c2a74ac&
-var Blockvue_type_template_id_4c2a74ac_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"block",staticClass:"block",class:{ moving: _vm.moving, dropzone: _vm.mode.indexOf('dropzone') != -1 },style:(_vm.style)},[_c('div',{staticClass:"overlay full",class:{ visible: _vm.singleDropzone, active: _vm.activeDropzone === 'full' }},[_c('span',{staticClass:"overlay-title"},[_c('font-awesome-icon',{attrs:{"icon":"compress-arrows-alt"}}),_c('br'),_vm._v("REPLACE")],1)]),_c('div',{ref:"leftdropzone",staticClass:"overlay left",class:{ visible: _vm.dualDropzone, active: _vm.activeDropzone === 'left' }},[_c('span',{staticClass:"overlay-title"},[_c('font-awesome-icon',{attrs:{"icon":"layer-group"}}),_c('br'),_vm._v("MERGE")],1)]),_c('div',{ref:"rightdropzone",staticClass:"overlay right",class:{ visible: _vm.dualDropzone, active: _vm.activeDropzone === 'right' }},[_c('span',{staticClass:"overlay-title"},[_c('font-awesome-icon',{attrs:{"icon":"compress-arrows-alt"}}),_c('br'),_vm._v("REPLACE")],1)]),_c('BlockHead',{attrs:{"slotv":_vm.slotv,"plotComponent":_vm.plotComponent}}),_c('PlotProxy',{ref:"plot",attrs:{"slotv":_vm.slotv},on:{"plotComponentUpdate":function($event){_vm.plotComponent = $event}}}),_c('span',{staticClass:"fullscreen-toggle tooltiped",on:{"click":function($event){return _vm.$emit('openFullscreen')}}},[_c('span',{staticClass:"tooltip"},[_vm._v("Fullscreen")]),_c('span',[_c('font-awesome-icon',{attrs:{"icon":"expand"}})],1)])],1)}
-var Blockvue_type_template_id_4c2a74ac_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Block.vue?vue&type=template&id=8ab356a4&
+var Blockvue_type_template_id_8ab356a4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"block",staticClass:"block",class:{ moving: _vm.moving, dropzone: _vm.mode.indexOf('dropzone') != -1 },style:(_vm.style)},[_c('div',{staticClass:"overlay full",class:{ visible: _vm.singleDropzone, active: _vm.activeDropzone === 'full' }},[_c('span',{staticClass:"overlay-title"},[_c('font-awesome-icon',{attrs:{"icon":"compress-arrows-alt"}}),_c('br'),_vm._v("REPLACE")],1)]),_c('div',{ref:"leftdropzone",staticClass:"overlay left",class:{ visible: _vm.dualDropzone, active: _vm.activeDropzone === 'left' }},[_c('span',{staticClass:"overlay-title"},[_c('font-awesome-icon',{attrs:{"icon":"layer-group"}}),_c('br'),_vm._v("MERGE")],1)]),_c('div',{ref:"rightdropzone",staticClass:"overlay right",class:{ visible: _vm.dualDropzone, active: _vm.activeDropzone === 'right' }},[_c('span',{staticClass:"overlay-title"},[_c('font-awesome-icon',{attrs:{"icon":"compress-arrows-alt"}}),_c('br'),_vm._v("REPLACE")],1)]),_c('BlockHead',{attrs:{"slotv":_vm.slotv,"plotComponent":_vm.plotComponent}}),_c('PlotProxy',{ref:"plot",attrs:{"slotv":_vm.slotv},on:{"plotComponentUpdate":function($event){_vm.plotComponent = $event}}}),_c('span',{staticClass:"fullscreen-toggle tooltiped",on:{"click":function($event){return _vm.$emit('openFullscreen')}}},[_c('span',{staticClass:"tooltip"},[_vm._v("Fullscreen")]),_c('span',[_c('font-awesome-icon',{attrs:{"icon":"expand"}})],1)]),_c('div',{staticClass:"handle handle-left"}),_c('div',{staticClass:"handle handle-top"}),_c('div',{staticClass:"handle handle-right"}),_c('div',{staticClass:"handle handle-bottom"}),_c('div',{staticClass:"handle handle-left handle-top"}),_c('div',{staticClass:"handle handle-left handle-bottom"}),_c('div',{staticClass:"handle handle-right handle-top"}),_c('div',{staticClass:"handle handle-right handle-bottom"})],1)}
+var Blockvue_type_template_id_8ab356a4_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Block.vue?vue&type=template&id=4c2a74ac&
+// CONCATENATED MODULE: ./src/components/Block.vue?vue&type=template&id=8ab356a4&
 
 // CONCATENATED MODULE: ./src/components/Block.config.js
 
@@ -3327,10 +3327,10 @@ var Blockvue_type_template_id_4c2a74ac_staticRenderFns = []
   })],
   resizeConfig: {
     edges: {
-      left: true,
-      right: true,
-      bottom: true,
-      top: true
+      left: '.handle-left',
+      right: '.handle-right',
+      bottom: '.handle-bottom',
+      top: '.handle-top'
     },
     modifiers: [interact_min_default.a.modifiers.restrict({
       restriction: '#playground',
@@ -3359,6 +3359,8 @@ var Blockvue_type_template_id_4c2a74ac_staticRenderFns = []
   }
 });
 // CONCATENATED MODULE: ./src/components/Block.interactions.js
+
+
 
 
 
@@ -3494,6 +3496,7 @@ var Blockvue_type_template_id_4c2a74ac_staticRenderFns = []
       this.moving = false;
     },
     onHold: function onHold(event) {
+      if (!event.target || Array.prototype.includes.call(event.target.classList, 'handle')) return;
       var interaction = event.interaction;
 
       if (!interaction.interacting()) {
@@ -3967,6 +3970,16 @@ var v4_default = /*#__PURE__*/__webpack_require__.n(v4);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4051,8 +4064,8 @@ var Blockvue_type_style_index_0_lang_css_ = __webpack_require__("424a");
 
 var Block_component = Object(componentNormalizer["a" /* default */])(
   components_Blockvue_type_script_lang_js_,
-  Blockvue_type_template_id_4c2a74ac_render,
-  Blockvue_type_template_id_4c2a74ac_staticRenderFns,
+  Blockvue_type_template_id_8ab356a4_render,
+  Blockvue_type_template_id_8ab356a4_staticRenderFns,
   false,
   null,
   null,
@@ -6369,4 +6382,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.48e6ef39.js.map
+//# sourceMappingURL=app.4cd077e9.js.map
