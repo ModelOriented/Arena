@@ -91,6 +91,7 @@ export default {
       this.moving = false
     },
     onHold (event) {
+      if (!event.target || Array.prototype.includes.call(event.target.classList, 'handle')) return
       let interaction = event.interaction
       if (!interaction.interacting()) {
         interaction.start({ name: 'drag' }, event.interactable, event.currentTarget)

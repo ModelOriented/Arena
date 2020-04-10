@@ -12,6 +12,16 @@
     <BlockHead :slotv="slotv" :plotComponent="plotComponent" />
     <PlotProxy :slotv="slotv" ref="plot" @plotComponentUpdate="plotComponent = $event"/>
     <span class="fullscreen-toggle tooltiped" @click="$emit('openFullscreen')"><span class="tooltip">Fullscreen</span><span><font-awesome-icon icon="expand"/></span></span>
+    <!-- resize edges -->
+    <div class="handle handle-left"/>
+    <div class="handle handle-top"/>
+    <div class="handle handle-right"/>
+    <div class="handle handle-bottom"/>
+    <!-- resize corners -->
+    <div class="handle handle-left handle-top"/>
+    <div class="handle handle-left handle-bottom"/>
+    <div class="handle handle-right handle-top"/>
+    <div class="handle handle-right handle-bottom"/>
   </div>
 </template>
 <script>
@@ -153,5 +163,38 @@ div.block > span.fullscreen-toggle {
   font-size: 13px;
   cursor: pointer;
   color: #371ea3;
+}
+
+/*
+  Resize handlers
+  Using !important we do not need to make another rules
+  for corners.
+*/
+div.block > div.handle {
+  position: absolute;
+}
+div.block > div.handle-bottom {
+  height: 15px !important;
+  width: calc(100% - 20px);
+  top: calc(100% - 10px) !important;
+  left: 10px;
+}
+div.block > div.handle-top {
+  height: 15px !important;
+  width: calc(100% - 20px);
+  top: -5px !important;
+  left: 10px;
+}
+div.block > div.handle-left {
+  height: calc(100% - 20px);
+  width: 15px !important;
+  top: 10px;
+  left: -5px !important;
+}
+div.block > div.handle-right {
+  height: calc(100% - 20px);
+  width: 15px !important;
+  top: 10px;
+  left: calc(100% - 10px) !important;
 }
 </style>

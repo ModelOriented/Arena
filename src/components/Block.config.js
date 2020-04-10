@@ -14,7 +14,7 @@ export default {
     })
   ],
   resizeConfig: {
-    edges: { left: true, right: true, bottom: true, top: true },
+    edges: { left: '.handle-left', right: '.handle-right', bottom: '.handle-bottom', top: '.handle-top' },
     modifiers: [
       interact.modifiers.restrict({
         restriction: '#playground',
