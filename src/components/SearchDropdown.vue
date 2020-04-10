@@ -5,8 +5,7 @@
     <span class="param-value">{{ displayedValue }}</span>
     <font-awesome-icon icon="angle-down" class="caret"/>
     <div class="options-list" v-if="open && availableOptions.length > 0">
-      <SearchDropdownElement v-for="o in availableOptions" :key="o.uuid" :paramName="paramName" :paramValue="o"
-      @setParam="setParam(o)" @take="$emit('addToPlayground', $event)"/>
+      <SearchDropdownElement v-for="o in availableOptions" :key="o.uuid" :paramName="paramName" :paramValue="o" @setParam="setParam(o)"/>
       <div class="page-row" v-if="pagesCount > 1">
         <!-- We cannot use v-if here, because vue can remove item before document click listener will search for it -->
         <div class="page-left page-button" :class="{ invisible: page <= 0}" @click="page -= 1">

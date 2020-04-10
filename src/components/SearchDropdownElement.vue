@@ -16,7 +16,7 @@ export default {
   },
   data () {
     return {
-      downEvent: null
+      initInfo: null
     }
   },
   computed: {
@@ -45,14 +45,16 @@ export default {
           localParams: [ { variable: this.paramValue, model: this.getGlobalParam('model') } ]
         }
       }
-      if (this.downEvent && slot) this.$emit('take', { slot, mouseEvent: this.downEvent })
+      if (this.initInfo && slot) {
+        this.$store.dispatch('addSlotToPlayground', { slot, ...this.initInfo })
+      }
     }).on('up', event => {
-      if (!this.downEvent) return
-      let timeDiff = event.timeStamp - this.downEvent.timeStamp
+      if (!this.initInfo) return
+      let timeDiff = event.timeStamp - this.initInfo.timeStamp
       if (timeDiff < 250) this.$emit('setParam') // when timeDiff < holdDuration it is click
-      this.downEvent = null
+      this.initInfo = null
     }).on('down', event => {
-      this.downEvent = event
+      this.initInfo = { timeStamp: event.timeStamp, interaction: event.interaction, x: event.pageX, y: event.pageY }
     })
   },
   filters: {

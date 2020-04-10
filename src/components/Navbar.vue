@@ -3,8 +3,8 @@
     <div class="nav-item options-toggle" @click="$emit('openSettings')"><font-awesome-icon icon="bars"/></div>
     <div class="nav-item title">Arena</div>
     <PageSelector class="right" />
-    <SearchDropdown class="right" paramName="variable" @addToPlayground="$emit('addToPlayground', $event)"/>
-    <SearchDropdown class="right" paramName="observation" @addToPlayground="$emit('addToPlayground', $event)"/>
+    <SearchDropdown class="right" paramName="variable"/>
+    <SearchDropdown class="right" paramName="observation"/>
     <NavbarHelp :num="3" text="Change parameters to manipulete plots" class="right" @close="closeElement('help-3')" v-if="!isElementClosed('help-3')"/>
     <div class="nav-item right button" style="margin-right: 10px" @click="$store.dispatch('arrangeSlots')">
       <span class="label">Auto arrange</span>

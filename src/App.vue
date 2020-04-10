@@ -1,10 +1,9 @@
 <template>
   <div id="app">
-    <Navbar @openSettings="settingsVisible = true" :class="{ blured: settingsVisible }" @addToPlayground="addToPlayground"/>
-    <Sidepanel id="sidepanel" @addToPlayground="addToPlayground" :class="{ blured: settingsVisible }"/>
+    <Navbar @openSettings="settingsVisible = true" :class="{ blured: settingsVisible }"/>
+    <Sidepanel id="sidepanel" :class="{ blured: settingsVisible }"/>
     <div id="playground" :class="{ blured: settingsVisible }">
-      <Block v-for="slot in visibleSlots" :key="slot.uuid" :slotv="slot" :startMoving="slot === movingBlock.slot ? movingBlock.mouseEvent : null"
-      @took="movingBlock = {}" @openFullscreen="fullscreenSlot = slot"/>
+      <Block v-for="slot in visibleSlots" :key="slot.uuid" :slotv="slot" @openFullscreen="fullscreenSlot = slot"/>
     </div>
     <DeleteZone />
     <div class="overlay" v-if="settingsVisible" @click="settingsVisible = false"/>
@@ -24,7 +23,7 @@ import DeleteZone from '@/components/DeleteZone.vue'
 import Block from '@/components/Block.vue'
 import Settings from '@/components/Settings.vue'
 import FullscreenBlock from '@/components/FullscreenBlock.vue'
-import { mapMutations, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import Preview from '@/components/Preview.vue'
 import NameConflicts from '@/components/NameConflicts.vue'
 import WelcomeScreen from '@/components/WelcomeScreen.vue'
@@ -44,7 +43,6 @@ export default {
   },
   data () {
     return {
-      movingBlock: {},
       settingsVisible: false,
       fullscreenSlot: null,
       displayWelcomeScreen: true
@@ -53,14 +51,6 @@ export default {
   computed: {
     welcomeScreenVisible () { return this.displayWelcomeScreen && !this.isElementClosed('welcome-screen') },
     ...mapGetters(['visibleSlots', 'preview', 'nextNameConflicts', 'isElementClosed'])
-  },
-  methods: {
-    addToPlayground ({ slot, mouseEvent }) {
-      if (slot.archived) this.unarchiveSlot(slot)
-      else this.addSlot(slot)
-      this.movingBlock = { slot, mouseEvent }
-    },
-    ...mapMutations(['addSlot', 'unarchiveSlot'])
   },
   created () {
     // eslint-disable-next-line no-unused-expressions

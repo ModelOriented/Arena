@@ -25,7 +25,8 @@ const state = {
   options: {},
   manualColors: {},
   closedElements: [],
-  recentURLSources: []
+  recentURLSources: [],
+  slotsInitInformation: [] // contains information required to open new slot in drag mode
 }
 
 const getters = {
@@ -111,6 +112,9 @@ const getters = {
   },
   recentURLSources (state) {
     return state.recentURLSources
+  },
+  getSlotInitInfo: (state) => (slot) => {
+    return state.slotsInitInformation.find(x => x.uuid === slot.uuid)
   }
 }
 
@@ -152,6 +156,12 @@ const mutations = {
   },
   deleteSlot (state, slot) {
     state.slots = state.slots.filter(s => s.uuid !== slot.uuid)
+  },
+  addSlotInitInfo (state, { slot, info }) {
+    state.slotsInitInformation = [...state.slotsInitInformation, { uuid: slot.uuid, ...info }]
+  },
+  removeSlotInitInfo (state, slot) {
+    state.slotsInitInformation = state.slotsInitInformation.filter(x => x.uuid !== slot.uuid)
   },
   splitSlot (state, slot) {
     let n = -32
@@ -333,6 +343,22 @@ const actions = {
       commit('setSlotPosition', { slot, x: 32 * leftMargin, y: 32 * topMargin })
       commit('setSlotSize', { slot, width: slotWidth * 32, height: slotHeight * 32 })
     })
+  },
+  /*
+   * Method called to add slot or unarchive it
+   * To make slot open in drag mode over button that was pressed to open it, set interaction and x, y params
+   * @param interaction interaction object from interactjs event of pressing button etc
+   * @param x left position of slot center
+   * @param y top position of slot center
+   * @example dispatch('addSlotToPlayground', { slot, interaction: event.interaction, x: event.pageX, y: event.pageY })
+   */
+  addSlotToPlayground ({ commit, getters }, { slot, interaction, x, y }) {
+    if (slot.archived) commit('unarchiveSlot', slot)
+    else {
+      if (!slot.uuid) Vue.set(slot, 'uuid', uuid())
+      if (interaction) commit('addSlotInitInfo', { slot, info: { interaction, x: x || 0, y: y || 0 } })
+      commit('addSlot', slot)
+    }
   }
 }
 

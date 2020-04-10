@@ -1,23 +1,21 @@
 import interact from 'interactjs'
 import BlockConfig from '@/components/Block.config.js'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 
 export default {
-  props: {
-    startMoving: Object
-  },
   computed: {
     singleDropzone () { return this.mode === 'single-dropzone' },
     dualDropzone () { return this.mode === 'dual-dropzone' },
     activeLeftDropzone () { return this.dualDropzone && this.activeDropzone === 'left' },
     activeRightDropzone () { return this.dualDropzone && this.activeDropzone === 'right' },
-    activeFullDropzone () { return this.singleDropzone && this.activeDropzone === 'full' }
+    activeFullDropzone () { return this.singleDropzone && this.activeDropzone === 'full' },
+    ...mapGetters(['getSlotInitInfo'])
   },
   methods: {
     initInteractions () {
       // Link to component from dom element
       this.$el.block = this
-      this.interactable = interact(this.$refs.block).pointerEvents({ holdDuration: 150 })
+      this.interactable = interact(this.$refs.block).pointerEvents({ holdDuration: 250 })
         .draggable({
           interia: true,
           autoScroll: true,
@@ -30,15 +28,16 @@ export default {
         .on('resizemove', event => this.resizeOnMove(event))
         .on('hold', event => this.onHold(event))
 
-      // Init component moving, startMoving - pointerdown event triggering move
-      if (this.startMoving) {
+      // Init component moving using interaction object from holding button event (See SlotsListElement)
+      let initInfo = this.getSlotInitInfo(this.slotv)
+      if (initInfo) {
         let target = this.$refs.block
-        let x = this.startMoving.pageX - target.parentElement.offsetLeft - (target.offsetWidth / 2)
-        let y = this.startMoving.pageY - target.parentElement.offsetTop - (target.offsetHeight / 2)
+        let x = initInfo.x - target.parentElement.offsetLeft - (target.offsetWidth / 2)
+        let y = initInfo.y - target.parentElement.offsetTop - (target.offsetHeight / 2)
         this.updateTargetPosition(target, x, y)
-        this.startMoving.interaction.start({ name: 'drag' }, this.interactable, this.$el)
+        initInfo.interaction.start({ name: 'drag' }, this.interactable, this.$el)
+        this.removeSlotInitInfo(this.slotv)
         this.moving = true
-        this.$emit('took', this.slotv) // Clear startMoving in parent
       }
 
       /* Init dropzone */
@@ -112,6 +111,6 @@ export default {
       this.updateTargetPosition(event.target, x, y)
       this.setSlotSize({ slot: this.slotv, width: this.roundToGrid(event.rect.width), height: this.roundToGrid(event.rect.height) })
     },
-    ...mapMutations(['setSlotPosition', 'setSlotSize'])
+    ...mapMutations(['setSlotPosition', 'setSlotSize', 'removeSlotInitInfo'])
   }
 }

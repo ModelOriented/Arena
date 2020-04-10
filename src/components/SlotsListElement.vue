@@ -20,7 +20,7 @@ export default {
     }).on('hold', event => {
       event.stopPropagation()
       event.preventDefault()
-      this.$emit('take', { slot: this.slotv, mouseEvent: event })
+      this.$store.dispatch('addSlotToPlayground', { slot: this.slotv, interaction: event.interaction, x: event.pageX, y: event.pageY })
     }).on('down', event => {
       event.preventDefault()
     })
