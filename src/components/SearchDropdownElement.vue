@@ -28,7 +28,7 @@ export default {
   methods: {},
   mounted () {
     interact(this.$el).pointerEvents({
-      holdDuration: 150
+      holdDuration: 250
     }).on('hold', event => {
       event.preventDefault()
       let slot = null
@@ -49,7 +49,7 @@ export default {
     }).on('up', event => {
       if (!this.downEvent) return
       let timeDiff = event.timeStamp - this.downEvent.timeStamp
-      if (timeDiff < 150) this.$emit('setParam') // when timeDiff < holdDuration it is click
+      if (timeDiff < 250) this.$emit('setParam') // when timeDiff < holdDuration it is click
       this.downEvent = null
     }).on('down', event => {
       this.downEvent = event
