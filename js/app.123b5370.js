@@ -2783,12 +2783,12 @@ var Sidepanel_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var Sidepanel = (Sidepanel_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Navbar.vue?vue&type=template&id=75694578&
-var Navbarvue_type_template_id_75694578_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"navbar"},[_c('div',{staticClass:"nav-item options-toggle",on:{"click":function($event){return _vm.$emit('openSettings')}}},[_c('font-awesome-icon',{attrs:{"icon":"bars"}})],1),_c('div',{staticClass:"nav-item title"},[_vm._v("Arena")]),_c('PageSelector',{staticClass:"right"}),_c('SearchDropdown',{staticClass:"right",attrs:{"paramName":"variable"}}),_c('SearchDropdown',{staticClass:"right",attrs:{"paramName":"observation"}}),(!_vm.isElementClosed('help-3'))?_c('NavbarHelp',{staticClass:"right",attrs:{"num":3,"text":"Change parameters to manipulete plots"},on:{"close":function($event){return _vm.closeElement('help-3')}}}):_vm._e(),_c('div',{staticClass:"nav-item right button",staticStyle:{"margin-right":"10px"},on:{"click":function($event){return _vm.$store.dispatch('arrangeSlots')}}},[_c('span',{staticClass:"label"},[_vm._v("Auto arrange")])])],1)}
-var Navbarvue_type_template_id_75694578_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Navbar.vue?vue&type=template&id=438e6cd2&
+var Navbarvue_type_template_id_438e6cd2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"navbar"},[_c('div',{staticClass:"nav-item left options-toggle",on:{"click":function($event){return _vm.$emit('openSettings')}}},[_c('font-awesome-icon',{attrs:{"icon":"bars"}})],1),_c('img',{staticClass:"nav-item left logo",attrs:{"src":__webpack_require__("cf05")}}),_c('div',{staticClass:"nav-item left title"},[_vm._v("Arena")]),_c('PageSelector',{staticClass:"right"}),_c('SearchDropdown',{staticClass:"right",attrs:{"paramName":"variable"}}),_c('SearchDropdown',{staticClass:"right",attrs:{"paramName":"observation"}}),(!_vm.isElementClosed('help-3'))?_c('NavbarHelp',{staticClass:"right",attrs:{"num":3,"text":"Change parameters to manipulete plots"},on:{"close":function($event){return _vm.closeElement('help-3')}}}):_vm._e(),_c('div',{staticClass:"nav-item right button",staticStyle:{"margin-right":"10px"},on:{"click":function($event){return _vm.$store.dispatch('arrangeSlots')}}},[_c('span',{staticClass:"label"},[_vm._v("Auto arrange")])])],1)}
+var Navbarvue_type_template_id_438e6cd2_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Navbar.vue?vue&type=template&id=75694578&
+// CONCATENATED MODULE: ./src/components/Navbar.vue?vue&type=template&id=438e6cd2&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SearchDropdown.vue?vue&type=template&id=3aa86351&
 var SearchDropdownvue_type_template_id_3aa86351_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"search-dropdown",class:{ open: _vm.open },on:{"click":function($event){_vm.open = true}}},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.editText),expression:"editText"}],attrs:{"type":"text"},domProps:{"value":(_vm.editText)},on:{"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"escape",undefined,$event.key,undefined)){ return null; }_vm.open = false},"input":function($event){if($event.target.composing){ return; }_vm.editText=$event.target.value}}}),_c('span',{staticClass:"param-name"},[_vm._v(_vm._s(_vm.displayedParamName))]),_c('span',{staticClass:"param-value"},[_vm._v(_vm._s(_vm.displayedValue))]),_c('font-awesome-icon',{staticClass:"caret",attrs:{"icon":"angle-down"}}),(_vm.open && _vm.availableOptions.length > 0)?_c('div',{staticClass:"options-list"},[_vm._l((_vm.availableOptions),function(o){return _c('SearchDropdownElement',{key:o.uuid,attrs:{"paramName":_vm.paramName,"paramValue":o},on:{"setParam":function($event){return _vm.setParam(o)}}})}),(_vm.pagesCount > 1)?_c('div',{staticClass:"page-row"},[_c('div',{staticClass:"page-left page-button",class:{ invisible: _vm.page <= 0},on:{"click":function($event){_vm.page -= 1}}},[_c('font-awesome-icon',{attrs:{"icon":"angle-left"}}),_vm._v(" Previous ")],1),_vm._v(" Page "+_vm._s(_vm.page + 1)+" of "+_vm._s(_vm.pagesCount)+" "),_c('div',{staticClass:"page-right page-button",class:{ invisible: _vm.page >= _vm.pagesCount },on:{"click":function($event){_vm.page += 1}}},[_vm._v(" Next "),_c('font-awesome-icon',{attrs:{"icon":"angle-right"}})],1)]):_vm._e()],2):_vm._e()],1)}
@@ -3155,6 +3155,7 @@ var NavbarHelp_component = Object(componentNormalizer["a" /* default */])(
 //
 //
 //
+//
 
 
 
@@ -3185,8 +3186,8 @@ var Navbarvue_type_style_index_0_lang_css_ = __webpack_require__("5dfc");
 
 var Navbar_component = Object(componentNormalizer["a" /* default */])(
   components_Navbarvue_type_script_lang_js_,
-  Navbarvue_type_template_id_75694578_render,
-  Navbarvue_type_template_id_75694578_staticRenderFns,
+  Navbarvue_type_template_id_438e6cd2_render,
+  Navbarvue_type_template_id_438e6cd2_staticRenderFns,
   false,
   null,
   null,
@@ -6333,6 +6334,13 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 
 /***/ }),
 
+/***/ "cf05":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "img/logo.1a3768b8.png";
+
+/***/ }),
+
 /***/ "d751":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6423,4 +6431,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.55ae2f54.js.map
+//# sourceMappingURL=app.123b5370.js.map
