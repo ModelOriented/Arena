@@ -8,6 +8,9 @@ body, html {
 .right {
   float: right;
 }
+.left {
+  float: left;
+}
 .blured {
   filter: blur(2px);
 }

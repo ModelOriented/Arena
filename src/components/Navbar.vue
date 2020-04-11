@@ -1,7 +1,8 @@
 <template>
   <div class="navbar">
-    <div class="nav-item options-toggle" @click="$emit('openSettings')"><font-awesome-icon icon="bars"/></div>
-    <div class="nav-item title">Arena</div>
+    <div class="nav-item left options-toggle" @click="$emit('openSettings')"><font-awesome-icon icon="bars"/></div>
+    <img class="nav-item left logo" src="@/assets/logo.png">
+    <div class="nav-item left title">Arena</div>
     <PageSelector class="right" />
     <SearchDropdown class="right" paramName="variable"/>
     <SearchDropdown class="right" paramName="observation"/>
@@ -45,6 +46,10 @@ export default {
   line-height: 40px;
   color: #371ea3;
   box-sizing: border-box;
+}
+.navbar > .logo {
+  min-width: none;
+  padding: 5px;
 }
 .navbar > .nav-item > .label {
   font-size: 18px;
