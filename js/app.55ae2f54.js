@@ -6041,18 +6041,16 @@ var store_actions = {
         interaction = _ref21.interaction,
         x = _ref21.x,
         y = _ref21.y;
-    if (slot.archived) commit('unarchiveSlot', slot);else {
-      if (!slot.uuid) vue_runtime_esm["a" /* default */].set(slot, 'uuid', v4_default()());
-      if (interaction) commit('addSlotInitInfo', {
-        slot: slot,
-        info: {
-          interaction: interaction,
-          x: x || 0,
-          y: y || 0
-        }
-      });
-      commit('addSlot', slot);
-    }
+    if (!slot.uuid) vue_runtime_esm["a" /* default */].set(slot, 'uuid', v4_default()());
+    if (interaction) commit('addSlotInitInfo', {
+      slot: slot,
+      info: {
+        interaction: interaction,
+        x: x || 0,
+        y: y || 0
+      }
+    });
+    if (slot.archived) commit('unarchiveSlot', slot);else commit('addSlot', slot);
   }
 };
 /* harmony default export */ var store = (new vuex_esm["a" /* default */].Store({
@@ -6425,4 +6423,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.9b5ae9ae.js.map
+//# sourceMappingURL=app.55ae2f54.js.map
