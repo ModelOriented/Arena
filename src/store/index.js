@@ -353,12 +353,10 @@ const actions = {
    * @example dispatch('addSlotToPlayground', { slot, interaction: event.interaction, x: event.pageX, y: event.pageY })
    */
   addSlotToPlayground ({ commit, getters }, { slot, interaction, x, y }) {
+    if (!slot.uuid) Vue.set(slot, 'uuid', uuid())
+    if (interaction) commit('addSlotInitInfo', { slot, info: { interaction, x: x || 0, y: y || 0 } })
     if (slot.archived) commit('unarchiveSlot', slot)
-    else {
-      if (!slot.uuid) Vue.set(slot, 'uuid', uuid())
-      if (interaction) commit('addSlotInitInfo', { slot, info: { interaction, x: x || 0, y: y || 0 } })
-      commit('addSlot', slot)
-    }
+    else commit('addSlot', slot)
   }
 }
 
