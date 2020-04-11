@@ -20,10 +20,11 @@
   </div>
 </template>
 <script>
-import PlotsInfo from '@/plots/PlotsInfo.js'
+import PlotsInfo from '@/configuration/PlotsInfo.js'
 import SearchMenu from '@/components/SearchMenu.vue'
 import format from '@/utils/format.js'
 import { mapMutations, mapGetters } from 'vuex'
+import config from '@/configuration/config.js'
 
 export default {
   name: 'BlockHead',
@@ -44,7 +45,7 @@ export default {
   computed: {
     fullParams () { return this.getSlotFullParams(this.slotv.localParams) },
     usedModels () {
-      return [...new Set(this.fullParams.map(p => '<span style="color: ' + this.modelsColors[p.model.uuid] + '">' + p.model.name + '</span>'))].join(', ')
+      return [...new Set(this.fullParams.map(p => '<span style="color: ' + this.mainParamColors[p[config.mainParam].uuid] + '">' + p[config.mainParam].name + '</span>'))].join(', ')
     },
     isMerged () {
       return this.slotv && this.slotv.localParams.length > 1
@@ -60,7 +61,7 @@ export default {
       if (!this.slotv) return ''
       return PlotsInfo.getPlotDesc(this.slotv.plotType)
     },
-    ...mapGetters(['getSlotFullParams', 'modelsColors', 'availableParams'])
+    ...mapGetters(['getSlotFullParams', 'mainParamColors', 'availableParams'])
   },
   methods: {
     saveTitle () {

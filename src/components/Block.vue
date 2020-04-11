@@ -27,10 +27,10 @@
 <script>
 import { mapMutations } from 'vuex'
 import BlockInteractions from '@/components/Block.interactions.js'
-import PlotsInfo from '@/plots/PlotsInfo.js'
+import PlotsInfo from '@/configuration/PlotsInfo.js'
 import PlotProxy from '@/components/PlotProxy.vue'
 import BlockHead from '@/components/BlockHead.vue'
-import zIndexIncrementor from '@/components/zIndexIncrementor.js'
+import zIndexIncrementor from '@/utils/zIndexIncrementor.js'
 import uuid from 'uuid/v4'
 
 export default {

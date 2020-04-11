@@ -4,7 +4,7 @@ import format from '@/utils/format.js'
 
 const ajv = new Ajv()
 ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-06.json'))
-const validator = ajv.compile(require('@/utils/data.schema.json'))
+const validator = ajv.compile(require('@/store/schemas/data.schema.json'))
 
 const state = {
   models: [],

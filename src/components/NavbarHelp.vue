@@ -6,11 +6,15 @@
   </div>
 </template>
 <script>
+import config from '@/configuration/config.js'
+
 export default {
   name: 'NavbarHelp',
   props: {
-    num: Number,
-    text: String
+    num: Number
+  },
+  computed: {
+    text () { return config.helpMessages[this.num] }
   }
 }
 </script>

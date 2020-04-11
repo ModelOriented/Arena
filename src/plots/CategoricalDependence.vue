@@ -31,11 +31,11 @@ export default {
           hoverinfo: 'template',
           hovertemplate: d.plotData.y.map(x => format.formatValue(x - d.plotData.base, true)),
           hoverlabel: {
-            bgcolor: this.modelsColors[d.params.model.uuid],
+            bgcolor: this.mainParamColors[d.params.model.uuid],
             font: { family: 'FiraSansBold', size: 16, color: 'white' }
           },
           marker: {
-            color: this.modelsColors[d.params.model.uuid]
+            color: this.mainParamColors[d.params.model.uuid]
           },
           insidetextanchor: 'start'
         }
@@ -116,7 +116,7 @@ export default {
       return { 'xaxis.range': this.range, 'margin.l': this.leftMargin }
     },
     leftMargin () { return this.$store.getters.getOption('left_margin_values') },
-    ...mapGetters(['modelsColors'])
+    ...mapGetters(['mainParamColors'])
   },
   components: {
     Plotly

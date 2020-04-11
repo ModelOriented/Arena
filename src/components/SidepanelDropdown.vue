@@ -1,16 +1,16 @@
 <template>
   <div class='sidepanel-dropdown'>
     <div class="options-list">
-      <div class="group-name">Model</div>
-      <div class="option" v-for="o in availableParams['model']" :key="o.uuid" :class="{ selected: isSelected('model', o.uuid) }" @click.self="select('model', o)">
+      <div class="group-name">{{ mainParam | firstCharUpper }}</div>
+      <div class="option" v-for="o in availableParams[mainParam]" :key="o.uuid" :class="{ selected: isSelected(mainParam, o.uuid) }" @click.self="select(mainParam, o)">
         {{ o.name | formatTitle }}
         <span class="left-button">
-          <font-awesome-icon icon="plus" class="add button" v-if="selectedGroup == 'model' && !isSelected('model', o.uuid)"/>
-          <font-awesome-icon icon="plus-square" class="add button-hover" v-if="selectedGroup == 'model' && !isSelected('model', o.uuid)" @click="addSelect('model', o)"/>
-          <font-awesome-icon icon="minus" class="minus button" v-if="isSelected('model', o.uuid) && selectedValues.length > 1"/>
-          <font-awesome-icon icon="minus-square" class="minus button-hover" v-if="isSelected('model', o.uuid) && selectedValues.length > 1" @click="removeSelect(o.uuid)"/>
+          <font-awesome-icon icon="plus" class="add button" v-if="selectedGroup === mainParam && !isSelected(mainParam, o.uuid)"/>
+          <font-awesome-icon icon="plus-square" class="add button-hover" v-if="selectedGroup === mainParam && !isSelected(mainParam, o.uuid)" @click="addSelect(mainParam, o)"/>
+          <font-awesome-icon icon="minus" class="minus button" v-if="isSelected(mainParam, o.uuid) && selectedValues.length > 1"/>
+          <font-awesome-icon icon="minus-square" class="minus button-hover" v-if="isSelected(mainParam, o.uuid) && selectedValues.length > 1" @click="removeSelect(o.uuid)"/>
         </span>
-        <font-awesome-icon icon="square" class="color-button" :style="{ display: colorSelector !== o.uuid ? 'block' : 'none', color: modelsColors[o.uuid] }" @click="colorSelector = o.uuid"/>
+        <font-awesome-icon icon="square" class="color-button" :style="{ display: colorSelector !== o.uuid ? 'block' : 'none', color: mainParamColors[o.uuid] }" @click="colorSelector = o.uuid"/>
         <div class="color-selector" :style="{ display: colorSelector === o.uuid ? 'block' : 'none' }">
           <font-awesome-icon v-for="color in palette" :key="color" icon="square" class="color-button" :style="{ color }" @click="setColor(o.uuid, color)"/>
         </div>
@@ -22,24 +22,25 @@
 </template>
 <script>
 import format from '@/utils/format.js'
-import PlotsInfo from '@/plots/PlotsInfo.js'
+import PlotsInfo from '@/configuration/PlotsInfo.js'
 import { mapGetters } from 'vuex'
+import config from '@/configuration/config.js'
 
 export default {
   name: 'SidepanelDropdown',
   data () {
     return {
-      selectedGroup: 'model',
+      selectedGroup: config.mainParam,
       selectedValues: [],
-      colorSelector: null // uuid of model when open
+      colorSelector: null // uuid of main param when open
     }
   },
   watch: {
     availableSlots () {
       this.$emit('updateSlotsList', this.availableSlots)
     },
-    'availableParams.model': function (newValue, oldValue) {
-      if (this.selectedGroup !== 'model') return
+    'availableMainParams': function (newValue, oldValue) {
+      if (this.selectedGroup !== this.mainParam) return
       // filter params that are not available anymore
       this.selectedValues = this.selectedValues.filter(sel => newValue.find(x => x.uuid === sel.uuid))
       if (this.selectedValues.length === 0) this.selectedValues = newValue.slice(0, 1)
@@ -52,6 +53,7 @@ export default {
     displayedGroup () {
       return format.firstCharUpper(this.selectedGroup)
     },
+    mainParam () { return config.mainParam },
     /* Slots for selected params, will be emitted to Sidepanel */
     availableSlots () {
       // it forces refreshing slots id, when any slot is added to playground
@@ -62,8 +64,8 @@ export default {
         let uuidB = Object.keys(b).reduce((acu, k) => { acu[k] = b[k].uuid; return acu }, {})
         return ![...new Set([...Object.keys(uuidA), ...Object.keys(uuidB)])].find(k => uuidA[k] !== uuidB[k])
       }
-      if (this.selectedGroup === 'model') {
-        let plotTypes = this.selectedValues.map(m => this.getAvailableSlots({ model: m })).flat().reduce((acu, slot) => {
+      if (this.selectedGroup === config.mainParam) {
+        let plotTypes = this.selectedValues.map(m => this.getAvailableSlots({ [config.mainParam]: m })).flat().reduce((acu, slot) => {
           if (!acu[slot.plotType]) acu[slot.plotType] = slot
           else {
             if (!PlotsInfo.canMerge(acu[slot.plotType], slot)) return acu
@@ -79,10 +81,14 @@ export default {
       }
       return []
     },
-    ...mapGetters(['availableParams', 'getGlobalParam', 'modelsColors', 'palette', 'archivedSlots', 'getAvailableSlots', 'allSlots'])
+    availableMainParams () {
+      return this.availableParams[config.mainParam]
+    },
+    ...mapGetters(['availableParams', 'getGlobalParam', 'mainParamColors', 'palette', 'archivedSlots', 'getAvailableSlots', 'allSlots'])
   },
   filters: {
-    formatTitle: format.formatTitle
+    formatTitle: format.formatTitle,
+    firstCharUpper: format.firstCharUpper
   },
   methods: {
     isSelected (group, value) {

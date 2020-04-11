@@ -6,7 +6,7 @@ import equal from 'fast-deep-equal/es6'
 
 const ajv = new Ajv()
 ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-06.json'))
-const validator = ajv.compile(require('@/utils/arenarLive.schema.json'))
+const validator = ajv.compile(require('@/store/schemas/arenarLive.schema.json'))
 
 const state = {
   servers: []

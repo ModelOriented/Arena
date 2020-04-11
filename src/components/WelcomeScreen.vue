@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-import config from '@/utils/config.js'
+import config from '@/configuration/config.js'
 import { mapMutations } from 'vuex'
 
 export default {

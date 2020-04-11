@@ -19,7 +19,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import config from '@/utils/config.js'
+import config from '@/configuration/config.js'
 
 export default {
   name: 'SettingsTabSources',

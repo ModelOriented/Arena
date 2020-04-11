@@ -4,9 +4,8 @@
     <img class="nav-item left logo" src="@/assets/logo.png">
     <div class="nav-item left title">Arena</div>
     <PageSelector class="right" />
-    <SearchDropdown class="right" paramName="variable"/>
-    <SearchDropdown class="right" paramName="observation"/>
-    <NavbarHelp :num="3" text="Change parameters to manipulete plots" class="right" @close="closeElement('help-3')" v-if="!isElementClosed('help-3')"/>
+    <SearchDropdown class="right" v-for="p in auxiliaryParams" :paramName="p" :key="p"/>
+    <NavbarHelp :num="3" class="right" @close="closeElement('help-3')" v-if="!isElementClosed('help-3')"/>
     <div class="nav-item right button" style="margin-right: 10px" @click="$store.dispatch('arrangeSlots')">
       <span class="label">Auto arrange</span>
     </div>
@@ -17,10 +16,14 @@ import { mapGetters, mapMutations } from 'vuex'
 import SearchDropdown from '@/components/SearchDropdown.vue'
 import PageSelector from '@/components/PageSelector.vue'
 import NavbarHelp from '@/components/NavbarHelp.vue'
+import config from '@/configuration/config.js'
 
 export default {
   name: 'Navbar',
-  computed: mapGetters(['availableParams', 'getGlobalParam', 'isElementClosed']),
+  computed: {
+    auxiliaryParams () { return config.params.filter(p => p !== config.mainParam) },
+    ...mapGetters(['availableParams', 'getGlobalParam', 'isElementClosed'])
+  },
   methods: mapMutations(['setGlobalParam', 'closeElement']),
   components: { SearchDropdown, PageSelector, NavbarHelp }
 }

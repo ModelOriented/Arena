@@ -13,7 +13,7 @@
   </div>
 </template>
 <script>
-import OptionsSchemas from '@/components/OptionsSchemas.js'
+import OptionsSchemas from '@/configuration/OptionsSchemas.js'
 import { mapGetters } from 'vuex'
 
 export default {

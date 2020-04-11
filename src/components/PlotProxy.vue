@@ -7,7 +7,7 @@
   </div>
 </template>
 <script>
-import PlotsInfo from '@/plots/PlotsInfo.js'
+import PlotsInfo from '@/configuration/PlotsInfo.js'
 import { mapActions, mapGetters } from 'vuex'
 import equal from 'fast-deep-equal/es6'
 

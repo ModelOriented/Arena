@@ -4,8 +4,9 @@ import uuid from 'uuid/v4'
 import jsonDatasource from '@/store/datasources/jsonDatasource.js'
 import arenarLiveDatasource from '@/store/datasources/arenarLiveDatasource.js'
 import format from '@/utils/format.js'
-import OptionsSchemas from '@/components/OptionsSchemas.js'
+import OptionsSchemas from '@/configuration/OptionsSchemas.js'
 import Ajv from 'ajv'
+import config from '@/configuration/config.js'
 
 Vue.use(Vuex)
 const ajv = new Ajv()
@@ -13,11 +14,7 @@ ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-06.json'))
 
 const state = {
   datasources: ['jsonDatasource', 'arenarLiveDatasource'],
-  globalParams: {
-    model: null,
-    variable: null,
-    observation: null
-  },
+  globalParams: {},
   slots: [],
   pageNumber: 0,
   preview: null,
@@ -40,13 +37,16 @@ const getters = {
     return null
   },
   globalParams (state, getters) {
-    return Object.keys(state.globalParams).reduce((acu, n) => {
+    return config.params.reduce((acu, n) => {
       acu[n] = getters.getGlobalParam(n)
       return acu
     }, {})
   },
   availableParams (state, getters) {
-    let params = { model: {}, variable: {}, observation: {} }
+    let params = {}
+    config.params.forEach(p => {
+      params[p] = {}
+    })
     Object.keys(params).forEach(key => {
       state.datasources.forEach(ds => {
         getters[ds + '/' + key + 's'].forEach(a => {
@@ -93,9 +93,9 @@ const getters = {
   getSlotFullParams: (state, getters) => (localParams) => {
     return localParams.map(p => Object.assign({}, getters.globalParams, p))
   },
-  modelsColors (state, getters) {
+  mainParamColors (state, getters) {
     let colors = palette.slice(0)
-    let defaultColors = getters.availableParams.model.reduce((acc, m) => {
+    let defaultColors = getters.availableParams[config.mainParam].reduce((acc, m) => {
       acc[m.uuid] = colors.shift() || color.h
       return acc
     }, {})
@@ -255,7 +255,7 @@ const actions = {
       console.error('Failed to read closedElements from localStorage', e)
     }
     try {
-      const validatorRecentURLSources = ajv.compile(require('@/utils/recentURLSources.schema.json'))
+      const validatorRecentURLSources = ajv.compile(require('@/store/schemas/recentURLSources.schema.json'))
       let recentURLSources = JSON.parse(localStorage.getItem('recentURLSources'))
       if (validatorRecentURLSources(recentURLSources)) {
         commit('loadRecentURLSources', recentURLSources.sources)
