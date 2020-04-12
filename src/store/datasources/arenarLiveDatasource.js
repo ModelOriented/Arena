@@ -23,16 +23,19 @@ const getters = {
   variables (state) {
     return state.servers.map(s => s.variables).flat()
   },
-  getAvailableSlots: (state, getters) => (fullParams) => {
+  getAvailableSlots: (state, getters, rootState, rootGetters) => (fullParams) => {
     for (let server of state.servers) {
       let params = {}
       // we check if model is from this server
       params.model = server.models.find(m => (fullParams.model || {}).uuid === m.uuid)
       params.observation = server.observations.find(o => (fullParams.observation || {}).uuid === o.uuid)
+      if (!params.observation && rootGetters.availableParams.observation.length === 0) params.observation = { uuid: -1 }
       params.variable = server.variables.find(v => (fullParams.variable || {}).uuid === v.uuid)
       if (!params.model || !params.observation || !params.variable) continue
 
-      return server.availablePlots.map(d => {
+      return server.availablePlots.filter(d => {
+        return params.observation.uuid !== -1 || !d.requiredParams.includes('observation')
+      }).map(d => {
         return {
           plotType: d.plotType,
           plotCategory: d.plotCategory ? d.plotCategory : 'Other',
