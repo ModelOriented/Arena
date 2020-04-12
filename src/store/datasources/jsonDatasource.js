@@ -7,54 +7,44 @@ ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-06.json'))
 const validator = ajv.compile(require('@/store/schemas/data.schema.json'))
 
 const state = {
-  models: [],
-  variables: [],
-  observations: [],
-  plotsData: []
+  files: []
 }
 
 const getters = {
   models (state) {
-    return state.models
+    return state.files.map(f => f.models).flat()
   },
   observations (state) {
-    return state.observations
+    return state.files.map(f => f.observations).flat()
   },
   variables (state) {
-    return state.variables
+    return state.files.map(f => f.variables).flat()
   },
   getAvailableSlots: (state, getters) => (fullParams) => {
-    let params = {}
-    params.model = state.models.find(m => (fullParams.model || {}).uuid === m.uuid)
-    params.observation = state.observations.find(o => (fullParams.observation || {}).uuid === o.uuid)
-    params.variable = state.variables.find(v => (fullParams.variable || {}).uuid === v.uuid)
-    if (!params.model || !params.observation || !params.variable) return []
+    for (let file of state.files) {
+      let params = {}
+      params.model = file.models.find(m => (fullParams.model || {}).uuid === m.uuid)
+      params.observation = file.observations.find(o => (fullParams.observation || {}).uuid === o.uuid)
+      params.variable = file.variables.find(v => (fullParams.variable || {}).uuid === v.uuid)
+      if (!params.model || !params.observation || !params.variable) return []
 
-    return state.plotsData.filter(d => {
-      return Object.keys(d.params).reduce((acc, x) => acc && d.params[x].uuid === params[x].uuid, true)
-    }).map(d => {
-      return {
-        localParams: [{ model: d.params.model }],
-        name: d.name,
-        plotType: d.plotType,
-        plotCategory: d.plotCategory
-      }
-    })
+      return file.plotsData.filter(d => {
+        return Object.keys(d.params).reduce((acc, x) => acc && d.params[x].uuid === params[x].uuid, true)
+      }).map(d => {
+        return {
+          localParams: [{ model: d.params.model }],
+          name: d.name,
+          plotType: d.plotType,
+          plotCategory: d.plotCategory
+        }
+      })
+    }
   }
 }
 
 const mutations = {
-  addModels (state, x) {
-    state.models = [...state.models, ...x]
-  },
-  addObservations (state, x) {
-    state.observations = [...state.observations, ...x]
-  },
-  addVariables (state, x) {
-    state.variables = [...state.variables, ...x]
-  },
-  addPlotsData (state, x) {
-    state.plotsData = [...state.plotsData, ...x]
+  addFile (state, file) {
+    state.files = [...state.files, file]
   }
 }
 
@@ -78,12 +68,16 @@ const actions = {
       dispatch('removeNameConflicts', params, { root: true }).then(updates => {
         // array of uuids of params that was merged to the already existing param
         let updated = Object.keys(updates)
-        // We add only params, that was not merged to already existing ones
-        commit('addModels', params.model.filter(p => !updated.includes(p.uuid)))
-        commit('addVariables', params.variable.filter(p => !updated.includes(p.uuid)))
-        commit('addObservations', params.observation.filter(p => !updated.includes(p.uuid)))
 
-        let plotsData = []
+        let file = {
+          models: params.model.map(p => updated.includes(p.uuid) ? Object.assign({}, updates[p.uuid], { orginalName: p.name }) : p),
+          variables: params.variable.map(p => updated.includes(p.uuid) ? Object.assign({}, updates[p.uuid], { orginalName: p.name }) : p),
+          observations: params.observation.map(p => updated.includes(p.uuid) ? Object.assign({}, updates[p.uuid], { orginalName: p.name }) : p),
+          uuid: uuid(),
+          address: src,
+          plotsData: []
+        }
+
         data.data.forEach(d => {
           let obj = {
             plotType: d.plotType,
@@ -107,19 +101,23 @@ const actions = {
           if (variable) obj.params.variable = variableUpdated || variable
 
           if (Object.values(obj).includes(undefined)) return
-          plotsData.push(obj)
+          file.plotsData.push(obj)
         })
-        commit('addPlotsData', plotsData)
+
+        commit('addFile', file)
         resolve(true)
       }).catch(reject)
     })
   },
   query ({ state }, { params, plotType }) {
-    let plotData = state.plotsData.find(d => {
-      return d.plotType === plotType &&
-        Object.keys(d.params).reduce((acc, x) => acc && d.params[x].uuid === params[x].uuid, true)
-    })
-    return plotData
+    for (let file of state.files) {
+      let plotData = file.plotsData.find(d => {
+        return d.plotType === plotType &&
+          Object.keys(d.params).reduce((acc, x) => acc && d.params[x].uuid === params[x].uuid, true)
+      })
+      if (plotData) return plotData
+    }
+    return null
   }
 }
 
