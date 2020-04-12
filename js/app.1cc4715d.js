@@ -4980,7 +4980,7 @@ var jsonDatasource_getters = {
   variables: function variables(state) {
     return state.variables;
   },
-  getAvailableSlots: function getAvailableSlots(state, getters) {
+  getAvailableSlots: function getAvailableSlots(state, getters, rootState, rootGetters) {
     return function (fullParams) {
       var params = {};
       params.model = state.models.find(function (m) {
@@ -4992,6 +4992,9 @@ var jsonDatasource_getters = {
       params.variable = state.variables.find(function (v) {
         return (fullParams.variable || {}).uuid === v.uuid;
       });
+      if (!params.observation && rootGetters.availableParams.observation.length === 0) params.observation = {
+        uuid: 'neverexisted'
+      };
       if (!params.model || !params.observation || !params.variable) return [];
       return state.plotsData.filter(function (d) {
         return Object.keys(d.params).reduce(function (acc, x) {
@@ -5188,7 +5191,7 @@ var arenarLiveDatasource_getters = {
       return s.variables;
     }).flat();
   },
-  getAvailableSlots: function getAvailableSlots(state, getters) {
+  getAvailableSlots: function getAvailableSlots(state, getters, rootState, rootGetters) {
     return function (fullParams) {
       var _iterator = Object(createForOfIteratorHelper["a" /* default */])(state.servers),
           _step;
@@ -5204,12 +5207,17 @@ var arenarLiveDatasource_getters = {
           params.observation = server.observations.find(function (o) {
             return (fullParams.observation || {}).uuid === o.uuid;
           });
+          if (!params.observation && rootGetters.availableParams.observation.length === 0) params.observation = {
+            uuid: -1
+          };
           params.variable = server.variables.find(function (v) {
             return (fullParams.variable || {}).uuid === v.uuid;
           });
           if (!params.model || !params.observation || !params.variable) return "continue";
           return {
-            v: server.availablePlots.map(function (d) {
+            v: server.availablePlots.filter(function (d) {
+              return params.observation.uuid !== -1 || !d.requiredParams.includes('observation');
+            }).map(function (d) {
               return {
                 plotType: d.plotType,
                 plotCategory: d.plotCategory ? d.plotCategory : 'Other',
@@ -6431,4 +6439,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.123b5370.js.map
+//# sourceMappingURL=app.1cc4715d.js.map
