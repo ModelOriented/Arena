@@ -27,6 +27,7 @@ import { mapGetters } from 'vuex'
 import Preview from '@/components/Preview.vue'
 import NameConflicts from '@/components/NameConflicts.vue'
 import WelcomeScreen from '@/components/WelcomeScreen.vue'
+import config from '@/utils/config.js'
 
 export default {
   name: 'app',
@@ -57,9 +58,19 @@ export default {
     import('@/components/Plotly.vue')
     this.$store.dispatch('init')
     let dataURL = new URLSearchParams(window.location.search).get('data')
+    let demo = new URLSearchParams(window.location.search).get('demo')
     if (dataURL) {
       this.$store.dispatch('loadURL', dataURL).catch(console.error)
       this.displayWelcomeScreen = false
+    } else if (demo) {
+      try {
+        let nr = Number.parseInt(demo)
+        let url = config.examples[nr].url
+        this.$store.dispatch('loadURL', url).catch(console.error)
+        this.displayWelcomeScreen = false
+      } catch (e) {
+        console.log(demo)
+      }
     }
 
     window.addEventListener('storage', e => {
