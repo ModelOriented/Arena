@@ -61,6 +61,9 @@ const mutations = {
     if (slot.pageNumber === undefined) Vue.set(slot, 'pageNumber', state.pageNumber)
     state.slots = [...state.slots, slot]
   },
+  clearSlots (state) {
+    Vue.set(state, 'slots', [])
+  },
   unarchiveSlot (state, slot) {
     Vue.set(slot, 'archived', false)
     Vue.set(slot, 'pageNumber', state.pageNumber)

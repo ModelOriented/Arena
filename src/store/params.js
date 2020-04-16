@@ -43,6 +43,9 @@ const getters = {
     }, {})
     return Object.assign({}, defaultColors, state.manualColors)
   },
+  manualColors (state) {
+    return state.manualColors
+  },
   palette (state, getters) {
     return palette
   },
@@ -110,6 +113,9 @@ const mutations = {
   setColor (state, { paramName, color }) {
     Vue.set(state.manualColors, paramName, color)
   },
+  loadManualColors (stete, manualColors) {
+    Vue.set(state, 'manualColors', manualColors)
+  },
   removeParamsFromWaitingList (state, uuid) {
     Vue.set(state, 'waitingParams', state.waitingParams.filter(wp => wp.uuid !== uuid))
   },
@@ -128,6 +134,9 @@ const mutations = {
       if (uniqueTranslations.size < Object.keys(newTranslations.params[paramType]).length) newTranslations.params[paramType] = currentTranslations.params[paramType] || {}
     })
     Vue.set(state, 'translations', [...state.translations.filter(t => t.uuid !== translation.uuid), newTranslations])
+  },
+  clearTranslations (state) {
+    Vue.set(state, 'translations', [])
   }
 }
 

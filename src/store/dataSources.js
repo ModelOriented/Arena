@@ -2,6 +2,7 @@ import jsonDatasource from '@/store/datasources/jsonDatasource.js'
 import arenarLiveDatasource from '@/store/datasources/arenarLiveDatasource.js'
 import Vue from 'vue'
 import Ajv from 'ajv'
+import uuid from 'uuid/v4'
 
 const ajv = new Ajv()
 ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-06.json'))
@@ -11,7 +12,8 @@ const state = {
     'jsonDatasource',
     'arenarLiveDatasource'
   ],
-  recentURLSources: []
+  recentURLSources: [],
+  uuid: uuid() // uuid of active session
 }
 
 const getters = {
@@ -20,6 +22,9 @@ const getters = {
   },
   recentURLSources (state) {
     return state.recentURLSources
+  },
+  sessionUUID (state) {
+    return state.uuid
   }
 }
 
@@ -71,6 +76,43 @@ const actions = {
       if (await dispatch(ds + '/loadData', data)) return
     }
     console.error('Failed to load data')
+  },
+  exportSession ({ getters }) {
+    let sources = getters.dataSources.map(ds => getters[ds + '/sources'])
+      .flat()
+      .sort((a, b) => a.timestamp - b.timestamp)
+      .map(source => {
+        return {
+          address: source.address,
+          translations: getters.translations[source.uuid],
+          uuid: source.uuid
+        }
+      })
+    let slots = getters.allSlots
+    let colors = getters.manualColors
+    return {
+      sources,
+      slots,
+      colors,
+      version: '1.0.0',
+      uuid: getters.sessionUUID,
+      time: new Date().getTime()
+    }
+  },
+  async importSession ({ getters, commit, dispatch }, session) {
+    // TODO json schema verify
+    getters.dataSources.forEach(ds => commit(ds + '/clearSources'))
+    commit('clearTranslations')
+    commit('loadManualColors', session.colors)
+    for (let source of session.sources) {
+      if (!source.address) continue
+      if (source.translations) commit('addTranslations', { uuid: source.uuid, params: source.translations })
+      await Vue.http.get(source.address)
+        .then(response => dispatch('loadData', { data: response.body, src: source.address, uuid: source.uuid }))
+        .catch(e => console.error('Failed to load source ' + source.uuid + ' from ' + source.address, e))
+    }
+    commit('clearSlots')
+    session.slots.forEach(slot => commit('addSlot', slot))
   }
 }
 

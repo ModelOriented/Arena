@@ -1,4 +1,4 @@
-import uuid from 'uuid/v4'
+import uuidGenerator from 'uuid/v4'
 import Ajv from 'ajv'
 import format from '@/utils/format.js'
 import config from '@/configuration/config.js'
@@ -44,7 +44,7 @@ const validateData = (data) => {
 }
 
 const actions = {
-  loadData ({ state, commit, dispatch }, { data, src }) {
+  loadData ({ state, commit, dispatch }, { data, src, uuid }) {
     if (!validateData(data)) return false
     let params = config.params.reduce((acu, paramType) => {
       acu[paramType] = data[paramType + 's']
@@ -52,7 +52,7 @@ const actions = {
     }, {})
     let source = {
       availableParams: params,
-      uuid: uuid(),
+      uuid: uuid || uuidGenerator(),
       address: src,
       plotsData: []
     }

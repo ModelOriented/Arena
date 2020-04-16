@@ -60,10 +60,14 @@ const getters = {
 
 const mutations = {
   addSource (state, source) {
+    if (!source.timestamp) Vue.set(source, 'timestamp', new Date().getTime())
     Vue.set(state, 'sources', [...state.sources, source])
   },
   removeSource (state, source) {
     Vue.set(state, 'sources', state.sources.filter(s => s !== source && s.uuid !== source))
+  },
+  clearSources (state) {
+    Vue.set(state, 'sources', [])
   }
 }
 
