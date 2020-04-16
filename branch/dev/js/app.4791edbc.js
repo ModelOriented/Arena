@@ -508,12 +508,12 @@ var es_promise_finally = __webpack_require__("a79d");
 // EXTERNAL MODULE: ./node_modules/vue/dist/vue.runtime.esm.js
 var vue_runtime_esm = __webpack_require__("2b0e");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=81e275b4&
-var Appvue_type_template_id_81e275b4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('Navbar',{class:{ blured: _vm.settingsVisible },on:{"openSettings":function($event){_vm.settingsVisible = true}}}),_c('Sidepanel',{class:{ blured: _vm.settingsVisible },attrs:{"id":"sidepanel"}}),_c('div',{class:{ blured: _vm.settingsVisible },attrs:{"id":"playground"}},_vm._l((_vm.visibleSlots),function(slot){return _c('Block',{key:slot.uuid,attrs:{"slotv":slot},on:{"openFullscreen":function($event){_vm.fullscreenSlot = slot}}})}),1),_c('DeleteZone'),(_vm.settingsVisible)?_c('div',{staticClass:"overlay",on:{"click":function($event){_vm.settingsVisible = false}}}):_vm._e(),(_vm.settingsVisible)?_c('Settings',{on:{"close":function($event){_vm.settingsVisible = false}}}):_vm._e(),(_vm.nextNameConflicts)?_c('div',{staticClass:"overlay"}):_vm._e(),(_vm.nextNameConflicts)?_c('NameConflicts'):_vm._e(),(_vm.welcomeScreenVisible)?_c('div',{staticClass:"overlay",on:{"click":function($event){_vm.displayWelcomeScreen = false}}}):_vm._e(),(_vm.welcomeScreenVisible)?_c('WelcomeScreen',{on:{"close":function($event){_vm.displayWelcomeScreen = false}}}):_vm._e(),(_vm.fullscreenSlot)?_c('FullscreenBlock',{attrs:{"slotv":_vm.fullscreenSlot},on:{"close":function($event){_vm.fullscreenSlot = null}}}):_vm._e(),(_vm.preview)?_c('Preview',{attrs:{"slotv":_vm.preview}}):_vm._e()],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=226f895a&
+var Appvue_type_template_id_226f895a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('Navbar',{class:{ blured: _vm.settingsVisible },on:{"openSettings":function($event){_vm.settingsVisible = true}}}),_c('Sidepanel',{class:{ blured: _vm.settingsVisible },attrs:{"id":"sidepanel"}}),_c('div',{class:{ blured: _vm.settingsVisible },attrs:{"id":"playground"}},_vm._l((_vm.visibleSlots),function(slot){return _c('Block',{key:slot.uuid,attrs:{"slotv":slot},on:{"openFullscreen":function($event){_vm.fullscreenSlot = slot}}})}),1),_c('DeleteZone'),(_vm.settingsVisible)?_c('div',{staticClass:"overlay",on:{"click":function($event){_vm.settingsVisible = false}}}):_vm._e(),(_vm.settingsVisible)?_c('Settings',{on:{"close":function($event){_vm.settingsVisible = false}}}):_vm._e(),(_vm.waitingParamsConflicts.length > 0)?_c('div',{staticClass:"overlay overlay-2"}):_vm._e(),(_vm.waitingParamsConflicts.length > 0)?_c('NameConflicts'):_vm._e(),(_vm.welcomeScreenVisible)?_c('div',{staticClass:"overlay",on:{"click":function($event){_vm.displayWelcomeScreen = false}}}):_vm._e(),(_vm.welcomeScreenVisible)?_c('WelcomeScreen',{on:{"close":function($event){_vm.displayWelcomeScreen = false}}}):_vm._e(),(_vm.fullscreenSlot)?_c('FullscreenBlock',{attrs:{"slotv":_vm.fullscreenSlot},on:{"close":function($event){_vm.fullscreenSlot = null}}}):_vm._e(),(_vm.preview)?_c('Preview',{attrs:{"slotv":_vm.preview}}):_vm._e()],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=81e275b4&
+// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=226f895a&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js
 var objectSpread2 = __webpack_require__("5530");
@@ -633,12 +633,12 @@ var component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var SlotsListElement = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SidepanelDropdown.vue?vue&type=template&id=ab394c8c&
-var SidepanelDropdownvue_type_template_id_ab394c8c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"sidepanel-dropdown"},[_c('div',{staticClass:"options-list"},[_c('div',{staticClass:"group-name"},[_vm._v(_vm._s(_vm._f("firstCharUpper")(_vm.mainParam)))]),_vm._l((_vm.availableParams[_vm.mainParam]),function(o){return _c('div',{key:o.uuid,staticClass:"option",class:{ selected: _vm.isSelected(_vm.mainParam, o.uuid) },on:{"click":function($event){if($event.target !== $event.currentTarget){ return null; }return _vm.select(_vm.mainParam, o)}}},[_vm._v(" "+_vm._s(_vm._f("formatTitle")(o.name))+" "),_c('span',{staticClass:"left-button"},[(_vm.selectedGroup === _vm.mainParam && !_vm.isSelected(_vm.mainParam, o.uuid))?_c('font-awesome-icon',{staticClass:"add button",attrs:{"icon":"plus"}}):_vm._e(),(_vm.selectedGroup === _vm.mainParam && !_vm.isSelected(_vm.mainParam, o.uuid))?_c('font-awesome-icon',{staticClass:"add button-hover",attrs:{"icon":"plus-square"},on:{"click":function($event){return _vm.addSelect(_vm.mainParam, o)}}}):_vm._e(),(_vm.isSelected(_vm.mainParam, o.uuid) && _vm.selectedValues.length > 1)?_c('font-awesome-icon',{staticClass:"minus button",attrs:{"icon":"minus"}}):_vm._e(),(_vm.isSelected(_vm.mainParam, o.uuid) && _vm.selectedValues.length > 1)?_c('font-awesome-icon',{staticClass:"minus button-hover",attrs:{"icon":"minus-square"},on:{"click":function($event){return _vm.removeSelect(o.uuid)}}}):_vm._e()],1),_c('font-awesome-icon',{staticClass:"color-button",style:({ display: _vm.colorSelector !== o.uuid ? 'block' : 'none', color: _vm.mainParamColors[o.uuid] }),attrs:{"icon":"square"},on:{"click":function($event){_vm.colorSelector = o.uuid}}}),_c('div',{staticClass:"color-selector",style:({ display: _vm.colorSelector === o.uuid ? 'block' : 'none' })},_vm._l((_vm.palette),function(color){return _c('font-awesome-icon',{key:color,staticClass:"color-button",style:({ color: color }),attrs:{"icon":"square"},on:{"click":function($event){return _vm.setColor(o.uuid, color)}}})}),1)],1)}),_c('div',{staticClass:"group-name"},[_vm._v("Other")]),_c('div',{staticClass:"option",class:{ selected: _vm.isSelected('other', 'clipboard') },on:{"click":function($event){if($event.target !== $event.currentTarget){ return null; }return _vm.select('other', 'clipboard')}}},[_vm._v("Clipboard")])],2)])}
-var SidepanelDropdownvue_type_template_id_ab394c8c_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SidepanelDropdown.vue?vue&type=template&id=0064ffa2&
+var SidepanelDropdownvue_type_template_id_0064ffa2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"sidepanel-dropdown"},[_c('div',{staticClass:"options-list"},[_c('div',{staticClass:"group-name"},[_vm._v(_vm._s(_vm._f("firstCharUpper")(_vm.mainParam)))]),_vm._l((_vm.availableParams[_vm.mainParam]),function(o){return _c('div',{key:o,staticClass:"option",class:{ selected: _vm.isSelected(_vm.mainParam, o) },on:{"click":function($event){if($event.target !== $event.currentTarget){ return null; }return _vm.select(_vm.mainParam, o)}}},[_vm._v(" "+_vm._s(_vm._f("formatTitle")(o))+" "),_c('span',{staticClass:"left-button"},[(_vm.selectedGroup === _vm.mainParam && !_vm.isSelected(_vm.mainParam, o))?_c('font-awesome-icon',{staticClass:"add button",attrs:{"icon":"plus"}}):_vm._e(),(_vm.selectedGroup === _vm.mainParam && !_vm.isSelected(_vm.mainParam, o))?_c('font-awesome-icon',{staticClass:"add button-hover",attrs:{"icon":"plus-square"},on:{"click":function($event){return _vm.addSelect(_vm.mainParam, o)}}}):_vm._e(),(_vm.isSelected(_vm.mainParam, o) && _vm.selectedValues.length > 1)?_c('font-awesome-icon',{staticClass:"minus button",attrs:{"icon":"minus"}}):_vm._e(),(_vm.isSelected(_vm.mainParam, o) && _vm.selectedValues.length > 1)?_c('font-awesome-icon',{staticClass:"minus button-hover",attrs:{"icon":"minus-square"},on:{"click":function($event){return _vm.removeSelect(o)}}}):_vm._e()],1),_c('font-awesome-icon',{staticClass:"color-button",style:({ display: _vm.colorSelector !== o ? 'block' : 'none', color: _vm.mainParamColors[o] }),attrs:{"icon":"square"},on:{"click":function($event){_vm.colorSelector = o}}}),_c('div',{staticClass:"color-selector",style:({ display: _vm.colorSelector === o ? 'block' : 'none' })},_vm._l((_vm.palette),function(color){return _c('font-awesome-icon',{key:color,staticClass:"color-button",style:({ color: color }),attrs:{"icon":"square"},on:{"click":function($event){return _vm.setColor(o, color)}}})}),1)],1)}),_c('div',{staticClass:"group-name"},[_vm._v("Other")]),_c('div',{staticClass:"option",class:{ selected: _vm.isSelected('other', 'clipboard') },on:{"click":function($event){if($event.target !== $event.currentTarget){ return null; }return _vm.select('other', 'clipboard')}}},[_vm._v("Clipboard")])],2)])}
+var SidepanelDropdownvue_type_template_id_0064ffa2_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/SidepanelDropdown.vue?vue&type=template&id=ab394c8c&
+// CONCATENATED MODULE: ./src/components/SidepanelDropdown.vue?vue&type=template&id=0064ffa2&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -666,9 +666,6 @@ var es_array_slice = __webpack_require__("fb6a");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.unscopables.flat.js
 var es_array_unscopables_flat = __webpack_require__("4069");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
-var es_function_name = __webpack_require__("b0c0");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.keys.js
 var es_object_keys = __webpack_require__("b64b");
@@ -760,12 +757,12 @@ var round = function round(x) {
     }).join(' ');
   }
 });
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/Breakdown.vue?vue&type=template&id=01dbb149&
-var Breakdownvue_type_template_id_01dbb149_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"resize",rawName:"v-resize:throttle.100",value:(_vm.onResize),expression:"onResize",arg:"throttle",modifiers:{"100":true}}],staticClass:"breakdown-plot"},[_c('Plotly',_vm._b({ref:"plot",on:{"plotly_click":_vm.onPlotlyClick}},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout, layoutPatches: _vm.layoutPatches },false)),(_vm.selectVisible)?_c('SelectMenu',{style:(_vm.selectStyle),attrs:{"options":_vm.selectOptions},model:{value:(_vm.selectVisible),callback:function ($$v) {_vm.selectVisible=$$v},expression:"selectVisible"}}):_vm._e()],1)}
-var Breakdownvue_type_template_id_01dbb149_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/Breakdown.vue?vue&type=template&id=502f4592&
+var Breakdownvue_type_template_id_502f4592_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"resize",rawName:"v-resize:throttle.100",value:(_vm.onResize),expression:"onResize",arg:"throttle",modifiers:{"100":true}}],staticClass:"breakdown-plot"},[_c('Plotly',_vm._b({ref:"plot",on:{"plotly_click":_vm.onPlotlyClick}},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout, layoutPatches: _vm.layoutPatches },false)),(_vm.selectVisible)?_c('SelectMenu',{style:(_vm.selectStyle),attrs:{"options":_vm.selectOptions},model:{value:(_vm.selectVisible),callback:function ($$v) {_vm.selectVisible=$$v},expression:"selectVisible"}}):_vm._e()],1)}
+var Breakdownvue_type_template_id_502f4592_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/plots/Breakdown.vue?vue&type=template&id=01dbb149&
+// CONCATENATED MODULE: ./src/plots/Breakdown.vue?vue&type=template&id=502f4592&
 
 // EXTERNAL MODULE: ./node_modules/vue-resize-directive/dist/Vueresize.js
 var Vueresize = __webpack_require__("428d");
@@ -857,7 +854,6 @@ var SelectMenu_component = Object(componentNormalizer["a" /* default */])(
 
 
 
-
 //
 //
 //
@@ -938,7 +934,7 @@ var Plotly = function Plotly() {
 
       return this.trimmed.map(function (d) {
         return {
-          name: d.params.model.name,
+          name: d.params.model,
           type: 'waterfall',
           orientation: 'h',
           measure: ['relative'].concat(Object(toConsumableArray["a" /* default */])(d.plotData.variables.map(function (y) {
@@ -1109,7 +1105,7 @@ var Plotly = function Plotly() {
       };
       var variableName = this.data[curve].plotData.variables[variable];
       this.selectedVariable = this.$store.getters.availableParams.variable.find(function (v) {
-        return v.name === variableName;
+        return v === variableName;
       });
       this.selectedModel = this.data[curve].params.model;
       this.selectedObservation = this.data[curve].params.observation;
@@ -1137,8 +1133,8 @@ var Breakdownvue_type_style_index_0_lang_css_ = __webpack_require__("00ef");
 
 var Breakdown_component = Object(componentNormalizer["a" /* default */])(
   plots_Breakdownvue_type_script_lang_js_,
-  Breakdownvue_type_template_id_01dbb149_render,
-  Breakdownvue_type_template_id_01dbb149_staticRenderFns,
+  Breakdownvue_type_template_id_502f4592_render,
+  Breakdownvue_type_template_id_502f4592_staticRenderFns,
   false,
   null,
   null,
@@ -1147,15 +1143,14 @@ var Breakdown_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var Breakdown = (Breakdown_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/FeatureImportance.vue?vue&type=template&id=1de322cb&
-var FeatureImportancevue_type_template_id_1de322cb_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"resize",rawName:"v-resize:throttle.100",value:(_vm.onResize),expression:"onResize",arg:"throttle",modifiers:{"100":true}}],staticClass:"feature-importance--plot"},[_c('Plotly',_vm._b({ref:"plot",on:{"plotly_click":_vm.onPlotlyClick}},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout, layoutPatches: _vm.layoutPatches },false))],1)}
-var FeatureImportancevue_type_template_id_1de322cb_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/FeatureImportance.vue?vue&type=template&id=78454eb3&
+var FeatureImportancevue_type_template_id_78454eb3_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"resize",rawName:"v-resize:throttle.100",value:(_vm.onResize),expression:"onResize",arg:"throttle",modifiers:{"100":true}}],staticClass:"feature-importance--plot"},[_c('Plotly',_vm._b({ref:"plot",on:{"plotly_click":_vm.onPlotlyClick}},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout, layoutPatches: _vm.layoutPatches },false))],1)}
+var FeatureImportancevue_type_template_id_78454eb3_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/plots/FeatureImportance.vue?vue&type=template&id=1de322cb&
+// CONCATENATED MODULE: ./src/plots/FeatureImportance.vue?vue&type=template&id=78454eb3&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/FeatureImportance.vue?vue&type=script&lang=js&
-
 
 
 
@@ -1225,7 +1220,7 @@ var FeatureImportancevue_type_script_lang_js_Plotly = function Plotly() {
 
       return this.trimmed.map(function (d, i) {
         return {
-          name: d.params.model.name,
+          name: d.params.model,
           type: 'bar',
           orientation: 'h',
           y: d.plotData.variables.map(function (y) {
@@ -1248,7 +1243,7 @@ var FeatureImportancevue_type_script_lang_js_Plotly = function Plotly() {
             return format.formatValue(d.plotData.base) + ' => ' + format.formatValue(x);
           }),
           hoverlabel: {
-            bgcolor: _this2.mainParamColors[d.params.model.uuid],
+            bgcolor: _this2.mainParamColors[d.params.model],
             font: {
               family: 'FiraSansBold',
               size: 16,
@@ -1256,15 +1251,15 @@ var FeatureImportancevue_type_script_lang_js_Plotly = function Plotly() {
             }
           },
           marker: {
-            color: _this2.mainParamColors[d.params.model.uuid]
+            color: _this2.mainParamColors[d.params.model]
           },
           insidetextanchor: 'start',
-          selectedpoints: _this2.selectedModel === d.params.model.uuid || _this2.selectedModel === null ? undefined : [] // undefined - all selected, [] - all unselected
+          selectedpoints: _this2.selectedModel === d.params.model || _this2.selectedModel === null ? undefined : [] // undefined - all selected, [] - all unselected
 
         };
       }).concat(!this.displayBoxplots ? [] : this.trimmed.map(function (d, i) {
         return {
-          name: d.params.model.name,
+          name: d.params.model,
           type: 'box',
           orientation: 'h',
           y: d.plotData.variables.map(function (y) {
@@ -1275,12 +1270,12 @@ var FeatureImportancevue_type_script_lang_js_Plotly = function Plotly() {
           // median is invisible, but need to be between q1 and q3
           q3: d.plotData.q3,
           marker: {
-            color: _this2.selectedModel === d.params.model.uuid || _this2.selectedModel === null ? '#371ea3' : 'transparent'
+            color: _this2.selectedModel === d.params.model || _this2.selectedModel === null ? '#371ea3' : 'transparent'
           },
           line: {
             width: 1
           },
-          fillcolor: _this2.selectedModel === d.params.model.uuid || _this2.selectedModel === null ? '#371ea3' : 'transparent',
+          fillcolor: _this2.selectedModel === d.params.model || _this2.selectedModel === null ? '#371ea3' : 'transparent',
           lowerfence: d.plotData.min,
           upperfence: d.plotData.max,
           showlegend: false,
@@ -1403,7 +1398,7 @@ var FeatureImportancevue_type_script_lang_js_Plotly = function Plotly() {
       var curveNum = Math.floor((e.data.event.pointerY - barsTop) / barWidth); // Assuming plot is at top:0
 
       if (curveNum >= this.trimmed.length || curveNum < 0) return;
-      var model = this.trimmed[curveNum].params.model.uuid; // If this model is already selected, then unselect
+      var model = this.trimmed[curveNum].params.model; // If this model is already selected, then unselect
 
       this.selectedModel = this.selectedModel === model ? null : model;
     }
@@ -1424,8 +1419,8 @@ var FeatureImportancevue_type_script_lang_js_Plotly = function Plotly() {
 
 var FeatureImportance_component = Object(componentNormalizer["a" /* default */])(
   plots_FeatureImportancevue_type_script_lang_js_,
-  FeatureImportancevue_type_template_id_1de322cb_render,
-  FeatureImportancevue_type_template_id_1de322cb_staticRenderFns,
+  FeatureImportancevue_type_template_id_78454eb3_render,
+  FeatureImportancevue_type_template_id_78454eb3_staticRenderFns,
   false,
   null,
   null,
@@ -1434,15 +1429,14 @@ var FeatureImportance_component = Object(componentNormalizer["a" /* default */])
 )
 
 /* harmony default export */ var FeatureImportance = (FeatureImportance_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/CategoricalDependence.vue?vue&type=template&id=30acc378&
-var CategoricalDependencevue_type_template_id_30acc378_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"resize",rawName:"v-resize:throttle.100",value:(_vm.onResize),expression:"onResize",arg:"throttle",modifiers:{"100":true}}],staticClass:"categorical-dependence-plot"},[_c('Plotly',_vm._b({ref:"plot"},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout, layoutPatches: _vm.layoutPatches },false))],1)}
-var CategoricalDependencevue_type_template_id_30acc378_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/CategoricalDependence.vue?vue&type=template&id=67725e1f&
+var CategoricalDependencevue_type_template_id_67725e1f_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"resize",rawName:"v-resize:throttle.100",value:(_vm.onResize),expression:"onResize",arg:"throttle",modifiers:{"100":true}}],staticClass:"categorical-dependence-plot"},[_c('Plotly',_vm._b({ref:"plot"},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout, layoutPatches: _vm.layoutPatches },false))],1)}
+var CategoricalDependencevue_type_template_id_67725e1f_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/plots/CategoricalDependence.vue?vue&type=template&id=30acc378&
+// CONCATENATED MODULE: ./src/plots/CategoricalDependence.vue?vue&type=template&id=67725e1f&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/CategoricalDependence.vue?vue&type=script&lang=js&
-
 
 
 
@@ -1474,7 +1468,7 @@ var CategoricalDependencevue_type_script_lang_js_Plotly = function Plotly() {
 
       return this.data.map(function (d, i) {
         return {
-          name: d.params.model.name,
+          name: d.params.model,
           type: 'bar',
           orientation: 'h',
           base: d.plotData.base,
@@ -1493,7 +1487,7 @@ var CategoricalDependencevue_type_script_lang_js_Plotly = function Plotly() {
             return format.formatValue(x - d.plotData.base, true);
           }),
           hoverlabel: {
-            bgcolor: _this.mainParamColors[d.params.model.uuid],
+            bgcolor: _this.mainParamColors[d.params.model],
             font: {
               family: 'FiraSansBold',
               size: 16,
@@ -1501,7 +1495,7 @@ var CategoricalDependencevue_type_script_lang_js_Plotly = function Plotly() {
             }
           },
           marker: {
-            color: _this.mainParamColors[d.params.model.uuid]
+            color: _this.mainParamColors[d.params.model]
           },
           insidetextanchor: 'start'
         };
@@ -1609,8 +1603,8 @@ var CategoricalDependencevue_type_script_lang_js_Plotly = function Plotly() {
 
 var CategoricalDependence_component = Object(componentNormalizer["a" /* default */])(
   plots_CategoricalDependencevue_type_script_lang_js_,
-  CategoricalDependencevue_type_template_id_30acc378_render,
-  CategoricalDependencevue_type_template_id_30acc378_staticRenderFns,
+  CategoricalDependencevue_type_template_id_67725e1f_render,
+  CategoricalDependencevue_type_template_id_67725e1f_staticRenderFns,
   false,
   null,
   null,
@@ -1619,15 +1613,14 @@ var CategoricalDependence_component = Object(componentNormalizer["a" /* default 
 )
 
 /* harmony default export */ var CategoricalDependence = (CategoricalDependence_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/LinearDependence.vue?vue&type=template&id=20aae3ee&
-var LinearDependencevue_type_template_id_20aae3ee_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"linear-dependence-plot"},[_c('Plotly',_vm._b({ref:"plot",on:{"plotly_click":_vm.onPlotlyClick}},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout },false))],1)}
-var LinearDependencevue_type_template_id_20aae3ee_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/LinearDependence.vue?vue&type=template&id=c7a0b27c&
+var LinearDependencevue_type_template_id_c7a0b27c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"linear-dependence-plot"},[_c('Plotly',_vm._b({ref:"plot",on:{"plotly_click":_vm.onPlotlyClick}},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout },false))],1)}
+var LinearDependencevue_type_template_id_c7a0b27c_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/plots/LinearDependence.vue?vue&type=template&id=20aae3ee&
+// CONCATENATED MODULE: ./src/plots/LinearDependence.vue?vue&type=template&id=c7a0b27c&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/LinearDependence.vue?vue&type=script&lang=js&
-
 
 
 
@@ -1655,7 +1648,7 @@ var LinearDependencevue_type_script_lang_js_Plotly = function Plotly() {
 
       return this.data.map(function (d, i) {
         return {
-          name: d.params.model.name + ' - ' + d.params.variable.name,
+          name: d.params.model + ' - ' + d.params.variable,
           type: 'scatter',
           mode: 'lines',
           x: d.plotData.x,
@@ -1665,7 +1658,7 @@ var LinearDependencevue_type_script_lang_js_Plotly = function Plotly() {
             shape: 'spline'
           },
           marker: {
-            color: _this.mainParamColors[d.params.model.uuid]
+            color: _this.mainParamColors[d.params.model]
           }
         };
       });
@@ -1678,7 +1671,7 @@ var LinearDependencevue_type_script_lang_js_Plotly = function Plotly() {
           fixedrange: true,
           zeroline: false,
           title: {
-            text: this.data.length > 0 ? format.formatTitle(this.data[0].params.variable.name) : '',
+            text: this.data.length > 0 ? format.formatTitle(this.data[0].params.variable) : '',
             standoff: 10
           }
         },
@@ -1735,8 +1728,8 @@ var LinearDependencevue_type_script_lang_js_Plotly = function Plotly() {
 
 var LinearDependence_component = Object(componentNormalizer["a" /* default */])(
   plots_LinearDependencevue_type_script_lang_js_,
-  LinearDependencevue_type_template_id_20aae3ee_render,
-  LinearDependencevue_type_template_id_20aae3ee_staticRenderFns,
+  LinearDependencevue_type_template_id_c7a0b27c_render,
+  LinearDependencevue_type_template_id_c7a0b27c_staticRenderFns,
   false,
   null,
   null,
@@ -1745,15 +1738,14 @@ var LinearDependence_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var LinearDependence = (LinearDependence_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/NumericalCeterisParibus.vue?vue&type=template&id=536d0878&
-var NumericalCeterisParibusvue_type_template_id_536d0878_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"numerical-cateris-paribus-plot"},[_c('Plotly',_vm._b({ref:"plot",on:{"plotly_click":_vm.onPlotlyClick}},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout },false))],1)}
-var NumericalCeterisParibusvue_type_template_id_536d0878_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/NumericalCeterisParibus.vue?vue&type=template&id=553687ac&
+var NumericalCeterisParibusvue_type_template_id_553687ac_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"numerical-cateris-paribus-plot"},[_c('Plotly',_vm._b({ref:"plot",on:{"plotly_click":_vm.onPlotlyClick}},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout },false))],1)}
+var NumericalCeterisParibusvue_type_template_id_553687ac_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/plots/NumericalCeterisParibus.vue?vue&type=template&id=536d0878&
+// CONCATENATED MODULE: ./src/plots/NumericalCeterisParibus.vue?vue&type=template&id=553687ac&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/NumericalCeterisParibus.vue?vue&type=script&lang=js&
-
 
 
 
@@ -1786,7 +1778,7 @@ var NumericalCeterisParibusvue_type_script_lang_js_Plotly = function Plotly() {
 
       return this.data.map(function (d, i) {
         return [{
-          name: d.params.model.name + ' - ' + d.params.variable.name,
+          name: d.params.model + ' - ' + d.params.variable,
           type: 'scatter',
           mode: 'lines',
           x: d.plotData.x,
@@ -1796,10 +1788,10 @@ var NumericalCeterisParibusvue_type_script_lang_js_Plotly = function Plotly() {
             shape: 'spline'
           },
           marker: {
-            color: _this.mainParamColors[d.params.model.uuid]
+            color: _this.mainParamColors[d.params.model]
           }
         }, {
-          name: d.params.model.name + ' - ' + d.params.variable.name,
+          name: d.params.model + ' - ' + d.params.variable,
           type: 'scatter',
           mode: 'marker',
           x: [d.plotData.observation[d.plotData.variable]],
@@ -1834,7 +1826,7 @@ var NumericalCeterisParibusvue_type_script_lang_js_Plotly = function Plotly() {
           showspikes: true,
           zeroline: false,
           title: {
-            text: this.data.length > 0 ? format.formatTitle(this.data[0].params.variable.name) : '',
+            text: this.data.length > 0 ? format.formatTitle(this.data[0].params.variable) : '',
             standoff: 10
           }
         },
@@ -1893,8 +1885,8 @@ var NumericalCeterisParibusvue_type_script_lang_js_Plotly = function Plotly() {
 
 var NumericalCeterisParibus_component = Object(componentNormalizer["a" /* default */])(
   plots_NumericalCeterisParibusvue_type_script_lang_js_,
-  NumericalCeterisParibusvue_type_template_id_536d0878_render,
-  NumericalCeterisParibusvue_type_template_id_536d0878_staticRenderFns,
+  NumericalCeterisParibusvue_type_template_id_553687ac_render,
+  NumericalCeterisParibusvue_type_template_id_553687ac_staticRenderFns,
   false,
   null,
   null,
@@ -1903,15 +1895,14 @@ var NumericalCeterisParibus_component = Object(componentNormalizer["a" /* defaul
 )
 
 /* harmony default export */ var NumericalCeterisParibus = (NumericalCeterisParibus_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/CategoricalCeterisParibus.vue?vue&type=template&id=82ba4f4a&
-var CategoricalCeterisParibusvue_type_template_id_82ba4f4a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"resize",rawName:"v-resize:throttle.100",value:(_vm.onResize),expression:"onResize",arg:"throttle",modifiers:{"100":true}}],staticClass:"categorical-dependence-plot"},[_c('Plotly',_vm._b({ref:"plot"},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout, layoutPatches: _vm.layoutPatches },false))],1)}
-var CategoricalCeterisParibusvue_type_template_id_82ba4f4a_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/CategoricalCeterisParibus.vue?vue&type=template&id=7094b72c&
+var CategoricalCeterisParibusvue_type_template_id_7094b72c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"resize",rawName:"v-resize:throttle.100",value:(_vm.onResize),expression:"onResize",arg:"throttle",modifiers:{"100":true}}],staticClass:"categorical-dependence-plot"},[_c('Plotly',_vm._b({ref:"plot"},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout, layoutPatches: _vm.layoutPatches },false))],1)}
+var CategoricalCeterisParibusvue_type_template_id_7094b72c_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/plots/CategoricalCeterisParibus.vue?vue&type=template&id=82ba4f4a&
+// CONCATENATED MODULE: ./src/plots/CategoricalCeterisParibus.vue?vue&type=template&id=7094b72c&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/CategoricalCeterisParibus.vue?vue&type=script&lang=js&
-
 
 
 
@@ -1943,7 +1934,7 @@ var CategoricalCeterisParibusvue_type_script_lang_js_Plotly = function Plotly() 
 
       return this.data.map(function (d, i) {
         return {
-          name: d.params.model.name + ' - ' + d.params.variable.name,
+          name: d.params.model + ' - ' + d.params.variable,
           type: 'bar',
           orientation: 'h',
           base: d.plotData.observation['_yhat_'],
@@ -1964,7 +1955,7 @@ var CategoricalCeterisParibusvue_type_script_lang_js_Plotly = function Plotly() 
           },
           hoverinfo: 'none',
           marker: {
-            color: _this.mainParamColors[d.params.model.uuid]
+            color: _this.mainParamColors[d.params.model]
           },
           insidetextanchor: 'start'
         };
@@ -2070,8 +2061,8 @@ var CategoricalCeterisParibusvue_type_script_lang_js_Plotly = function Plotly() 
 
 var CategoricalCeterisParibus_component = Object(componentNormalizer["a" /* default */])(
   plots_CategoricalCeterisParibusvue_type_script_lang_js_,
-  CategoricalCeterisParibusvue_type_template_id_82ba4f4a_render,
-  CategoricalCeterisParibusvue_type_template_id_82ba4f4a_staticRenderFns,
+  CategoricalCeterisParibusvue_type_template_id_7094b72c_render,
+  CategoricalCeterisParibusvue_type_template_id_7094b72c_staticRenderFns,
   false,
   null,
   null,
@@ -2080,15 +2071,14 @@ var CategoricalCeterisParibus_component = Object(componentNormalizer["a" /* defa
 )
 
 /* harmony default export */ var CategoricalCeterisParibus = (CategoricalCeterisParibus_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/SHAPValues.vue?vue&type=template&id=01f8ec76&
-var SHAPValuesvue_type_template_id_01f8ec76_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"resize",rawName:"v-resize:throttle.100",value:(_vm.onResize),expression:"onResize",arg:"throttle",modifiers:{"100":true}}],staticClass:"shap-values-plot"},[_c('Plotly',_vm._b({ref:"plot",on:{"plotly_click":_vm.onPlotlyClick}},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout, layoutPatches: _vm.layoutPatches },false))],1)}
-var SHAPValuesvue_type_template_id_01f8ec76_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/SHAPValues.vue?vue&type=template&id=5b74f1a8&
+var SHAPValuesvue_type_template_id_5b74f1a8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"resize",rawName:"v-resize:throttle.100",value:(_vm.onResize),expression:"onResize",arg:"throttle",modifiers:{"100":true}}],staticClass:"shap-values-plot"},[_c('Plotly',_vm._b({ref:"plot",on:{"plotly_click":_vm.onPlotlyClick}},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout, layoutPatches: _vm.layoutPatches },false))],1)}
+var SHAPValuesvue_type_template_id_5b74f1a8_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/plots/SHAPValues.vue?vue&type=template&id=01f8ec76&
+// CONCATENATED MODULE: ./src/plots/SHAPValues.vue?vue&type=template&id=5b74f1a8&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/SHAPValues.vue?vue&type=script&lang=js&
-
 
 
 
@@ -2159,7 +2149,7 @@ var SHAPValuesvue_type_script_lang_js_Plotly = function Plotly() {
 
       return this.trimmed.map(function (d, i) {
         return {
-          name: d.params.model.name,
+          name: d.params.model,
           type: 'bar',
           orientation: 'h',
           y: d.plotData.variables.map(function (y, i) {
@@ -2180,7 +2170,7 @@ var SHAPValuesvue_type_script_lang_js_Plotly = function Plotly() {
             return format.formatValue(d.plotData.intercept) + ' => ' + format.formatValue(x + d.plotData.intercept);
           }),
           hoverlabel: {
-            bgcolor: _this2.mainParamColors[d.params.model.uuid],
+            bgcolor: _this2.mainParamColors[d.params.model],
             font: {
               family: 'FiraSansBold',
               size: 16,
@@ -2188,15 +2178,15 @@ var SHAPValuesvue_type_script_lang_js_Plotly = function Plotly() {
             }
           },
           marker: {
-            color: _this2.mainParamColors[d.params.model.uuid]
+            color: _this2.mainParamColors[d.params.model]
           },
           insidetextanchor: 'start',
-          selectedpoints: _this2.selectedModel === d.params.model.uuid || _this2.selectedModel === null ? undefined : [] // undefined - all selected, [] - all unselected
+          selectedpoints: _this2.selectedModel === d.params.model || _this2.selectedModel === null ? undefined : [] // undefined - all selected, [] - all unselected
 
         };
       }).concat(!this.displayBoxplots ? [] : this.trimmed.map(function (d, i) {
         return {
-          name: d.params.model.name,
+          name: d.params.model,
           type: 'box',
           orientation: 'h',
           y: d.plotData.variables.map(function (y, i) {
@@ -2213,12 +2203,12 @@ var SHAPValuesvue_type_script_lang_js_Plotly = function Plotly() {
             return v + d.plotData.intercept;
           }),
           marker: {
-            color: _this2.selectedModel === d.params.model.uuid || _this2.selectedModel === null ? '#371ea3' : 'transparent'
+            color: _this2.selectedModel === d.params.model || _this2.selectedModel === null ? '#371ea3' : 'transparent'
           },
           line: {
             width: 1
           },
-          fillcolor: _this2.selectedModel === d.params.model.uuid || _this2.selectedModel === null ? '#371ea3' : 'transparent',
+          fillcolor: _this2.selectedModel === d.params.model || _this2.selectedModel === null ? '#371ea3' : 'transparent',
           lowerfence: d.plotData.min.map(function (v) {
             return v + d.plotData.intercept;
           }),
@@ -2345,7 +2335,7 @@ var SHAPValuesvue_type_script_lang_js_Plotly = function Plotly() {
       var curveNum = Math.floor((e.data.event.pointerY - barsTop) / barWidth); // Assuming plot is at top:0
 
       if (curveNum >= this.trimmed.length || curveNum < 0) return;
-      var model = this.trimmed[curveNum].params.model.uuid; // If this model is already selected, then unselect
+      var model = this.trimmed[curveNum].params.model; // If this model is already selected, then unselect
 
       this.selectedModel = this.selectedModel === model ? null : model;
     }
@@ -2366,8 +2356,8 @@ var SHAPValuesvue_type_script_lang_js_Plotly = function Plotly() {
 
 var SHAPValues_component = Object(componentNormalizer["a" /* default */])(
   plots_SHAPValuesvue_type_script_lang_js_,
-  SHAPValuesvue_type_template_id_01f8ec76_render,
-  SHAPValuesvue_type_template_id_01f8ec76_staticRenderFns,
+  SHAPValuesvue_type_template_id_5b74f1a8_render,
+  SHAPValuesvue_type_template_id_5b74f1a8_staticRenderFns,
   false,
   null,
   null,
@@ -2403,17 +2393,17 @@ var SHAPValues_component = Object(componentNormalizer["a" /* default */])(
     SHAPValues: SHAPValues
   },
   canMerge: function canMerge(slot1, slot2) {
-    if (!slot1 || !slot2 || slot1.uuid === slot2.uuid || slot1.plotType !== slot2.plotType) return false;
+    if (!slot1 || !slot2 || slot1 === slot2 || slot1.plotType !== slot2.plotType) return false;
     var type = slot1.plotType;
 
-    var getPropsUUID = function getPropsUUID(slot, propName) {
-      return slot.localParams.map(function (props) {
-        return (props[propName] || {}).uuid;
-      });
+    var testSameParamName = function testSameParamName(paramType) {
+      return new Set([].concat(Object(toConsumableArray["a" /* default */])(slot1.localParams), Object(toConsumableArray["a" /* default */])(slot2.localParams)).map(function (params) {
+        return params[paramType];
+      })).size === 1;
     };
 
-    var sameVariable = new Set([].concat(Object(toConsumableArray["a" /* default */])(getPropsUUID(slot1, 'variable')), Object(toConsumableArray["a" /* default */])(getPropsUUID(slot2, 'variable')))).size === 1;
-    var sameObservation = new Set([].concat(Object(toConsumableArray["a" /* default */])(getPropsUUID(slot1, 'observation')), Object(toConsumableArray["a" /* default */])(getPropsUUID(slot2, 'observation')))).size === 1;
+    var sameVariable = testSameParamName('variable');
+    var sameObservation = testSameParamName('observation');
     if (type === 'PartialDependence' || type === 'AccumulatedDependence' || type === 'CeterisParibus') return sameVariable;
     if (type === 'FeatureImportance') return true;
     if (type === 'SHAPValues') return sameObservation;
@@ -2473,6 +2463,10 @@ var SHAPValues_component = Object(componentNormalizer["a" /* default */])(
     }
   }
 });
+// EXTERNAL MODULE: ./node_modules/fast-deep-equal/es6/index.js
+var es6 = __webpack_require__("9f6a");
+var es6_default = /*#__PURE__*/__webpack_require__.n(es6);
+
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SidepanelDropdown.vue?vue&type=script&lang=js&
 
 
@@ -2490,33 +2484,29 @@ var SHAPValues_component = Object(componentNormalizer["a" /* default */])(
 
 
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-
-
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2539,9 +2529,7 @@ var SHAPValues_component = Object(componentNormalizer["a" /* default */])(
       if (this.selectedGroup !== this.mainParam) return; // filter params that are not available anymore
 
       this.selectedValues = this.selectedValues.filter(function (sel) {
-        return newValue.find(function (x) {
-          return x.uuid === sel.uuid;
-        });
+        return newValue.includes(sel);
       });
       if (this.selectedValues.length === 0) this.selectedValues = newValue.slice(0, 1);
     }
@@ -2549,7 +2537,7 @@ var SHAPValues_component = Object(componentNormalizer["a" /* default */])(
   computed: Object(objectSpread2["a" /* default */])({
     displayedValue: function displayedValue() {
       return this.selectedValues.map(function (v) {
-        return v.name || v || '';
+        return v || '';
       }).map(format.formatTitle).join(', ');
     },
     displayedGroup: function displayedGroup() {
@@ -2564,33 +2552,23 @@ var SHAPValues_component = Object(componentNormalizer["a" /* default */])(
       var _this = this;
 
       // it forces refreshing slots id, when any slot is added to playground
-      if (!this.allSlots) return []; // function compares two params object based on uuid (names may differ)
-
-      var sameParams = function sameParams(a, b) {
-        var uuidA = Object.keys(a).reduce(function (acu, k) {
-          acu[k] = a[k].uuid;
-          return acu;
-        }, {});
-        var uuidB = Object.keys(b).reduce(function (acu, k) {
-          acu[k] = b[k].uuid;
-          return acu;
-        }, {});
-        return !Object(toConsumableArray["a" /* default */])(new Set([].concat(Object(toConsumableArray["a" /* default */])(Object.keys(uuidA)), Object(toConsumableArray["a" /* default */])(Object.keys(uuidB))))).find(function (k) {
-          return uuidA[k] !== uuidB[k];
-        });
-      };
+      if (!this.allSlots) return [];
 
       if (this.selectedGroup === config.mainParam) {
         var plotTypes = this.selectedValues.map(function (m) {
           return _this.getAvailableSlots(Object(defineProperty["a" /* default */])({}, config.mainParam, m));
         }).flat().reduce(function (acu, slot) {
+          // if there are no slot of that plotType in accumulator that set current one
+          // in other case just append localParams
           if (!acu[slot.plotType]) acu[slot.plotType] = slot;else {
-            if (!PlotsInfo.canMerge(acu[slot.plotType], slot)) return acu;
-            acu[slot.plotType].localParams = [].concat(Object(toConsumableArray["a" /* default */])(acu[slot.plotType].localParams), Object(toConsumableArray["a" /* default */])(slot.localParams.filter(function (a) {
+            if (!PlotsInfo.canMerge(acu[slot.plotType], slot)) return acu; // get all localParams from slot that do not exist already in accumulator (removing duplications)
+
+            var newLocalParams = slot.localParams.filter(function (a) {
               return !acu[slot.plotType].localParams.find(function (b) {
-                return sameParams(a, b);
+                return es6_default()(a, b);
               });
-            })));
+            });
+            acu[slot.plotType].localParams = [].concat(Object(toConsumableArray["a" /* default */])(acu[slot.plotType].localParams), Object(toConsumableArray["a" /* default */])(newLocalParams));
           }
           return acu;
         }, {});
@@ -2613,9 +2591,7 @@ var SHAPValues_component = Object(componentNormalizer["a" /* default */])(
   },
   methods: {
     isSelected: function isSelected(group, value) {
-      return this.selectedGroup === group && this.selectedValues.find(function (s) {
-        return s === value || (s || {}).uuid === value;
-      });
+      return this.selectedGroup === group && this.selectedValues.includes(value);
     },
     select: function select(group, value) {
       this.selectedGroup = group;
@@ -2630,13 +2606,13 @@ var SHAPValues_component = Object(componentNormalizer["a" /* default */])(
     },
     removeSelect: function removeSelect(value) {
       if (this.selectedValues.length > 1) this.selectedValues = this.selectedValues.filter(function (s) {
-        return s !== value && (s || {}).uuid !== value;
+        return s !== value;
       });
     },
-    setColor: function setColor(uuid, color) {
+    setColor: function setColor(paramName, color) {
       this.colorSelector = null;
       this.$store.commit('setColor', {
-        uuid: uuid,
+        paramName: paramName,
         color: color
       });
     }
@@ -2658,8 +2634,8 @@ var SidepanelDropdownvue_type_style_index_0_lang_css_ = __webpack_require__("774
 
 var SidepanelDropdown_component = Object(componentNormalizer["a" /* default */])(
   components_SidepanelDropdownvue_type_script_lang_js_,
-  SidepanelDropdownvue_type_template_id_ab394c8c_render,
-  SidepanelDropdownvue_type_template_id_ab394c8c_staticRenderFns,
+  SidepanelDropdownvue_type_template_id_0064ffa2_render,
+  SidepanelDropdownvue_type_template_id_0064ffa2_staticRenderFns,
   false,
   null,
   null,
@@ -2858,23 +2834,23 @@ var Navbarvue_type_template_id_0e85646a_staticRenderFns = []
 
 // CONCATENATED MODULE: ./src/components/Navbar.vue?vue&type=template&id=0e85646a&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SearchDropdown.vue?vue&type=template&id=3aa86351&
-var SearchDropdownvue_type_template_id_3aa86351_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"search-dropdown",class:{ open: _vm.open },on:{"click":function($event){_vm.open = true}}},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.editText),expression:"editText"}],attrs:{"type":"text"},domProps:{"value":(_vm.editText)},on:{"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"escape",undefined,$event.key,undefined)){ return null; }_vm.open = false},"input":function($event){if($event.target.composing){ return; }_vm.editText=$event.target.value}}}),_c('span',{staticClass:"param-name"},[_vm._v(_vm._s(_vm.displayedParamName))]),_c('span',{staticClass:"param-value"},[_vm._v(_vm._s(_vm.displayedValue))]),_c('font-awesome-icon',{staticClass:"caret",attrs:{"icon":"angle-down"}}),(_vm.open && _vm.availableOptions.length > 0)?_c('div',{staticClass:"options-list"},[_vm._l((_vm.availableOptions),function(o){return _c('SearchDropdownElement',{key:o.uuid,attrs:{"paramName":_vm.paramName,"paramValue":o},on:{"setParam":function($event){return _vm.setParam(o)}}})}),(_vm.pagesCount > 1)?_c('div',{staticClass:"page-row"},[_c('div',{staticClass:"page-left page-button",class:{ invisible: _vm.page <= 0},on:{"click":function($event){_vm.page -= 1}}},[_c('font-awesome-icon',{attrs:{"icon":"angle-left"}}),_vm._v(" Previous ")],1),_vm._v(" Page "+_vm._s(_vm.page + 1)+" of "+_vm._s(_vm.pagesCount)+" "),_c('div',{staticClass:"page-right page-button",class:{ invisible: _vm.page >= _vm.pagesCount },on:{"click":function($event){_vm.page += 1}}},[_vm._v(" Next "),_c('font-awesome-icon',{attrs:{"icon":"angle-right"}})],1)]):_vm._e()],2):_vm._e()],1)}
-var SearchDropdownvue_type_template_id_3aa86351_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SearchDropdown.vue?vue&type=template&id=eb520442&
+var SearchDropdownvue_type_template_id_eb520442_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"search-dropdown",class:{ open: _vm.open },on:{"click":function($event){_vm.open = true}}},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.editText),expression:"editText"}],attrs:{"type":"text"},domProps:{"value":(_vm.editText)},on:{"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"escape",undefined,$event.key,undefined)){ return null; }_vm.open = false},"input":function($event){if($event.target.composing){ return; }_vm.editText=$event.target.value}}}),_c('span',{staticClass:"param-name"},[_vm._v(_vm._s(_vm.displayedParamName))]),_c('span',{staticClass:"param-value"},[_vm._v(_vm._s(_vm.displayedValue))]),_c('font-awesome-icon',{staticClass:"caret",attrs:{"icon":"angle-down"}}),(_vm.open && _vm.availableOptions.length > 0)?_c('div',{staticClass:"options-list"},[_vm._l((_vm.availableOptions),function(o){return _c('SearchDropdownElement',{key:o,attrs:{"paramName":_vm.paramName,"paramValue":o},on:{"setParam":function($event){return _vm.setParam(o)}}})}),(_vm.pagesCount > 1)?_c('div',{staticClass:"page-row"},[_c('div',{staticClass:"page-left page-button",class:{ invisible: _vm.page <= 0},on:{"click":function($event){_vm.page -= 1}}},[_c('font-awesome-icon',{attrs:{"icon":"angle-left"}}),_vm._v(" Previous ")],1),_vm._v(" Page "+_vm._s(_vm.page + 1)+" of "+_vm._s(_vm.pagesCount)+" "),_c('div',{staticClass:"page-right page-button",class:{ invisible: _vm.page >= _vm.pagesCount },on:{"click":function($event){_vm.page += 1}}},[_vm._v(" Next "),_c('font-awesome-icon',{attrs:{"icon":"angle-right"}})],1)]):_vm._e()],2):_vm._e()],1)}
+var SearchDropdownvue_type_template_id_eb520442_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/SearchDropdown.vue?vue&type=template&id=3aa86351&
+// CONCATENATED MODULE: ./src/components/SearchDropdown.vue?vue&type=template&id=eb520442&
 
 // EXTERNAL MODULE: ./node_modules/fuse.js/dist/fuse.js
 var dist_fuse = __webpack_require__("ffe7");
 var fuse_default = /*#__PURE__*/__webpack_require__.n(dist_fuse);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SearchDropdownElement.vue?vue&type=template&id=2159f5b8&
-var SearchDropdownElementvue_type_template_id_2159f5b8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"search-dropdown-element",class:{ active: _vm.isActive }},[_vm._v(" "+_vm._s(_vm._f("formatTitle")(_vm.paramValue.name))+" ")])}
-var SearchDropdownElementvue_type_template_id_2159f5b8_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SearchDropdownElement.vue?vue&type=template&id=58e49e34&
+var SearchDropdownElementvue_type_template_id_58e49e34_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"search-dropdown-element",class:{ active: _vm.isActive }},[_vm._v(" "+_vm._s(_vm._f("formatTitle")(_vm.paramValue))+" ")])}
+var SearchDropdownElementvue_type_template_id_58e49e34_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/SearchDropdownElement.vue?vue&type=template&id=2159f5b8&
+// CONCATENATED MODULE: ./src/components/SearchDropdownElement.vue?vue&type=template&id=58e49e34&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SearchDropdownElement.vue?vue&type=script&lang=js&
 
@@ -2892,7 +2868,7 @@ var SearchDropdownElementvue_type_template_id_2159f5b8_staticRenderFns = []
   name: 'SearchDropdownElement',
   props: {
     paramName: String,
-    paramValue: Object
+    paramValue: String
   },
   data: function data() {
     return {
@@ -2901,7 +2877,7 @@ var SearchDropdownElementvue_type_template_id_2159f5b8_staticRenderFns = []
   },
   computed: Object(objectSpread2["a" /* default */])({
     isActive: function isActive() {
-      return this.paramValue && (this.getGlobalParam(this.paramName) || {}).uuid === this.paramValue.uuid;
+      return this.paramValue && this.getGlobalParam(this.paramName) === this.paramValue;
     }
   }, Object(vuex_esm["c" /* mapGetters */])(['getGlobalParam'])),
   methods: {},
@@ -2962,8 +2938,8 @@ var SearchDropdownElementvue_type_style_index_0_lang_css_ = __webpack_require__(
 
 var SearchDropdownElement_component = Object(componentNormalizer["a" /* default */])(
   components_SearchDropdownElementvue_type_script_lang_js_,
-  SearchDropdownElementvue_type_template_id_2159f5b8_render,
-  SearchDropdownElementvue_type_template_id_2159f5b8_staticRenderFns,
+  SearchDropdownElementvue_type_template_id_58e49e34_render,
+  SearchDropdownElementvue_type_template_id_58e49e34_staticRenderFns,
   false,
   null,
   null,
@@ -3029,20 +3005,22 @@ var SearchDropdownElement_component = Object(componentNormalizer["a" /* default 
   },
   computed: Object(objectSpread2["a" /* default */])({
     displayedValue: function displayedValue() {
-      var valueName = (this.getGlobalParam(this.paramName) || {}).name;
+      var valueName = this.getGlobalParam(this.paramName) || '<Empty list>';
       return format.formatTitle(valueName || '');
     },
     displayedParamName: function displayedParamName() {
       return format.firstCharUpper(this.paramName);
     },
     fuse: function fuse() {
-      return new fuse_default.a(this.availableParams[this.paramName] || [], {
-        keys: ['name']
-      });
+      return new fuse_default.a(this.availableParams[this.paramName] || [], {});
     },
     allAvailableOptions: function allAvailableOptions() {
+      var _this = this;
+
       if (this.editText.length < 1) return this.availableParams[this.paramName] || [];
-      return this.fuse.search(this.editText);
+      return this.fuse.search(this.editText).map(function (i) {
+        return _this.availableParams[_this.paramName][i];
+      });
     },
     availableOptions: function availableOptions() {
       return this.allAvailableOptions.slice(this.page * this.itemsOnPage, (this.page + 1) * this.itemsOnPage);
@@ -3089,8 +3067,8 @@ var SearchDropdownvue_type_style_index_0_lang_css_ = __webpack_require__("9efa")
 
 var SearchDropdown_component = Object(componentNormalizer["a" /* default */])(
   components_SearchDropdownvue_type_script_lang_js_,
-  SearchDropdownvue_type_template_id_3aa86351_render,
-  SearchDropdownvue_type_template_id_3aa86351_staticRenderFns,
+  SearchDropdownvue_type_template_id_eb520442_render,
+  SearchDropdownvue_type_template_id_eb520442_staticRenderFns,
   false,
   null,
   null,
@@ -3618,10 +3596,6 @@ var PlotProxyvue_type_template_id_037f0af4_staticRenderFns = []
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.every.js
 var es_array_every = __webpack_require__("a623");
 
-// EXTERNAL MODULE: ./node_modules/fast-deep-equal/es6/index.js
-var es6 = __webpack_require__("9f6a");
-var es6_default = /*#__PURE__*/__webpack_require__.n(es6);
-
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/PlotProxy.vue?vue&type=script&lang=js&
 
 
@@ -3776,21 +3750,25 @@ var PlotProxy_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var PlotProxy = (PlotProxy_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/BlockHead.vue?vue&type=template&id=e008f696&
-var BlockHeadvue_type_template_id_e008f696_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"block-head"},[_c('div',{staticClass:"main-title-box"},[(!_vm.titleEdit)?_c('span',{staticClass:"title tooltiped",on:{"dblclick":function($event){_vm.titleEdit = true}}},[_c('span',{staticClass:"tooltip"},[_vm._v("Double click to edit")]),_c('span',{staticClass:"title-text"},[_vm._v(_vm._s(_vm.slotv.name))])]):_vm._e(),(_vm.description && !_vm.titleEdit)?_c('span',{staticClass:"tooltiped plot-help-box"},[_c('span',{staticClass:"tooltip"},[_vm._v(_vm._s(_vm.description))]),_c('font-awesome-icon',{attrs:{"icon":['far', 'question-circle']}})],1):_vm._e(),(_vm.titleEdit)?_c('input',{ref:"titleInput",staticClass:"title-input",attrs:{"type":"text"},domProps:{"value":_vm.slotv.name},on:{"blur":_vm.saveTitle,"keyup":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.saveTitle($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"escape",undefined,$event.key,undefined)){ return null; }_vm.titleEdit = false}]}}):_vm._e(),_c('div',{staticClass:"subtitle",domProps:{"innerHTML":_vm._s(_vm.usedModels)}})]),_c('div',{staticClass:"locks"},[(_vm.isMerged)?_c('span',{on:{"click":function($event){return _vm.splitSlot(_vm.slotv)}}},[_vm._v("Split "),_c('font-awesome-icon',{attrs:{"icon":['far', 'clone']}})],1):_vm._e(),_vm._l((_vm.lockableParams),function(p){return _c('span',{key:p.name,staticClass:"tooltiped",on:{"click":function($event){return _vm.lockUnlockParam(p.name)},"contextmenu":function($event){$event.preventDefault();return _vm.openParamSearch(p.name, $event)}}},[_vm._m(0,true),_vm._v(" "+_vm._s(_vm._f("titleFormat")(p.value ? p.value.name : p.name))+" "+_vm._s(p.value ? '🔒' : '🔓')+" ")])}),(_vm.searchMenuParam)?_c('SearchMenu',{style:(_vm.searchManuStyle),attrs:{"paramName":_vm.searchMenuParam},on:{"close":function($event){_vm.searchMenuParam = ''},"setParam":function($event){return _vm.setSlotParam($event)}}}):_vm._e()],2)])}
-var BlockHeadvue_type_template_id_e008f696_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"tooltip"},[_vm._v("Left click to lock"),_c('br'),_vm._v("Right click to choose")])}]
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/BlockHead.vue?vue&type=template&id=de5c3910&
+var BlockHeadvue_type_template_id_de5c3910_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"block-head"},[_c('div',{staticClass:"main-title-box"},[(!_vm.titleEdit)?_c('span',{staticClass:"title tooltiped",on:{"dblclick":function($event){_vm.titleEdit = true}}},[_c('span',{staticClass:"tooltip"},[_vm._v("Double click to edit")]),_c('span',{staticClass:"title-text"},[_vm._v(_vm._s(_vm.slotv.name))])]):_vm._e(),(_vm.description && !_vm.titleEdit)?_c('span',{staticClass:"tooltiped plot-help-box"},[_c('span',{staticClass:"tooltip"},[_vm._v(_vm._s(_vm.description))]),_c('font-awesome-icon',{attrs:{"icon":['far', 'question-circle']}})],1):_vm._e(),(_vm.titleEdit)?_c('input',{ref:"titleInput",staticClass:"title-input",attrs:{"type":"text"},domProps:{"value":_vm.slotv.name},on:{"blur":_vm.saveTitle,"keyup":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.saveTitle($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"escape",undefined,$event.key,undefined)){ return null; }_vm.titleEdit = false}]}}):_vm._e(),_c('div',{staticClass:"subtitle",domProps:{"innerHTML":_vm._s(_vm.usedModels)}})]),_c('div',{staticClass:"locks"},[(_vm.isMerged)?_c('span',{on:{"click":function($event){return _vm.splitSlot(_vm.slotv)}}},[_vm._v("Split "),_c('font-awesome-icon',{attrs:{"icon":['far', 'clone']}})],1):_vm._e(),_vm._l((_vm.lockableParams),function(p){return _c('span',{key:p.name,staticClass:"tooltiped",on:{"click":function($event){return _vm.lockUnlockParam(p.name)},"contextmenu":function($event){$event.preventDefault();return _vm.openParamSearch(p.name, $event)}}},[_vm._m(0,true),_vm._v(" "+_vm._s(_vm._f("titleFormat")(p.value ? p.value : p.name))+" "+_vm._s(p.value ? '🔒' : '🔓')+" ")])}),(_vm.searchMenuParam)?_c('SearchMenu',{style:(_vm.searchManuStyle),attrs:{"paramName":_vm.searchMenuParam},on:{"close":function($event){_vm.searchMenuParam = ''},"setParam":function($event){return _vm.setSlotParam($event)}}}):_vm._e()],2)])}
+var BlockHeadvue_type_template_id_de5c3910_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"tooltip"},[_vm._v("Left click to lock"),_c('br'),_vm._v("Right click to choose")])}]
 
 
-// CONCATENATED MODULE: ./src/components/BlockHead.vue?vue&type=template&id=e008f696&
+// CONCATENATED MODULE: ./src/components/BlockHead.vue?vue&type=template&id=de5c3910&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SearchMenu.vue?vue&type=template&id=ea239fe2&
-var SearchMenuvue_type_template_id_ea239fe2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"search-menu"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.editText),expression:"editText"}],attrs:{"type":"text"},domProps:{"value":(_vm.editText)},on:{"input":function($event){if($event.target.composing){ return; }_vm.editText=$event.target.value}}}),_vm._l((_vm.availableOptions),function(o){return _c('div',{key:o.uuid,staticClass:"entry",on:{"click":function($event){return _vm.$emit('setParam', o)}}},[_vm._v(" "+_vm._s(_vm._f("formatTitle")(o.name))+" ")])}),_c('div',{staticClass:"entry",on:{"click":function($event){return _vm.$emit('close')}}},[_vm._v("Close")])],2)}
-var SearchMenuvue_type_template_id_ea239fe2_staticRenderFns = []
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
+var es_function_name = __webpack_require__("b0c0");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SearchMenu.vue?vue&type=template&id=9f316266&
+var SearchMenuvue_type_template_id_9f316266_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"search-menu"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.editText),expression:"editText"}],attrs:{"type":"text"},domProps:{"value":(_vm.editText)},on:{"input":function($event){if($event.target.composing){ return; }_vm.editText=$event.target.value}}}),_vm._l((_vm.availableOptions),function(o){return _c('div',{key:o,staticClass:"entry",on:{"click":function($event){return _vm.$emit('setParam', o)}}},[_vm._v(" "+_vm._s(_vm._f("formatTitle")(o))+" ")])}),_c('div',{staticClass:"entry",on:{"click":function($event){return _vm.$emit('close')}}},[_vm._v("Close")])],2)}
+var SearchMenuvue_type_template_id_9f316266_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/SearchMenu.vue?vue&type=template&id=ea239fe2&
+// CONCATENATED MODULE: ./src/components/SearchMenu.vue?vue&type=template&id=9f316266&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/SearchMenu.vue?vue&type=script&lang=js&
+
 
 
 
@@ -3819,13 +3797,15 @@ var SearchMenuvue_type_template_id_ea239fe2_staticRenderFns = []
   },
   computed: Object(objectSpread2["a" /* default */])({
     fuse: function fuse() {
-      return new fuse_default.a(this.availableParams[this.paramName] || [], {
-        keys: ['name']
-      });
+      return new fuse_default.a(this.availableParams[this.paramName] || [], {});
     },
     availableOptions: function availableOptions() {
+      var _this = this;
+
       if (this.editText.length < 1) return (this.availableParams[this.paramName] || []).slice(0, 10);
-      return this.fuse.search(this.editText).slice(0, 10);
+      return this.fuse.search(this.editText).slice(0, 10).map(function (i) {
+        return _this.availableParams[_this.paramName][i];
+      });
     }
   }, Object(vuex_esm["c" /* mapGetters */])(['availableParams'])),
   filters: {
@@ -3859,8 +3839,8 @@ var SearchMenuvue_type_style_index_0_lang_css_ = __webpack_require__("ceb6");
 
 var SearchMenu_component = Object(componentNormalizer["a" /* default */])(
   components_SearchMenuvue_type_script_lang_js_,
-  SearchMenuvue_type_template_id_ea239fe2_render,
-  SearchMenuvue_type_template_id_ea239fe2_staticRenderFns,
+  SearchMenuvue_type_template_id_9f316266_render,
+  SearchMenuvue_type_template_id_9f316266_staticRenderFns,
   false,
   null,
   null,
@@ -3931,7 +3911,7 @@ var SearchMenu_component = Object(componentNormalizer["a" /* default */])(
       var _this = this;
 
       return Object(toConsumableArray["a" /* default */])(new Set(this.fullParams.map(function (p) {
-        return '<span style="color: ' + _this.mainParamColors[p[config.mainParam].uuid] + '">' + p[config.mainParam].name + '</span>';
+        return '<span style="color: ' + _this.mainParamColors[p[config.mainParam]] + '">' + p[config.mainParam] + '</span>';
       }))).join(', ');
     },
     isMerged: function isMerged() {
@@ -4017,8 +3997,8 @@ var BlockHeadvue_type_style_index_0_lang_css_ = __webpack_require__("7675");
 
 var BlockHead_component = Object(componentNormalizer["a" /* default */])(
   components_BlockHeadvue_type_script_lang_js_,
-  BlockHeadvue_type_template_id_e008f696_render,
-  BlockHeadvue_type_template_id_e008f696_staticRenderFns,
+  BlockHeadvue_type_template_id_de5c3910_render,
+  BlockHeadvue_type_template_id_de5c3910_staticRenderFns,
   false,
   null,
   null,
@@ -4666,12 +4646,12 @@ var Preview_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var Preview = (Preview_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/NameConflicts.vue?vue&type=template&id=20ac892a&
-var NameConflictsvue_type_template_id_20ac892a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"name-conflicts"},[_c('span',{staticClass:"title"},[_vm._v("Names conflicts")]),_c('div',{staticClass:"params-list"},_vm._l((_vm.paramsNames),function(p){return _c('div',{key:p,staticClass:"param"},[_c('span',{staticClass:"param-title"},[_vm._v(_vm._s(_vm._f("firstUpper")(p))),_c('span',{staticClass:"c2"},[_vm._v("Already existing")]),_c('span',{staticClass:"c3"},[_vm._v("Merge")])]),_vm._l((_vm.nextNameConflicts.params[p]),function(c){return _c('div',{key:c.newParam.uuid,staticClass:"row"},[_c('span',{staticClass:"c1"},[_vm._v(_vm._s(c.newParam.name))]),_c('span',{staticClass:"c2"},[_vm._v(_vm._s(c.orginal.name))]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectedToMerge[c.newParam.uuid]),expression:"selectedToMerge[c.newParam.uuid]"}],staticClass:"c3",attrs:{"type":"checkbox"},domProps:{"checked":Array.isArray(_vm.selectedToMerge[c.newParam.uuid])?_vm._i(_vm.selectedToMerge[c.newParam.uuid],null)>-1:(_vm.selectedToMerge[c.newParam.uuid])},on:{"change":function($event){var $$a=_vm.selectedToMerge[c.newParam.uuid],$$el=$event.target,$$c=$$el.checked?(true):(false);if(Array.isArray($$a)){var $$v=null,$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.$set(_vm.selectedToMerge, c.newParam.uuid, $$a.concat([$$v])))}else{$$i>-1&&(_vm.$set(_vm.selectedToMerge, c.newParam.uuid, $$a.slice(0,$$i).concat($$a.slice($$i+1))))}}else{_vm.$set(_vm.selectedToMerge, c.newParam.uuid, $$c)}}}})])})],2)}),0),_c('button',{staticClass:"save",on:{"click":_vm.save}},[_vm._v("Save")])])}
-var NameConflictsvue_type_template_id_20ac892a_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21c6ccd6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/NameConflicts.vue?vue&type=template&id=4b5591e5&
+var NameConflictsvue_type_template_id_4b5591e5_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"name-conflicts"},[_c('span',{staticClass:"title"},[_vm._v("Found conflict in "),_c('b',[_vm._v(_vm._s(_vm.nextParamType))]),_vm._v(" name")]),_c('span',{staticClass:"desc"},[_vm._v(" "+_vm._s(_vm._f("firstUpper")(_vm.nextParamType))+" "),_c('b',[_vm._v(_vm._s(_vm.nextParamName))]),_vm._v(" looks too similar to "),_c('b',[_vm._v(_vm._s(_vm.nextParamConflict))]),_vm._v(". If it's the same "+_vm._s(_vm.nextParamType)+", then "),_c('b',[_vm._v("merge")]),_vm._v(" it. You can also "),_c('b',[_vm._v("rename")]),_vm._v(" it, to remove conflict. ")]),_c('div',{staticClass:"buttons"},[_c('button',{staticClass:"merge",on:{"click":_vm.merge}},[_vm._v("Merge")]),_c('button',{staticClass:"merge-all",on:{"click":_vm.mergeAll}},[_vm._v("Merge for all "+_vm._s(_vm.nextParamType + 's'))]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.renameInput),expression:"renameInput"}],staticClass:"rename-input",class:{ error: _vm.renameError, disabled: !_vm.renameInput },attrs:{"type":"text","placeholder":"Enter new name here"},domProps:{"value":(_vm.renameInput)},on:{"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.tryToRename($event)},"input":function($event){if($event.target.composing){ return; }_vm.renameInput=$event.target.value}}}),_c('button',{staticClass:"rename-button",class:{ disabled: _vm.renameError || !_vm.renameInput },on:{"click":_vm.tryToRename}},[_vm._v("Rename")])])])}
+var NameConflictsvue_type_template_id_4b5591e5_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/NameConflicts.vue?vue&type=template&id=20ac892a&
+// CONCATENATED MODULE: ./src/components/NameConflicts.vue?vue&type=template&id=4b5591e5&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/NameConflicts.vue?vue&type=script&lang=js&
 
@@ -4679,6 +4659,7 @@ var NameConflictsvue_type_template_id_20ac892a_staticRenderFns = []
 
 
 
+
 //
 //
 //
@@ -4693,65 +4674,107 @@ var NameConflictsvue_type_template_id_20ac892a_staticRenderFns = []
 //
 //
 //
-//
-//
+
 
 
 /* harmony default export */ var NameConflictsvue_type_script_lang_js_ = ({
   name: 'NameConflicts',
   computed: Object(objectSpread2["a" /* default */])({
-    allParamsNames: function allParamsNames() {
-      if (!this.nextNameConflicts) return [];
-      return Object.keys(this.nextNameConflicts.params);
+    nextParamType: function nextParamType() {
+      return Object.keys(this.paramsConflict.params)[this.paramTypeIndex] || '';
     },
-    paramsNames: function paramsNames() {
+    nextParamName: function nextParamName() {
+      return this.nextParam.paramName || '';
+    },
+    nextParamsOfSameType: function nextParamsOfSameType() {
       var _this = this;
 
-      return this.allParamsNames.filter(function (n) {
-        return _this.nextNameConflicts.params[n].length > 0;
+      return (this.paramsConflict.params[this.nextParamType] || []).filter(function (x, i) {
+        return i >= _this.paramNameIndex;
       });
+    },
+    nextParam: function nextParam() {
+      return this.nextParamsOfSameType[0] || {};
+    },
+    nextParamConflict: function nextParamConflict() {
+      return this.nextParam.conflictedWith || '';
+    },
+    renameError: function renameError() {
+      return format.simplify(this.renameInput) === format.simplify(this.nextParamConflict) || !this.isRenameCorrect(this.paramsConflict.uuid, this.nextParamType, this.renameInput);
+    },
+    paramsConflict: function paramsConflict() {
+      return this.waitingParamsConflicts[0];
     }
-  }, Object(vuex_esm["c" /* mapGetters */])(['nextNameConflicts'])),
+  }, Object(vuex_esm["c" /* mapGetters */])(['waitingParamsConflicts', 'isRenameCorrect'])),
   data: function data() {
     return {
-      selectedToMerge: {}
+      renameInput: '',
+      paramTypeIndex: 0,
+      paramNameIndex: 0,
+      translations: null // will be set in watcher
+
     };
   },
   watch: {
-    nextNameConflicts: {
-      handler: function handler() {
-        var _this2 = this;
+    paramsConflict: {
+      handler: function handler(newValue) {
+        if (!newValue) return;
+        this.translations = {
+          uuid: newValue.uuid,
+          // source uuid
+          // Object with param types as keys and empty objects as values
+          params: config.params.reduce(function (acu, paramType) {
+            acu[paramType] = {};
+            return acu;
+          }, {})
+        };
+        this.paramTypeIndex = 0;
+        this.paramNameIndex = 0;
+      },
+      immediate: true
+    },
+    paramTypeIndex: {
+      handler: function handler(newValue) {
+        if (!this.paramsConflict) return;
 
-        this.selectedToMerge = {};
-        Object.keys(this.nextNameConflicts.params).forEach(function (n) {
-          _this2.nextNameConflicts.params[n].forEach(function (p) {
-            return _this2.$set(_this2.selectedToMerge, p.newParam.uuid, true);
-          });
-        });
+        if (Object.keys(this.paramsConflict.params).length <= this.paramTypeIndex && this.translations) {
+          this.addTranslations(this.translations);
+          this.paramTypeIndex = 0;
+          this.paramNameIndex = 0;
+          return;
+        }
+
+        this.paramNameIndex = 0;
+      },
+      immediate: true
+    },
+    paramNameIndex: {
+      handler: function handler(newValue) {
+        if (!this.paramsConflict) return;
+        if (this.paramsConflict.params[this.nextParamType].length <= this.paramNameIndex) this.paramTypeIndex += 1;
       },
       immediate: true
     }
   },
-  created: function created() {
-    if (this.paramsNames.length === 0 && this.nextNameConflicts) {
-      this.nextNameConflicts.resolve({});
-      this.removeNameConflicts();
-    }
-  },
   methods: Object(objectSpread2["a" /* default */])({
-    save: function save() {
-      var _this3 = this;
+    tryToRename: function tryToRename() {
+      if (this.renameError) return false;
+      this.translations.params[this.nextParamType][this.nextParamName] = this.renameInput;
+      this.paramNameIndex += 1;
+    },
+    merge: function merge() {
+      this.translations.params[this.nextParamType][this.nextParamName] = this.nextParamConflict;
+      this.paramNameIndex += 1;
+    },
+    mergeAll: function mergeAll() {
+      var _this2 = this;
 
-      var updates = {};
-      this.allParamsNames.forEach(function (p) {
-        _this3.nextNameConflicts.params[p].forEach(function (x) {
-          if (_this3.selectedToMerge[x.newParam.uuid]) updates[x.newParam.uuid] = x.orginal;
-        });
+      this.nextParamsOfSameType.forEach(function (p) {
+        _this2.translations.params[_this2.nextParamType][p.paramName] = p.conflictedWith;
       });
-      this.nextNameConflicts.resolve(updates);
-      this.removeNameConflicts();
+      this.paramTypeIndex += 1;
     }
-  }, Object(vuex_esm["d" /* mapMutations */])(['removeNameConflicts'])),
+  }, Object(vuex_esm["d" /* mapMutations */])(['addTranslations'])),
   filters: {
     firstUpper: format.firstCharUpper
   }
@@ -4772,8 +4795,8 @@ var NameConflictsvue_type_style_index_0_lang_css_ = __webpack_require__("4859");
 
 var NameConflicts_component = Object(componentNormalizer["a" /* default */])(
   components_NameConflictsvue_type_script_lang_js_,
-  NameConflictsvue_type_template_id_20ac892a_render,
-  NameConflictsvue_type_template_id_20ac892a_staticRenderFns,
+  NameConflictsvue_type_template_id_4b5591e5_render,
+  NameConflictsvue_type_template_id_4b5591e5_staticRenderFns,
   false,
   null,
   null,
@@ -4931,11 +4954,17 @@ var WelcomeScreen_component = Object(componentNormalizer["a" /* default */])(
       displayWelcomeScreen: true
     };
   },
+  watch: {
+    waitingParamsCorrect: function waitingParamsCorrect(newValue) {
+      if (newValue.length === 0) return;
+      this.$store.commit('removeParamsFromWaitingList', newValue[0]);
+    }
+  },
   computed: Object(objectSpread2["a" /* default */])({
     welcomeScreenVisible: function welcomeScreenVisible() {
       return this.displayWelcomeScreen && !this.isElementClosed('welcome-screen');
     }
-  }, Object(vuex_esm["c" /* mapGetters */])(['visibleSlots', 'preview', 'nextNameConflicts', 'isElementClosed'])),
+  }, Object(vuex_esm["c" /* mapGetters */])(['visibleSlots', 'preview', 'isElementClosed', 'waitingParamsCorrect', 'waitingParamsConflicts'])),
   created: function created() {
     var _this = this;
 
@@ -4972,7 +5001,7 @@ var Appvue_type_style_index_0_lang_css_ = __webpack_require__("034f");
 
 var App_component = Object(componentNormalizer["a" /* default */])(
   src_Appvue_type_script_lang_js_,
-  Appvue_type_template_id_81e275b4_render,
+  Appvue_type_template_id_226f895a_render,
   staticRenderFns,
   false,
   null,
@@ -4985,21 +5014,44 @@ var App_component = Object(componentNormalizer["a" /* default */])(
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.find-index.js
 var es_array_find_index = __webpack_require__("c740");
 
-// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
-var runtime = __webpack_require__("96cf");
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.index-of.js
+var es_array_index_of = __webpack_require__("c975");
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
-var asyncToGenerator = __webpack_require__("1da1");
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.entries.js
+var es_object_entries = __webpack_require__("4fad");
 
-// EXTERNAL MODULE: ./node_modules/ajv/lib/ajv.js
-var ajv = __webpack_require__("783b");
-var ajv_default = /*#__PURE__*/__webpack_require__.n(ajv);
-
-// CONCATENATED MODULE: ./src/store/datasources/jsonDatasource.js
+// CONCATENATED MODULE: ./src/utils/streams.js
 
 
 
 
+/* harmony default export */ var streams = ({
+  mapChildren: function mapChildren(obj, f) {
+    return Object.keys(obj).reduce(function (acu, key) {
+      acu[key] = obj[key].map(f);
+      return acu;
+    }, {});
+  },
+  filterChildren: function filterChildren(obj, f) {
+    return Object.keys(obj).reduce(function (acu, key) {
+      acu[key] = obj[key].filter(f);
+      return acu;
+    }, {});
+  },
+  findIndexAll: function findIndexAll(arr, f) {
+    return arr.reduce(function (acu, x, index) {
+      if (f(x)) acu.push(index);
+      return acu;
+    }, []);
+  },
+  createObjectWithArrays: function createObjectWithArrays(keys) {
+    return keys.reduce(function (acu, key) {
+      acu[key] = [];
+      return acu;
+    }, {});
+  }
+});
+// CONCATENATED MODULE: ./src/store/params.js
 
 
 
@@ -5016,598 +5068,288 @@ var ajv_default = /*#__PURE__*/__webpack_require__.n(ajv);
 
 
 
-var jsonDatasource_ajv = new ajv_default.a();
-jsonDatasource_ajv.addMetaSchema(__webpack_require__("0e0d"));
-var validator = jsonDatasource_ajv.compile(__webpack_require__("2283"));
-var jsonDatasource_state = {
-  models: [],
-  variables: [],
-  observations: [],
-  plotsData: []
+
+
+
+
+
+
+
+
+
+
+
+
+
+var params_state = {
+  globalParams: {},
+  nameConflicts: [],
+  manualColors: {},
+  // colors manualy set to param (key - param name, value - color)
+  waitingParams: [],
+  translations: []
 };
-var jsonDatasource_getters = {
-  models: function models(state) {
-    return state.models;
-  },
-  observations: function observations(state) {
-    return state.observations;
-  },
-  variables: function variables(state) {
-    return state.variables;
-  },
-  getAvailableSlots: function getAvailableSlots(state, getters) {
-    return function (fullParams) {
-      var params = {};
-      params.model = state.models.find(function (m) {
-        return (fullParams.model || {}).uuid === m.uuid;
+var params_getters = {
+  getSlotFullParams: function getSlotFullParams(state, getters) {
+    return function (localParams) {
+      return localParams.map(function (p) {
+        return Object.assign({}, getters.globalParams, p);
       });
-      params.observation = state.observations.find(function (o) {
-        return (fullParams.observation || {}).uuid === o.uuid;
+    };
+  },
+  getGlobalParam: function getGlobalParam(state, getters) {
+    return function (paramType) {
+      if (state.globalParams[paramType]) return state.globalParams[paramType];
+      if (getters.availableParams[paramType] && getters.availableParams[paramType].length > 0) return getters.availableParams[paramType][0];
+      return null;
+    };
+  },
+  globalParams: function globalParams(state, getters) {
+    return config.params.reduce(function (acu, paramType) {
+      acu[paramType] = getters.getGlobalParam(paramType);
+      return acu;
+    }, {});
+  },
+  availableParams: function availableParams(state, getters) {
+    return config.params.reduce(function (acu, paramType) {
+      acu[paramType] = Object(toConsumableArray["a" /* default */])(new Set(getters.dataSources.map(function (ds) {
+        return getters[ds + '/availableParams'][paramType];
+      }).flat()));
+      return acu;
+    }, {});
+  },
+  nextNameConflicts: function nextNameConflicts(state) {
+    return state.nameConflicts.length > 0 ? state.nameConflicts[0] : null;
+  },
+  mainParamColors: function mainParamColors(state, getters) {
+    var colors = _palette.slice(0);
+
+    var defaultColors = getters.availableParams[config.mainParam].reduce(function (acc, m) {
+      acc[m] = colors.shift() || params_color.h;
+      return acc;
+    }, {});
+    return Object.assign({}, defaultColors, state.manualColors);
+  },
+  palette: function palette(state, getters) {
+    return _palette;
+  },
+  translations: function translations(state) {
+    return state.translations.reduce(function (acu, t) {
+      acu[t.uuid] = t.params;
+      return acu;
+    }, {});
+  },
+
+  /* For collision checks only */
+  simplifiedNames: function simplifiedNames(state, getters) {
+    return streams.mapChildren(getters.availableParams, format.simplify);
+  },
+
+  /* Returns if rename input for source specified by uuid is correct. */
+  isRenameCorrect: function isRenameCorrect(state, getters) {
+    return function (uuid, paramType, paramName) {
+      if (!paramName || !uuid) return false;
+      var simplified = format.simplify(paramName); // if new name already is used
+
+      if (getters.simplifiedNames[paramType].includes(simplified)) return false;
+      var translations = ((getters.translations[uuid] || {}).params || {})[paramType] || {}; // if user already used that name in translation for waiting params
+
+      if (Object.entries(translations).find(function (_ref) {
+        var _ref2 = Object(slicedToArray["a" /* default */])(_ref, 2),
+            from = _ref2[0],
+            to = _ref2[1];
+
+        return format.simplify(to) === simplified && from !== paramName;
+      })) return false;
+      return true;
+    };
+  },
+  waitingParamsConflicts: function waitingParamsConflicts(state, getters) {
+    return state.waitingParams.map(function (wp) {
+      var result = {
+        uuid: wp.uuid,
+        params: {}
+      };
+      var params = wp.params;
+      config.params.forEach(function (paramType) {
+        if (!params[paramType]) return; // Get translations object for given source and param type
+
+        var translations = (getters.translations[wp.uuid] || {})[paramType] || {};
+        var conflicts = [];
+        params[paramType].forEach(function (name) {
+          var translated = translations[name];
+          var conflictedIndex = getters.simplifiedNames[paramType].indexOf(format.simplify(translated || name));
+          if (conflictedIndex === -1) return;
+          var conflicted = getters.availableParams[paramType][conflictedIndex];
+          if (translated === conflicted) return; // merged to already existing
+
+          conflicts.push({
+            paramName: name,
+            conflictedWith: conflicted
+          });
+        });
+        if (conflicts.length > 0) result.params[paramType] = conflicts;
       });
-      params.variable = state.variables.find(function (v) {
-        return (fullParams.variable || {}).uuid === v.uuid;
-      });
-      if (!params.model || !params.observation || !params.variable) return [];
-      return state.plotsData.filter(function (d) {
-        return Object.keys(d.params).reduce(function (acc, x) {
-          return acc && d.params[x].uuid === params[x].uuid;
-        }, true);
-      }).map(function (d) {
-        return {
-          localParams: [{
-            model: d.params.model
-          }],
-          name: d.name,
-          plotType: d.plotType,
-          plotCategory: d.plotCategory
-        };
+      return result;
+    });
+  },
+  waitingParamsCorrect: function waitingParamsCorrect(state, getters) {
+    return getters.waitingParamsConflicts.filter(function (result) {
+      return Object.keys(result.params).length === 0;
+    }).map(function (result) {
+      return result.uuid;
+    });
+  },
+  canPublishParams: function canPublishParams(state, getters) {
+    return function (uuid) {
+      return !state.waitingParams.find(function (wp) {
+        return wp.uuid === uuid;
       });
     };
   }
 };
 var mutations = {
-  addModels: function addModels(state, x) {
-    state.models = [].concat(Object(toConsumableArray["a" /* default */])(state.models), Object(toConsumableArray["a" /* default */])(x));
+  setGlobalParam: function setGlobalParam(state, _ref3) {
+    var name = _ref3.name,
+        value = _ref3.value;
+    vue_runtime_esm["a" /* default */].set(state.globalParams, name, value);
   },
-  addObservations: function addObservations(state, x) {
-    state.observations = [].concat(Object(toConsumableArray["a" /* default */])(state.observations), Object(toConsumableArray["a" /* default */])(x));
+  addNameConflictsToResolve: function addNameConflictsToResolve(state, toResolve) {
+    vue_runtime_esm["a" /* default */].set(state, 'nameConflicts', [].concat(Object(toConsumableArray["a" /* default */])(state.nameConflicts), [toResolve]));
   },
-  addVariables: function addVariables(state, x) {
-    state.variables = [].concat(Object(toConsumableArray["a" /* default */])(state.variables), Object(toConsumableArray["a" /* default */])(x));
+  removeNameConflicts: function removeNameConflicts(state) {
+    vue_runtime_esm["a" /* default */].set(state, 'nameConflicts', state.nameConflicts.slice(1));
   },
-  addPlotsData: function addPlotsData(state, x) {
-    state.plotsData = [].concat(Object(toConsumableArray["a" /* default */])(state.plotsData), Object(toConsumableArray["a" /* default */])(x));
+  setColor: function setColor(state, _ref4) {
+    var paramName = _ref4.paramName,
+        color = _ref4.color;
+    vue_runtime_esm["a" /* default */].set(state.manualColors, paramName, color);
+  },
+  removeParamsFromWaitingList: function removeParamsFromWaitingList(state, uuid) {
+    vue_runtime_esm["a" /* default */].set(state, 'waitingParams', state.waitingParams.filter(function (wp) {
+      return wp.uuid !== uuid;
+    }));
+  },
+  addWaitingParams: function addWaitingParams(state, _ref5) {
+    var params = _ref5.params,
+        uuid = _ref5.uuid;
+    vue_runtime_esm["a" /* default */].set(state, 'waitingParams', [].concat(Object(toConsumableArray["a" /* default */])(state.waitingParams), [{
+      params: params,
+      uuid: uuid
+    }]));
+  },
+  addTranslations: function addTranslations(state, translation) {
+    // Get already existing translation for same source
+    var currentTranslations = state.translations.find(function (t) {
+      return t.uuid === translation.uuid;
+    }) || {
+      params: {}
+    };
+    var newTranslations = {
+      uuid: translation.uuid,
+      params: {}
+    };
+    config.params.forEach(function (paramType) {
+      // apply new translations over the old one
+      newTranslations.params[paramType] = Object.assign({}, currentTranslations.params[paramType], translation.params[paramType]); // check if translations are unique, if not, then abort for that paramType
+
+      var uniqueTranslations = new Set(Object.values(newTranslations.params[paramType]).map(format.simplify));
+      if (uniqueTranslations.size < Object.keys(newTranslations.params[paramType]).length) newTranslations.params[paramType] = currentTranslations.params[paramType] || {};
+    });
+    vue_runtime_esm["a" /* default */].set(state, 'translations', [].concat(Object(toConsumableArray["a" /* default */])(state.translations.filter(function (t) {
+      return t.uuid !== translation.uuid;
+    })), [newTranslations]));
   }
-}; // Checks if names array have unique elements, after removing special characters and in lower case
-
-var jsonDatasource_isUnique = function isUnique(array) {
-  return new Set(array.map(format.simplify)).size === array.length;
 };
-
-var validateData = function validateData(data) {
-  return validator(data) && jsonDatasource_isUnique(data.observations) && jsonDatasource_isUnique(data.variables) && jsonDatasource_isUnique(data.models);
-};
-
 var actions = {
-  loadData: function loadData(_ref, _ref2) {
-    var state = _ref.state,
-        commit = _ref.commit,
-        dispatch = _ref.dispatch;
-    var data = _ref2.data,
-        src = _ref2.src;
-    if (!validateData(data)) return false;
-    var params = {
-      model: data.models.map(function (a) {
-        return {
-          name: a,
-          uuid: v4_default()()
-        };
-      }),
-      variable: data.variables.map(function (a) {
-        return {
-          name: a,
-          uuid: v4_default()()
-        };
-      }),
-      observation: data.observations.map(function (a) {
-        return {
-          name: a,
-          uuid: v4_default()()
-        };
-      })
+  /*
+   * Method called from data sources to check if there are name collisions
+   * of params and resolve them.
+   * @return Promise with object in which keys are uuids of params that should be replaced
+   * by keys' value
+   */
+  removeNameConflicts: function removeNameConflicts(_ref6, params) {
+    var commit = _ref6.commit,
+        getters = _ref6.getters;
+    var toResolve = {
+      params: {}
     };
-    return new Promise(function (resolve, reject) {
-      dispatch('removeNameConflicts', params, {
-        root: true
-      }).then(function (updates) {
-        // array of uuids of params that was merged to the already existing param
-        var updated = Object.keys(updates); // We add only params, that was not merged to already existing ones
-
-        commit('addModels', params.model.filter(function (p) {
-          return !updated.includes(p.uuid);
-        }));
-        commit('addVariables', params.variable.filter(function (p) {
-          return !updated.includes(p.uuid);
-        }));
-        commit('addObservations', params.observation.filter(function (p) {
-          return !updated.includes(p.uuid);
-        }));
-        var plotsData = [];
-        data.data.forEach(function (d) {
-          var obj = {
-            plotType: d.plotType,
-            plotCategory: d.plotCategory ? d.plotCategory : 'Other',
-            plotComponent: d.plotComponent,
-            name: d.name ? d.name : format.firstCharUpper(d.plotType),
-            plotData: d.data,
-            params: {}
-          }; // Firstly we search by name in not updated params
-
-          var model = params.model.find(function (a) {
-            return a.name === d.params.model;
-          });
-          var observation = params.observation.find(function (a) {
-            return a.name === d.params.observation;
-          });
-          var variable = params.variable.find(function (a) {
-            return a.name === d.params.variable;
-          }); // Next we find merged version if exists
-
-          var modelUpdated = updates[(model || {}).uuid || ''];
-          var variableUpdated = updates[(variable || {}).uuid || ''];
-          var observationUpdated = updates[(observation || {}).uuid || '']; // Set param with priority to updated version
-
-          if (model) obj.params.model = modelUpdated || model;
-          if (observation) obj.params.observation = observationUpdated || observation;
-          if (variable) obj.params.variable = variableUpdated || variable;
-          if (Object.values(obj).includes(undefined)) return;
-          plotsData.push(obj);
+    Object.keys(params).forEach(function (paramKey) {
+      if (!getters.availableParams[paramKey]) return;
+      toResolve.params[paramKey] = [];
+      var simplified = getters.availableParams[paramKey].map(function (p) {
+        return Object(objectSpread2["a" /* default */])({
+          simplified: format.simplify(p.name)
+        }, p);
+      });
+      params[paramKey].forEach(function (p) {
+        var duplicate = simplified.findIndex(function (s) {
+          return s.simplified === format.simplify(p.name);
         });
-        commit('addPlotsData', plotsData);
-        resolve(true);
-      }).catch(reject);
-    });
-  },
-  query: function query(_ref3, _ref4) {
-    var state = _ref3.state;
-    var params = _ref4.params,
-        plotType = _ref4.plotType;
-    var plotData = state.plotsData.find(function (d) {
-      return d.plotType === plotType && Object.keys(d.params).reduce(function (acc, x) {
-        return acc && d.params[x].uuid === params[x].uuid;
-      }, true);
-    });
-    return plotData;
-  }
-};
-/* harmony default export */ var jsonDatasource = ({
-  state: jsonDatasource_state,
-  getters: jsonDatasource_getters,
-  mutations: mutations,
-  actions: actions,
-  namespaced: true
-});
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.entries.js
-var es_object_entries = __webpack_require__("4fad");
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/typeof.js
-var esm_typeof = __webpack_require__("53ca");
-
-// CONCATENATED MODULE: ./src/store/datasources/arenarLiveDatasource.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var arenarLiveDatasource_ajv = new ajv_default.a();
-arenarLiveDatasource_ajv.addMetaSchema(__webpack_require__("0e0d"));
-var arenarLiveDatasource_validator = arenarLiveDatasource_ajv.compile(__webpack_require__("8c3e"));
-var arenarLiveDatasource_state = {
-  servers: []
-};
-var arenarLiveDatasource_getters = {
-  // These can produce duplicats, index.js removes them
-  models: function models(state) {
-    return state.servers.map(function (s) {
-      return s.models;
-    }).flat();
-  },
-  observations: function observations(state) {
-    return state.servers.map(function (s) {
-      return s.observations;
-    }).flat();
-  },
-  variables: function variables(state) {
-    return state.servers.map(function (s) {
-      return s.variables;
-    }).flat();
-  },
-  getAvailableSlots: function getAvailableSlots(state, getters) {
-    return function (fullParams) {
-      var _iterator = Object(createForOfIteratorHelper["a" /* default */])(state.servers),
-          _step;
-
-      try {
-        var _loop = function _loop() {
-          var server = _step.value;
-          var params = {}; // we check if model is from this server
-
-          params.model = server.models.find(function (m) {
-            return (fullParams.model || {}).uuid === m.uuid;
-          });
-          params.observation = server.observations.find(function (o) {
-            return (fullParams.observation || {}).uuid === o.uuid;
-          });
-          params.variable = server.variables.find(function (v) {
-            return (fullParams.variable || {}).uuid === v.uuid;
-          });
-          if (!params.model || !params.observation || !params.variable) return "continue";
-          return {
-            v: server.availablePlots.map(function (d) {
-              return {
-                plotType: d.plotType,
-                plotCategory: d.plotCategory ? d.plotCategory : 'Other',
-                name: d.name ? d.name : format.firstCharUpper(d.plotType),
-                localParams: [{
-                  model: params.model
-                }]
-              };
-            })
-          };
-        };
-
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var _ret = _loop();
-
-          switch (_ret) {
-            case "continue":
-              continue;
-
-            default:
-              if (Object(esm_typeof["a" /* default */])(_ret) === "object") return _ret.v;
-          }
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-
-      return [];
-    };
-  }
-};
-var arenarLiveDatasource_mutations = {
-  addServer: function addServer(state, server) {
-    state.servers = [].concat(Object(toConsumableArray["a" /* default */])(state.servers), [server]);
-  },
-  addToCache: function addToCache(state, _ref) {
-    var server = _ref.server,
-        slotData = _ref.slotData;
-    server.cache = [].concat(Object(toConsumableArray["a" /* default */])(server.cache), [slotData]);
-  },
-  addWaiting: function addWaiting(state, _ref2) {
-    var server = _ref2.server,
-        waitingObject = _ref2.waitingObject;
-    server.waiting = [].concat(Object(toConsumableArray["a" /* default */])(server.waiting), [waitingObject]);
-  },
-  removeWaiting: function removeWaiting(state, _ref3) {
-    var server = _ref3.server,
-        waitingObject = _ref3.waitingObject;
-    server.waiting = server.waiting.filter(function (w) {
-      return w !== waitingObject;
-    });
-  }
-}; // Checks if names array have unique elements, after removing special characters and in lower case
-
-var arenarLiveDatasource_isUnique = function isUnique(array) {
-  return new Set(array.map(format.simplify)).size === array.length;
-};
-
-var arenarLiveDatasource_validateData = function validateData(data) {
-  return arenarLiveDatasource_validator(data) && arenarLiveDatasource_isUnique(data.observations) && arenarLiveDatasource_isUnique(data.variables) && arenarLiveDatasource_isUnique(data.models);
-};
-
-var arenarLiveDatasource_actions = {
-  loadData: function loadData(_ref4, _ref5) {
-    var state = _ref4.state,
-        commit = _ref4.commit,
-        dispatch = _ref4.dispatch;
-    var data = _ref5.data,
-        src = _ref5.src;
-    if (!arenarLiveDatasource_validateData(data)) return false;
-    var params = {
-      model: data.models.map(function (a) {
-        return {
-          name: a,
-          uuid: v4_default()()
-        };
-      }),
-      variable: data.variables.map(function (a) {
-        return {
-          name: a,
-          uuid: v4_default()()
-        };
-      }),
-      observation: data.observations.map(function (a) {
-        return {
-          name: a,
-          uuid: v4_default()()
-        };
-      })
-    };
-    return new Promise(function (resolve, reject) {
-      dispatch('removeNameConflicts', params, {
-        root: true
-      }).then(function (updates) {
-        // array of uuids of params that was merged to the already existing param
-        var updated = Object.keys(updates);
-        var server = {
-          models: params.model.map(function (p) {
-            return updated.includes(p.uuid) ? Object.assign({}, updates[p.uuid], {
-              orginalName: p.name
-            }) : p;
-          }),
-          variables: params.variable.map(function (p) {
-            return updated.includes(p.uuid) ? Object.assign({}, updates[p.uuid], {
-              orginalName: p.name
-            }) : p;
-          }),
-          observations: params.observation.map(function (p) {
-            return updated.includes(p.uuid) ? Object.assign({}, updates[p.uuid], {
-              orginalName: p.name
-            }) : p;
-          }),
-          uuid: v4_default()(),
-          timestamp: data.timestamp,
-          address: src,
-          availablePlots: data.availablePlots,
-          cache: [],
-          waiting: []
-        };
-        commit('addServer', server);
-        resolve(true);
-      }).catch(reject);
-    });
-  },
-  query: function query(_ref6, _ref7) {
-    var state = _ref6.state,
-        commit = _ref6.commit;
-    var params = _ref7.params,
-        plotType = _ref7.plotType;
-
-    var _iterator2 = Object(createForOfIteratorHelper["a" /* default */])(state.servers),
-        _step2;
-
-    try {
-      var _loop2 = function _loop2() {
-        var server = _step2.value;
-        // for each server we find required params for plotType
-        var plotProperties = server.availablePlots.find(function (p) {
-          return p.plotType === plotType;
-        });
-        if (!plotProperties) return "continue"; // each param is maped to object from this server (same uuid is not enought)
-
-        var serverParams = plotProperties.requiredParams.reduce(function (acu, paramName) {
-          acu[paramName] = server[paramName + 's'].find(function (p) {
-            return p.uuid === params[paramName].uuid;
-          });
-          return acu;
-        }, {}); // one of required params is not from this server
-
-        if (Object.values(serverParams).includes(undefined) || Object.values(serverParams).includes(null)) return "continue";
-        var cached = server.cache.find(function (c) {
-          return c.plotType === plotType && es6_default()(c.params, serverParams);
-        });
-        if (cached) return {
-          v: cached
-        };
-        var query = Object.keys(serverParams).reduce(function (acu, p) {
-          acu[p] = serverParams[p].orginalName || serverParams[p].name;
-          return acu;
-        }, {});
-        var alreadyWaiting = server.waiting.find(function (w) {
-          return w.plotType === plotType && es6_default()(w.params, serverParams);
-        });
-        if (alreadyWaiting) return {
-          v: alreadyWaiting.promise
-        };
-        return {
-          v: new Promise(function (resolve, reject) {
-            var waitingObject = {
-              promise: null,
-              resolve: null,
-              reject: null,
-              params: serverParams,
-              plotType: plotType
-            };
-            var waitingPromise = new Promise(function (resolve, reject) {
-              waitingObject.resolve = resolve;
-              waitingObject.reject = reject; // To make sure promise parameter is already set
-
-              if (waitingObject.promise) commit('addWaiting', {
-                server: server,
-                waitingObject: waitingObject
-              });
-            });
-            waitingObject.promise = waitingPromise;
-            if (waitingObject.resolve) commit('addWaiting', {
-              server: server,
-              waitingObject: waitingObject
-            });
-            var queryString = Object.entries(query).map(function (e) {
-              return e.map(encodeURIComponent).join('=');
-            }).join('&');
-            vue_runtime_esm["a" /* default */].http.get(server.address + plotType + '?' + queryString).then(function (respone) {
-              var data = respone.body;
-              var slotData = {
-                plotType: plotType,
-                params: serverParams,
-                plotData: data.data,
-                plotComponent: data.plotComponent
-              };
-              commit('addToCache', {
-                server: server,
-                slotData: slotData
-              });
-              waitingObject.resolve(slotData);
-              commit('removeWaiting', {
-                server: server,
-                waitingObject: waitingObject
-              });
-              resolve(slotData);
-            }).catch(function (e) {
-              waitingObject.reject(e);
-              reject(e);
-            });
-          })
-        };
-      };
-
-      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-        var _ret2 = _loop2();
-
-        switch (_ret2) {
-          case "continue":
-            continue;
-
-          default:
-            if (Object(esm_typeof["a" /* default */])(_ret2) === "object") return _ret2.v;
-        }
-      }
-    } catch (err) {
-      _iterator2.e(err);
-    } finally {
-      _iterator2.f();
-    }
-
-    return null;
-  }
-};
-/* harmony default export */ var arenarLiveDatasource = ({
-  state: arenarLiveDatasource_state,
-  getters: arenarLiveDatasource_getters,
-  mutations: arenarLiveDatasource_mutations,
-  actions: arenarLiveDatasource_actions,
-  namespaced: true
-});
-// CONCATENATED MODULE: ./src/store/index.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-vue_runtime_esm["a" /* default */].use(vuex_esm["a" /* default */]);
-var store_ajv = new ajv_default.a();
-store_ajv.addMetaSchema(__webpack_require__("0e0d"));
-var store_state = {
-  datasources: ['jsonDatasource', 'arenarLiveDatasource'],
-  globalParams: {},
-  slots: [],
-  pageNumber: 0,
-  preview: null,
-  nameConflicts: [],
-  options: {},
-  manualColors: {},
-  closedElements: [],
-  recentURLSources: [],
-  slotsInitInformation: [] // contains information required to open new slot in drag mode
-
-};
-var store_getters = {
-  getOption: function getOption(srare, getters) {
-    return function (name) {
-      if (store_state.options[name] !== undefined) return store_state.options[name];
-      return (OptionsSchemas.find(function (s) {
-        return s.name === name;
-      }) || {}).default;
-    };
-  },
-  getGlobalParam: function getGlobalParam(state, getters) {
-    return function (name) {
-      if (state.globalParams[name]) return state.globalParams[name];
-      if (getters.availableParams[name] && getters.availableParams[name].length > 0) return getters.availableParams[name][0];
-      return null;
-    };
-  },
-  globalParams: function globalParams(state, getters) {
-    return config.params.reduce(function (acu, n) {
-      acu[n] = getters.getGlobalParam(n);
-      return acu;
-    }, {});
-  },
-  availableParams: function availableParams(state, getters) {
-    var params = {};
-    config.params.forEach(function (p) {
-      params[p] = {};
-    });
-    Object.keys(params).forEach(function (key) {
-      state.datasources.forEach(function (ds) {
-        getters[ds + '/' + key + 's'].forEach(function (a) {
-          params[key][a.uuid] = a; // make sure we have only one param for one uuid
+        if (duplicate === -1) return;
+        toResolve.params[paramKey].push({
+          orginal: getters.availableParams[paramKey][duplicate],
+          newParam: p
         });
       });
-      params[key] = Object.values(params[key]); // make array from object
     });
-    return params;
-  },
+    return new Promise(function (resolve, reject) {
+      toResolve.resolve = resolve;
+      toResolve.reject = reject;
+      commit('addNameConflictsToResolve', toResolve);
+    });
+  }
+};
+/* harmony default export */ var store_params = ({
+  state: params_state,
+  getters: params_getters,
+  mutations: mutations,
+  actions: actions,
+  namespaced: false
+});
+var params_color = {
+  a: '#8bdcbe',
+  b: '#f05a71',
+  c: '#371ea3',
+  d: '#46bac2',
+  e: '#ae2c87',
+  f: '#ffa58c',
+  g: '#4378bf',
+  h: '#160e3b'
+};
+var _palette = [params_color.a, params_color.b, params_color.g, params_color.d, params_color.e, params_color.f, params_color.c, params_color.h];
+// CONCATENATED MODULE: ./src/store/slots.js
+
+
+
+
+
+
+
+
+
+
+
+
+var slots_state = {
+  slots: [],
+  pageNumber: 0,
+  slotsInitInformation: [],
+  // contains information required to open new slot in drag mode
+  preview: null
+};
+var slots_getters = {
   pageNumber: function pageNumber(state) {
     return state.pageNumber;
   },
-  nextNameConflicts: function nextNameConflicts(state) {
-    return state.nameConflicts.length > 0 ? state.nameConflicts[0] : null;
+  preview: function preview(state) {
+    return state.preview;
   },
   getAvailableSlots: function getAvailableSlots(state, getters) {
     return function (params) {
       var fullParams = Object.assign({}, getters.globalParams, params);
       var slots = [];
-      state.datasources.forEach(function (ds) {
+      getters.dataSources.forEach(function (ds) {
         slots = slots.concat(getters[ds + '/getAvailableSlots'](fullParams));
       });
       slots = slots.map(function (s) {
@@ -5618,7 +5360,7 @@ var store_getters = {
           positionY: 0,
           width: 512,
           height: 384,
-          pageNumber: state.pageNumber
+          pageNumber: getters.pageNumber
         });
       });
       return slots;
@@ -5637,38 +5379,6 @@ var store_getters = {
   allSlots: function allSlots(state) {
     return state.slots;
   },
-  getSlotFullParams: function getSlotFullParams(state, getters) {
-    return function (localParams) {
-      return localParams.map(function (p) {
-        return Object.assign({}, getters.globalParams, p);
-      });
-    };
-  },
-  mainParamColors: function mainParamColors(state, getters) {
-    var colors = _palette.slice(0);
-
-    var defaultColors = getters.availableParams[config.mainParam].reduce(function (acc, m) {
-      acc[m.uuid] = colors.shift() || store_color.h;
-      return acc;
-    }, {});
-    return Object.assign({}, defaultColors, state.manualColors);
-  },
-  palette: function palette(state, getters) {
-    return _palette;
-  },
-  preview: function preview(state) {
-    return state.preview;
-  },
-  isElementClosed: function isElementClosed(state, getters) {
-    return function (name) {
-      return !!state.closedElements.find(function (f) {
-        return f === name;
-      });
-    };
-  },
-  recentURLSources: function recentURLSources(state) {
-    return state.recentURLSources;
-  },
   getSlotInitInfo: function getSlotInitInfo(state) {
     return function (slot) {
       return state.slotsInitInformation.find(function (x) {
@@ -5677,30 +5387,10 @@ var store_getters = {
     };
   }
 };
-var store_mutations = {
-  setOption: function setOption(state, _ref) {
-    var name = _ref.name,
-        value = _ref.value;
-    vue_runtime_esm["a" /* default */].set(state.options, name, value);
-  },
-  setGlobalParam: function setGlobalParam(state, _ref2) {
-    var name = _ref2.name,
-        value = _ref2.value;
-    vue_runtime_esm["a" /* default */].set(state.globalParams, name, value);
-  },
-  addNameConflictsToResolve: function addNameConflictsToResolve(state, toResolve) {
-    state.nameConflicts = [].concat(Object(toConsumableArray["a" /* default */])(state.nameConflicts), [toResolve]);
-  },
-  removeNameConflicts: function removeNameConflicts(state) {
-    state.nameConflicts = state.nameConflicts.slice(1);
-  },
+var slots_mutations = {
   setPageNumber: function setPageNumber(state, n) {
     state.pageNumber = n;
   },
-
-  /*
-   * Slots
-  */
   addSlot: function addSlot(state, slot) {
     if (!slot.uuid) vue_runtime_esm["a" /* default */].set(slot, 'uuid', v4_default()());
     if (slot.archived === undefined) vue_runtime_esm["a" /* default */].set(slot, 'archived', false);
@@ -5723,9 +5413,9 @@ var store_mutations = {
       return s.uuid !== slot.uuid;
     });
   },
-  addSlotInitInfo: function addSlotInitInfo(state, _ref3) {
-    var slot = _ref3.slot,
-        info = _ref3.info;
+  addSlotInitInfo: function addSlotInitInfo(state, _ref) {
+    var slot = _ref.slot,
+        info = _ref.info;
     state.slotsInitInformation = [].concat(Object(toConsumableArray["a" /* default */])(state.slotsInitInformation), [Object(objectSpread2["a" /* default */])({
       uuid: slot.uuid
     }, info)]);
@@ -5757,46 +5447,46 @@ var store_mutations = {
       return s.uuid !== slot.uuid;
     })), Object(toConsumableArray["a" /* default */])(newSlots));
   },
-  setSlotName: function setSlotName(state, _ref4) {
-    var slot = _ref4.slot,
-        name = _ref4.name;
+  setSlotName: function setSlotName(state, _ref2) {
+    var slot = _ref2.slot,
+        name = _ref2.name;
     if (!name || name.length === 0) return;
     vue_runtime_esm["a" /* default */].set(slot, 'name', name);
   },
-  setSlotPosition: function setSlotPosition(state, _ref5) {
-    var slot = _ref5.slot,
-        x = _ref5.x,
-        y = _ref5.y;
+  setSlotPosition: function setSlotPosition(state, _ref3) {
+    var slot = _ref3.slot,
+        x = _ref3.x,
+        y = _ref3.y;
     vue_runtime_esm["a" /* default */].set(slot, 'positionX', x);
     vue_runtime_esm["a" /* default */].set(slot, 'positionY', y);
   },
-  setSlotSize: function setSlotSize(state, _ref6) {
-    var slot = _ref6.slot,
-        width = _ref6.width,
-        height = _ref6.height;
+  setSlotSize: function setSlotSize(state, _ref4) {
+    var slot = _ref4.slot,
+        width = _ref4.width,
+        height = _ref4.height;
     vue_runtime_esm["a" /* default */].set(slot, 'width', width);
     vue_runtime_esm["a" /* default */].set(slot, 'height', height);
   },
-  mergeSlots: function mergeSlots(state, _ref7) {
-    var slot1 = _ref7.slot1,
-        slot2 = _ref7.slot2;
+  mergeSlots: function mergeSlots(state, _ref5) {
+    var slot1 = _ref5.slot1,
+        slot2 = _ref5.slot2;
     if (slot1.uuid === slot2.uuid) return;
     slot1.localParams = [].concat(Object(toConsumableArray["a" /* default */])(slot1.localParams), Object(toConsumableArray["a" /* default */])(slot2.localParams));
     state.slots = state.slots.filter(function (s) {
       return s.uuid !== slot2.uuid;
     });
   },
-  setParam: function setParam(state, _ref8) {
-    var slot = _ref8.slot,
-        paramName = _ref8.paramName,
-        paramValue = _ref8.paramValue;
+  setParam: function setParam(state, _ref6) {
+    var slot = _ref6.slot,
+        paramName = _ref6.paramName,
+        paramValue = _ref6.paramValue;
     slot.localParams = slot.localParams.map(function (params) {
       return Object.assign({}, params, Object(defineProperty["a" /* default */])({}, paramName, paramValue));
     });
   },
-  unsetParam: function unsetParam(state, _ref9) {
-    var slot = _ref9.slot,
-        paramName = _ref9.paramName;
+  unsetParam: function unsetParam(state, _ref7) {
+    var slot = _ref7.slot,
+        paramName = _ref7.paramName;
     slot.localParams = slot.localParams.map(function (params) {
       var copy = Object(objectSpread2["a" /* default */])({}, params);
 
@@ -5804,9 +5494,9 @@ var store_mutations = {
       return copy;
     });
   },
-  replaceSlots: function replaceSlots(state, _ref10) {
-    var slot1 = _ref10.slot1,
-        slot2 = _ref10.slot2;
+  replaceSlots: function replaceSlots(state, _ref8) {
+    var slot1 = _ref8.slot1,
+        slot2 = _ref8.slot2;
     if (slot1.uuid === slot2.uuid) return;
     ['name', 'plotType', 'localParams'].forEach(function (v) {
       vue_runtime_esm["a" /* default */].set(slot1, v, slot2[v]);
@@ -5817,18 +5507,620 @@ var store_mutations = {
   },
   setPreview: function setPreview(state, slot) {
     state.preview = slot;
+  }
+};
+var slots_actions = {
+  /*
+   * Method called to add slot or unarchive it
+   * To make slot open in drag mode over button that was pressed to open it, set interaction and x, y params
+   * @param interaction interaction object from interactjs event of pressing button etc
+   * @param x left position of slot center
+   * @param y top position of slot center
+   * @example dispatch('addSlotToPlayground', { slot, interaction: event.interaction, x: event.pageX, y: event.pageY })
+   */
+  addSlotToPlayground: function addSlotToPlayground(_ref9, _ref10) {
+    var commit = _ref9.commit,
+        getters = _ref9.getters;
+    var slot = _ref10.slot,
+        interaction = _ref10.interaction,
+        x = _ref10.x,
+        y = _ref10.y;
+    if (!slot.uuid) vue_runtime_esm["a" /* default */].set(slot, 'uuid', v4_default()());
+    if (interaction) commit('addSlotInitInfo', {
+      slot: slot,
+      info: {
+        interaction: interaction,
+        x: x || 0,
+        y: y || 0
+      }
+    });
+    if (slot.archived) commit('unarchiveSlot', slot);else commit('addSlot', slot);
   },
-  setColor: function setColor(state, _ref11) {
-    var uuid = _ref11.uuid,
-        color = _ref11.color;
-    vue_runtime_esm["a" /* default */].set(state.manualColors, uuid, color);
+  arrangeSlots: function arrangeSlots(_ref11) {
+    var commit = _ref11.commit,
+        getters = _ref11.getters;
+    var slots = getters.visibleSlots;
+    var width = Math.floor(document.getElementById('playground').offsetWidth / 32);
+    var height = Math.floor(document.getElementById('playground').offsetHeight / 32);
+    var ratio = height / width;
+    var c = 1; // number of columns
+
+    var r = 1; // number of rows
+
+    while (c * r < slots.length) {
+      r / c > ratio ? c += 1 : r += 1;
+    }
+
+    var slotWidth = Math.floor((width - 1) / c) - 1; // -1 for margins
+
+    var slotHeight = Math.floor((height - 1) / r) - 1;
+    if (slotWidth <= 5 || slotHeight <= 5) return;
+    slots.forEach(function (slot, i) {
+      var columnNumber = Math.floor(i / r);
+      var rowNumber = i - columnNumber * r;
+      var leftMargin = 1 + columnNumber * (slotWidth + 1);
+      var topMargin = 1 + rowNumber * (slotHeight + 1);
+      commit('setSlotPosition', {
+        slot: slot,
+        x: 32 * leftMargin,
+        y: 32 * topMargin
+      });
+      commit('setSlotSize', {
+        slot: slot,
+        width: slotWidth * 32,
+        height: slotHeight * 32
+      });
+    });
+  }
+};
+/* harmony default export */ var store_slots = ({
+  state: slots_state,
+  getters: slots_getters,
+  mutations: slots_mutations,
+  actions: slots_actions,
+  namespaced: false
+});
+// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
+var runtime = __webpack_require__("96cf");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
+var asyncToGenerator = __webpack_require__("1da1");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/typeof.js
+var esm_typeof = __webpack_require__("53ca");
+
+// EXTERNAL MODULE: ./node_modules/ajv/lib/ajv.js
+var ajv = __webpack_require__("783b");
+var ajv_default = /*#__PURE__*/__webpack_require__.n(ajv);
+
+// CONCATENATED MODULE: ./src/store/datasources/dataSourceCommon.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var dataSourceCommon_state = function state() {
+  return {
+    sources: []
+  };
+};
+
+var dataSourceCommon_getters = {
+  availableParams: function availableParams(state, getters) {
+    return getters.sources.reduce(function (acu, s) {
+      config.params.forEach(function (paramType) {
+        acu[paramType] = [].concat(Object(toConsumableArray["a" /* default */])(acu[paramType]), Object(toConsumableArray["a" /* default */])(getters.translatedAvailableParams[s.uuid][paramType] || []));
+      });
+      return acu;
+    }, streams.createObjectWithArrays(config.params));
   },
-  closeElement: function closeElement(state, name) {
-    state.closedElements = [].concat(Object(toConsumableArray["a" /* default */])(state.closedElements.filter(function (e) {
-      return e !== name;
-    })), [name]);
-    localStorage.setItem('closedElements', JSON.stringify(state.closedElements));
+  translatedAvailableParams: function translatedAvailableParams(state, getters, rootState, rootGetters) {
+    return state.sources.reduce(function (acu, s) {
+      acu[s.uuid] = {};
+      config.params.forEach(function (paramType) {
+        var translation = (rootGetters.translations[s.uuid] || {})[paramType] || {};
+        acu[s.uuid][paramType] = s.availableParams[paramType].map(function (paramName) {
+          return translation[paramName] || paramName;
+        });
+      });
+      return acu;
+    }, {});
   },
+  translateIfPossible: function translateIfPossible(state, getters, rootState, rootGetters) {
+    return function (uuid, paramType, paramName) {
+      return ((rootGetters.translations[uuid] || {})[paramType] || {})[paramName] || paramName;
+    };
+  },
+  // Published sources
+  sources: function sources(state, getters, rootState, rootGetters) {
+    return state.sources.filter(function (s) {
+      return rootGetters.canPublishParams(s.uuid);
+    });
+  },
+  validateParams: function validateParams(state, getters, rootState, rootGetters) {
+    return function (source, fullParams) {
+      if (!rootGetters.canPublishParams(source.uuid)) return {};
+      return config.params.reduce(function (acu, paramType) {
+        acu[paramType] = getters.translatedAvailableParams[source.uuid][paramType].includes(fullParams[paramType]) ? fullParams[paramType] : null;
+        return acu;
+      }, {});
+    };
+  },
+  translateBackParams: function translateBackParams(state, getters, rootState, rootGetters) {
+    return function (source, fullParams) {
+      if (!rootGetters.canPublishParams(source.uuid)) return {};
+      return config.params.reduce(function (acu, paramType) {
+        var index = getters.translatedAvailableParams[source.uuid][paramType].indexOf(fullParams[paramType]);
+        acu[paramType] = index === -1 ? null : source.availableParams[paramType][index];
+        return acu;
+      }, {});
+    };
+  },
+  translateParams: function translateParams(state, getters) {
+    return function (source, params) {
+      return Object.keys(params).reduce(function (acu, paramType) {
+        acu[paramType] = getters.translateIfPossible(source.uuid, paramType, params[paramType]);
+        return acu;
+      }, {});
+    };
+  }
+};
+var dataSourceCommon_mutations = {
+  addSource: function addSource(state, source) {
+    vue_runtime_esm["a" /* default */].set(state, 'sources', [].concat(Object(toConsumableArray["a" /* default */])(state.sources), [source]));
+  },
+  removeSource: function removeSource(state, source) {
+    vue_runtime_esm["a" /* default */].set(state, 'sources', state.sources.filter(function (s) {
+      return s !== source && s.uuid !== source;
+    }));
+  }
+};
+/* harmony default export */ var dataSourceCommon = ({
+  getNew: function getNew() {
+    return {
+      state: dataSourceCommon_state(),
+      getters: Object(objectSpread2["a" /* default */])({}, dataSourceCommon_getters),
+      mutations: Object(objectSpread2["a" /* default */])({}, dataSourceCommon_mutations),
+      namespaced: false
+    };
+  }
+});
+// CONCATENATED MODULE: ./src/store/datasources/jsonDatasource.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var jsonDatasource_ajv = new ajv_default.a();
+jsonDatasource_ajv.addMetaSchema(__webpack_require__("0e0d"));
+var validator = jsonDatasource_ajv.compile(__webpack_require__("2283"));
+var jsonDatasource_state = {};
+var jsonDatasource_getters = {
+  getAvailableSlots: function getAvailableSlots(state, getters) {
+    return function (fullParams) {
+      return getters.sources.map(function (source) {
+        var params = getters.translateBackParams(source, fullParams);
+        if (params[config.mainParam] === null) return [];
+        return source.plotsData.filter(function (d) {
+          // for each single plot data we check if params of a plot are same in fullParams
+          return Object.keys(d.params).reduce(function (acc, paramType) {
+            return acc && d.params[paramType] === params[paramType];
+          }, true);
+        }).map(function (d) {
+          return {
+            localParams: [Object(defineProperty["a" /* default */])({}, config.mainParam, fullParams[config.mainParam])],
+            name: d.name,
+            plotType: d.plotType,
+            plotCategory: d.plotCategory
+          };
+        });
+      }).flat();
+    };
+  }
+};
+var jsonDatasource_mutations = {}; // Checks if names array have unique elements, after removing special characters and in lower case
+
+var jsonDatasource_isUnique = function isUnique(array) {
+  return new Set(array.map(format.simplify)).size === array.length;
+};
+
+var jsonDatasource_validateData = function validateData(data) {
+  return validator(data) && config.params.map(function (paramType) {
+    return jsonDatasource_isUnique(data[paramType + 's']);
+  }).reduce(function (acu, x) {
+    return acu && x;
+  }, true);
+};
+
+var jsonDatasource_actions = {
+  loadData: function loadData(_ref2, _ref3) {
+    var state = _ref2.state,
+        commit = _ref2.commit,
+        dispatch = _ref2.dispatch;
+    var data = _ref3.data,
+        src = _ref3.src;
+    if (!jsonDatasource_validateData(data)) return false;
+    var params = config.params.reduce(function (acu, paramType) {
+      acu[paramType] = data[paramType + 's'];
+      return acu;
+    }, {});
+    var source = {
+      availableParams: params,
+      uuid: v4_default()(),
+      address: src,
+      plotsData: []
+    };
+    data.data.forEach(function (d) {
+      var obj = {
+        plotType: d.plotType,
+        plotCategory: d.plotCategory ? d.plotCategory : 'Other',
+        plotComponent: d.plotComponent,
+        name: d.name ? d.name : format.firstCharUpper(d.plotType),
+        plotData: d.data,
+        params: d.params
+      };
+      if (Object.values(obj).includes(undefined)) return;
+      source.plotsData.push(obj);
+    });
+    var waitingParams = {
+      uuid: source.uuid,
+      params: source.availableParams
+    };
+    commit('addWaitingParams', waitingParams, {
+      root: true
+    });
+    commit('addSource', source);
+    return true;
+  },
+  query: function query(_ref4, _ref5) {
+    var state = _ref4.state,
+        getters = _ref4.getters;
+    var params = _ref5.params,
+        plotType = _ref5.plotType;
+
+    var _iterator = Object(createForOfIteratorHelper["a" /* default */])(getters.sources),
+        _step;
+
+    try {
+      var _loop = function _loop() {
+        var source = _step.value;
+        // translate params back to original names
+        var queryParams = getters.translateBackParams(source, params);
+        var plotData = source.plotsData.find(function (d) {
+          return d.plotType === plotType && Object.keys(d.params).reduce(function (acc, paramType) {
+            return acc && d.params[paramType] === queryParams[paramType];
+          }, true);
+        });
+        if (plotData) return {
+          v: Object(objectSpread2["a" /* default */])({
+            params: getters.translateParams(source, plotData.params)
+          }, plotData)
+        };
+      };
+
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var _ret = _loop();
+
+        if (Object(esm_typeof["a" /* default */])(_ret) === "object") return _ret.v;
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+
+    return null;
+  }
+};
+/* harmony default export */ var jsonDatasource = ({
+  state: jsonDatasource_state,
+  getters: jsonDatasource_getters,
+  mutations: jsonDatasource_mutations,
+  actions: jsonDatasource_actions,
+  modules: {
+    dataSourceCommon: dataSourceCommon.getNew()
+  },
+  namespaced: true
+});
+// CONCATENATED MODULE: ./src/store/datasources/arenarLiveDatasource.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var arenarLiveDatasource_ajv = new ajv_default.a();
+arenarLiveDatasource_ajv.addMetaSchema(__webpack_require__("0e0d"));
+var arenarLiveDatasource_validator = arenarLiveDatasource_ajv.compile(__webpack_require__("8c3e"));
+var arenarLiveDatasource_state = {};
+var arenarLiveDatasource_getters = {
+  getAvailableSlots: function getAvailableSlots(state, getters) {
+    return function (fullParams) {
+      return getters.sources.map(function (source) {
+        var params = getters.translateBackParams(source, fullParams);
+        if (params[config.mainParam] === null) return [];
+        return source.availablePlots.filter(function (d) {
+          // check if all required params are available from that source (not null in params variable)
+          return d.requiredParams.reduce(function (acu, paramType) {
+            return acu && params[paramType];
+          }, true);
+        }).map(function (d) {
+          return {
+            plotType: d.plotType,
+            plotCategory: d.plotCategory ? d.plotCategory : 'Other',
+            name: d.name ? d.name : format.firstCharUpper(d.plotType),
+            localParams: [Object(defineProperty["a" /* default */])({}, config.mainParam, fullParams[config.mainParam])]
+          };
+        });
+      }).flat();
+    };
+  }
+};
+var arenarLiveDatasource_mutations = {
+  addToCache: function addToCache(state, _ref2) {
+    var source = _ref2.source,
+        slotData = _ref2.slotData;
+    vue_runtime_esm["a" /* default */].set(source, 'cache', [].concat(Object(toConsumableArray["a" /* default */])(source.cache), [slotData]));
+  },
+  addPendingRequest: function addPendingRequest(state, _ref3) {
+    var source = _ref3.source,
+        pendingRequest = _ref3.pendingRequest;
+    vue_runtime_esm["a" /* default */].set(source, 'pendingRequests', [].concat(Object(toConsumableArray["a" /* default */])(source.pendingRequests), [pendingRequest]));
+  },
+  removePendingRequest: function removePendingRequest(state, _ref4) {
+    var source = _ref4.source,
+        pendingRequest = _ref4.pendingRequest;
+    vue_runtime_esm["a" /* default */].set(source, 'pendingRequests', source.pendingRequests.filter(function (w) {
+      return w !== pendingRequest;
+    }));
+  }
+}; // Checks if names array have unique elements, after removing special characters and in lower case
+
+var arenarLiveDatasource_isUnique = function isUnique(array) {
+  return new Set(array.map(format.simplify)).size === array.length;
+};
+
+var arenarLiveDatasource_validateData = function validateData(data) {
+  return arenarLiveDatasource_validator(data) && config.params.map(function (paramType) {
+    return arenarLiveDatasource_isUnique(data[paramType + 's']);
+  }).reduce(function (acu, x) {
+    return acu && x;
+  }, true);
+};
+
+var arenarLiveDatasource_actions = {
+  loadData: function loadData(_ref5, _ref6) {
+    var state = _ref5.state,
+        commit = _ref5.commit,
+        dispatch = _ref5.dispatch;
+    var data = _ref6.data,
+        src = _ref6.src;
+    if (!arenarLiveDatasource_validateData(data)) return false;
+    var params = config.params.reduce(function (acu, paramType) {
+      acu[paramType] = data[paramType + 's'];
+      return acu;
+    }, {});
+    var source = {
+      availableParams: params,
+      availablePlots: data.availablePlots,
+      uuid: v4_default()(),
+      address: src,
+      timestamp: data.timestamp,
+      cache: [],
+      pendingRequests: []
+    };
+    var waitingParams = {
+      uuid: source.uuid,
+      params: source.availableParams
+    };
+    commit('addWaitingParams', waitingParams, {
+      root: true
+    });
+    commit('addSource', source);
+    return true;
+  },
+  query: function query(_ref7, _ref8) {
+    var state = _ref7.state,
+        commit = _ref7.commit,
+        getters = _ref7.getters;
+    var params = _ref8.params,
+        plotType = _ref8.plotType;
+
+    var _iterator = Object(createForOfIteratorHelper["a" /* default */])(getters.sources),
+        _step;
+
+    try {
+      var _loop = function _loop() {
+        var source = _step.value;
+        // translate params back to original names
+        var queryParams = getters.translateBackParams(source, params); // for each source we find required params for plotType
+
+        var plotProperties = source.availablePlots.find(function (p) {
+          return p.plotType === plotType;
+        });
+        if (!plotProperties) return "continue"; // check if all required params are not null
+
+        if (!plotProperties.requiredParams.reduce(function (acu, plotType) {
+          return acu && queryParams[plotType];
+        }, true)) return "continue"; // check if response for same query is not cached
+
+        var cached = source.cache.find(function (c) {
+          return c.plotType === plotType && es6_default()(c.params, queryParams);
+        });
+        if (cached) return {
+          v: cached
+        }; // check it there is already pending request for same query
+
+        var pendingRequest = source.pendingRequests.find(function (w) {
+          return w.plotType === plotType && es6_default()(w.params, queryParams);
+        });
+        if (pendingRequest) return {
+          v: pendingRequest.promise
+        };
+        return {
+          v: new Promise(function (resolve, reject) {
+            var pendingRequest = {
+              promise: null,
+              resolve: null,
+              reject: null,
+              params: queryParams,
+              plotType: plotType
+            };
+            var pendingRequestPromise = new Promise(function (resolve, reject) {
+              pendingRequest.resolve = resolve;
+              pendingRequest.reject = reject; // To make sure promise parameter is already set
+
+              if (pendingRequest.promise) commit('addPendingRequest', {
+                source: source,
+                pendingRequest: pendingRequest
+              });
+            });
+            pendingRequest.promise = pendingRequestPromise;
+            if (pendingRequest.resolve) commit('addPendingRequest', {
+              source: source,
+              pendingRequest: pendingRequest
+            });
+            var queryString = Object.entries(queryParams).map(function (e) {
+              return e.map(encodeURIComponent).join('=');
+            }).join('&');
+            vue_runtime_esm["a" /* default */].http.get(source.address + plotType + '?' + queryString).then(function (respone) {
+              var data = respone.body;
+              var slotData = {
+                plotType: plotType,
+                params: getters.translateParams(source, queryParams),
+                plotData: data.data,
+                plotComponent: data.plotComponent
+              };
+              commit('addToCache', {
+                source: source,
+                slotData: slotData
+              });
+              pendingRequest.resolve(slotData);
+              commit('removePendingRequest', {
+                source: source,
+                pendingRequest: pendingRequest
+              });
+              resolve(slotData);
+            }).catch(function (e) {
+              pendingRequest.reject(e);
+              reject(e);
+            });
+          })
+        };
+      };
+
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var _ret = _loop();
+
+        switch (_ret) {
+          case "continue":
+            continue;
+
+          default:
+            if (Object(esm_typeof["a" /* default */])(_ret) === "object") return _ret.v;
+        }
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+
+    return null;
+  }
+};
+/* harmony default export */ var arenarLiveDatasource = ({
+  state: arenarLiveDatasource_state,
+  getters: arenarLiveDatasource_getters,
+  mutations: arenarLiveDatasource_mutations,
+  actions: arenarLiveDatasource_actions,
+  modules: {
+    dataSourceCommon: dataSourceCommon.getNew()
+  },
+  namespaced: true
+});
+// CONCATENATED MODULE: ./src/store/dataSources.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var dataSources_ajv = new ajv_default.a();
+dataSources_ajv.addMetaSchema(__webpack_require__("0e0d"));
+var dataSources_state = {
+  dataSources: ['jsonDatasource', 'arenarLiveDatasource'],
+  recentURLSources: []
+};
+var dataSources_getters = {
+  dataSources: function dataSources(state) {
+    return state.dataSources;
+  },
+  recentURLSources: function recentURLSources(state) {
+    return state.recentURLSources;
+  }
+};
+var dataSources_mutations = {
   addRecentURL: function addRecentURL(state, url) {
     state.recentURLSources = [].concat(Object(toConsumableArray["a" /* default */])(state.recentURLSources.filter(function (s) {
       return s.url !== url;
@@ -5848,27 +6140,13 @@ var store_mutations = {
     state.recentURLSources = sources;
   }
 };
-var store_actions = {
-  init: function init(_ref12) {
-    var commit = _ref12.commit,
-        state = _ref12.state,
-        dispatch = _ref12.dispatch;
+var dataSources_actions = {
+  initDataSources: function initDataSources(_ref) {
+    var commit = _ref.commit,
+        getters = _ref.getters;
 
     try {
-      var closed = JSON.parse(localStorage.getItem('closedElements'));
-
-      if (closed) {
-        if (!Array.isArray(closed)) throw new Error('value is not an array');
-        closed.forEach(function (name) {
-          if (typeof name === 'string' || name instanceof String) commit('closeElement', name);
-        });
-      }
-    } catch (e) {
-      console.error('Failed to read closedElements from localStorage', e);
-    }
-
-    try {
-      var validatorRecentURLSources = store_ajv.compile(__webpack_require__("4e85"));
+      var validatorRecentURLSources = dataSources_ajv.compile(__webpack_require__("4e85"));
       var recentURLSources = JSON.parse(localStorage.getItem('recentURLSources'));
 
       if (validatorRecentURLSources(recentURLSources)) {
@@ -5878,11 +6156,11 @@ var store_actions = {
       console.error('Failed to read recentURLSources from localStorage', e);
     }
   },
-  query: function query(_ref13, _query) {
-    var state = _ref13.state,
-        dispatch = _ref13.dispatch;
+  query: function query(_ref2, _query) {
+    var dispatch = _ref2.dispatch,
+        getters = _ref2.getters;
     // array of promises and raw objects (Promise.all will handle them)
-    var promises = state.datasources.map(function (ds) {
+    var promises = getters.dataSources.map(function (ds) {
       return dispatch(ds + '/query', _query);
     });
     return Promise.all(promises).then(function (results) {
@@ -5896,14 +6174,14 @@ var store_actions = {
       if (results.length >= 1) return results[0];
     });
   },
-  loadURL: function loadURL(_ref14, url) {
+  loadURL: function loadURL(_ref3, url) {
     return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var state, dispatch, commit, response;
+      var dispatch, commit, response;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              state = _ref14.state, dispatch = _ref14.dispatch, commit = _ref14.commit;
+              dispatch = _ref3.dispatch, commit = _ref3.commit;
               _context.next = 3;
               return vue_runtime_esm["a" /* default */].http.get(url);
 
@@ -5926,16 +6204,16 @@ var store_actions = {
       }, _callee);
     }))();
   },
-  loadData: function loadData(_ref15, data) {
+  loadData: function loadData(_ref4, data) {
     return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-      var state, dispatch, _iterator, _step, ds;
+      var dispatch, getters, _iterator, _step, ds;
 
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              state = _ref15.state, dispatch = _ref15.dispatch;
-              _iterator = Object(createForOfIteratorHelper["a" /* default */])(state.datasources);
+              dispatch = _ref4.dispatch, getters = _ref4.getters;
+              _iterator = Object(createForOfIteratorHelper["a" /* default */])(getters.dataSources);
               _context2.prev = 2;
 
               _iterator.s();
@@ -5989,144 +6267,117 @@ var store_actions = {
         }
       }, _callee2, null, [[2, 14, 17, 20]]);
     }))();
-  },
-  setGlobalParamByName: function setGlobalParamByName(_ref16, _ref17) {
-    var commit = _ref16.commit,
-        getters = _ref16.getters;
-    var paramName = _ref17.paramName,
-        valueName = _ref17.valueName;
-    var param = (getters.availableParams[paramName] || []).find(function (p) {
-      return p.name === valueName;
-    });
-    if (param) commit('setGlobalParam', {
-      name: paramName,
-      value: param
-    });
-  },
-
-  /*
-   * Method called from datasources to check if there are name collisions
-   * of params and resolve them.
-   * @return Promise with object in which keys are uuids of params that should be replaced
-   * by keys' value
-   */
-  removeNameConflicts: function removeNameConflicts(_ref18, params) {
-    var commit = _ref18.commit,
-        getters = _ref18.getters;
-    var toResolve = {
-      params: {}
-    };
-    Object.keys(params).forEach(function (paramKey) {
-      if (!getters.availableParams[paramKey]) return;
-      toResolve.params[paramKey] = [];
-      var simplified = getters.availableParams[paramKey].map(function (p) {
-        return Object(objectSpread2["a" /* default */])({
-          simplified: format.simplify(p.name)
-        }, p);
-      });
-      params[paramKey].forEach(function (p) {
-        var duplicate = simplified.findIndex(function (s) {
-          return s.simplified === format.simplify(p.name);
-        });
-        if (duplicate === -1) return;
-        toResolve.params[paramKey].push({
-          orginal: getters.availableParams[paramKey][duplicate],
-          newParam: p
-        });
-      });
-    });
-    return new Promise(function (resolve, reject) {
-      toResolve.resolve = resolve;
-      toResolve.reject = reject;
-      commit('addNameConflictsToResolve', toResolve);
-    });
-  },
-  arrangeSlots: function arrangeSlots(_ref19) {
-    var commit = _ref19.commit,
-        getters = _ref19.getters;
-    var slots = getters.visibleSlots;
-    var width = Math.floor(document.getElementById('playground').offsetWidth / 32);
-    var height = Math.floor(document.getElementById('playground').offsetHeight / 32);
-    var ratio = height / width;
-    var c = 1; // number of columns
-
-    var r = 1; // number of rows
-
-    while (c * r < slots.length) {
-      r / c > ratio ? c += 1 : r += 1;
-    }
-
-    var slotWidth = Math.floor((width - 1) / c) - 1; // -1 for margins
-
-    var slotHeight = Math.floor((height - 1) / r) - 1;
-    if (slotWidth <= 5 || slotHeight <= 5) return;
-    slots.forEach(function (slot, i) {
-      var columnNumber = Math.floor(i / r);
-      var rowNumber = i - columnNumber * r;
-      var leftMargin = 1 + columnNumber * (slotWidth + 1);
-      var topMargin = 1 + rowNumber * (slotHeight + 1);
-      commit('setSlotPosition', {
-        slot: slot,
-        x: 32 * leftMargin,
-        y: 32 * topMargin
-      });
-      commit('setSlotSize', {
-        slot: slot,
-        width: slotWidth * 32,
-        height: slotHeight * 32
-      });
-    });
-  },
-
-  /*
-   * Method called to add slot or unarchive it
-   * To make slot open in drag mode over button that was pressed to open it, set interaction and x, y params
-   * @param interaction interaction object from interactjs event of pressing button etc
-   * @param x left position of slot center
-   * @param y top position of slot center
-   * @example dispatch('addSlotToPlayground', { slot, interaction: event.interaction, x: event.pageX, y: event.pageY })
-   */
-  addSlotToPlayground: function addSlotToPlayground(_ref20, _ref21) {
-    var commit = _ref20.commit,
-        getters = _ref20.getters;
-    var slot = _ref21.slot,
-        interaction = _ref21.interaction,
-        x = _ref21.x,
-        y = _ref21.y;
-    if (!slot.uuid) vue_runtime_esm["a" /* default */].set(slot, 'uuid', v4_default()());
-    if (interaction) commit('addSlotInitInfo', {
-      slot: slot,
-      info: {
-        interaction: interaction,
-        x: x || 0,
-        y: y || 0
-      }
-    });
-    if (slot.archived) commit('unarchiveSlot', slot);else commit('addSlot', slot);
   }
 };
-/* harmony default export */ var store = (new vuex_esm["a" /* default */].Store({
+/* harmony default export */ var dataSources = ({
+  state: dataSources_state,
+  getters: dataSources_getters,
+  mutations: dataSources_mutations,
+  actions: dataSources_actions,
   modules: {
     jsonDatasource: jsonDatasource,
     arenarLiveDatasource: arenarLiveDatasource
   },
+  namespaced: false
+});
+// CONCATENATED MODULE: ./src/store/miscellaneous.js
+
+
+
+
+
+
+
+
+
+var miscellaneous_state = {
+  options: {},
+  closedElements: []
+};
+var miscellaneous_getters = {
+  getOption: function getOption(stare, getters) {
+    return function (name) {
+      if (miscellaneous_state.options[name] !== undefined) return miscellaneous_state.options[name];
+      return (OptionsSchemas.find(function (s) {
+        return s.name === name;
+      }) || {}).default;
+    };
+  },
+  isElementClosed: function isElementClosed(state, getters) {
+    return function (name) {
+      return !!state.closedElements.find(function (f) {
+        return f === name;
+      });
+    };
+  }
+};
+var miscellaneous_mutations = {
+  setOption: function setOption(state, _ref) {
+    var name = _ref.name,
+        value = _ref.value;
+    vue_runtime_esm["a" /* default */].set(state.options, name, value);
+  },
+  closeElement: function closeElement(state, name) {
+    state.closedElements = [].concat(Object(toConsumableArray["a" /* default */])(state.closedElements.filter(function (e) {
+      return e !== name;
+    })), [name]);
+    localStorage.setItem('closedElements', JSON.stringify(state.closedElements));
+  }
+};
+var miscellaneous_actions = {
+  initMiscellaneous: function initMiscellaneous(_ref2) {
+    var commit = _ref2.commit,
+        dispatch = _ref2.dispatch;
+
+    try {
+      var closed = JSON.parse(localStorage.getItem('closedElements'));
+
+      if (closed) {
+        if (!Array.isArray(closed)) throw new Error('value is not an array');
+        closed.forEach(function (name) {
+          if (typeof name === 'string' || name instanceof String) commit('closeElement', name);
+        });
+      }
+    } catch (e) {
+      console.error('Failed to read closedElements from localStorage', e);
+    }
+  }
+};
+/* harmony default export */ var miscellaneous = ({
+  state: miscellaneous_state,
+  getters: miscellaneous_getters,
+  mutations: miscellaneous_mutations,
+  actions: miscellaneous_actions,
+  namespaced: false
+});
+// CONCATENATED MODULE: ./src/store/index.js
+
+
+/* Vuex Modules */
+
+
+
+
+
+vue_runtime_esm["a" /* default */].use(vuex_esm["a" /* default */]);
+var store_actions = {
+  init: function init(_ref) {
+    var commit = _ref.commit,
+        dispatch = _ref.dispatch;
+    dispatch('initMiscellaneous');
+    dispatch('initDataSources');
+  }
+};
+/* harmony default export */ var store = (new vuex_esm["a" /* default */].Store({
+  modules: {
+    params: store_params,
+    slots: store_slots,
+    dataSources: dataSources,
+    miscellaneous: miscellaneous
+  },
   strict: false,
-  state: store_state,
-  getters: store_getters,
-  mutations: store_mutations,
   actions: store_actions
 }));
-var store_color = {
-  a: '#8bdcbe',
-  b: '#f05a71',
-  c: '#371ea3',
-  d: '#46bac2',
-  e: '#ae2c87',
-  f: '#ffa58c',
-  g: '#4378bf',
-  h: '#160e3b'
-};
-var _palette = [store_color.a, store_color.b, store_color.g, store_color.d, store_color.e, store_color.f, store_color.c, store_color.h];
 // EXTERNAL MODULE: ./node_modules/vue-resource/dist/vue-resource.esm.js
 var vue_resource_esm = __webpack_require__("28dd");
 
@@ -6468,4 +6719,4 @@ module.exports = __webpack_require__.p + "img/logo.1a3768b8.png";
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.35053347.js.map
+//# sourceMappingURL=app.4791edbc.js.map
