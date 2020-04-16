@@ -20,7 +20,7 @@ export default {
     traces () {
       return this.data.map((d, i) => {
         return {
-          name: d.params.model.name + ' - ' + d.params.variable.name,
+          name: d.params.model + ' - ' + d.params.variable,
           type: 'bar',
           orientation: 'h',
           base: d.plotData.observation['_yhat_'],
@@ -33,7 +33,7 @@ export default {
           },
           hoverinfo: 'none',
           marker: {
-            color: this.mainParamColors[d.params.model.uuid]
+            color: this.mainParamColors[d.params.model]
           },
           insidetextanchor: 'start'
         }

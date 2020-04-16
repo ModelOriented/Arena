@@ -8,8 +8,8 @@
     <DeleteZone />
     <div class="overlay" v-if="settingsVisible" @click="settingsVisible = false"/>
     <Settings v-if="settingsVisible" @close="settingsVisible = false"/>
-    <div class="overlay" v-if="nextNameConflicts"/>
-    <NameConflicts v-if="nextNameConflicts" />
+    <div class="overlay overlay-2" v-if="waitingParamsConflicts.length > 0"/>
+    <NameConflicts v-if="waitingParamsConflicts.length > 0"/>
     <div class="overlay" v-if="welcomeScreenVisible" @click="displayWelcomeScreen = false"/>
     <WelcomeScreen v-if="welcomeScreenVisible" @close="displayWelcomeScreen = false"/>
     <FullscreenBlock v-if="fullscreenSlot" :slotv="fullscreenSlot" @close="fullscreenSlot = null"/>
@@ -48,9 +48,15 @@ export default {
       displayWelcomeScreen: true
     }
   },
+  watch: {
+    waitingParamsCorrect (newValue) {
+      if (newValue.length === 0) return
+      this.$store.commit('removeParamsFromWaitingList', newValue[0])
+    }
+  },
   computed: {
     welcomeScreenVisible () { return this.displayWelcomeScreen && !this.isElementClosed('welcome-screen') },
-    ...mapGetters(['visibleSlots', 'preview', 'nextNameConflicts', 'isElementClosed'])
+    ...mapGetters(['visibleSlots', 'preview', 'isElementClosed', 'waitingParamsCorrect', 'waitingParamsConflicts'])
   },
   created () {
     // eslint-disable-next-line no-unused-expressions
@@ -108,5 +114,8 @@ export default {
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   z-index: 100001;
+}
+#app > div.overlay-2 {
+  z-index: 100003;
 }
 </style>

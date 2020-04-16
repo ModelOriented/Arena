@@ -11,11 +11,11 @@ export default {
     Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues
   },
   canMerge (slot1, slot2) {
-    if (!slot1 || !slot2 || slot1.uuid === slot2.uuid || slot1.plotType !== slot2.plotType) return false
+    if (!slot1 || !slot2 || slot1 === slot2 || slot1.plotType !== slot2.plotType) return false
     let type = slot1.plotType
-    let getPropsUUID = (slot, propName) => slot.localParams.map(props => (props[propName] || {}).uuid)
-    let sameVariable = new Set([...getPropsUUID(slot1, 'variable'), ...getPropsUUID(slot2, 'variable')]).size === 1
-    let sameObservation = new Set([...getPropsUUID(slot1, 'observation'), ...getPropsUUID(slot2, 'observation')]).size === 1
+    let testSameParamName = paramType => (new Set([...slot1.localParams, ...slot2.localParams].map(params => params[paramType])).size === 1)
+    let sameVariable = testSameParamName('variable')
+    let sameObservation = testSameParamName('observation')
     if (type === 'PartialDependence' || type === 'AccumulatedDependence' || type === 'CeterisParibus') return sameVariable
     if (type === 'FeatureImportance') return true
     if (type === 'SHAPValues') return sameObservation

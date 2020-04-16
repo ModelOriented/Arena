@@ -1,6 +1,6 @@
 <template>
   <div class="search-dropdown-element" :class="{ active: isActive }">
-    {{ paramValue.name | formatTitle }}
+    {{ paramValue | formatTitle }}
   </div>
 </template>
 <script>
@@ -13,7 +13,7 @@ export default {
   name: 'SearchDropdownElement',
   props: {
     paramName: String,
-    paramValue: Object
+    paramValue: String
   },
   data () {
     return {
@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     isActive () {
-      return this.paramValue && (this.getGlobalParam(this.paramName) || {}).uuid === this.paramValue.uuid
+      return this.paramValue && this.getGlobalParam(this.paramName) === this.paramValue
     },
     ...mapGetters(['getGlobalParam'])
   },

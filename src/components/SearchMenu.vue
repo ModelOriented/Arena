@@ -1,8 +1,8 @@
 <template>
   <div class="search-menu">
     <input type="text" v-model="editText">
-    <div class="entry" v-for="o in availableOptions" :key="o.uuid" @click="$emit('setParam', o)">
-      {{ o.name | formatTitle }}
+    <div class="entry" v-for="o in availableOptions" :key="o" @click="$emit('setParam', o)">
+      {{ o | formatTitle }}
     </div>
     <div class="entry" @click="$emit('close')">Close</div>
   </div>
@@ -24,11 +24,11 @@ export default {
   },
   computed: {
     fuse () {
-      return new Fuse(this.availableParams[this.paramName] || [], { keys: ['name'] })
+      return new Fuse(this.availableParams[this.paramName] || [], {})
     },
     availableOptions () {
       if (this.editText.length < 1) return (this.availableParams[this.paramName] || []).slice(0, 10)
-      return this.fuse.search(this.editText).slice(0, 10)
+      return this.fuse.search(this.editText).slice(0, 10).map(i => this.availableParams[this.paramName][i])
     },
     ...mapGetters(['availableParams'])
   },

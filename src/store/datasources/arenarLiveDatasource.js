@@ -3,60 +3,45 @@ import Ajv from 'ajv'
 import format from '@/utils/format.js'
 import Vue from 'vue'
 import equal from 'fast-deep-equal/es6'
+import config from '@/configuration/config.js'
+import dataSourceCommon from '@/store/datasources/dataSourceCommon.js'
 
 const ajv = new Ajv()
 ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-06.json'))
 const validator = ajv.compile(require('@/store/schemas/arenarLive.schema.json'))
 
-const state = {
-  servers: []
-}
+const state = {}
 
 const getters = {
-  // These can produce duplicats, index.js removes them
-  models (state) {
-    return state.servers.map(s => s.models).flat()
-  },
-  observations (state) {
-    return state.servers.map(s => s.observations).flat()
-  },
-  variables (state) {
-    return state.servers.map(s => s.variables).flat()
-  },
   getAvailableSlots: (state, getters) => (fullParams) => {
-    for (let server of state.servers) {
-      let params = {}
-      // we check if model is from this server
-      params.model = server.models.find(m => (fullParams.model || {}).uuid === m.uuid)
-      params.observation = server.observations.find(o => (fullParams.observation || {}).uuid === o.uuid)
-      params.variable = server.variables.find(v => (fullParams.variable || {}).uuid === v.uuid)
-      if (!params.model || !params.observation || !params.variable) continue
+    return getters.sources.map(source => {
+      let params = getters.translateBackParams(source, fullParams)
+      if (params[config.mainParam] === null) return []
 
-      return server.availablePlots.map(d => {
+      return source.availablePlots.filter(d => {
+        // check if all required params are available from that source (not null in params variable)
+        return d.requiredParams.reduce((acu, paramType) => acu && params[paramType], true)
+      }).map(d => {
         return {
           plotType: d.plotType,
           plotCategory: d.plotCategory ? d.plotCategory : 'Other',
           name: d.name ? d.name : format.firstCharUpper(d.plotType),
-          localParams: [{ model: params.model }]
+          localParams: [{ [config.mainParam]: fullParams[config.mainParam] }]
         }
       })
-    }
-    return []
+    }).flat()
   }
 }
 
 const mutations = {
-  addServer (state, server) {
-    state.servers = [...state.servers, server]
+  addToCache (state, { source, slotData }) {
+    Vue.set(source, 'cache', [...source.cache, slotData])
   },
-  addToCache (state, { server, slotData }) {
-    server.cache = [...server.cache, slotData]
+  addPendingRequest (state, { source, pendingRequest }) {
+    Vue.set(source, 'pendingRequests', [...source.pendingRequests, pendingRequest])
   },
-  addWaiting (state, { server, waitingObject }) {
-    server.waiting = [...server.waiting, waitingObject]
-  },
-  removeWaiting (state, { server, waitingObject }) {
-    server.waiting = server.waiting.filter(w => w !== waitingObject)
+  removePendingRequest (state, { source, pendingRequest }) {
+    Vue.set(source, 'pendingRequests', source.pendingRequests.filter(w => w !== pendingRequest))
   }
 }
 
@@ -65,95 +50,85 @@ const isUnique = (array) => {
   return (new Set(array.map(format.simplify))).size === array.length
 }
 const validateData = (data) => {
-  return validator(data) && isUnique(data.observations) && isUnique(data.variables) && isUnique(data.models)
+  return validator(data) && config.params.map(paramType => isUnique(data[paramType + 's'])).reduce((acu, x) => acu && x, true)
 }
 
 const actions = {
   loadData ({ state, commit, dispatch }, { data, src }) {
     if (!validateData(data)) return false
-    let params = {
-      model: data.models.map(a => { return { name: a, uuid: uuid() } }),
-      variable: data.variables.map(a => { return { name: a, uuid: uuid() } }),
-      observation: data.observations.map(a => { return { name: a, uuid: uuid() } })
+    let params = config.params.reduce((acu, paramType) => {
+      acu[paramType] = data[paramType + 's']
+      return acu
+    }, {})
+    let source = {
+      availableParams: params,
+      availablePlots: data.availablePlots,
+      uuid: uuid(),
+      address: src,
+      timestamp: data.timestamp,
+      cache: [],
+      pendingRequests: []
     }
-    return new Promise((resolve, reject) => {
-      dispatch('removeNameConflicts', params, { root: true }).then(updates => {
-        // array of uuids of params that was merged to the already existing param
-        let updated = Object.keys(updates)
-
-        let server = {
-          models: params.model.map(p => updated.includes(p.uuid) ? Object.assign({}, updates[p.uuid], { orginalName: p.name }) : p),
-          variables: params.variable.map(p => updated.includes(p.uuid) ? Object.assign({}, updates[p.uuid], { orginalName: p.name }) : p),
-          observations: params.observation.map(p => updated.includes(p.uuid) ? Object.assign({}, updates[p.uuid], { orginalName: p.name }) : p),
-          uuid: uuid(),
-          timestamp: data.timestamp,
-          address: src,
-          availablePlots: data.availablePlots,
-          cache: [],
-          waiting: []
-        }
-        commit('addServer', server)
-        resolve(true)
-      }).catch(reject)
-    })
+    let waitingParams = {
+      uuid: source.uuid,
+      params: source.availableParams
+    }
+    commit('addWaitingParams', waitingParams, { root: true })
+    commit('addSource', source)
+    return true
   },
-  query ({ state, commit }, { params, plotType }) {
-    for (let server of state.servers) {
-      // for each server we find required params for plotType
-      let plotProperties = server.availablePlots.find(p => p.plotType === plotType)
+  query ({ state, commit, getters }, { params, plotType }) {
+    for (let source of getters.sources) {
+      // translate params back to original names
+      let queryParams = getters.translateBackParams(source, params)
+
+      // for each source we find required params for plotType
+      let plotProperties = source.availablePlots.find(p => p.plotType === plotType)
       if (!plotProperties) continue
 
-      // each param is maped to object from this server (same uuid is not enought)
-      let serverParams = plotProperties.requiredParams.reduce((acu, paramName) => {
-        acu[paramName] = server[paramName + 's'].find(p => p.uuid === params[paramName].uuid)
-        return acu
-      }, {})
-      // one of required params is not from this server
-      if (Object.values(serverParams).includes(undefined) || Object.values(serverParams).includes(null)) continue
+      // check if all required params are not null
+      if (!plotProperties.requiredParams.reduce((acu, plotType) => acu && queryParams[plotType], true)) continue
 
-      let cached = server.cache.find(c => c.plotType === plotType && equal(c.params, serverParams))
+      // check if response for same query is not cached
+      let cached = source.cache.find(c => c.plotType === plotType && equal(c.params, queryParams))
       if (cached) return cached
 
-      let query = Object.keys(serverParams).reduce((acu, p) => {
-        acu[p] = serverParams[p].orginalName || serverParams[p].name
-        return acu
-      }, {})
-
-      let alreadyWaiting = server.waiting.find(w => w.plotType === plotType && equal(w.params, serverParams))
-      if (alreadyWaiting) return alreadyWaiting.promise
+      // check it there is already pending request for same query
+      let pendingRequest = source.pendingRequests.find(w => w.plotType === plotType && equal(w.params, queryParams))
+      if (pendingRequest) return pendingRequest.promise
 
       return new Promise((resolve, reject) => {
-        let waitingObject = {
+        let pendingRequest = {
           promise: null,
           resolve: null,
           reject: null,
-          params: serverParams,
+          params: queryParams,
           plotType: plotType
         }
-        let waitingPromise = new Promise((resolve, reject) => {
-          waitingObject.resolve = resolve
-          waitingObject.reject = reject
+        let pendingRequestPromise = new Promise((resolve, reject) => {
+          pendingRequest.resolve = resolve
+          pendingRequest.reject = reject
           // To make sure promise parameter is already set
-          if (waitingObject.promise) commit('addWaiting', { server, waitingObject })
+          if (pendingRequest.promise) commit('addPendingRequest', { source, pendingRequest })
         })
-        waitingObject.promise = waitingPromise
-        if (waitingObject.resolve) commit('addWaiting', { server, waitingObject })
+        pendingRequest.promise = pendingRequestPromise
+        if (pendingRequest.resolve) commit('addPendingRequest', { source, pendingRequest })
 
-        let queryString = Object.entries(query).map(e => e.map(encodeURIComponent).join('=')).join('&')
-        Vue.http.get(server.address + plotType + '?' + queryString).then(respone => {
+        let queryString = Object.entries(queryParams).map(e => e.map(encodeURIComponent).join('=')).join('&')
+        Vue.http.get(source.address + plotType + '?' + queryString).then(respone => {
           let data = respone.body
           let slotData = {
             plotType: plotType,
-            params: serverParams,
+            params: getters.translateParams(source, queryParams),
             plotData: data.data,
             plotComponent: data.plotComponent
           }
-          commit('addToCache', { server, slotData })
-          waitingObject.resolve(slotData)
-          commit('removeWaiting', { server, waitingObject })
+          commit('addToCache', { source, slotData })
+          pendingRequest.resolve(slotData)
+          commit('removePendingRequest', { source, pendingRequest })
           resolve(slotData)
         }).catch((e) => {
-          waitingObject.reject(e)
+          pendingRequest.reject(e)
           reject(e)
         })
       })
@@ -167,5 +142,8 @@ export default {
   getters,
   mutations,
   actions,
+  modules: {
+    dataSourceCommon: dataSourceCommon.getNew()
+  },
   namespaced: true
 }

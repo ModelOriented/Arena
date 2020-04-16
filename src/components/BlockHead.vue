@@ -13,7 +13,7 @@
       <span v-if="isMerged" @click="splitSlot(slotv)">Split <font-awesome-icon :icon="['far', 'clone']"/></span>
       <span v-for="p in lockableParams" :key="p.name" @click="lockUnlockParam(p.name)" @contextmenu.prevent="openParamSearch(p.name, $event)" class="tooltiped">
         <span class="tooltip">Left click to lock<br>Right click to choose</span>
-        {{ p.value ? p.value.name : p.name | titleFormat }} {{ p.value ? '&#x1f512;' : '&#x1f513;' }}
+        {{ p.value ? p.value : p.name | titleFormat }} {{ p.value ? '&#x1f512;' : '&#x1f513;' }}
       </span>
       <SearchMenu v-if="searchMenuParam" :paramName="searchMenuParam" :style="searchManuStyle" @close="searchMenuParam = ''" @setParam="setSlotParam($event)"/>
     </div>
@@ -45,7 +45,7 @@ export default {
   computed: {
     fullParams () { return this.getSlotFullParams(this.slotv.localParams) },
     usedModels () {
-      return [...new Set(this.fullParams.map(p => '<span style="color: ' + this.mainParamColors[p[config.mainParam].uuid] + '">' + p[config.mainParam].name + '</span>'))].join(', ')
+      return [...new Set(this.fullParams.map(p => '<span style="color: ' + this.mainParamColors[p[config.mainParam]] + '">' + p[config.mainParam] + '</span>'))].join(', ')
     },
     isMerged () {
       return this.slotv && this.slotv.localParams.length > 1

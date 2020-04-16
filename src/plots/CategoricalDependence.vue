@@ -20,7 +20,7 @@ export default {
     traces () {
       return this.data.map((d, i) => {
         return {
-          name: d.params.model.name,
+          name: d.params.model,
           type: 'bar',
           orientation: 'h',
           base: d.plotData.base,
@@ -31,11 +31,11 @@ export default {
           hoverinfo: 'template',
           hovertemplate: d.plotData.y.map(x => format.formatValue(x - d.plotData.base, true)),
           hoverlabel: {
-            bgcolor: this.mainParamColors[d.params.model.uuid],
+            bgcolor: this.mainParamColors[d.params.model],
             font: { family: 'FiraSansBold', size: 16, color: 'white' }
           },
           marker: {
-            color: this.mainParamColors[d.params.model.uuid]
+            color: this.mainParamColors[d.params.model]
           },
           insidetextanchor: 'start'
         }

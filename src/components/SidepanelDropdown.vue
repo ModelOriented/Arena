@@ -2,17 +2,17 @@
   <div class='sidepanel-dropdown'>
     <div class="options-list">
       <div class="group-name">{{ mainParam | firstCharUpper }}</div>
-      <div class="option" v-for="o in availableParams[mainParam]" :key="o.uuid" :class="{ selected: isSelected(mainParam, o.uuid) }" @click.self="select(mainParam, o)">
-        {{ o.name | formatTitle }}
+      <div class="option" v-for="o in availableParams[mainParam]" :key="o" :class="{ selected: isSelected(mainParam, o) }" @click.self="select(mainParam, o)">
+        {{ o | formatTitle }}
         <span class="left-button">
-          <font-awesome-icon icon="plus" class="add button" v-if="selectedGroup === mainParam && !isSelected(mainParam, o.uuid)"/>
-          <font-awesome-icon icon="plus-square" class="add button-hover" v-if="selectedGroup === mainParam && !isSelected(mainParam, o.uuid)" @click="addSelect(mainParam, o)"/>
-          <font-awesome-icon icon="minus" class="minus button" v-if="isSelected(mainParam, o.uuid) && selectedValues.length > 1"/>
-          <font-awesome-icon icon="minus-square" class="minus button-hover" v-if="isSelected(mainParam, o.uuid) && selectedValues.length > 1" @click="removeSelect(o.uuid)"/>
+          <font-awesome-icon icon="plus" class="add button" v-if="selectedGroup === mainParam && !isSelected(mainParam, o)"/>
+          <font-awesome-icon icon="plus-square" class="add button-hover" v-if="selectedGroup === mainParam && !isSelected(mainParam, o)" @click="addSelect(mainParam, o)"/>
+          <font-awesome-icon icon="minus" class="minus button" v-if="isSelected(mainParam, o) && selectedValues.length > 1"/>
+          <font-awesome-icon icon="minus-square" class="minus button-hover" v-if="isSelected(mainParam, o) && selectedValues.length > 1" @click="removeSelect(o)"/>
         </span>
-        <font-awesome-icon icon="square" class="color-button" :style="{ display: colorSelector !== o.uuid ? 'block' : 'none', color: mainParamColors[o.uuid] }" @click="colorSelector = o.uuid"/>
-        <div class="color-selector" :style="{ display: colorSelector === o.uuid ? 'block' : 'none' }">
-          <font-awesome-icon v-for="color in palette" :key="color" icon="square" class="color-button" :style="{ color }" @click="setColor(o.uuid, color)"/>
+        <font-awesome-icon icon="square" class="color-button" :style="{ display: colorSelector !== o ? 'block' : 'none', color: mainParamColors[o] }" @click="colorSelector = o"/>
+        <div class="color-selector" :style="{ display: colorSelector === o ? 'block' : 'none' }">
+          <font-awesome-icon v-for="color in palette" :key="color" icon="square" class="color-button" :style="{ color }" @click="setColor(o, color)"/>
         </div>
       </div>
       <div class="group-name">Other</div>
@@ -25,6 +25,7 @@ import format from '@/utils/format.js'
 import PlotsInfo from '@/configuration/PlotsInfo.js'
 import { mapGetters } from 'vuex'
 import config from '@/configuration/config.js'
+import equal from 'fast-deep-equal/es6'
 
 export default {
   name: 'SidepanelDropdown',
@@ -42,13 +43,13 @@ export default {
     'availableMainParams': function (newValue, oldValue) {
       if (this.selectedGroup !== this.mainParam) return
       // filter params that are not available anymore
-      this.selectedValues = this.selectedValues.filter(sel => newValue.find(x => x.uuid === sel.uuid))
+      this.selectedValues = this.selectedValues.filter(sel => newValue.includes(sel))
       if (this.selectedValues.length === 0) this.selectedValues = newValue.slice(0, 1)
     }
   },
   computed: {
     displayedValue () {
-      return this.selectedValues.map(v => v.name || v || '').map(format.formatTitle).join(', ')
+      return this.selectedValues.map(v => v || '').map(format.formatTitle).join(', ')
     },
     displayedGroup () {
       return format.firstCharUpper(this.selectedGroup)
@@ -58,20 +59,19 @@ export default {
     availableSlots () {
       // it forces refreshing slots id, when any slot is added to playground
       if (!this.allSlots) return []
-      // function compares two params object based on uuid (names may differ)
-      let sameParams = (a, b) => {
-        let uuidA = Object.keys(a).reduce((acu, k) => { acu[k] = a[k].uuid; return acu }, {})
-        let uuidB = Object.keys(b).reduce((acu, k) => { acu[k] = b[k].uuid; return acu }, {})
-        return ![...new Set([...Object.keys(uuidA), ...Object.keys(uuidB)])].find(k => uuidA[k] !== uuidB[k])
-      }
+
       if (this.selectedGroup === config.mainParam) {
         let plotTypes = this.selectedValues.map(m => this.getAvailableSlots({ [config.mainParam]: m })).flat().reduce((acu, slot) => {
+          // if there are no slot of that plotType in accumulator that set current one
+          // in other case just append localParams
           if (!acu[slot.plotType]) acu[slot.plotType] = slot
           else {
             if (!PlotsInfo.canMerge(acu[slot.plotType], slot)) return acu
-            acu[slot.plotType].localParams = [...acu[slot.plotType].localParams, ...slot.localParams.filter(a => {
-              return !acu[slot.plotType].localParams.find(b => sameParams(a, b))
-            })]
+            // get all localParams from slot that do not exist already in accumulator (removing duplications)
+            let newLocalParams = slot.localParams.filter(a => {
+              return !acu[slot.plotType].localParams.find(b => equal(a, b))
+            })
+            acu[slot.plotType].localParams = [...acu[slot.plotType].localParams, ...newLocalParams]
           }
           return acu
         }, {})
@@ -92,7 +92,7 @@ export default {
   },
   methods: {
     isSelected (group, value) {
-      return this.selectedGroup === group && this.selectedValues.find(s => s === value || (s || {}).uuid === value)
+      return this.selectedGroup === group && this.selectedValues.includes(value)
     },
     select (group, value) {
       this.selectedGroup = group
@@ -104,11 +104,11 @@ export default {
       else this.selectedValues = [...this.selectedValues, value]
     },
     removeSelect (value) {
-      if (this.selectedValues.length > 1) this.selectedValues = this.selectedValues.filter(s => s !== value && (s || {}).uuid !== value)
+      if (this.selectedValues.length > 1) this.selectedValues = this.selectedValues.filter(s => s !== value)
     },
-    setColor (uuid, color) {
+    setColor (paramName, color) {
       this.colorSelector = null
-      this.$store.commit('setColor', { uuid, color })
+      this.$store.commit('setColor', { paramName, color })
     }
   }
 }
