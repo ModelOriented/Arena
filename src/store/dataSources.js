@@ -13,7 +13,10 @@ const state = {
     'arenarLiveDatasource'
   ],
   recentURLSources: [],
-  uuid: uuid() // uuid of active session
+  recentSessions: [],
+  sessionUUID: uuid(), // uuid of active session
+  sessionName: '',
+  sessionLastSaved: null
 }
 
 const getters = {
@@ -24,7 +27,16 @@ const getters = {
     return state.recentURLSources
   },
   sessionUUID (state) {
-    return state.uuid
+    return state.sessionUUID
+  },
+  sessionName (state) {
+    return state.sessionName
+  },
+  sessionLastSaved (state) {
+    return state.sessionLastSaved
+  },
+  recentSessions (state) {
+    return state.recentSessions
   }
 }
 
@@ -38,11 +50,25 @@ const mutations = {
   },
   loadRecentURLSources (state, sources) {
     state.recentURLSources = sources
+  },
+  setRecentSessions (state, sessions) {
+    Vue.set(state, 'recentSessions', sessions)
+  },
+  setSessionName (state, name) {
+    Vue.set(state, 'sessionName', name)
+  },
+  resetSession (state) {
+    Vue.set(state, 'sessionUUID', uuid())
+    Vue.set(state, 'sessionName', '')
+    Vue.set(state, 'sessionLastSaved', null)
+  },
+  setSaveTime (state, time) {
+    Vue.set(state, 'sessionLastSaved', time)
   }
 }
 
 const actions = {
-  initDataSources ({ commit, getters }) {
+  initDataSources ({ commit, getters, dispatch }) {
     try {
       const validatorRecentURLSources = ajv.compile(require('@/store/schemas/recentURLSources.schema.json'))
       let recentURLSources = JSON.parse(localStorage.getItem('recentURLSources'))
@@ -52,6 +78,12 @@ const actions = {
     } catch (e) {
       console.error('Failed to read recentURLSources from localStorage', e)
     }
+    setInterval(() => dispatch('saveSession'), 30 * 1000)
+    dispatch('loadRecentSessions')
+    window.addEventListener('storage', e => {
+      if (e.key !== 'recentSessions' && e.newValue) return
+      dispatch('loadRecentSessions')
+    })
   },
   query ({ dispatch, getters }, query) {
     // array of promises and raw objects (Promise.all will handle them)
@@ -95,14 +127,17 @@ const actions = {
       slots,
       colors,
       version: '1.0.0',
+      name: getters.sessionName,
       uuid: getters.sessionUUID,
       time: new Date().getTime()
     }
   },
   async importSession ({ getters, commit, dispatch }, session) {
     // TODO json schema verify
+    commit('resetSession')
     getters.dataSources.forEach(ds => commit(ds + '/clearSources'))
     commit('clearTranslations')
+    commit('setSessionName', session.name || '')
     commit('loadManualColors', session.colors)
     for (let source of session.sources) {
       if (!source.address) continue
@@ -113,6 +148,45 @@ const actions = {
     }
     commit('clearSlots')
     session.slots.forEach(slot => commit('addSlot', slot))
+  },
+  async loadRecentSessions ({ commit }) {
+    try {
+      let recentSessions = JSON.parse(localStorage.getItem('recentSessions'))
+      if (Array.isArray(recentSessions)) {
+        commit('setRecentSessions', recentSessions)
+        return recentSessions
+      }
+    } catch (e) {
+      console.error('Failed to read recentSessions from localStorage', e)
+    }
+    return []
+  },
+  async saveSession ({ dispatch, getters, commit }) {
+    try {
+      if (!getters.sessionName) return
+      let recentSessions = await dispatch('loadRecentSessions')
+      let exported = await dispatch('exportSession')
+      let newValue = [...recentSessions.filter(s => s.uuid !== exported.uuid), exported].slice(-10)
+      localStorage.setItem('recentSessions', JSON.stringify(newValue))
+      commit('setRecentSessions', newValue)
+      commit('setSaveTime', exported.time)
+    } catch (e) {
+      console.error('Failed to save session', e)
+    }
+  },
+  async deleteSession ({ dispatch, commit }, uuid) {
+    try {
+      let recentSessions = await dispatch('loadRecentSessions')
+      let newValue = recentSessions.filter(s => s.uuid !== uuid)
+      localStorage.setItem('recentSessions', JSON.stringify(newValue))
+      commit('setRecentSessions', newValue)
+    } catch (e) {
+      console.error('Failed to delete session from localStorage', e)
+    }
+  },
+  async loadSessionURL ({ dispatch, commit }, url) {
+    let response = await Vue.http.get(url)
+    await dispatch('importSession', response.body)
   }
 }
 

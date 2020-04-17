@@ -27,6 +27,7 @@ import { mapGetters } from 'vuex'
 import Preview from '@/components/Preview.vue'
 import NameConflicts from '@/components/NameConflicts.vue'
 import WelcomeScreen from '@/components/WelcomeScreen.vue'
+import config from '@/configuration/config.js'
 
 export default {
   name: 'app',
@@ -56,21 +57,44 @@ export default {
   },
   computed: {
     welcomeScreenVisible () { return this.displayWelcomeScreen && !this.isElementClosed('welcome-screen') },
-    ...mapGetters(['visibleSlots', 'preview', 'isElementClosed', 'waitingParamsCorrect', 'waitingParamsConflicts'])
+    ...mapGetters(['visibleSlots', 'preview', 'isElementClosed', 'waitingParamsCorrect', 'waitingParamsConflicts', 'recentSessions'])
   },
   created () {
     // eslint-disable-next-line no-unused-expressions
     import('@/components/Plotly.vue')
-    this.$store.dispatch('init')
-    let dataURL = new URLSearchParams(window.location.search).get('data')
-    if (dataURL) {
-      this.$store.dispatch('loadURL', dataURL).catch(console.error)
-      this.displayWelcomeScreen = false
-    }
+    this.$store.dispatch('init').then(() => {
+      let dataURL = new URLSearchParams(window.location.search).get('data')
+      let demo = new URLSearchParams(window.location.search).get('demo')
+      let sessionUUID = new URLSearchParams(window.location.search).get('session_uuid')
+      let sessionURL = new URLSearchParams(window.location.search).get('session')
 
-    window.addEventListener('storage', e => {
-      if (e.key !== 'append' && e.newValue) return
-      this.$store.dispatch('loadURL', e.newValue).catch(console.error)
+      if (demo) {
+        try {
+          let nr = Number.parseInt(demo)
+          dataURL = config.examples[nr].url
+          sessionURL = config.examples[nr].session
+        } catch (e) {
+          console.error('Failed to load demo', e)
+        }
+      }
+      if (sessionURL) {
+        this.$store.dispatch('loadSessionURL', sessionURL).catch(console.error)
+        this.displayWelcomeScreen = false
+      } else if (sessionUUID) {
+        let session = this.recentSessions.find(s => s.uuid === sessionUUID)
+        if (session) {
+          this.$store.dispatch('importSession', session)
+          this.displayWelcomeScreen = false
+        }
+      } else if (dataURL) {
+        this.$store.dispatch('loadURL', dataURL).catch(console.error)
+        this.displayWelcomeScreen = false
+      }
+
+      window.addEventListener('storage', e => {
+        if (e.key !== 'append' && e.newValue) return
+        this.$store.dispatch('loadURL', e.newValue).catch(console.error)
+      })
     })
   }
 }
