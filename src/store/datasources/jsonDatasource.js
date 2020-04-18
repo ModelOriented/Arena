@@ -44,8 +44,10 @@ const validateData = (data) => {
 }
 
 const actions = {
-  loadData ({ state, commit, dispatch }, { data, src, uuid }) {
-    if (!validateData(data)) return false
+  loadData ({ state, commit, dispatch, rootGetters }, { data, src, uuid }) {
+    let isValid = validateData(data)
+    if (rootGetters.debug) console.log({ data: JSON.stringify(data), src, isValid })
+    if (!isValid) return false
     let params = config.params.reduce((acu, paramType) => {
       acu[paramType] = data[paramType + 's']
       return acu

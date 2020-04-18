@@ -67,6 +67,11 @@ export default {
       let demo = new URLSearchParams(window.location.search).get('demo')
       let sessionUUID = new URLSearchParams(window.location.search).get('session_uuid')
       let sessionURL = new URLSearchParams(window.location.search).get('session')
+      let debug = new URLSearchParams(window.location.search).get('debug')
+
+      if (debug) {
+        this.$store.commit('setDebug', true)
+      }
 
       if (demo) {
         try {

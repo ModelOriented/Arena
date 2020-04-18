@@ -16,7 +16,8 @@ const state = {
   recentSessions: [],
   sessionUUID: uuid(), // uuid of active session
   sessionName: '',
-  sessionLastSaved: null
+  sessionLastSaved: null,
+  debug: false
 }
 
 const getters = {
@@ -37,6 +38,9 @@ const getters = {
   },
   recentSessions (state) {
     return state.recentSessions
+  },
+  debug (state) {
+    return state.debug
   }
 }
 
@@ -64,6 +68,9 @@ const mutations = {
   },
   setSaveTime (state, time) {
     Vue.set(state, 'sessionLastSaved', time)
+  },
+  setDebug (state, v) {
+    Vue.set(state, 'debug', !!v)
   }
 }
 
