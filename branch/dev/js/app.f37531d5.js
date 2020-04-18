@@ -508,12 +508,12 @@ var es_promise_finally = __webpack_require__("a79d");
 // EXTERNAL MODULE: ./node_modules/vue/dist/vue.runtime.esm.js
 var vue_runtime_esm = __webpack_require__("2b0e");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8be97ce4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=f287e5ee&
-var Appvue_type_template_id_f287e5ee_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('Navbar',{class:{ blured: _vm.settingsVisible },on:{"openSettings":function($event){_vm.settingsVisible = true}}}),_c('Sidepanel',{class:{ blured: _vm.settingsVisible },attrs:{"id":"sidepanel"}}),_c('div',{class:{ blured: _vm.settingsVisible },attrs:{"id":"playground"}},_vm._l((_vm.visibleSlots),function(slot){return _c('Block',{key:slot.uuid,attrs:{"slotv":slot},on:{"openFullscreen":function($event){_vm.fullscreenSlot = slot}}})}),1),_c('DeleteZone'),(_vm.settingsVisible)?_c('div',{staticClass:"overlay",on:{"click":function($event){_vm.settingsVisible = false}}}):_vm._e(),(_vm.settingsVisible)?_c('Settings',{on:{"close":function($event){_vm.settingsVisible = false}}}):_vm._e(),(_vm.waitingParamsConflicts.length > 0)?_c('div',{staticClass:"overlay overlay-2"}):_vm._e(),(_vm.waitingParamsConflicts.length > 0)?_c('NameConflicts'):_vm._e(),(_vm.welcomeScreenVisible)?_c('div',{staticClass:"overlay",on:{"click":function($event){_vm.displayWelcomeScreen = false}}}):_vm._e(),(_vm.welcomeScreenVisible)?_c('WelcomeScreen',{on:{"close":function($event){_vm.displayWelcomeScreen = false}}}):_vm._e(),(_vm.fullscreenSlot)?_c('FullscreenBlock',{attrs:{"slotv":_vm.fullscreenSlot},on:{"close":function($event){_vm.fullscreenSlot = null}}}):_vm._e(),(_vm.preview)?_c('Preview',{attrs:{"slotv":_vm.preview}}):_vm._e()],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8be97ce4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=35bf4266&
+var Appvue_type_template_id_35bf4266_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('Navbar',{class:{ blured: _vm.settingsVisible },on:{"openSettings":function($event){_vm.settingsVisible = true}}}),_c('Sidepanel',{class:{ blured: _vm.settingsVisible },attrs:{"id":"sidepanel"}}),_c('div',{class:{ blured: _vm.settingsVisible },attrs:{"id":"playground"}},_vm._l((_vm.visibleSlots),function(slot){return _c('Block',{key:slot.uuid,attrs:{"slotv":slot},on:{"openFullscreen":function($event){_vm.fullscreenSlot = slot}}})}),1),_c('DeleteZone'),(_vm.settingsVisible)?_c('div',{staticClass:"overlay",on:{"click":function($event){_vm.settingsVisible = false}}}):_vm._e(),(_vm.settingsVisible)?_c('Settings',{on:{"close":function($event){_vm.settingsVisible = false}}}):_vm._e(),(_vm.waitingParamsConflicts.length > 0)?_c('div',{staticClass:"overlay overlay-2"}):_vm._e(),(_vm.waitingParamsConflicts.length > 0)?_c('NameConflicts'):_vm._e(),(_vm.welcomeScreenVisible)?_c('div',{staticClass:"overlay",on:{"click":function($event){_vm.displayWelcomeScreen = false}}}):_vm._e(),(_vm.welcomeScreenVisible)?_c('WelcomeScreen',{on:{"close":function($event){_vm.displayWelcomeScreen = false}}}):_vm._e(),(_vm.fullscreenSlot)?_c('FullscreenBlock',{attrs:{"slotv":_vm.fullscreenSlot},on:{"close":function($event){_vm.fullscreenSlot = null}}}):_vm._e(),(_vm.preview)?_c('Preview',{attrs:{"slotv":_vm.preview}}):_vm._e()],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=f287e5ee&
+// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=35bf4266&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.find.js
 var es_array_find = __webpack_require__("7db0");
@@ -5127,6 +5127,11 @@ var WelcomeScreen_component = Object(componentNormalizer["a" /* default */])(
       var demo = new URLSearchParams(window.location.search).get('demo');
       var sessionUUID = new URLSearchParams(window.location.search).get('session_uuid');
       var sessionURL = new URLSearchParams(window.location.search).get('session');
+      var debug = new URLSearchParams(window.location.search).get('debug');
+
+      if (debug) {
+        _this.$store.commit('setDebug', true);
+      }
 
       if (demo) {
         try {
@@ -5182,7 +5187,7 @@ var Appvue_type_style_index_0_lang_css_ = __webpack_require__("034f");
 
 var App_component = Object(componentNormalizer["a" /* default */])(
   src_Appvue_type_script_lang_js_,
-  Appvue_type_template_id_f287e5ee_render,
+  Appvue_type_template_id_35bf4266_render,
   staticRenderFns,
   false,
   null,
@@ -5965,11 +5970,18 @@ var jsonDatasource_actions = {
   loadData: function loadData(_ref2, _ref3) {
     var state = _ref2.state,
         commit = _ref2.commit,
-        dispatch = _ref2.dispatch;
+        dispatch = _ref2.dispatch,
+        rootGetters = _ref2.rootGetters;
     var data = _ref3.data,
         src = _ref3.src,
         uuid = _ref3.uuid;
-    if (!jsonDatasource_validateData(data)) return false;
+    var isValid = jsonDatasource_validateData(data);
+    if (rootGetters.debug) console.log({
+      data: JSON.stringify(data),
+      src: src,
+      isValid: isValid
+    });
+    if (!isValid) return false;
     var params = config.params.reduce(function (acu, paramType) {
       acu[paramType] = data[paramType + 's'];
       return acu;
@@ -6141,11 +6153,18 @@ var arenarLiveDatasource_actions = {
   loadData: function loadData(_ref5, _ref6) {
     var state = _ref5.state,
         commit = _ref5.commit,
-        dispatch = _ref5.dispatch;
+        dispatch = _ref5.dispatch,
+        rootGetters = _ref5.rootGetters;
     var data = _ref6.data,
         src = _ref6.src,
         uuid = _ref6.uuid;
-    if (!arenarLiveDatasource_validateData(data)) return false;
+    var isValid = arenarLiveDatasource_validateData(data);
+    if (rootGetters.debug) console.log({
+      data: JSON.stringify(data),
+      src: src,
+      isValid: isValid
+    });
+    if (!isValid) return false;
     var params = config.params.reduce(function (acu, paramType) {
       acu[paramType] = data[paramType + 's'];
       return acu;
@@ -6320,7 +6339,8 @@ var dataSources_state = {
   sessionUUID: v4_default()(),
   // uuid of active session
   sessionName: '',
-  sessionLastSaved: null
+  sessionLastSaved: null,
+  debug: false
 };
 var dataSources_getters = {
   dataSources: function dataSources(state) {
@@ -6340,6 +6360,9 @@ var dataSources_getters = {
   },
   recentSessions: function recentSessions(state) {
     return state.recentSessions;
+  },
+  debug: function debug(state) {
+    return state.debug;
   }
 };
 var dataSources_mutations = {
@@ -6374,6 +6397,9 @@ var dataSources_mutations = {
   },
   setSaveTime: function setSaveTime(state, time) {
     vue_runtime_esm["a" /* default */].set(state, 'sessionLastSaved', time);
+  },
+  setDebug: function setDebug(state, v) {
+    vue_runtime_esm["a" /* default */].set(state, 'debug', !!v);
   }
 };
 var dataSources_actions = {
@@ -7270,4 +7296,4 @@ module.exports = __webpack_require__.p + "img/logo.1a3768b8.png";
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.754b5adb.js.map
+//# sourceMappingURL=app.f37531d5.js.map
