@@ -6145,8 +6145,12 @@ function loadFontAwesome() {
 
 loadFontAwesome();
 var appendURL = new URLSearchParams(window.location.search).get('append');
+var clearStorage = new URLSearchParams(window.location.search).get('clear_storage');
 
-if (appendURL) {
+if (clearStorage) {
+  localStorage.clear();
+  document.write('Local Storage is now clear');
+} else if (appendURL) {
   localStorage.setItem('append', '');
   localStorage.setItem('append', appendURL);
   document.write('You can close this window');
@@ -6455,4 +6459,4 @@ module.exports = JSON.parse("{\"$schema\":\"http://json-schema.org/draft-06/sche
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.ca56bf0c.js.map
+//# sourceMappingURL=app.89e17af0.js.map
