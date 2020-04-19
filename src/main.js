@@ -7,7 +7,12 @@ import { loadFontAwesome } from './utils/fontAwesomeLoader.js'
 loadFontAwesome()
 
 let appendURL = new URLSearchParams(window.location.search).get('append')
-if (appendURL) {
+let clearStorage = new URLSearchParams(window.location.search).get('clear_storage')
+
+if (clearStorage) {
+  localStorage.clear()
+  document.write('Local Storage is now clear')
+} else if (appendURL) {
   localStorage.setItem('append', '')
   localStorage.setItem('append', appendURL)
   document.write('You can close this window')
