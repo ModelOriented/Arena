@@ -4,7 +4,9 @@
       <button class="download" @click="save">Download current session</button>
       <input type="file" style="display: none" ref="fileinput" @change="loadFiles">
       <button class="upload" @click="$refs.fileinput.click()">Load session from file</button>
+      <button class="share" @click="share">Share using Github Gist</button>
     </div>
+    <span v-if="message" class="message" :style="{ color: message.error ? '#f05a71' : '#46bac2' }">{{ message.text }}</span>
     <div class="recently-used">
       <span>Recent sessions</span>
       <div v-for="s in recentSessions" :key="s.time">
@@ -27,6 +29,11 @@ export default {
     baseURL () { return config.url },
     ...mapGetters(['recentSessions'])
   },
+  data () {
+    return {
+      message: null
+    }
+  },
   methods: {
     loadSession (session) {
       this.$store.dispatch('importSession', session)
@@ -44,6 +51,16 @@ export default {
     save () {
       this.$store.dispatch('exportSession').then(session => {
         this.downloadSession(session)
+      })
+    },
+    share () {
+      this.$store.dispatch('shareSession').then(url => {
+        this.message = {
+          text: this.baseURL + '/?session=' + url
+        }
+      }).catch(e => {
+        console.error(e)
+        this.message = { text: 'Failed to share session', error: true }
       })
     },
     loadFiles (event) {
@@ -95,6 +112,12 @@ div.settings-tab-sessions > div.current-session > button.upload {
 div.settings-tab-sessions > div.current-session > button.upload:hover {
   box-shadow: 0 0 5px 0 #4378bf;
 }
+div.settings-tab-sessions > div.current-session > button.share {
+  background: #f05a71;
+}
+div.settings-tab-sessions > div.current-session > button.share:hover {
+  box-shadow: 0 0 5px 0 #f05a71;
+}
 div.settings-tab-sessions > div.recently-used {
   padding: 20px 0;
 }
@@ -133,5 +156,13 @@ div.settings-tab-sessions > div.recently-used > div > span.option {
   font-size: 15px;
   text-align: center;
   cursor: pointer;
+}
+div.settings-tab-sessions > span.message {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 15px;
+  user-select: all;
+  word-break: break-all;
 }
 </style>

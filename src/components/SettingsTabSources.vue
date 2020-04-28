@@ -13,12 +13,13 @@
       <div v-for="s in recentURLSources" :key="s.time">
         <a :href="baseURL + '/?data=' + s.url" @click.prevent="loadURL(s.url)">{{ s.url }}</a>
         <span class="date">{{ new Date(s.time).toString().split(' ').slice(0,5).join(' ') }}</span>
+        <span class="option" @click="deleteRecentSource(s)"><font-awesome-icon :icon="['far', 'times-circle']" style="color: red"/></span>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import config from '@/configuration/config.js'
 
 export default {
@@ -75,7 +76,8 @@ export default {
         this.addSourceError = 'Cannot load the file. Look to console for more details.'
         console.error(e)
       })
-    }
+    },
+    ...mapMutations(['deleteRecentSource'])
   }
 }
 </script>
@@ -144,7 +146,7 @@ div.settings-tab-sources > div.recently-used > div:nth-child(2n+1) {
 div.settings-tab-sources > div.recently-used > div > a {
   color: #555;
   display: inline-block;
-  width: calc(100% - 250px);
+  width: calc(100% - 275px);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -156,5 +158,13 @@ div.settings-tab-sources > div.recently-used > div > span.date {
   vertical-align: middle;
   font-size: 15px;
   text-align: center;
+}
+div.settings-tab-sources > div.recently-used > div > span.option {
+  width: 25px;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
 }
 </style>

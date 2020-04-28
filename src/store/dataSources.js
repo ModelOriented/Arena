@@ -3,6 +3,7 @@ import arenarLiveDatasource from '@/store/datasources/arenarLiveDatasource.js'
 import Vue from 'vue'
 import Ajv from 'ajv'
 import uuid from 'uuid/v4'
+import config from '@/configuration/config.js'
 
 const ajv = new Ajv()
 ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-06.json'))
@@ -17,7 +18,8 @@ const state = {
   sessionUUID: uuid(), // uuid of active session
   sessionName: '',
   sessionLastSaved: null,
-  debug: false
+  debug: false,
+  tokenCallback: null // promise resolve function waiting for token
 }
 
 const getters = {
@@ -41,6 +43,9 @@ const getters = {
   },
   debug (state) {
     return state.debug
+  },
+  tokenCallback (state) {
+    return state.tokenCallback
   }
 }
 
@@ -50,6 +55,10 @@ const mutations = {
       ...state.recentURLSources.filter(s => s.url !== url),
       { time: new Date().getTime(), url }
     ].sort((a, b) => b.time - a.time).slice(0, 5) // get last 5 urls
+    localStorage.setItem('recentURLSources', JSON.stringify({ version: '1.0.0', sources: state.recentURLSources }))
+  },
+  deleteRecentSource (state, source) {
+    Vue.set(state, 'recentURLSources', state.recentURLSources.filter(s => s !== source))
     localStorage.setItem('recentURLSources', JSON.stringify({ version: '1.0.0', sources: state.recentURLSources }))
   },
   loadRecentURLSources (state, sources) {
@@ -71,6 +80,12 @@ const mutations = {
   },
   setDebug (state, v) {
     Vue.set(state, 'debug', !!v)
+  },
+  setTokenCallback (state, f) {
+    Vue.set(state, 'tokenCallback', f)
+  },
+  clearTokenCallback (state) {
+    Vue.set(state, 'tokenCallback', null)
   }
 }
 
@@ -190,6 +205,34 @@ const actions = {
     } catch (e) {
       console.error('Failed to delete session from localStorage', e)
     }
+  },
+  async authorize ({ commit }) {
+    let token = localStorage.getItem('githubToken')
+    if (!token) {
+      return new Promise((resolve, reject) => {
+        commit('setTokenCallback', resolve)
+        window.open('https://github.com/login/oauth/authorize?client_id=' + config.githubClientId + '&state=' + uuid() + '&scope=gist')
+      })
+    } else {
+      return token
+    }
+  },
+  async shareSession ({ dispatch, commit, getters }) {
+    let exported = await dispatch('exportSession')
+    let token = await dispatch('authorize')
+    let json = JSON.stringify(exported)
+    return Vue.http.post('https://api.github.com/gists', {
+      public: false,
+      description: exported.name || 'Arena session',
+      files: { 'session.json': { content: json } }
+    }, { headers: { 'Authorization': 'token ' + token } }).then(response => {
+      return (((response.body || {}).files || {})['session.json'] || {}).raw_url
+    })
+  },
+  loadGithubToken ({ getters, commit }, token) {
+    if (localStorage.getItem('githubToken') !== token) localStorage.setItem('githubToken', token)
+    if (getters.tokenCallback) getters.tokenCallback(token)
+    commit('clearTokenCallback')
   },
   async loadSessionURL ({ dispatch, commit }, url) {
     let response = await Vue.http.get(url)

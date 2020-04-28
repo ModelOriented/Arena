@@ -68,9 +68,18 @@ export default {
       let sessionUUID = new URLSearchParams(window.location.search).get('session_uuid')
       let sessionURL = new URLSearchParams(window.location.search).get('session')
       let debug = new URLSearchParams(window.location.search).get('debug')
+      let githubCode = new URLSearchParams(window.location.search).get('code')
+      let githubState = new URLSearchParams(window.location.search).get('state')
 
       if (debug) {
         this.$store.commit('setDebug', true)
+      }
+
+      if (githubCode && githubState) {
+        this.$http.get(config.githubAuthorizeServer + '?code=' + githubCode + '&state=' + githubState).then(response => {
+          let token = response.body
+          this.$store.dispatch('loadGithubToken', token).then(() => window.close())
+        }).catch(console.error)
       }
 
       if (demo) {
@@ -97,8 +106,8 @@ export default {
       }
 
       window.addEventListener('storage', e => {
-        if (e.key !== 'append' && e.newValue) return
-        this.$store.dispatch('loadURL', e.newValue).catch(console.error)
+        if (e.key === 'append' && e.newValue) this.$store.dispatch('loadURL', e.newValue).catch(console.error)
+        if (e.key === 'githubToken' && e.newValue) this.$store.dispatch('loadGithubToken', e.newValue).catch(console.error)
       })
     })
   }

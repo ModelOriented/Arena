@@ -22,5 +22,7 @@ export default {
   searchDropdownPlots: {
     variable: { name: 'Partial Dependence', plotType: 'PartialDependence' },
     observation: { name: 'Break Down', plotType: 'Breakdown' }
-  }
+  },
+  githubClientId: 'd7d96eec80f68c16954b',
+  githubAuthorizeServer: localStorage.getItem('githubAuthServer') || '' // temporary
 }
