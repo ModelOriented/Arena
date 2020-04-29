@@ -5,6 +5,7 @@
     <div id="playground" :class="{ blured: settingsVisible }">
       <Block v-for="slot in visibleSlots" :key="slot.uuid" :slotv="slot" @openFullscreen="fullscreenSlot = slot"/>
     </div>
+    <Annotations />
     <DeleteZone />
     <div class="overlay" v-if="settingsVisible" @click="settingsVisible = false"/>
     <Settings v-if="settingsVisible" @close="settingsVisible = false"/>
@@ -27,6 +28,7 @@ import { mapGetters } from 'vuex'
 import Preview from '@/components/Preview.vue'
 import NameConflicts from '@/components/NameConflicts.vue'
 import WelcomeScreen from '@/components/WelcomeScreen.vue'
+import Annotations from '@/components/Annotations.vue'
 import config from '@/configuration/config.js'
 
 export default {
@@ -40,7 +42,8 @@ export default {
     FullscreenBlock,
     Preview,
     NameConflicts,
-    WelcomeScreen
+    WelcomeScreen,
+    Annotations
   },
   data () {
     return {

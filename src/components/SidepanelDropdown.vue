@@ -17,6 +17,15 @@
       </div>
       <div class="group-name">Other</div>
       <div class="option" :class="{ selected: isSelected('other', 'clipboard') }" @click.self="select('other', 'clipboard')">Clipboard</div>
+      <div class="option" :class="{ selected: isSelected('other', 'annotate') }" @click.self="select('other', 'annotate')">
+        Annotate
+        <font-awesome-icon v-if="!annotateColorSelector" :icon="annotationsColor === 'erase' ? 'eraser' : 'square'" class="color-button"
+        :style="{ color: annotationsColor === 'erase' ? 'black' : annotationsColor }" @click="annotateColorSelector = true"/>
+        <div class="color-selector" :style="{ display: annotateColorSelector ? 'block' : 'none' }">
+          <font-awesome-icon v-for="color in palette" :key="color" icon="square" class="color-button" :style="{ color }" @click="setAnnotationsColor(color)"/>
+          <font-awesome-icon icon="eraser" class="color-button" style="color: black" @click="setAnnotationsColor('erase')"/>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -33,7 +42,8 @@ export default {
     return {
       selectedGroup: config.mainParam,
       selectedValues: [],
-      colorSelector: null // uuid of main param when open
+      colorSelector: null, // uuid of main param when open
+      annotateColorSelector: false
     }
   },
   watch: {
@@ -45,6 +55,9 @@ export default {
       // filter params that are not available anymore
       this.selectedValues = this.selectedValues.filter(sel => newValue.includes(sel))
       if (this.selectedValues.length === 0) this.selectedValues = newValue.slice(0, 1)
+    },
+    selectedValues () {
+      this.$store.commit('setAnnotations', this.selectedGroup === 'other' && this.selectedValues.find(v => v === 'annotate'))
     }
   },
   computed: {
@@ -84,7 +97,7 @@ export default {
     availableMainParams () {
       return this.availableParams[config.mainParam]
     },
-    ...mapGetters(['availableParams', 'getGlobalParam', 'mainParamColors', 'palette', 'archivedSlots', 'getAvailableSlots', 'allSlots'])
+    ...mapGetters(['availableParams', 'getGlobalParam', 'mainParamColors', 'palette', 'archivedSlots', 'getAvailableSlots', 'allSlots', 'annotationsColor'])
   },
   filters: {
     formatTitle: format.formatTitle,
@@ -108,7 +121,13 @@ export default {
     },
     setColor (paramName, color) {
       this.colorSelector = null
+      this.annotateColorSelector = false
       this.$store.commit('setColor', { paramName, color })
+    },
+    setAnnotationsColor (color) {
+      this.colorSelector = null
+      this.annotateColorSelector = false
+      this.$store.commit('setAnnotationsColor', color)
     }
   }
 }

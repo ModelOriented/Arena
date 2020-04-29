@@ -3,16 +3,24 @@ import OptionsSchemas from '@/configuration/OptionsSchemas.js'
 
 const state = {
   options: {},
-  closedElements: []
+  closedElements: [],
+  annotationsActive: false,
+  annotationsColor: '#371ea8'
 }
 
 const getters = {
-  getOption: (stare, getters) => (name) => {
+  getOption: (state, getters) => (name) => {
     if (state.options[name] !== undefined) return state.options[name]
     return (OptionsSchemas.find(s => s.name === name) || {}).default
   },
   isElementClosed: (state, getters) => (name) => {
     return !!state.closedElements.find(f => f === name)
+  },
+  annotationsActive (state) {
+    return state.annotationsActive
+  },
+  annotationsColor (state) {
+    return state.annotationsColor
   }
 }
 
@@ -23,6 +31,12 @@ const mutations = {
   closeElement (state, name) {
     state.closedElements = [...state.closedElements.filter(e => e !== name), name]
     localStorage.setItem('closedElements', JSON.stringify(state.closedElements))
+  },
+  setAnnotations (state, active) {
+    Vue.set(state, 'annotationsActive', !!active)
+  },
+  setAnnotationsColor (state, color) {
+    Vue.set(state, 'annotationsColor', color)
   }
 }
 
