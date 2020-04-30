@@ -12,18 +12,27 @@ export default {
   data () {
     return {
       context: null,
-      lineWidth: 3,
-      paths: [],
+      lineWidth: 5,
       width: 0,
       height: 0,
-      cursor: null
+      cursor: null,
+      paths: []
+    }
+  },
+  watch: {
+    annotations () {
+      this.paths = this.annotations.paths
+      this.refresh()
     }
   },
   computed: {
     effectiveLineWidth () {
       return this.lineWidth + (this.annotationsColor === 'erase' ? 15 : 0)
     },
-    ...mapGetters(['annotationsActive', 'annotationsColor'])
+    annotations () {
+      return this.getAnnotations(this.pageNumber)
+    },
+    ...mapGetters(['annotationsActive', 'annotationsColor', 'getAnnotations', 'pageNumber'])
   },
   mounted () {
     if (this.$refs.canvas.getContext) this.context = this.$refs.canvas.getContext('2d')
@@ -50,17 +59,22 @@ export default {
       this.refresh()
     })
     this.$refs.canvas.addEventListener('wheel', e => {
-      this.lineWidth += e.deltaY / 30
-      this.lineWidth = Math.max(this.lineWidth, 1)
+      this.lineWidth *= 1 + (e.deltaY / 100)
+      this.lineWidth = Math.min(Math.max(this.lineWidth, 1), 30)
       this.refresh()
     })
     this.$refs.canvas.addEventListener('pointerleave', e => {
       this.cursor = null
+      this.updateStore()
       this.refresh()
     })
     this.$refs.canvas.addEventListener('pointercancel', e => {
       this.cursor = null
+      this.updateStore()
       this.refresh()
+    })
+    this.$refs.canvas.addEventListener('pointerup', e => {
+      this.updateStore()
     })
   },
   methods: {
@@ -72,6 +86,7 @@ export default {
         this.$refs.canvas.width = this.width
         this.$refs.canvas.height = this.height
       }
+      this.refresh()
     },
     plotPath (path) {
       this.context.beginPath()
@@ -109,7 +124,6 @@ export default {
     splitPath (path) {
       let dist = Math.sqrt(Math.pow(path.from.x - path.to.x, 2) + Math.pow(path.from.y - path.to.y, 2))
       let k = Math.ceil(dist / 10) // div by max size for a one segment in px
-      console.log({ dist, k })
       if (k <= 1) return [path]
       let diff = { x: (path.to.x - path.from.x) / k, y: (path.to.y - path.from.y) / k }
       let paths = []
@@ -125,6 +139,9 @@ export default {
     },
     addPath (path) {
       this.paths = [...this.paths, ...this.splitPath(path)]
+    },
+    updateStore () {
+      this.$store.commit('setAnnotations', Object.assign({}, this.annotations, { paths: this.paths }))
     }
   },
   directives: {

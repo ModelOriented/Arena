@@ -144,10 +144,12 @@ const actions = {
       })
     let slots = getters.allSlots
     let colors = getters.manualColors
+    let annotations = getters.annotations
     return {
       sources,
       slots,
       colors,
+      annotations,
       version: '1.0.0',
       name: getters.sessionName,
       uuid: getters.sessionUUID,
@@ -161,6 +163,7 @@ const actions = {
     commit('clearTranslations')
     commit('setSessionName', session.name || '')
     commit('loadManualColors', session.colors)
+    commit('loadAnnotations', session.annotations || [])
     for (let source of session.sources) {
       if (!source.address) continue
       if (source.translations) commit('addTranslations', { uuid: source.uuid, params: source.translations })

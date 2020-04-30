@@ -57,7 +57,7 @@ export default {
       if (this.selectedValues.length === 0) this.selectedValues = newValue.slice(0, 1)
     },
     selectedValues () {
-      this.$store.commit('setAnnotations', this.selectedGroup === 'other' && this.selectedValues.find(v => v === 'annotate'))
+      this.$store.commit('setAnnotationsActive', this.selectedGroup === 'other' && this.selectedValues.find(v => v === 'annotate'))
     }
   },
   computed: {

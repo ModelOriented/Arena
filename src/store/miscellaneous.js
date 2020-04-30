@@ -5,7 +5,8 @@ const state = {
   options: {},
   closedElements: [],
   annotationsActive: false,
-  annotationsColor: '#371ea8'
+  annotationsColor: '#371ea8',
+  annotations: []
 }
 
 const getters = {
@@ -21,6 +22,12 @@ const getters = {
   },
   annotationsColor (state) {
     return state.annotationsColor
+  },
+  getAnnotations: (state) => (pageNumber) => {
+    return Object.assign({ paths: [], pageNumber }, state.annotations.find(a => a.pageNumber === pageNumber))
+  },
+  annotations (state) {
+    return state.annotations
   }
 }
 
@@ -32,11 +39,17 @@ const mutations = {
     state.closedElements = [...state.closedElements.filter(e => e !== name), name]
     localStorage.setItem('closedElements', JSON.stringify(state.closedElements))
   },
-  setAnnotations (state, active) {
+  setAnnotationsActive (state, active) {
     Vue.set(state, 'annotationsActive', !!active)
   },
   setAnnotationsColor (state, color) {
     Vue.set(state, 'annotationsColor', color)
+  },
+  setAnnotations (state, annotations) {
+    Vue.set(state, 'annotations', [...state.annotations.filter(a => a.pageNumber !== annotations.pageNumber), annotations])
+  },
+  loadAnnotations (state, annotations) {
+    Vue.set(state, 'annotations', annotations)
   }
 }
 
