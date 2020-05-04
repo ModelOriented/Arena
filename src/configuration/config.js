@@ -3,7 +3,7 @@ export default {
     {
       name: 'Apartments from 2009-2010 price per m2',
       url: 'https://gist.githubusercontent.com/piotrpiatyszek/e90d62f8896637001b9110cbe143956f/raw/15a1c75488122580dc5766e3ca7474949ba89678/data.json',
-      session: 'https://arena.drwhy.ai/?session=https://gist.githubusercontent.com/piotrpiatyszek/20377262b400348d0af4c8dd9500b85e/raw/0042ce5b93185d36ffd27fb37a36e6e499924f78/session.json'
+      session: 'https://gist.githubusercontent.com/piotrpiatyszek/0c3577c845c3bfe3f36f9e38a6945926/raw/db2238427c2457c28377e740e681727c1c5c12f4/session.json'
     },
     {
       name: 'FIFA Players Value',
