@@ -7,6 +7,7 @@ import config from '@/configuration/config.js'
 
 const ajv = new Ajv()
 ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-06.json'))
+const validatorSession = ajv.compile(require('@/store/schemas/session.schema.json'))
 
 const state = {
   dataSources: [
@@ -138,18 +139,20 @@ const actions = {
       .map(source => {
         return {
           address: source.address,
-          translations: getters.translations[source.uuid],
+          translations: getters.translations[source.uuid] || {},
           uuid: source.uuid
         }
       })
     let slots = getters.allSlots
     let colors = getters.manualColors
     let annotations = getters.annotations
+    let options = getters.allOptions
     return {
       sources,
       slots,
       colors,
       annotations,
+      options,
       version: '1.0.0',
       name: getters.sessionName,
       uuid: getters.sessionUUID,
@@ -157,11 +160,13 @@ const actions = {
     }
   },
   async importSession ({ getters, commit, dispatch }, session) {
-    // TODO json schema verify
+    if (!validatorSession(session)) throw new Error('Invalid session file')
     commit('resetSession')
     getters.dataSources.forEach(ds => commit(ds + '/clearSources'))
     commit('clearTranslations')
+    commit('clearOptions')
     commit('setSessionName', session.name || '')
+    session.options.forEach(o => commit('setOption', o))
     commit('loadManualColors', session.colors)
     commit('loadAnnotations', session.annotations || [])
     for (let source of session.sources) {

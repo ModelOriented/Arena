@@ -14,6 +14,11 @@ const getters = {
     if (state.options[name] !== undefined) return state.options[name]
     return (OptionsSchemas.find(s => s.name === name) || {}).default
   },
+  allOptions (state, getters) {
+    return OptionsSchemas.map(s => {
+      return { name: s.name, value: getters.getOption(s.name) }
+    })
+  },
   isElementClosed: (state, getters) => (name) => {
     return !!state.closedElements.find(f => f === name)
   },
@@ -50,6 +55,9 @@ const mutations = {
   },
   loadAnnotations (state, annotations) {
     Vue.set(state, 'annotations', annotations)
+  },
+  clearOptions (state) {
+    Vue.set(state, 'options', {})
   }
 }
 
