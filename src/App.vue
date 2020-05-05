@@ -63,6 +63,8 @@ export default {
     ...mapGetters(['visibleSlots', 'preview', 'isElementClosed', 'waitingParamsCorrect', 'waitingParamsConflicts', 'recentSessions'])
   },
   created () {
+    console.log(BUILDINFO)
+
     // eslint-disable-next-line no-unused-expressions
     import('@/components/Plotly.vue')
     this.$store.dispatch('init').then(() => {
