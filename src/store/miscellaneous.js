@@ -33,6 +33,9 @@ const getters = {
   },
   annotations (state) {
     return state.annotations
+  },
+  lastPageAnnotations (state) {
+    return Math.max.call(null, ...state.annotations.map(a => a.pageNumber))
   }
 }
 

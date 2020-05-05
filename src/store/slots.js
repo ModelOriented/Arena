@@ -42,6 +42,9 @@ const getters = {
   allSlots (state) {
     return state.slots
   },
+  lastPage (state) {
+    return Math.max.call(null, ...state.slots.map(s => s.pageNumber))
+  },
   getSlotInitInfo: (state) => (slot) => {
     return state.slotsInitInformation.find(x => x.uuid === slot.uuid)
   }

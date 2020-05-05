@@ -7,6 +7,7 @@
     </div>
     <Annotations />
     <DeleteZone />
+    <PagesBar />
     <div class="overlay" v-if="settingsVisible" @click="settingsVisible = false"/>
     <Settings v-if="settingsVisible" @close="settingsVisible = false"/>
     <div class="overlay overlay-2" v-if="waitingParamsConflicts.length > 0"/>
@@ -30,6 +31,7 @@ import NameConflicts from '@/components/NameConflicts.vue'
 import WelcomeScreen from '@/components/WelcomeScreen.vue'
 import Annotations from '@/components/Annotations.vue'
 import config from '@/configuration/config.js'
+import PagesBar from '@/components/PagesBar.vue'
 
 export default {
   name: 'app',
@@ -43,7 +45,8 @@ export default {
     Preview,
     NameConflicts,
     WelcomeScreen,
-    Annotations
+    Annotations,
+    PagesBar
   },
   data () {
     return {

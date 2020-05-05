@@ -11,7 +11,6 @@
       </span>
       <input type="text" :class="{ visible: editTitle }" @keyup.enter="saveSessionName" :value="sessionName">
     </div>
-    <PageSelector class="right" />
     <SearchDropdown class="right" v-for="p in auxiliaryParams" :paramName="p" :key="p"/>
     <NavbarHelp :num="3" class="right" @close="closeElement('help-3')" v-if="!isElementClosed('help-3')"/>
     <div class="nav-item right button" style="margin-right: 10px" @click="$store.dispatch('arrangeSlots')">
@@ -22,7 +21,6 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import SearchDropdown from '@/components/SearchDropdown.vue'
-import PageSelector from '@/components/PageSelector.vue'
 import NavbarHelp from '@/components/NavbarHelp.vue'
 import config from '@/configuration/config.js'
 
@@ -53,7 +51,7 @@ export default {
     },
     ...mapMutations(['setGlobalParam', 'closeElement', 'setSessionName'])
   },
-  components: { SearchDropdown, PageSelector, NavbarHelp }
+  components: { SearchDropdown, NavbarHelp }
 }
 </script>
 <style>
