@@ -5,10 +5,11 @@ import LinearDependence from '@/plots/LinearDependence.vue'
 import NumericalCeterisParibus from '@/plots/NumericalCeterisParibus.vue'
 import CategoricalCeterisParibus from '@/plots/CategoricalCeterisParibus.vue'
 import SHAPValues from '@/plots/SHAPValues.vue'
+import HtmlWidget from '@/plots/HtmlWidget.vue'
 
 export default {
   plotComponents: {
-    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues
+    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget
   },
   canMerge (slot1, slot2) {
     if (!slot1 || !slot2 || slot1 === slot2 || slot1.plotType !== slot2.plotType) return false
