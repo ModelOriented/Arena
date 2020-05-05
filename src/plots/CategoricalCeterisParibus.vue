@@ -20,18 +20,22 @@ export default {
     traces () {
       return this.data.map((d, i) => {
         return {
-          name: d.params.model + ' - ' + d.params.variable,
+          name: d.params.model,
           type: 'bar',
           orientation: 'h',
           base: d.plotData.observation['_yhat_'],
           y: d.plotData.x.map(y => format.addNewLines(y, this.leftMargin)),
           x: d.plotData.y.map(x => x - d.plotData.observation['_yhat_']),
-          text: d.plotData.y.map(x => x - d.plotData.observation['_yhat_']).map(diff => diff >= 0 ? ('    +' + Math.round(diff)) : (Math.round(diff) + '    ')),
-          textposition: 'inside',
+          textposition: 'outside',
           textfont: {
-            color: 'white'
+            color: '#371ea8'
           },
-          hoverinfo: 'none',
+          hoverinfo: 'text',
+          text: d.plotData.y.map(x => format.formatValue(x - d.plotData.observation['_yhat_'], true)),
+          hoverlabel: {
+            bgcolor: this.mainParamColors[d.params.model],
+            font: { family: 'FiraSansBold', size: 16, color: 'white' }
+          },
           marker: {
             color: this.mainParamColors[d.params.model]
           },
@@ -67,6 +71,7 @@ export default {
         showlegend: false,
         margin: { l: this.leftMargin, t: 0, b: 45, r: 5 },
         dragmode: 'pan',
+        hovermode: 'closest',
         shapes: this.data.map(d => {
           return {
             type: 'line',

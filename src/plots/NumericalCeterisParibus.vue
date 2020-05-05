@@ -21,32 +21,33 @@ export default {
           name: d.params.model + ' - ' + d.params.variable,
           type: 'scatter',
           mode: 'lines',
-          x: d.plotData.x,
-          y: d.plotData.y,
+          x: [...d.plotData.x, d.plotData.observation[d.plotData.variable]],
+          y: [...d.plotData.y, d.plotData.observation['_yhat_']],
           hoverinfo: 'none',
           line: { shape: 'spline' },
           marker: {
             color: this.mainParamColors[d.params.model]
-          }
+          },
+          transforms: [{
+            type: 'sort',
+            target: 'x',
+            order: 'ascending'
+          }]
         }, {
-          name: d.params.model + ' - ' + d.params.variable,
+          name: d.params.model,
           type: 'scatter',
           mode: 'marker',
           x: [d.plotData.observation[d.plotData.variable]],
           y: [d.plotData.observation['_yhat_']],
-          text: '<b>Prediction: ' + d.plotData.observation['_yhat_'] + '</b><br><br>' +
-            Object.keys(d.plotData.observation)
-              .filter(o => o.length > 0 && o.charAt(0) !== '_')
-              .map(o => o + ': ' + d.plotData.observation[o])
-              .join('<br>'),
+          text: format.formatTitle(d.params.observation) + ': ' + format.formatValue(d.plotData.observation['_yhat_'], false, '', 3),
           hoverinfo: 'text',
+          hoverlabel: {
+            bgcolor: this.mainParamColors[d.params.model],
+            font: { family: 'FiraSansBold', size: 16, color: 'white' }
+          },
           marker: {
             color: '#371ea3',
             size: 8
-          },
-          hoverlabel: {
-            bgcolor: 'rgba(0,0,0,0.5)',
-            font: { family: 'FiraSansBold', size: 16, color: 'white' }
           }
         }]
       }).flat()
