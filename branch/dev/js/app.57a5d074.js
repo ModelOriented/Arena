@@ -764,8 +764,9 @@ var round = function round(x) {
   formatValue: function formatValue(x) {
     var addSign = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     var space = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-    var r = round(x);
-    if (Math.abs(2 * x) >= Math.pow(10, 6)) r = round(x / Math.pow(10, 6), 1) + 'M';else if (Math.abs(2 * x) >= Math.pow(10, 3)) r = round(x / Math.pow(10, 3), 2) + 'K';
+    var k = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+    var r = round(x, 3 + k);
+    if (Math.abs(2 * x) >= Math.pow(10, 6)) r = round(x / Math.pow(10, 6), 1 + k) + 'M';else if (Math.abs(2 * x) >= Math.pow(10, 3)) r = round(x / Math.pow(10, 3), 2 + k) + 'K';
     if (x >= 0) return space + (addSign ? '+' : '') + r;else return r + space;
   },
   simplify: function simplify(name) {
@@ -1758,15 +1759,14 @@ var LinearDependence_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var LinearDependence = (LinearDependence_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8be97ce4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/NumericalCeterisParibus.vue?vue&type=template&id=553687ac&
-var NumericalCeterisParibusvue_type_template_id_553687ac_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"numerical-cateris-paribus-plot"},[_c('Plotly',_vm._b({ref:"plot",on:{"plotly_click":_vm.onPlotlyClick}},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout },false))],1)}
-var NumericalCeterisParibusvue_type_template_id_553687ac_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8be97ce4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/NumericalCeterisParibus.vue?vue&type=template&id=293d0eb0&
+var NumericalCeterisParibusvue_type_template_id_293d0eb0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"numerical-cateris-paribus-plot"},[_c('Plotly',_vm._b({ref:"plot",on:{"plotly_click":_vm.onPlotlyClick}},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout },false))],1)}
+var NumericalCeterisParibusvue_type_template_id_293d0eb0_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/plots/NumericalCeterisParibus.vue?vue&type=template&id=553687ac&
+// CONCATENATED MODULE: ./src/plots/NumericalCeterisParibus.vue?vue&type=template&id=293d0eb0&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/NumericalCeterisParibus.vue?vue&type=script&lang=js&
-
 
 
 
@@ -1801,38 +1801,39 @@ var NumericalCeterisParibusvue_type_script_lang_js_Plotly = function Plotly() {
           name: d.params.model + ' - ' + d.params.variable,
           type: 'scatter',
           mode: 'lines',
-          x: d.plotData.x,
-          y: d.plotData.y,
+          x: [].concat(Object(toConsumableArray["a" /* default */])(d.plotData.x), [d.plotData.observation[d.plotData.variable]]),
+          y: [].concat(Object(toConsumableArray["a" /* default */])(d.plotData.y), [d.plotData.observation['_yhat_']]),
           hoverinfo: 'none',
           line: {
             shape: 'spline'
           },
           marker: {
             color: _this.mainParamColors[d.params.model]
-          }
+          },
+          transforms: [{
+            type: 'sort',
+            target: 'x',
+            order: 'ascending'
+          }]
         }, {
-          name: d.params.model + ' - ' + d.params.variable,
+          name: d.params.model,
           type: 'scatter',
           mode: 'marker',
           x: [d.plotData.observation[d.plotData.variable]],
           y: [d.plotData.observation['_yhat_']],
-          text: '<b>Prediction: ' + d.plotData.observation['_yhat_'] + '</b><br><br>' + Object.keys(d.plotData.observation).filter(function (o) {
-            return o.length > 0 && o.charAt(0) !== '_';
-          }).map(function (o) {
-            return o + ': ' + d.plotData.observation[o];
-          }).join('<br>'),
+          text: format.formatTitle(d.params.observation) + ': ' + format.formatValue(d.plotData.observation['_yhat_'], false, '', 3),
           hoverinfo: 'text',
-          marker: {
-            color: '#371ea3',
-            size: 8
-          },
           hoverlabel: {
-            bgcolor: 'rgba(0,0,0,0.5)',
+            bgcolor: _this.mainParamColors[d.params.model],
             font: {
               family: 'FiraSansBold',
               size: 16,
               color: 'white'
             }
+          },
+          marker: {
+            color: '#371ea3',
+            size: 8
           }
         }];
       }).flat();
@@ -1905,8 +1906,8 @@ var NumericalCeterisParibusvue_type_script_lang_js_Plotly = function Plotly() {
 
 var NumericalCeterisParibus_component = Object(componentNormalizer["a" /* default */])(
   plots_NumericalCeterisParibusvue_type_script_lang_js_,
-  NumericalCeterisParibusvue_type_template_id_553687ac_render,
-  NumericalCeterisParibusvue_type_template_id_553687ac_staticRenderFns,
+  NumericalCeterisParibusvue_type_template_id_293d0eb0_render,
+  NumericalCeterisParibusvue_type_template_id_293d0eb0_staticRenderFns,
   false,
   null,
   null,
@@ -1915,12 +1916,12 @@ var NumericalCeterisParibus_component = Object(componentNormalizer["a" /* defaul
 )
 
 /* harmony default export */ var NumericalCeterisParibus = (NumericalCeterisParibus_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8be97ce4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/CategoricalCeterisParibus.vue?vue&type=template&id=7094b72c&
-var CategoricalCeterisParibusvue_type_template_id_7094b72c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"resize",rawName:"v-resize:throttle.100",value:(_vm.onResize),expression:"onResize",arg:"throttle",modifiers:{"100":true}}],staticClass:"categorical-dependence-plot"},[_c('Plotly',_vm._b({ref:"plot"},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout, layoutPatches: _vm.layoutPatches },false))],1)}
-var CategoricalCeterisParibusvue_type_template_id_7094b72c_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8be97ce4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/CategoricalCeterisParibus.vue?vue&type=template&id=974d598e&
+var CategoricalCeterisParibusvue_type_template_id_974d598e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"resize",rawName:"v-resize:throttle.100",value:(_vm.onResize),expression:"onResize",arg:"throttle",modifiers:{"100":true}}],staticClass:"categorical-dependence-plot"},[_c('Plotly',_vm._b({ref:"plot"},'Plotly',{ traces: _vm.traces, config: _vm.config, layout: _vm.layout, layoutPatches: _vm.layoutPatches },false))],1)}
+var CategoricalCeterisParibusvue_type_template_id_974d598e_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/plots/CategoricalCeterisParibus.vue?vue&type=template&id=7094b72c&
+// CONCATENATED MODULE: ./src/plots/CategoricalCeterisParibus.vue?vue&type=template&id=974d598e&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/plots/CategoricalCeterisParibus.vue?vue&type=script&lang=js&
 
@@ -1954,7 +1955,7 @@ var CategoricalCeterisParibusvue_type_script_lang_js_Plotly = function Plotly() 
 
       return this.data.map(function (d, i) {
         return {
-          name: d.params.model + ' - ' + d.params.variable,
+          name: d.params.model,
           type: 'bar',
           orientation: 'h',
           base: d.plotData.observation['_yhat_'],
@@ -1964,16 +1965,22 @@ var CategoricalCeterisParibusvue_type_script_lang_js_Plotly = function Plotly() 
           x: d.plotData.y.map(function (x) {
             return x - d.plotData.observation['_yhat_'];
           }),
-          text: d.plotData.y.map(function (x) {
-            return x - d.plotData.observation['_yhat_'];
-          }).map(function (diff) {
-            return diff >= 0 ? '    +' + Math.round(diff) : Math.round(diff) + '    ';
-          }),
-          textposition: 'inside',
+          textposition: 'outside',
           textfont: {
-            color: 'white'
+            color: '#371ea8'
           },
-          hoverinfo: 'none',
+          hoverinfo: 'text',
+          text: d.plotData.y.map(function (x) {
+            return format.formatValue(x - d.plotData.observation['_yhat_'], true);
+          }),
+          hoverlabel: {
+            bgcolor: _this.mainParamColors[d.params.model],
+            font: {
+              family: 'FiraSansBold',
+              size: 16,
+              color: 'white'
+            }
+          },
           marker: {
             color: _this.mainParamColors[d.params.model]
           },
@@ -2014,6 +2021,7 @@ var CategoricalCeterisParibusvue_type_script_lang_js_Plotly = function Plotly() 
           r: 5
         },
         dragmode: 'pan',
+        hovermode: 'closest',
         shapes: this.data.map(function (d) {
           return {
             type: 'line',
@@ -2081,8 +2089,8 @@ var CategoricalCeterisParibusvue_type_script_lang_js_Plotly = function Plotly() 
 
 var CategoricalCeterisParibus_component = Object(componentNormalizer["a" /* default */])(
   plots_CategoricalCeterisParibusvue_type_script_lang_js_,
-  CategoricalCeterisParibusvue_type_template_id_7094b72c_render,
-  CategoricalCeterisParibusvue_type_template_id_7094b72c_staticRenderFns,
+  CategoricalCeterisParibusvue_type_template_id_974d598e_render,
+  CategoricalCeterisParibusvue_type_template_id_974d598e_staticRenderFns,
   false,
   null,
   null,
@@ -7904,4 +7912,4 @@ module.exports = __webpack_require__.p + "img/logo.1a3768b8.png";
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.d6662300.js.map
+//# sourceMappingURL=app.57a5d074.js.map
