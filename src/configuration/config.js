@@ -28,5 +28,6 @@ export default {
     observation: { name: 'Break Down', plotType: 'Breakdown' }
   },
   githubClientId: 'd7d96eec80f68c16954b',
-  githubAuthorizeServer: localStorage.getItem('githubAuthServer') || '' // temporary
+  githubAuthorizeServer: localStorage.getItem('githubAuthServer') || '', // temporary
+  telemetryServer: 'https://arena.mini.pw.edu.pl/telemetry'
 }

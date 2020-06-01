@@ -20,7 +20,8 @@ const state = {
   sessionName: '',
   sessionLastSaved: null,
   debug: false,
-  tokenCallback: null // promise resolve function waiting for token
+  tokenCallback: null, // promise resolve function waiting for token
+  telemetryUUID: null
 }
 
 const getters = {
@@ -87,6 +88,9 @@ const mutations = {
   },
   clearTokenCallback (state) {
     Vue.set(state, 'tokenCallback', null)
+  },
+  setTelemetryUUID (state, v) {
+    Vue.set(state, 'telemetryUUID', v)
   }
 }
 

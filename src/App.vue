@@ -113,6 +113,20 @@ export default {
         this.displayWelcomeScreen = false
       }
 
+      if (!localStorage.getItem('disableTelemetry')) {
+        this.$http.post(config.telemetryServer + '/session', {
+          application: 'Arena',
+          application_version: BUILDINFO.branch,
+          data: JSON.stringify({
+            commit: BUILDINFO.commit,
+            startDemo: !!demo,
+            startFresh: this.displayWelcomeScreen
+          })
+        }).then(response => {
+          if (typeof response.body === 'string' || response.body instanceof String) this.$store.commit('setTelemetryUUID', response.body)
+        }).catch(console.error)
+      }
+
       window.addEventListener('storage', e => {
         if (e.key === 'append' && e.newValue) this.$store.dispatch('loadURL', e.newValue).catch(console.error)
         if (e.key === 'githubToken' && e.newValue) this.$store.dispatch('loadGithubToken', e.newValue).catch(console.error)
