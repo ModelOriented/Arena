@@ -1,7 +1,7 @@
 <template>
   <div class="plot-proxy">
-    <span class="msg" v-if="loading">Loading...</span>
-    <span class="msg" v-if="!renderPlot && !error && !loading && slotData.length === 0">Cannot load plot data!</span>
+    <span class="msg" v-if="loading || waitingForRender">Loading...</span>
+    <span class="msg" v-if="!renderPlot && !error && !loading && slotData.length === 0 && !waitingForRender">Cannot load plot data!</span>
     <span class="msg error" v-if="!renderPlot && error && !loading">Error occured during loading plot data!</span>
     <component :is="plotComponent" class="plot" v-if="renderPlot" :data="slotData" :plotType="slotv.plotType" ref="plot"/>
   </div>
@@ -21,6 +21,7 @@ export default {
       plotVisible: false, // It is very important to render plot after component is mounted, to make picking SlotsListElement faster
       error: null, // type of error
       loading: null, // time of last pending query
+      waitingForRender: false,
       slotData: [] // data returned from query(fullParams)
     }
   },
@@ -76,8 +77,15 @@ export default {
         // set loading to null only when this was last promise
         if (this.loading === time) this.loading = null
         // Do not update if results are the same (ex. variable param changed in FeatureImportance plot)
-        if (new Set([...this.slotData, ...result]).size === new Set(this.slotData).size && new Set(this.slotData).size === new Set(result).size && this.slotData.length === result.length) return
-        this.slotData = result
+        let getPlotData = (slotData) => slotData.plotData
+        if (new Set([...this.slotData.map(getPlotData), ...result.map(getPlotData)]).size === new Set(this.slotData).size &&
+          new Set(this.slotData.map(getPlotData)).size === new Set(result.map(getPlotData)).size &&
+          this.slotData.length === result.length) return
+        this.waitingForRender = true
+        setTimeout(() => {
+          this.slotData = result
+          this.waitingForRender = false
+        }, 0)
       }).catch((reason) => { // It is called when any of promises failed
         this.slotData = []
         this.error = true
