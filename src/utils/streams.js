@@ -11,6 +11,12 @@ export default {
       return acu
     }, {})
   },
+  runOnChildren (obj, f) {
+    return Object.keys(obj).reduce((acu, key) => {
+      acu[key] = f(obj[key])
+      return acu
+    }, {})
+  },
   findIndexAll (arr, f) {
     return arr.reduce((acu, x, index) => {
       if (f(x)) acu.push(index)
