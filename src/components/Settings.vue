@@ -11,6 +11,7 @@
 import SettingsTabOptions from '@/components/SettingsTabOptions.vue'
 import SettingsTabSessions from '@/components/SettingsTabSessions.vue'
 import SettingsTabSources from '@/components/SettingsTabSources.vue'
+import SettingsTabPrivacy from '@/components/SettingsTabPrivacy.vue'
 
 export default {
   name: 'Settings',
@@ -19,7 +20,8 @@ export default {
       tabs: [
         { name: 'Sources', component: 'SettingsTabSources' },
         { name: 'Sessions', component: 'SettingsTabSessions' },
-        { name: 'Options', component: 'SettingsTabOptions' }
+        { name: 'Options', component: 'SettingsTabOptions' },
+        { name: 'Privacy', component: 'SettingsTabPrivacy' }
       ],
       activeTab: 'Options'
     }
@@ -30,7 +32,7 @@ export default {
     }
   },
   components: {
-    SettingsTabOptions, SettingsTabSessions, SettingsTabSources
+    SettingsTabOptions, SettingsTabSessions, SettingsTabSources, SettingsTabPrivacy
   }
 }
 </script>

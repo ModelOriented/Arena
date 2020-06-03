@@ -5,7 +5,7 @@
     <span class="param-value">{{ displayedValue }}</span>
     <font-awesome-icon icon="angle-down" class="caret"/>
     <div class="options-list" v-if="open && availableOptions.length > 0">
-      <SearchDropdownElement v-for="o in availableOptions" :key="o.uuid" :paramName="paramName" :paramValue="o" @setParam="setParam(o)"/>
+      <SearchDropdownElement v-for="o in availableOptions" :key="o" :paramName="paramName" :paramValue="o" @setParam="setParam(o)"/>
       <div class="page-row" v-if="pagesCount > 1">
         <!-- We cannot use v-if here, because vue can remove item before document click listener will search for it -->
         <div class="page-left page-button" :class="{ invisible: page <= 0}" @click="page -= 1">
@@ -51,18 +51,18 @@ export default {
   },
   computed: {
     displayedValue () {
-      let valueName = (this.getGlobalParam(this.paramName) || {}).name
+      let valueName = this.getGlobalParam(this.paramName) || '<Empty list>'
       return format.formatTitle(valueName || '')
     },
     displayedParamName () {
       return format.firstCharUpper(this.paramName)
     },
     fuse () {
-      return new Fuse(this.availableParams[this.paramName] || [], { keys: ['name'] })
+      return new Fuse(this.availableParams[this.paramName] || [], {})
     },
     allAvailableOptions () {
       if (this.editText.length < 1) return (this.availableParams[this.paramName] || [])
-      return this.fuse.search(this.editText)
+      return this.fuse.search(this.editText).map(i => this.availableParams[this.paramName][i])
     },
     availableOptions () {
       return this.allAvailableOptions.slice(this.page * this.itemsOnPage, (this.page + 1) * this.itemsOnPage)

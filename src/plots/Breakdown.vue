@@ -63,7 +63,7 @@ export default {
     traces () {
       return this.trimmed.map(d => {
         return {
-          name: d.params.model.name,
+          name: d.params.model,
           type: 'waterfall',
           orientation: 'h',
           measure: ['relative', ...d.plotData.variables.map(y => 'relative'), 'total'],
@@ -181,7 +181,7 @@ export default {
       if (this.trimmed[curve].plotData.variables_value[variable] === undefined) return // All other variables
       this.selectStyle = { left: event.pointerX + 'px', top: event.pointerY + 'px' }
       let variableName = this.data[curve].plotData.variables[variable]
-      this.selectedVariable = this.$store.getters.availableParams.variable.find(v => v.name === variableName)
+      this.selectedVariable = this.$store.getters.availableParams.variable.find(v => v === variableName)
       this.selectedModel = this.data[curve].params.model
       this.selectedObservation = this.data[curve].params.observation
       this.selectVisible = true

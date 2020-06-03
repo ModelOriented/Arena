@@ -18,7 +18,7 @@ export default {
     traces () {
       return this.data.map((d, i) => {
         return {
-          name: d.params.model.name + ' - ' + d.params.variable.name,
+          name: d.params.model + ' - ' + d.params.variable,
           type: 'scatter',
           mode: 'lines',
           x: d.plotData.x,
@@ -26,7 +26,7 @@ export default {
           hoverinfo: 'none',
           line: { shape: 'spline' },
           marker: {
-            color: this.modelsColors[d.params.model.uuid]
+            color: this.mainParamColors[d.params.model]
           }
         }
       })
@@ -39,7 +39,7 @@ export default {
           fixedrange: true,
           zeroline: false,
           title: {
-            text: this.data.length > 0 ? format.formatTitle(this.data[0].params.variable.name) : '',
+            text: this.data.length > 0 ? format.formatTitle(this.data[0].params.variable) : '',
             standoff: 10
           }
         },
@@ -71,7 +71,7 @@ export default {
         modeBarButtonsToRemove: ['lasso2d', 'autoScale2d', 'select2d', 'hoverCompareCartesian', 'hoverClosestCartesian', 'toImage']
       }
     },
-    ...mapGetters(['modelsColors'])
+    ...mapGetters(['mainParamColors'])
   },
   methods: {
     onPlotlyClick () {

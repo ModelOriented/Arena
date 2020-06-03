@@ -4,10 +4,10 @@
       <span class="title"><font-awesome-icon :icon="['fas', 'archive']"/>CLIPBOARD</span>
     </div>
     <div class="arrow-button" @click="open=!open">{{ open ? "▶" : "◀" }}</div>
-    <SidepanelHelp :num="1" text="Select one or more models to create plots for them" @close="closeElement('help-1')" v-if="!isElementClosed('help-1')"/>
-    <span class="section-title"><font-awesome-icon icon="list-alt"/> Models</span>
+    <SidepanelHelp :num="1" @close="closeElement('help-1')" v-if="!isElementClosed('help-1')"/>
+    <span class="section-title"><font-awesome-icon icon="list-alt"/> {{ selectTitle }}</span>
     <SidepanelDropdown @updateSlotsList="slotsList = $event"/>
-    <SidepanelHelp :num="2" text="Hold any of generated plots to open it" @close="closeElement('help-2')" v-if="!isElementClosed('help-2')"/>
+    <SidepanelHelp :num="2" @close="closeElement('help-2')" v-if="!isElementClosed('help-2')"/>
     <span class="section-title"><font-awesome-icon icon="poll"/> Plots</span>
     <div class="sidepanel-list" v-if="slotsList != null">
       <div v-for="c in slotsCategories" :key="c">
@@ -23,6 +23,8 @@ import SidepanelDropdown from '@/components/SidepanelDropdown.vue'
 import SidepanelHelp from '@/components/SidepanelHelp.vue'
 import interact from 'interactjs'
 import { mapMutations, mapGetters } from 'vuex'
+import config from '@/configuration/config.js'
+import format from '@/utils/format.js'
 
 export default {
   name: 'Sidepanel',
@@ -42,6 +44,9 @@ export default {
   computed: {
     slotsCategories () {
       return [...this.slotsList.reduce((set, x) => set.add(x.plotCategory), new Set())].sort()
+    },
+    selectTitle () {
+      return format.firstCharUpper(config.mainParam + 's')
     },
     ...mapGetters(['isElementClosed'])
   },

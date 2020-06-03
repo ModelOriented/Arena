@@ -7,8 +7,8 @@
       <p><b>Arena</b> is an interactive dashboard to compare <b>AI explanations</b> for multiple predictive models at once. You can work with static precalculated data from one or more sources and with a live server that calculates plots on demand.</p>
       <h2>See demo</h2>
       <div v-for="e in examples" :key="e.name" class="example">
-        <a :href="baseURL + '/?data=' + e.url" @click.prevent="openExample(e.url)">{{ e.name }}</a>
-        <span v-if="loadingExample === e.url"> (Loading...)</span>
+        <a :href="e.href" @click.prevent="openExample(e)">{{ e.name }}</a>
+        <span v-if="loadingExample === e"> (Loading...)</span>
       </div>
       <h2>Test on your data</h2>
       <p><a href="https://github.com/ModelOriented/ArenaR">Use Arena with R</a></p>
@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-import config from '@/utils/config.js'
+import config from '@/configuration/config.js'
 import { mapMutations } from 'vuex'
 
 export default {
@@ -37,17 +37,26 @@ export default {
   },
   computed: {
     baseURL () { return config.url },
-    examples () { return config.examples }
+    examples () {
+      return config.examples.map(e => {
+        return {
+          name: e.name,
+          href: this.baseURL + (e.session ? ('/?session=' + e.session) : ('/?data=' + e.url)),
+          url: e.session || e.url,
+          action: e.session ? 'loadSessionURL' : 'loadURL'
+        }
+      })
+    }
   },
   methods: {
-    openExample (url) {
+    openExample (e) {
       if (this.loadingExample) return
-      this.loadingExample = url
-      this.$store.dispatch('loadURL', url).then(() => {
+      this.loadingExample = e
+      this.$store.dispatch(e.action, e.url).then(() => {
         this.$emit('close')
-      }).catch(e => {
+      }).catch(error => {
         this.loadingExample = null
-        console.error(e)
+        console.error(error)
       })
     },
     ...mapMutations(['closeElement'])

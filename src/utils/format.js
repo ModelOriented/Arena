@@ -29,10 +29,10 @@ export default {
   formatTitle (title) {
     return title.replace(/[._-]/gi, ' ')
   },
-  formatValue (x, addSign = false, space = '') {
-    let r = round(x)
-    if (Math.abs(2 * x) >= 10 ** 6) r = round(x / (10 ** 6), 1) + 'M'
-    else if (Math.abs(2 * x) >= 10 ** 3) r = round(x / (10 ** 3), 2) + 'K'
+  formatValue (x, addSign = false, space = '', k = 0) {
+    let r = round(x, 3 + k)
+    if (Math.abs(2 * x) >= 10 ** 6) r = round(x / (10 ** 6), 1 + k) + 'M'
+    else if (Math.abs(2 * x) >= 10 ** 3) r = round(x / (10 ** 3), 2 + k) + 'K'
 
     if (x >= 0) return space + (addSign ? '+' : '') + r
     else return r + space

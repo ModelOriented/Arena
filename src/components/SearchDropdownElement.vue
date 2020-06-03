@@ -1,18 +1,19 @@
 <template>
   <div class="search-dropdown-element" :class="{ active: isActive }">
-    {{ paramValue.name | formatTitle }}
+    {{ paramValue | formatTitle }}
   </div>
 </template>
 <script>
 import format from '@/utils/format.js'
 import interact from 'interactjs'
 import { mapGetters } from 'vuex'
+import config from '@/configuration/config.js'
 
 export default {
   name: 'SearchDropdownElement',
   props: {
     paramName: String,
-    paramValue: Object
+    paramValue: String
   },
   data () {
     return {
@@ -21,7 +22,7 @@ export default {
   },
   computed: {
     isActive () {
-      return this.paramValue && (this.getGlobalParam(this.paramName) || {}).uuid === this.paramValue.uuid
+      return this.paramValue && this.getGlobalParam(this.paramName) === this.paramValue
     },
     ...mapGetters(['getGlobalParam'])
   },
@@ -31,20 +32,12 @@ export default {
       holdDuration: 250
     }).on('hold', event => {
       event.preventDefault()
-      let slot = null
-      if (this.paramName === 'observation' && this.getGlobalParam('model')) {
-        slot = {
-          name: 'Break Down',
-          plotType: 'Breakdown',
-          localParams: [ { observation: this.paramValue, model: this.getGlobalParam('model') } ]
-        }
-      } else if (this.paramName === 'variable' && this.getGlobalParam('model')) {
-        slot = {
-          name: 'Partial Dependence',
-          plotType: 'PartialDependence',
-          localParams: [ { variable: this.paramValue, model: this.getGlobalParam('model') } ]
-        }
-      }
+
+      let mainParamValue = this.getGlobalParam(config.mainParam)
+      let slot = { ...config.searchDropdownPlots[this.paramName] }
+      if (!mainParamValue || !slot) return
+      slot.localParams = [{ [this.paramName]: this.paramValue, [config.mainParam]: mainParamValue }]
+
       if (this.initInfo && slot) {
         this.$store.dispatch('addSlotToPlayground', { slot, ...this.initInfo })
       }

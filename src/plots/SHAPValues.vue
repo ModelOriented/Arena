@@ -44,7 +44,7 @@ export default {
     traces () {
       return this.trimmed.map((d, i) => {
         return {
-          name: d.params.model.name,
+          name: d.params.model,
           type: 'bar',
           orientation: 'h',
           y: d.plotData.variables.map((y, i) => format.addNewLines(format.formatTitle(y) + ' = ' + d.plotData.variables_value[i], this.leftMargin)),
@@ -59,18 +59,18 @@ export default {
           hoverinfo: 'template',
           hovertemplate: d.plotData.mean.map((x, i) => format.formatValue(d.plotData.intercept) + ' => ' + format.formatValue(x + d.plotData.intercept)),
           hoverlabel: {
-            bgcolor: this.modelsColors[d.params.model.uuid],
+            bgcolor: this.mainParamColors[d.params.model],
             font: { family: 'FiraSansBold', size: 16, color: 'white' }
           },
           marker: {
-            color: this.modelsColors[d.params.model.uuid]
+            color: this.mainParamColors[d.params.model]
           },
           insidetextanchor: 'start',
-          selectedpoints: (this.selectedModel === d.params.model.uuid || this.selectedModel === null) ? undefined : [] // undefined - all selected, [] - all unselected
+          selectedpoints: (this.selectedModel === d.params.model || this.selectedModel === null) ? undefined : [] // undefined - all selected, [] - all unselected
         }
       }).concat(!this.displayBoxplots ? [] : this.trimmed.map((d, i) => {
         return {
-          name: d.params.model.name,
+          name: d.params.model,
           type: 'box',
           orientation: 'h',
           y: d.plotData.variables.map((y, i) => format.addNewLines(format.formatTitle(y) + ' = ' + d.plotData.variables_value[i], this.leftMargin)),
@@ -78,12 +78,12 @@ export default {
           median: d.plotData.q1.map(v => v + d.plotData.intercept), // median is invisible, but need to be between q1 and q3
           q3: d.plotData.q3.map(v => v + d.plotData.intercept),
           marker: {
-            color: (this.selectedModel === d.params.model.uuid || this.selectedModel === null) ? '#371ea3' : 'transparent'
+            color: (this.selectedModel === d.params.model || this.selectedModel === null) ? '#371ea3' : 'transparent'
           },
           line: {
             width: 1
           },
-          fillcolor: (this.selectedModel === d.params.model.uuid || this.selectedModel === null) ? '#371ea3' : 'transparent',
+          fillcolor: (this.selectedModel === d.params.model || this.selectedModel === null) ? '#371ea3' : 'transparent',
           lowerfence: d.plotData.min.map(v => v + d.plotData.intercept),
           upperfence: d.plotData.max.map(v => v + d.plotData.intercept),
           showlegend: false,
@@ -173,7 +173,7 @@ export default {
     maxVariables () { return this.$store.getters.getOption('shapvalues_max_variables') },
     leftMargin () { return this.$store.getters.getOption('left_margin') },
     displayBoxplots () { return this.$store.getters.getOption('shapvalues_boxplots') },
-    ...mapGetters(['modelsColors'])
+    ...mapGetters(['mainParamColors'])
   },
   methods: {
     onPlotlyClick (e) {
@@ -185,7 +185,7 @@ export default {
       let barsTop = yaxis.d2p(points[0].y) - (0.5 * barWidth * this.trimmed.length) // Center - half of widths sum
       let curveNum = Math.floor((e.data.event.pointerY - barsTop) / barWidth) // Assuming plot is at top:0
       if (curveNum >= this.trimmed.length || curveNum < 0) return
-      let model = this.trimmed[curveNum].params.model.uuid
+      let model = this.trimmed[curveNum].params.model
       // If this model is already selected, then unselect
       this.selectedModel = this.selectedModel === model ? null : model
     }

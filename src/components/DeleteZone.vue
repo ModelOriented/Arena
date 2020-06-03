@@ -6,7 +6,7 @@
 <script>
 import interact from 'interactjs'
 import { mapMutations } from 'vuex'
-import zIndexIncrementor from '@/components/zIndexIncrementor.js'
+import zIndexIncrementor from '@/utils/zIndexIncrementor.js'
 
 export default {
   name: 'DeleteZone',

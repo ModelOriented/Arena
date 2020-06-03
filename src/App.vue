@@ -5,11 +5,13 @@
     <div id="playground" :class="{ blured: settingsVisible }">
       <Block v-for="slot in visibleSlots" :key="slot.uuid" :slotv="slot" @openFullscreen="fullscreenSlot = slot"/>
     </div>
+    <Annotations />
     <DeleteZone />
+    <PagesBar />
     <div class="overlay" v-if="settingsVisible" @click="settingsVisible = false"/>
     <Settings v-if="settingsVisible" @close="settingsVisible = false"/>
-    <div class="overlay" v-if="nextNameConflicts"/>
-    <NameConflicts v-if="nextNameConflicts" />
+    <div class="overlay overlay-2" v-if="waitingParamsConflicts.length > 0"/>
+    <NameConflicts v-if="waitingParamsConflicts.length > 0"/>
     <div class="overlay" v-if="welcomeScreenVisible" @click="displayWelcomeScreen = false"/>
     <WelcomeScreen v-if="welcomeScreenVisible" @close="displayWelcomeScreen = false"/>
     <FullscreenBlock v-if="fullscreenSlot" :slotv="fullscreenSlot" @close="fullscreenSlot = null"/>
@@ -27,7 +29,9 @@ import { mapGetters } from 'vuex'
 import Preview from '@/components/Preview.vue'
 import NameConflicts from '@/components/NameConflicts.vue'
 import WelcomeScreen from '@/components/WelcomeScreen.vue'
-import config from '@/utils/config.js'
+import Annotations from '@/components/Annotations.vue'
+import config from '@/configuration/config.js'
+import PagesBar from '@/components/PagesBar.vue'
 
 export default {
   name: 'app',
@@ -40,7 +44,9 @@ export default {
     FullscreenBlock,
     Preview,
     NameConflicts,
-    WelcomeScreen
+    WelcomeScreen,
+    Annotations,
+    PagesBar
   },
   data () {
     return {
@@ -49,33 +55,85 @@ export default {
       displayWelcomeScreen: true
     }
   },
+  watch: {
+    waitingParamsCorrect (newValue) {
+      if (newValue.length === 0) return
+      this.$store.commit('removeParamsFromWaitingList', newValue[0])
+    }
+  },
   computed: {
     welcomeScreenVisible () { return this.displayWelcomeScreen && !this.isElementClosed('welcome-screen') },
-    ...mapGetters(['visibleSlots', 'preview', 'nextNameConflicts', 'isElementClosed'])
+    ...mapGetters(['visibleSlots', 'preview', 'isElementClosed', 'waitingParamsCorrect', 'waitingParamsConflicts', 'recentSessions'])
   },
   created () {
+    console.log(BUILDINFO)
+
     // eslint-disable-next-line no-unused-expressions
     import('@/components/Plotly.vue')
-    this.$store.dispatch('init')
-    let dataURL = new URLSearchParams(window.location.search).get('data')
-    let demo = new URLSearchParams(window.location.search).get('demo')
-    if (dataURL) {
-      this.$store.dispatch('loadURL', dataURL).catch(console.error)
-      this.displayWelcomeScreen = false
-    } else if (demo) {
-      try {
-        let nr = Number.parseInt(demo)
-        let url = config.examples[nr].url
-        this.$store.dispatch('loadURL', url).catch(console.error)
-        this.displayWelcomeScreen = false
-      } catch (e) {
-        console.log(demo)
-      }
-    }
+    this.$store.dispatch('init').then(() => {
+      let dataURL = new URLSearchParams(window.location.search).get('data')
+      let demo = new URLSearchParams(window.location.search).get('demo')
+      let sessionUUID = new URLSearchParams(window.location.search).get('session_uuid')
+      let sessionURL = new URLSearchParams(window.location.search).get('session')
+      let debug = new URLSearchParams(window.location.search).get('debug')
+      let githubCode = new URLSearchParams(window.location.search).get('code')
+      let githubState = new URLSearchParams(window.location.search).get('state')
 
-    window.addEventListener('storage', e => {
-      if (e.key !== 'append' && e.newValue) return
-      this.$store.dispatch('loadURL', e.newValue).catch(console.error)
+      if (debug) {
+        this.$store.commit('setDebug', true)
+      }
+
+      if (githubCode && githubState) {
+        this.$http.get(config.githubAuthorizeServer + '?code=' + githubCode + '&state=' + githubState).then(response => {
+          let token = response.body
+          this.$store.dispatch('loadGithubToken', token).then(() => window.close())
+        }).catch(console.error)
+      }
+
+      if (demo) {
+        try {
+          let nr = Number.parseInt(demo)
+          dataURL = config.examples[nr].url
+          sessionURL = config.examples[nr].session
+        } catch (e) {
+          console.error('Failed to load demo', e)
+        }
+      }
+      if (sessionURL) {
+        this.$store.dispatch('loadSessionURL', sessionURL).catch(console.error)
+        this.displayWelcomeScreen = false
+      } else if (sessionUUID) {
+        let session = this.recentSessions.find(s => s.uuid === sessionUUID)
+        if (session) {
+          this.$store.dispatch('importSession', session)
+          this.displayWelcomeScreen = false
+        }
+      } else if (dataURL) {
+        this.$store.dispatch('loadURL', dataURL).catch(console.error)
+        this.displayWelcomeScreen = false
+      }
+
+      if (!localStorage.getItem('disableTelemetry')) {
+        if (!config.telemetryServer) return
+        this.$http.post(config.telemetryServer + '/session', {
+          application: 'Arena',
+          application_version: BUILDINFO.branch,
+          data: JSON.stringify({
+            commit: BUILDINFO.commit,
+            startDemo: !!demo,
+            startEmpty: this.displayWelcomeScreen,
+            windowWidth: this.$el.offsetWidth,
+            windowHeight: this.$el.offsetHeight
+          })
+        }).then(response => {
+          if (typeof response.body === 'string' || response.body instanceof String) this.$store.commit('setTelemetryUUID', response.body)
+        }).catch(console.error)
+      }
+
+      window.addEventListener('storage', e => {
+        if (e.key === 'append' && e.newValue) this.$store.dispatch('loadURL', e.newValue).catch(console.error)
+        if (e.key === 'githubToken' && e.newValue) this.$store.dispatch('loadGithubToken', e.newValue).catch(console.error)
+      })
     })
   }
 }
@@ -119,5 +177,8 @@ export default {
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   z-index: 100001;
+}
+#app > div.overlay-2 {
+  z-index: 100003;
 }
 </style>
