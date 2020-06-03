@@ -114,13 +114,16 @@ export default {
       }
 
       if (!localStorage.getItem('disableTelemetry')) {
+        if (!config.telemetryServer) return
         this.$http.post(config.telemetryServer + '/session', {
           application: 'Arena',
           application_version: BUILDINFO.branch,
           data: JSON.stringify({
             commit: BUILDINFO.commit,
             startDemo: !!demo,
-            startFresh: this.displayWelcomeScreen
+            startEmpty: this.displayWelcomeScreen,
+            windowWidth: this.$el.offsetWidth,
+            windowHeight: this.$el.offsetHeight
           })
         }).then(response => {
           if (typeof response.body === 'string' || response.body instanceof String) this.$store.commit('setTelemetryUUID', response.body)
