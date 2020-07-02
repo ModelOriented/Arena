@@ -91,6 +91,11 @@ const actions = {
       // check if all required params are not null
       if (!plotProperties.requiredParams.reduce((acu, plotType) => acu && queryParams[plotType], true)) continue
 
+      queryParams = plotProperties.requiredParams.reduce((acu, plotType) => {
+        acu[plotType] = queryParams[plotType]
+        return acu
+      }, {})
+
       // check if response for same query is not cached
       let cached = source.cache.find(c => c.plotType === plotType && equal(c.params, queryParams))
       if (cached) return cached
