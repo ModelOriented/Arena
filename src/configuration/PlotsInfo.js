@@ -6,10 +6,11 @@ import NumericalCeterisParibus from '@/plots/NumericalCeterisParibus.vue'
 import CategoricalCeterisParibus from '@/plots/CategoricalCeterisParibus.vue'
 import SHAPValues from '@/plots/SHAPValues.vue'
 import HtmlWidget from '@/plots/HtmlWidget.vue'
+import ROC from '@/plots/ROC.vue'
 
 export default {
   plotComponents: {
-    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget
+    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC
   },
   canMerge (slot1, slot2) {
     if (!slot1 || !slot2 || slot1 === slot2 || slot1.plotType !== slot2.plotType) return false
@@ -20,6 +21,7 @@ export default {
     if (type === 'PartialDependence' || type === 'AccumulatedDependence' || type === 'CeterisParibus') return sameVariable
     if (type === 'FeatureImportance') return true
     if (type === 'SHAPValues') return sameObservation
+    if (type === 'ROC') return true
     return false
   },
   lockableParams: { // for each plotType
@@ -28,10 +30,11 @@ export default {
     PartialDependence: ['variable'],
     AccumulatedDependence: ['variable'],
     CeterisParibus: ['variable', 'observation'],
-    SHAPValues: ['observation']
+    SHAPValues: ['observation'],
+    ROC: ['model']
   },
   isLinear (plotComponent) {
-    return ['LinearDependence', 'NumericalCeterisParibus'].includes(plotComponent)
+    return ['LinearDependence', 'NumericalCeterisParibus', 'ROC'].includes(plotComponent)
   },
   isBars (plotComponent) {
     return ['FeatureImportance', 'CategoricalDependence', 'CategoricalCeterisParibus', 'SHAPValues'].includes(plotComponent)
