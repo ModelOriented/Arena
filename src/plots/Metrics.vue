@@ -108,7 +108,7 @@ export default {
       let self = this
       lines.on('mouseover', function (d) {
         d3.select(this).style('stroke-width', 6)
-        d3.selectAll('g.axis')
+        chart.selectAll('g.axis')
           .append('svg:text')
           .attr('class', 'values')
           .attr('y', self.height - margin.b + 25)
@@ -117,7 +117,7 @@ export default {
           .text(m => format.formatValue(d[m]))
       })
       lines.on('mouseout', function (d) {
-        d3.selectAll('.values').remove()
+        chart.selectAll('.values').remove()
         d3.select(this).style('stroke-width', null)
       })
     },
