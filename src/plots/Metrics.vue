@@ -122,8 +122,8 @@ export default {
       })
     },
     getRange (measure, values) {
-      if (['f1', 'auc', 'accuracy'].includes(measure)) return [0, 1]
-      else if (['r2'].includes(measure)) return [1, 0]
+      if (['f1', 'auc', 'accuracy', 'recall', 'precision'].includes(measure)) return [0, 1]
+      else if (['r2'].includes(measure)) return [1, Math.min(0, ...values)]
       else return [0, Math.max(...values) * 1.05]
     }
   }
@@ -156,6 +156,6 @@ div.metrics-plot text.values {
 
 div.metrics-plot path.node {
   fill: none;
-  stroke-width: 5;
+  stroke-width: 3;
 }
 </style>
