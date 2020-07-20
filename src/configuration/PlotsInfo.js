@@ -9,10 +9,11 @@ import HtmlWidget from '@/plots/HtmlWidget.vue'
 import ROC from '@/plots/ROC.vue'
 import REC from '@/plots/REC.vue'
 import Metrics from '@/plots/Metrics.vue'
+import FunnelMeasure from '@/plots/FunnelMeasure.vue'
 
 export default {
   plotComponents: {
-    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics
+    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure
   },
   canMerge (slot1, slot2) {
     if (!slot1 || !slot2 || slot1 === slot2 || slot1.plotType !== slot2.plotType) return false
@@ -26,6 +27,7 @@ export default {
     if (type === 'ROC') return true
     if (type === 'REC') return true
     if (type === 'Metrics') return true
+    if (type === 'FunnelMeasure') return true
     return false
   },
   lockableParams: { // for each plotType
@@ -41,7 +43,7 @@ export default {
     return ['LinearDependence', 'NumericalCeterisParibus', 'ROC', 'REC'].includes(plotComponent)
   },
   isBars (plotComponent) {
-    return ['FeatureImportance', 'CategoricalDependence', 'CategoricalCeterisParibus', 'SHAPValues', 'Metrics'].includes(plotComponent)
+    return ['FeatureImportance', 'CategoricalDependence', 'CategoricalCeterisParibus', 'SHAPValues'].includes(plotComponent)
   },
   getPlotDesc (plotType) {
     if (plotType === 'Breakdown') return 'Break Down shows contributions of every variable to a final prediction'
