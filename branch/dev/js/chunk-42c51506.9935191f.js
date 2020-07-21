@@ -323,7 +323,7 @@ function isBuffer(val) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"f1752d5a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Plotly.vue?vue&type=template&id=6d91bef4&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0ad3920e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Plotly.vue?vue&type=template&id=6d91bef4&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"resize",rawName:"v-resize:throttle.100",value:(_vm.onResize),expression:"onResize",arg:"throttle",modifiers:{"100":true}}],ref:"plot_outer",staticClass:"plotly-outer-container"},[_c('div',{ref:"plot",staticClass:"plotly-inner-container"})])}
 var staticRenderFns = []
 
@@ -536,4 +536,4 @@ module.exports = function isPlainObject(o) {
 /***/ })
 
 }]);
-//# sourceMappingURL=chunk-42c51506.365ae6be.js.map
+//# sourceMappingURL=chunk-42c51506.9935191f.js.map
