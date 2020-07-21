@@ -76,10 +76,14 @@ export default {
       if (!this.chart) return
       this.plotChart()
     },
+    customFormat (v) {
+      if (v > 10 ** 10 || v < 1 / (10 ** 10)) return this.d3.format('.2g')(v)
+      else return format.formatValue(v)
+    },
     plotChart () {
       let d3 = this.d3
       this.line = d3.svg.line().x(d => d.x).y(d => d.y)
-      let axis = this.axis = this.d3.svg.axis().orient('left')
+      let axis = this.axis = this.d3.svg.axis().orient('left').tickFormat(this.customFormat)
       let width = this.width
       let height = this.height
       d3.select(this.$refs.plot).selectAll('svg').remove()
@@ -114,7 +118,7 @@ export default {
           .attr('y', self.height - margin.b + 25)
           .attr('fill', d3.select(this).style('stroke'))
           .attr('text-anchor', 'middle')
-          .text(m => format.formatValue(d[m]))
+          .text(m => self.customFormat(d[m]))
       })
       lines.on('mouseout', function (d) {
         chart.selectAll('.values').remove()
