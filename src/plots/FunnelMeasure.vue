@@ -1,11 +1,18 @@
 <template>
   <div class="funnel-measure-plot">
+    <div class="page-left page-button" :class="{ invisible: page <= 0}" @click="page -= 1">
+      <font-awesome-icon icon="angle-left"/> Previous
+    </div>
+    <div class="page-right page-button" :class="{ invisible: page >= pagesCount - 1 }" @click="page += 1">
+      Next <font-awesome-icon icon="angle-right"/>
+    </div>
     <span class="error" v-if="error">{{ error }}</span>
     <Plotly v-else v-bind="{ traces, config, layout }" ref="plot"/>
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import format from '@/utils/format.js'
 const Plotly = () => import('@/components/Plotly.vue')
 
 export default {
@@ -14,7 +21,19 @@ export default {
     data: Array,
     plotType: String
   },
+  data () {
+    return { page: 0 }
+  },
+  watch: {
+    data () { this.page = 0 }
+  },
   computed: {
+    pageSize () { return this.$store.getters.getOption('funnelmeasure_page_size') },
+    pagesCount () { return Math.ceil(this.variables.length / this.pageSize) },
+    pageRange () {
+      let first = this.page * this.pageSize
+      return [first, first + this.pageSize]
+    },
     variables () {
       return [...new Set(this.data.map(x => Object.keys(x.plotData.lossValues)).flat())]
     },
@@ -25,10 +44,10 @@ export default {
       }, {})
     },
     axisUnit () {
-      return 1 / (this.variables.reduce((acu, v) => acu + this.subsets[v].length + 2, 0) + 2)
+      return 1 / (this.variables.slice(...this.pageRange).reduce((acu, v) => acu + this.subsets[v].length + 1.5, 0) + 2)
     },
     variableOffset () {
-      let lengths = this.variables.map(v => this.subsets[v].length + 2)
+      let lengths = this.variables.map(v => this.subsets[v].length + 1.5).map((v, i) => (i >= this.pageRange[0] && i < this.pageRange[1]) ? v : 0)
       let cumsum = lengths.reduce((acu, len) => [...acu, acu[acu.length - 1] + len], [2])
       return this.variables.reduce((acu, v, i) => {
         acu[v] = cumsum[i] * this.axisUnit
@@ -47,10 +66,10 @@ export default {
       if (this.error) return []
       let ref = this.data[0].plotData.lossValues
       return this.data.slice(1).map(x => {
-        let variables = Object.entries(x.plotData.lossValues)
+        let variables = Object.entries(x.plotData.lossValues).slice(...this.pageRange)
         let points = variables.map(entry => {
           return Object.entries(entry[1]).map(e => {
-            let offset = this.variableOffset[entry[0]] + ((this.subsets[entry[0]].indexOf(e[0]) + 2) * this.axisUnit)
+            let offset = this.variableOffset[entry[0]] + ((this.subsets[entry[0]].indexOf(e[0]) + 1.5) * this.axisUnit)
             let point = { y: offset, x: e[1] - ref[entry[0]][e[0]], label: e[0] }
             point.xref = point.x / ref[entry[0]][e[0]]
             return point
@@ -117,9 +136,6 @@ export default {
         },
         yaxis: {
           type: 'linear',
-          title: {
-            standoff: 10
-          },
           range: [1.01, -0.01],
           gridwidth: 2,
           fixedrange: true,
@@ -133,10 +149,10 @@ export default {
           color: '#371ea3'
         },
         showlegend: false,
-        margin: { l: 60, t: 10, b: 45, r: 5 },
+        margin: { l: 5, t: 10, b: 45, r: 5 },
         dragmode: 'pan',
         hovermode: 'closest',
-        shapes: Object.values(this.variableOffset).map(off => {
+        shapes: Object.values(this.variableOffset).slice(...this.pageRange).map(off => {
           return {
             type: 'line',
             x0: 0,
@@ -157,9 +173,9 @@ export default {
             x0: 0,
             x1: 0,
             xref: 'x',
-            y0: 0,
+            y0: this.axisUnit * 1.5,
             y1: 1,
-            yref: 'paper',
+            yref: 'y',
             line: {
               color: this.mainParamColors[this.data[0].params.model],
               width: 2,
@@ -167,11 +183,12 @@ export default {
             }
           }
         ]).concat(this.lolipopLines),
-        annotations: Object.entries(this.variableOffset).map(x => {
+        annotations: Object.entries(this.variableOffset).slice(...this.pageRange).map(x => {
           return {
-            x: 0,
-            y: x[1] + this.axisUnit,
-            text: x[0],
+            x: 0.05,
+            y: x[1] + this.axisUnit * 0.2,
+            bgcolor: 'white',
+            text: ' ' + format.formatTitle(x[0]) + ' ',
             xref: 'paper',
             yref: 'y',
             showarrow: false
@@ -180,8 +197,9 @@ export default {
           {
             x: 0,
             y: this.axisUnit,
-            ay: -10,
-            ax: 50,
+            ay: 0,
+            ax: 0,
+            xanchor: 'middle',
             xref: 'x',
             yref: 'y',
             text: this.data[0].params.model,
@@ -216,5 +234,23 @@ div.funnel-measure-plot > span.error {
   z-index: 10;
   font-size: 20px;
   color: #371ea3;
+}
+div.funnel-measure-plot > div.page-button {
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+div.funnel-measure-plot > div.page-button:hover {
+  color: #371ea8;
+}
+div.funnel-measure-plot > div.page-button.invisible {
+  display: none;
+}
+div.funnel-measure-plot > div.page-left {
+  left: 0;
+}
+div.funnel-measure-plot > div.page-right {
+  right: 0;
 }
 </style>
