@@ -28,8 +28,8 @@ export default {
   },
   // Plots that are generated after holding a value in SearchDropdown for auxilary params.
   searchDropdownPlots: {
-    variable: { name: 'Partial Dependence', plotType: 'PartialDependence' },
-    observation: { name: 'Break Down', plotType: 'Breakdown' }
+    variable: { name: 'Partial Dependence', plotType: 'PartialDependence', plotCategory: 'Dataset Level' },
+    observation: { name: 'Break Down', plotType: 'Breakdown', plotCategory: 'Observation Level' }
   },
   githubClientId: 'd7d96eec80f68c16954b',
   githubAuthorizeServer: 'https://arena.mini.pw.edu.pl/github',
