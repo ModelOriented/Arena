@@ -49,6 +49,7 @@ export default {
     if (plotType === 'Breakdown') return 'Break Down shows contributions of every variable to a final prediction'
     if (plotType === 'ROC') return 'Receiver Operating Characterstic Curve is a plot of the Sensivity against the Specifity for the different thresholds. It is useful for measuring and comparing the accuracy of the classificators.'
     if (plotType === 'REC') return 'On the x axis of the plot there is an error tolerance and on the y axis there is a percentage of observations predicted within the given tolerance.'
+    if (plotType === 'FunnelMeasure') return 'Shows difference in performance in models across partitioned dataset'
     return ''
   }
 }
