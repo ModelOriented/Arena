@@ -2,6 +2,9 @@
   <div class="plot-proxy">
     <span class="msg" v-if="loading || waitingForRender">Loading...</span>
     <span class="msg" v-if="!renderPlot && !error && !loading && slotData.length === 0 && !waitingForRender">Cannot load plot data!</span>
+    <span class="msg" v-if="!plotComponent && !renderPlot && !error && !loading && slotData.length > 0 && !waitingForRender">
+      Cannot load plot data. Plot type is probably not supported for thease params.
+    </span>
     <span class="msg error" v-if="!renderPlot && error && !loading">Error occured during loading plot data!</span>
     <component :is="plotComponent" class="plot" v-if="renderPlot" :data="slotData" :plotType="slotv.plotType" ref="plot"/>
   </div>
