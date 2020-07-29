@@ -34,6 +34,13 @@ export default [
     min: 1
   },
   {
+    name: 'subsetsperformance_page_size',
+    displayName: 'Maximum variables in one page of Subset Performance',
+    type: 'integer',
+    default: 6,
+    min: 1
+  },
+  {
     name: 'shapvalues_boxplots',
     displayName: 'Display boxplots over SHAP Values',
     type: 'boolean',

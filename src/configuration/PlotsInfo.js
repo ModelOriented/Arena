@@ -10,10 +10,11 @@ import ROC from '@/plots/ROC.vue'
 import REC from '@/plots/REC.vue'
 import Metrics from '@/plots/Metrics.vue'
 import FunnelMeasure from '@/plots/FunnelMeasure.vue'
+import SubsetsPerformance from '@/plots/SubsetsPerformance.vue'
 
 export default {
   plotComponents: {
-    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure
+    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, SubsetsPerformance
   },
   canMerge (slot1, slot2) {
     if (!slot1 || !slot2 || slot1 === slot2 || slot1.plotType !== slot2.plotType) return false
@@ -28,6 +29,7 @@ export default {
     if (type === 'REC') return true
     if (type === 'Metrics') return true
     if (type === 'FunnelMeasure') return true
+    if (type === 'SubsetsPerformance') return true
     return false
   },
   lockableParams: { // for each plotType
