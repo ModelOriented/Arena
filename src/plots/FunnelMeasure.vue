@@ -13,6 +13,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import format from '@/utils/format.js'
+import LolipopAxis from '@/utils/lolipopAxis.js'
 const Plotly = () => import('@/components/Plotly.vue')
 
 export default {
@@ -43,16 +44,8 @@ export default {
         return acu
       }, {})
     },
-    axisUnit () {
-      return 1 / (this.variables.slice(...this.pageRange).reduce((acu, v) => acu + this.subsets[v].length + 1.5, 0) + 2)
-    },
-    variableOffset () {
-      let lengths = this.variables.map(v => this.subsets[v].length + 1.5).map((v, i) => (i >= this.pageRange[0] && i < this.pageRange[1]) ? v : 0)
-      let cumsum = lengths.reduce((acu, len) => [...acu, acu[acu.length - 1] + len], [2])
-      return this.variables.reduce((acu, v, i) => {
-        acu[v] = cumsum[i] * this.axisUnit
-        return acu
-      }, {})
+    lolipopAxis () {
+      return new LolipopAxis(this.variables.slice(...this.pageRange), this.data.slice(1).map(d => d.params.model), this.variables.slice(...this.pageRange).map(v => this.subsets[v]), 0.03, 0.03, 1000)
     },
     error () {
       if (new Set(this.data.map(x => x.plotData.lossFunction)).size > 1) return 'To plot Funnel Measure all models must use the same loss function'
@@ -67,11 +60,10 @@ export default {
       let ref = this.data[0].plotData.lossValues
       return this.data.slice(1).map(x => {
         let variables = Object.entries(x.plotData.lossValues).slice(...this.pageRange)
-        let points = variables.map(entry => {
-          return Object.entries(entry[1]).map(e => {
-            let offset = this.variableOffset[entry[0]] + ((this.subsets[entry[0]].indexOf(e[0]) + 1.5) * this.axisUnit)
-            let point = { y: offset, x: e[1] - ref[entry[0]][e[0]], label: e[0] }
-            point.xref = point.x / ref[entry[0]][e[0]]
+        let points = variables.map(([variable, subsets]) => {
+          return Object.entries(subsets).map(([subset, loss]) => {
+            let point = { y: this.lolipopAxis.getPointRange(variable, subset, x.params.model).mid, x: loss - ref[variable][subset], label: subset }
+            point.xref = point.x / ref[variable][subset]
             return point
           })
         }).flat()
@@ -136,7 +128,7 @@ export default {
         },
         yaxis: {
           type: 'linear',
-          range: [1.01, -0.01],
+          range: this.lolipopAxis.getAxisRange(0.01).reverse(),
           gridwidth: 2,
           fixedrange: true,
           showspikes: false,
@@ -152,14 +144,14 @@ export default {
         margin: { l: 5, t: 10, b: 45, r: 5 },
         dragmode: 'pan',
         hovermode: 'closest',
-        shapes: Object.values(this.variableOffset).slice(...this.pageRange).map(off => {
+        shapes: Object.values(this.variables).slice(...this.pageRange).map(v => this.lolipopAxis.getFacetTitleRange(v)).map(range => {
           return {
             type: 'line',
             x0: 0,
             x1: 1,
             xref: 'paper',
-            y0: off,
-            y1: off,
+            y0: range.mid,
+            y1: range.mid,
             yref: 'y',
             line: {
               color: '#371ea3',
@@ -173,8 +165,8 @@ export default {
             x0: 0,
             x1: 0,
             xref: 'x',
-            y0: this.axisUnit * 1.5,
-            y1: 1,
+            y0: this.lolipopAxis.getHeaderRange().end,
+            y1: this.lolipopAxis.axisLength,
             yref: 'y',
             line: {
               color: this.mainParamColors[this.data[0].params.model],
@@ -183,23 +175,25 @@ export default {
             }
           }
         ]).concat(this.lolipopLines),
-        annotations: Object.entries(this.variableOffset).slice(...this.pageRange).map(x => {
+        annotations: this.variables.slice(...this.pageRange).map(v => {
           return {
             x: 0.05,
-            y: x[1] + this.axisUnit * 0.2,
+            y: this.lolipopAxis.getFacetTitleRange(v).getRelativePoint(0.6),
+            yanchor: 'middle',
             bgcolor: 'white',
-            text: ' ' + format.formatTitle(x[0]) + ' ',
-            xref: 'paper',
+            text: ' ' + format.formatTitle(v) + ' ',
             yref: 'y',
+            xref: 'paper',
             showarrow: false
           }
         }).concat([
           {
             x: 0,
-            y: this.axisUnit,
+            y: this.lolipopAxis.getHeaderRange().mid,
             ay: 0,
             ax: 0,
             xanchor: 'middle',
+            yanchor: 'middle',
             xref: 'x',
             yref: 'y',
             text: this.data[0].params.model,
