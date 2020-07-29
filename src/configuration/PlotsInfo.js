@@ -10,11 +10,12 @@ import ROC from '@/plots/ROC.vue'
 import REC from '@/plots/REC.vue'
 import Metrics from '@/plots/Metrics.vue'
 import FunnelMeasure from '@/plots/FunnelMeasure.vue'
+import Fairness from '@/plots/Fairness.vue'
 import SubsetsPerformance from '@/plots/SubsetsPerformance.vue'
 
 export default {
   plotComponents: {
-    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, SubsetsPerformance
+    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, Fairness, SubsetsPerformance
   },
   canMerge (slot1, slot2) {
     if (!slot1 || !slot2 || slot1 === slot2 || slot1.plotType !== slot2.plotType) return false
@@ -22,7 +23,7 @@ export default {
     let testSameParamName = paramType => (new Set([...slot1.localParams, ...slot2.localParams].map(params => params[paramType])).size === 1)
     let sameVariable = testSameParamName('variable')
     let sameObservation = testSameParamName('observation')
-    if (type === 'PartialDependence' || type === 'AccumulatedDependence' || type === 'CeterisParibus') return sameVariable
+    if (type === 'PartialDependence' || type === 'AccumulatedDependence' || type === 'CeterisParibus' || type === 'Fairness') return sameVariable
     if (type === 'FeatureImportance') return true
     if (type === 'SHAPValues') return sameObservation
     if (type === 'ROC') return true
