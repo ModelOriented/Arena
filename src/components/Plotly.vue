@@ -19,17 +19,35 @@ export default {
     layoutPatches: Object
   },
   watch: {
-    config: { handler: 'redraw', immediate: true },
-    traces: { handler: 'redraw', immediate: true },
-    layout: { handler: 'relayout', immediate: true },
-    layoutPatches: { handler: 'relayout', immediate: true }
+    config: { handler: 'requestRedraw', immediate: true },
+    traces: { handler: 'requestRedraw', immediate: true },
+    layout: { handler: 'requestRelayout', immediate: true },
+    layoutPatches: { handler: 'requestRelayout', immediate: true },
+    request: {
+      handler (newValue, oldValue) {
+        if (newValue && !oldValue) setTimeout(() => this.doRequest(), 20)
+      },
+      immediate: true
+    }
   },
   data () {
     return {
-      needRedrawing: false
+      needRedrawing: false,
+      request: null
     }
   },
   methods: {
+    doRequest () {
+      let request = this.request
+      this.request = null
+      this[request]()
+    },
+    requestRedraw () {
+      this.request = 'redraw'
+    },
+    requestRelayout () {
+      if (this.request !== 'redraw') this.request = 'relayout'
+    },
     relayout () {
       let plt = this.$refs.plot
       if (!plt || !this.layout) return
@@ -40,11 +58,11 @@ export default {
     },
     applyLayoutPatchs () {
       let plt = this.$refs.plot
+      this.onResize()
       if (!plt || !this.layoutPatches) return
       Object.keys(this.layoutPatches).forEach(path => {
         Plotly.relayout(plt, path, clone(this.layoutPatches[path]))
       })
-      this.onResize()
     },
     redraw () {
       let plt = this.$refs.plot
@@ -58,7 +76,7 @@ export default {
       let events = ['plotly_click', 'plotly_legendclick', 'plotly_hover', 'plotly_unhover', 'plotly_selected', 'plotly_webglcontextlost',
         'plotly_afterplot', 'plotly_autosize', 'plotly_deselect', 'plotly_doubleclick', 'plotly_redraw', 'plotly_animated']
       events.forEach(eventName => {
-        plt.on(eventName, data => this.$emit(eventName, { plot: plt, data }))
+        plt.on(eventName, data => this.$emit(eventName, { plot: plt, data, plotly: Plotly }))
       })
     },
     onResize () {
