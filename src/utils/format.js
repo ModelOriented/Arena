@@ -16,7 +16,6 @@ export default {
         let n = limit - line.length - 1
         output += '<br>' + line + (n < 0 ? '' : ' ' + word.substr(0, n))
         line = word.substr(n >= 0 ? n : 0)
-        console.log(word.substr(0, n), n)
       } else if (word.length + line.length + 1 > limit) {
         output += '<br>' + line
         line = word
