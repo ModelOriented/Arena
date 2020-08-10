@@ -12,10 +12,11 @@ import Metrics from '@/plots/Metrics.vue'
 import FunnelMeasure from '@/plots/FunnelMeasure.vue'
 import Fairness from '@/plots/Fairness.vue'
 import SubsetsPerformance from '@/plots/SubsetsPerformance.vue'
+import Message from '@/plots/Message.vue'
 
 export default {
   plotComponents: {
-    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, Fairness, SubsetsPerformance
+    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, Fairness, SubsetsPerformance, Message
   },
   canMerge (slot1, slot2) {
     if (!slot1 || !slot2 || slot1 === slot2 || slot1.plotType !== slot2.plotType) return false
@@ -40,7 +41,7 @@ export default {
     AccumulatedDependence: ['variable'],
     CeterisParibus: ['variable', 'observation'],
     SHAPValues: ['observation'],
-    FairnessCheck: ['variable']
+    Fairness: ['variable']
   },
   isLinear (plotComponent) {
     return ['LinearDependence', 'NumericalCeterisParibus', 'ROC', 'REC'].includes(plotComponent)
