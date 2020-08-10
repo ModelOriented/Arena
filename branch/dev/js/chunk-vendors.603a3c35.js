@@ -3392,6 +3392,21 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
+/***/ "2af1":
+/***/ (function(module, exports, __webpack_require__) {
+
+var $ = __webpack_require__("23e7");
+var sign = __webpack_require__("f748");
+
+// `Math.sign` method
+// https://tc39.github.io/ecma262/#sec-math.sign
+$({ target: 'Math', stat: true }, {
+  sign: sign
+});
+
+
+/***/ }),
+
 /***/ "2b0e":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -37613,6 +37628,19 @@ module.exports = function (data, opts) {
 
 /***/ }),
 
+/***/ "f748":
+/***/ (function(module, exports) {
+
+// `Math.sign` method implementation
+// https://tc39.github.io/ecma262/#sec-math.sign
+module.exports = Math.sign || function sign(x) {
+  // eslint-disable-next-line no-self-compare
+  return (x = +x) == 0 || x != x ? x : x < 0 ? -1 : 1;
+};
+
+
+/***/ }),
+
 /***/ "f772":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38567,4 +38595,4 @@ function validateKeyword(definition, throwError) {
 /***/ })
 
 }]);
-//# sourceMappingURL=chunk-vendors.53cfdd2b.js.map
+//# sourceMappingURL=chunk-vendors.603a3c35.js.map
