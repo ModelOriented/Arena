@@ -24,7 +24,7 @@ export default {
           y: d.plotData.quantity,
           hovertemplate: '<b>Error tolerance:</b> %{x:.2f}<br><b>Observations:</b> %{y:,.1%}',
           marker: {
-            color: this.mainParamColors[d.params.model]
+            color: this.scopesColors.model[d.params.model]
           }
         }
       })
@@ -74,7 +74,7 @@ export default {
         modeBarButtonsToRemove: ['lasso2d', 'autoScale2d', 'select2d', 'hoverCompareCartesian', 'hoverClosestCartesian', 'toImage']
       }
     },
-    ...mapGetters(['mainParamColors'])
+    ...mapGetters(['scopesColors'])
   },
   components: {
     Plotly

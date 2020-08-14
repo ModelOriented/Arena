@@ -26,7 +26,7 @@ export default {
           hoverinfo: 'none',
           line: { shape: 'spline' },
           marker: {
-            color: this.mainParamColors[d.params.model]
+            color: this.scopesColors.model[d.params.model]
           },
           transforms: [{
             type: 'sort',
@@ -42,7 +42,7 @@ export default {
           text: format.formatTitle(d.params.observation) + ': ' + format.formatValue(d.plotData.observation['_yhat_'], false, '', 3),
           hoverinfo: 'text',
           hoverlabel: {
-            bgcolor: this.mainParamColors[d.params.model],
+            bgcolor: this.scopesColors.model[d.params.model],
             font: { family: 'FiraSansBold', size: 16, color: 'white' }
           },
           marker: {
@@ -95,7 +95,7 @@ export default {
         modeBarButtonsToRemove: ['lasso2d', 'autoScale2d', 'select2d', 'hoverCompareCartesian', 'hoverClosestCartesian', 'toImage']
       }
     },
-    ...mapGetters(['mainParamColors'])
+    ...mapGetters(['scopesColors'])
   },
   methods: {
     onPlotlyClick () {

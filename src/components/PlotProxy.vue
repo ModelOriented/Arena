@@ -6,7 +6,7 @@
       Cannot load plot data. Plot type is probably not supported for thease params.
     </span>
     <span class="msg error" v-if="!renderPlot && error && !loading">Error occured during loading plot data!</span>
-    <component :is="plotComponent" class="plot" v-if="renderPlot" :data="slotData" :plotType="slotv.plotType" ref="plot"/>
+    <component :is="plotComponent" class="plot" v-if="renderPlot" :data="slotData" :plotType="slotv.plotType" :slotv="slotv" ref="plot"/>
   </div>
 </template>
 <script>

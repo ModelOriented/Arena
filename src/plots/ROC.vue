@@ -25,7 +25,7 @@ export default {
           text: d.plotData.cutoff,
           hovertemplate: '<b>Specifity:</b> %{x:.3f}<br><b>Sensivity:</b> %{y:.3f}<br><b>Cutoff:</b> %{text:.3f}',
           marker: {
-            color: this.mainParamColors[d.params.model]
+            color: this.scopesColors.model[d.params.model]
           }
         }
       })
@@ -102,7 +102,7 @@ export default {
         modeBarButtonsToRemove: ['lasso2d', 'autoScale2d', 'select2d', 'hoverCompareCartesian', 'hoverClosestCartesian', 'toImage']
       }
     },
-    ...mapGetters(['mainParamColors'])
+    ...mapGetters(['scopesColors'])
   },
   components: {
     Plotly

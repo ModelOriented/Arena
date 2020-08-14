@@ -7,7 +7,10 @@ import config from '@/configuration/config.js'
 
 const ajv = new Ajv()
 ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-06.json'))
-const validatorSession = ajv.compile(require('@/store/schemas/session.schema.json'))
+/* eslint-disable camelcase */
+const validatorSession_1_0_0 = ajv.compile(require('@/store/schemas/session.schema.json'))
+const validatorSession_1_1_0 = ajv.compile(require('@/store/schemas/session-1.1.0.schema.json'))
+/* eslint-enable camelcase */
 
 const state = {
   dataSources: [
@@ -160,7 +163,12 @@ const actions = {
     }
   },
   async importSession ({ getters, commit, dispatch }, session) {
-    if (!validatorSession(session)) throw new Error('Invalid session file')
+    if (validatorSession_1_0_0(session)) {
+      session.slots = session.slots.map(s => ({ ...s, scope: config.scopes[0] }))
+    } else if (validatorSession_1_1_0(session)) {
+    } else {
+      throw new Error('Invalid session file')
+    }
     commit('resetSession')
     getters.dataSources.forEach(ds => commit(ds + '/clearSources'))
     commit('clearTranslations')

@@ -94,11 +94,11 @@ export default {
           text: d.label,
           hovertemplate: '<b>%{text}</b><br>' + this.scoreFunctionSafe + ': %{x:.2f} (%{customdata:+.0%})',
           hoverlabel: {
-            bgcolor: this.mainParamColors[d.data.params.model],
+            bgcolor: this.scopesColors.model[d.data.params.model],
             font: { family: 'FiraSansBold', size: 16, color: 'white' }
           },
           marker: {
-            color: this.mainParamColors[d.data.params.model],
+            color: this.scopesColors.model[d.data.params.model],
             size: 8
           }
         }
@@ -116,7 +116,7 @@ export default {
             y1: d.y[i],
             yref: 'y',
             line: {
-              color: this.mainParamColors[d.data.params.model],
+              color: this.scopesColors.model[d.data.params.model],
               width: 1,
               dash: 'line'
             },
@@ -181,7 +181,7 @@ export default {
             y1: this.lolipopAxis.axisLength,
             yref: 'y',
             line: {
-              color: this.mainParamColors[d.params.model],
+              color: this.scopesColors.model[d.params.model],
               width: 2,
               dash: 'line'
             }
@@ -209,7 +209,7 @@ export default {
             xref: 'x',
             yref: 'y',
             text: d.params.model,
-            font: { color: this.mainParamColors[d.params.model] }
+            font: { color: this.scopesColors.model[d.params.model] }
           }
         }))
       }
@@ -222,7 +222,7 @@ export default {
         modeBarButtonsToRemove: ['lasso2d', 'autoScale2d', 'select2d', 'hoverCompareCartesian', 'hoverClosestCartesian', 'toImage']
       }
     },
-    ...mapGetters(['mainParamColors'])
+    ...mapGetters(['scopesColors'])
   },
   components: {
     Plotly

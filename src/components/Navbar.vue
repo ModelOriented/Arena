@@ -32,7 +32,7 @@ export default {
     }
   },
   computed: {
-    auxiliaryParams () { return config.params.filter(p => p !== config.mainParam) },
+    auxiliaryParams () { return config.params.filter(p => !config.scopes.includes(p)) },
     ...mapGetters(['availableParams', 'getGlobalParam', 'isElementClosed', 'sessionName', 'sessionLastSaved'])
   },
   mounted () {

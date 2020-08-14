@@ -59,11 +59,11 @@ export default {
           hoverinfo: 'template',
           hovertemplate: d.plotData.mean.map((x, i) => format.formatValue(d.plotData.intercept) + ' => ' + format.formatValue(x + d.plotData.intercept)),
           hoverlabel: {
-            bgcolor: this.mainParamColors[d.params.model],
+            bgcolor: this.scopesColors.model[d.params.model],
             font: { family: 'FiraSansBold', size: 16, color: 'white' }
           },
           marker: {
-            color: this.mainParamColors[d.params.model]
+            color: this.scopesColors.model[d.params.model]
           },
           insidetextanchor: 'start',
           selectedpoints: (this.selectedModel === d.params.model || this.selectedModel === null) ? undefined : [] // undefined - all selected, [] - all unselected
@@ -173,7 +173,7 @@ export default {
     maxVariables () { return this.$store.getters.getOption('shapvalues_max_variables') },
     leftMargin () { return this.$store.getters.getOption('left_margin') },
     displayBoxplots () { return this.$store.getters.getOption('shapvalues_boxplots') },
-    ...mapGetters(['mainParamColors'])
+    ...mapGetters(['scopesColors'])
   },
   methods: {
     onPlotlyClick (e) {

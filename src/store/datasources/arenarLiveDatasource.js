@@ -8,25 +8,28 @@ import dataSourceCommon from '@/store/datasources/dataSourceCommon.js'
 
 const ajv = new Ajv()
 ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-06.json'))
-const validator = ajv.compile(require('@/store/schemas/arenarLive.schema.json'))
+/* eslint-disable camelcase */
+const validator_1_0_0 = ajv.compile(require('@/store/schemas/arenarLive.schema.json'))
+const validator_1_1_0 = ajv.compile(require('@/store/schemas/arenarLive-1.1.0.schema.json'))
+/* eslint-enable camelcase */
 
 const state = {}
 
 const getters = {
-  getAvailableSlots: (state, getters) => (fullParams) => {
+  getAvailableSlots: (state, getters) => (fullParams, scope) => {
     return getters.sources.map(source => {
       let params = getters.translateBackParams(source, fullParams)
-      if (params[config.mainParam] === null) return []
+      if (!params[scope]) return []
 
       return source.availablePlots.filter(d => {
         // check if all required params are available from that source (not null in params variable)
-        return d.requiredParams.reduce((acu, paramType) => acu && params[paramType], true)
+        return d.requiredParams.reduce((acu, paramType) => acu && params[paramType], true) && d.requiredParams.includes(scope)
       }).map(d => {
         return {
           plotType: d.plotType,
           plotCategory: d.plotCategory ? d.plotCategory : 'Other',
           name: d.name ? d.name : format.firstCharUpper(d.plotType),
-          localParams: [{ [config.mainParam]: fullParams[config.mainParam] }]
+          localParams: [{ [scope]: fullParams[scope] }]
         }
       })
     }).flat()
@@ -49,19 +52,21 @@ const mutations = {
 const isUnique = (array) => {
   return (new Set(array.map(format.simplify))).size === array.length
 }
-const validateData = (data) => {
-  return validator(data) && config.params.map(paramType => isUnique(data[paramType + 's'])).reduce((acu, x) => acu && x, true)
-}
 
 const actions = {
   loadData ({ state, commit, dispatch, rootGetters }, { data, src, uuid }) {
-    let isValid = validateData(data)
-    if (rootGetters.debug) console.log({ data: JSON.stringify(data), src, isValid })
-    if (!isValid) return false
-    let params = config.params.reduce((acu, paramType) => {
-      acu[paramType] = data[paramType + 's']
-      return acu
-    }, {})
+    let params = null
+    if (validator_1_0_0(data)) {
+      params = config.params.reduce((acu, paramType) => {
+        acu[paramType] = data[paramType + 's'] || []
+        return acu
+      }, {})
+    } else if (validator_1_1_0(data)) {
+      params = data.availableParams
+    } else {
+      return false
+    }
+    if (!config.params.reduce((acu, p) => acu && isUnique(params[p]), true)) return false
     let source = {
       availableParams: params,
       availablePlots: data.availablePlots,

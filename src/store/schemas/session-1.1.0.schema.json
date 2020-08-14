@@ -1,0 +1,108 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "title": "Session file",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "translations": {
+            "type": "object"
+          },
+          "uuid": {
+            "type": "string"
+          }
+        },
+        "required": ["address", "translations", "uuid"]
+      }
+    },
+    "slots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "plotType": {
+            "type": "string"
+          },
+          "plotCategory": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "localParams": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "positionX": {
+            "type": "number"
+          },
+          "positionY": {
+            "type": "number"
+          },
+          "width": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          },
+          "pageNumber": {
+            "type": "number"
+          },
+          "archived": {
+            "type": "boolean"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "customData": {
+            "type": "object"
+          }
+        },
+        "required": ["name", "plotType", "plotCategory", "localParams", "uuid", "positionX", "positionY", "width", "height", "pageNumber", "archived", "scope", "customData"]
+      }
+    },
+    "colors": {
+      "type": "object"
+    },
+    "annotations": {
+      "type": "array"
+    },
+    "name": {
+      "type": "string"
+    },
+    "uuid": {
+      "type": "string"
+    },
+    "time": {
+      "type": "number"
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": ["name", "value"]
+      }
+    }
+  },
+  "required": ["version", "sources", "slots", "colors", "annotations", "name", "uuid", "time", "options"]
+}

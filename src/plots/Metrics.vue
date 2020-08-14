@@ -23,7 +23,7 @@ export default {
     width: 'refresh',
     height: 'refresh',
     data: 'refresh',
-    mainParamColors: 'refresh'
+    scopesColors: 'refresh'
   },
   created () {
     Plotly().then(x => {
@@ -62,7 +62,7 @@ export default {
     axisSpace () {
       return (this.width - margin.l - margin.r) / (this.measures.length - 1)
     },
-    ...mapGetters(['mainParamColors'])
+    ...mapGetters(['scopesColors'])
   },
   methods: {
     updateLines () {
@@ -92,7 +92,7 @@ export default {
         .data(this.linesData, d => d.name)
         .enter().append('path')
         .attr('class', 'node')
-        .style('stroke', (d, i) => this.mainParamColors[this.data[i].params.model])
+        .style('stroke', (d, i) => this.scopesColors.model[this.data[i].params.model])
       let g = this.g = chart.selectAll('g.trait')
         .data(this.measures)
         .enter().append('svg:g')

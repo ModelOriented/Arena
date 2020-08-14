@@ -6,7 +6,7 @@ import streams from '@/utils/streams.js'
 const state = {
   globalParams: {},
   nameConflicts: [],
-  manualColors: {}, // colors manualy set to param (key - param name, value - color)
+  manualColors: config.scopes.reduce((acu, scope) => ({ ...acu, [scope]: {} }), {}),
   waitingParams: [],
   translations: []
 }
@@ -35,13 +35,18 @@ const getters = {
   nextNameConflicts (state) {
     return state.nameConflicts.length > 0 ? state.nameConflicts[0] : null
   },
-  mainParamColors (state, getters) {
+  scopesColors (state, getters) {
+    return config.scopes.reduce((acu, scope) => {
+      return { ...acu, [scope]: getters.getScopeColors(scope) }
+    }, {})
+  },
+  getScopeColors: (state, getters) => (scope) => {
     let colors = palette.slice(0)
-    let defaultColors = getters.availableParams[config.mainParam].reduce((acc, m) => {
+    let defaultColors = getters.availableParams[scope].reduce((acc, m) => {
       acc[m] = colors.shift() || color.h
       return acc
     }, {})
-    return Object.assign({}, defaultColors, state.manualColors)
+    return Object.assign({}, defaultColors, state.manualColors[scope])
   },
   manualColors (state) {
     return state.manualColors
@@ -110,11 +115,12 @@ const mutations = {
   removeNameConflicts (state) {
     Vue.set(state, 'nameConflicts', state.nameConflicts.slice(1))
   },
-  setColor (state, { paramName, color }) {
-    Vue.set(state.manualColors, paramName, color)
+  setColor (state, { scope, paramName, color }) {
+    Vue.set(state.manualColors[scope], paramName, color)
   },
   loadManualColors (stete, manualColors) {
-    Vue.set(state, 'manualColors', manualColors)
+    let colors = config.scopes.reduce((acu, scope) => ({ ...acu, [scope]: manualColors[scope] || {} }), {})
+    Vue.set(state, 'manualColors', colors)
   },
   removeParamsFromWaitingList (state, uuid) {
     Vue.set(state, 'waitingParams', state.waitingParams.filter(wp => wp.uuid !== uuid))

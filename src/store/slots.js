@@ -15,10 +15,11 @@ const getters = {
   preview (state) {
     return state.preview
   },
-  getAvailableSlots: (state, getters) => (params) => {
+  getAvailableSlots: (state, getters) => (params, scope) => {
+    // for auxilary params overwrite null with global params
     let fullParams = Object.assign({}, getters.globalParams, params)
     let slots = []
-    getters.dataSources.forEach(ds => { slots = slots.concat(getters[ds + '/getAvailableSlots'](fullParams)) })
+    getters.dataSources.forEach(ds => { slots = slots.concat(getters[ds + '/getAvailableSlots'](fullParams, scope)) })
     slots = slots.map(s => {
       return {
         ...s,
@@ -28,7 +29,9 @@ const getters = {
         positionY: 0,
         width: 512,
         height: 384,
-        pageNumber: getters.pageNumber
+        scope,
+        pageNumber: getters.pageNumber,
+        customData: null
       }
     })
     return slots
@@ -98,7 +101,9 @@ const mutations = {
         positionY: slot.positionY + n,
         width: slot.width,
         height: slot.height,
-        pageNumber: slot.pageNumber
+        pageNumber: slot.pageNumber,
+        scope: slot.scope,
+        customData: slot.customData
       }
     })
     state.slots = [...state.slots.filter(s => s.uuid !== slot.uuid), ...newSlots]
@@ -141,6 +146,9 @@ const mutations = {
   },
   setPreview (state, slot) {
     state.preview = slot
+  },
+  setSlotCustomData (state, { slot, customData }) {
+    Vue.set(slot, 'customData', customData)
   }
 }
 

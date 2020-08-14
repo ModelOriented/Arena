@@ -57,7 +57,7 @@ export default {
           y1: this.lolipopAxis.getPointRange(d.scoring, d.subgroup, d.model).mid,
           yref: 'y',
           line: {
-            color: this.mainParamColors[d.model],
+            color: this.scopesColors.model[d.model],
             width: 1,
             dash: 'line'
           },
@@ -91,7 +91,7 @@ export default {
           y: [this.lolipopAxis.getPointRange(d.scoring, d.subgroup, d.model).mid],
           x: [d.value],
           marker: {
-            color: this.mainParamColors[d.model],
+            color: this.scopesColors.model[d.model],
             size: 8
           }
         }
@@ -147,7 +147,7 @@ export default {
               yref: 'y',
               layer: 'below',
               line: {
-                color: this.mainParamColors[d.params.model],
+                color: this.scopesColors.model[d.params.model],
                 width: 2
               }
             }
@@ -186,7 +186,7 @@ export default {
         modeBarButtonsToRemove: ['lasso2d', 'autoScale2d', 'select2d', 'hoverCompareCartesian', 'hoverClosestCartesian', 'toImage']
       }
     },
-    ...mapGetters(['mainParamColors'])
+    ...mapGetters(['scopesColors'])
   },
   methods: {
     onHover (event) {

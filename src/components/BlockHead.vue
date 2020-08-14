@@ -24,7 +24,6 @@ import PlotsInfo from '@/configuration/PlotsInfo.js'
 import SearchMenu from '@/components/SearchMenu.vue'
 import format from '@/utils/format.js'
 import { mapMutations, mapGetters } from 'vuex'
-import config from '@/configuration/config.js'
 
 export default {
   name: 'BlockHead',
@@ -45,7 +44,8 @@ export default {
   computed: {
     fullParams () { return this.getSlotFullParams(this.slotv.localParams) },
     usedModels () {
-      return [...new Set(this.fullParams.map(p => '<span style="color: ' + this.mainParamColors[p[config.mainParam]] + '">' + p[config.mainParam] + '</span>'))].join(', ')
+      let scope = this.slotv.scope
+      return [...new Set(this.fullParams.map((p, i) => '<span style="color: ' + this.scopesColors[scope][p[scope]] + '">' + p[scope] + '</span>'))].join(', ')
     },
     isMerged () {
       return this.slotv && this.slotv.localParams.length > 1
@@ -61,7 +61,7 @@ export default {
       if (!this.slotv) return ''
       return PlotsInfo.getPlotDesc(this.slotv.plotType)
     },
-    ...mapGetters(['getSlotFullParams', 'mainParamColors', 'availableParams'])
+    ...mapGetters(['getSlotFullParams', 'availableParams', 'scopesColors'])
   },
   methods: {
     saveTitle () {
