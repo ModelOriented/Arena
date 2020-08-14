@@ -13,10 +13,12 @@ import FunnelMeasure from '@/plots/FunnelMeasure.vue'
 import Fairness from '@/plots/Fairness.vue'
 import SubsetsPerformance from '@/plots/SubsetsPerformance.vue'
 import Message from '@/plots/Message.vue'
+import DistributionCounts from '@/plots/DistributionCounts.vue'
+import DistributionHistogram from '@/plots/DistributionHistogram.vue'
 
 export default {
   plotComponents: {
-    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, Fairness, SubsetsPerformance, Message
+    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, Fairness, SubsetsPerformance, Message, DistributionCounts, DistributionHistogram
   },
   canMerge (slot1, slot2) {
     if (!slot1 || !slot2 || slot1 === slot2 || slot1.plotType !== slot2.plotType) return false
@@ -32,6 +34,7 @@ export default {
     if (type === 'Metrics') return true
     if (type === 'FunnelMeasure') return true
     if (type === 'SubsetsPerformance') return true
+    if (type === 'VariableDistribution') return sameVariable
     return false
   },
   lockableParams: { // for each plotType
@@ -41,7 +44,8 @@ export default {
     AccumulatedDependence: ['variable'],
     CeterisParibus: ['variable', 'observation'],
     SHAPValues: ['observation'],
-    Fairness: ['variable']
+    Fairness: ['variable'],
+    VariableDistribution: ['variable']
   },
   isLinear (plotComponent) {
     return ['LinearDependence', 'NumericalCeterisParibus', 'ROC', 'REC'].includes(plotComponent)
