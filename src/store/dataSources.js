@@ -156,7 +156,7 @@ const actions = {
       colors,
       annotations,
       options,
-      version: '1.0.0',
+      version: '1.1.0',
       name: getters.sessionName,
       uuid: getters.sessionUUID,
       time: new Date().getTime()
