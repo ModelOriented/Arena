@@ -153,12 +153,12 @@ export default {
     },
     minimalValue () {
       return Math.min(...this.trimmed.map(d => {
-        return Math.min(...d.plotData.min, 0) + d.plotData.intercept
+        return Math.min(...d.plotData[this.displayBoxplots ? 'min' : 'mean'], 0) + d.plotData.intercept
       }))
     },
     maximalValue () {
       return Math.max(...this.trimmed.map(d => {
-        return Math.max(...d.plotData.max, 0) + d.plotData.intercept
+        return Math.max(...d.plotData[this.displayBoxplots ? 'max' : 'mean'], 0) + d.plotData.intercept
       }))
     },
     range () {
