@@ -70,7 +70,7 @@ export default {
     },
     handlePointerMove (event) {
       if (!this.active) return
-      let scaled = (event.clientX - this.startClientX) / this.sliderWidth
+      let scaled = (this.rangeLength * (event.clientX - this.startClientX) / this.sliderWidth) + this.range[0]
       let dist = this.points.map(p => Math.abs(p - scaled))
       let index = dist.indexOf(Math.min(...dist))
       if (index !== -1) this.position = this.points[index]
@@ -106,7 +106,7 @@ div.slider > span.value {
   height: 100%;
   width: 50px;
   text-align: center;
-  line-height: 15px;
+  line-height: 25px;
   vertical-align: middle;
 }
 div.slider > div.dot {
