@@ -5,6 +5,7 @@
       <input type="file" style="display: none" ref="fileinput" @change="loadFiles">
       <button class="upload" @click="$refs.fileinput.click()">Load session from file</button>
       <button class="share" @click="share">Share using Github Gist</button>
+      <button class="share-peer" @click="sharePeer">Share using P2P</button>
     </div>
     <span v-if="message" class="message" :style="{ color: message.error ? '#f05a71' : '#46bac2' }">{{ message.text }}</span>
     <div class="recently-used">
@@ -63,6 +64,12 @@ export default {
         this.message = { text: 'Failed to share session', error: true }
       })
     },
+    async sharePeer () {
+      this.message = { text: 'Connecting...', error: false }
+      await this.$store.dispatch('initPeerServer')
+      let id = this.$store.getters.peer.id
+      this.message = { text: this.baseURL + '/?peer_server=' + id, error: false }
+    },
     loadFiles (event) {
       for (var file of event.target.files) this.loadFile(file)
     },
@@ -117,6 +124,12 @@ div.settings-tab-sessions > div.current-session > button.share {
 }
 div.settings-tab-sessions > div.current-session > button.share:hover {
   box-shadow: 0 0 5px 0 #f05a71;
+}
+div.settings-tab-sessions > div.current-session > button.share-peer {
+  background: #8bdcbe;
+}
+div.settings-tab-sessions > div.current-session > button.share-peer:hover {
+  box-shadow: 0 0 5px 0 #8bdcbe;
 }
 div.settings-tab-sessions > div.recently-used {
   padding: 20px 0;

@@ -63,6 +63,12 @@ const mutations = {
     if (!source.timestamp) Vue.set(source, 'timestamp', new Date().getTime())
     Vue.set(state, 'sources', [...state.sources, source])
   },
+  expandSource (state, source) {
+    if (!source.uuid) return
+    let original = state.sources.find(s => s.uuid === source.uuid)
+    if (!original) return
+    state.sources = [...state.sources.filter(s => s.uuid !== source.uuid), { ...original, ...source }]
+  },
   removeSource (state, source) {
     Vue.set(state, 'sources', state.sources.filter(s => s !== source && s.uuid !== source))
   },
