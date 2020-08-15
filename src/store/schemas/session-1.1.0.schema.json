@@ -5,7 +5,7 @@
   "properties": {
     "version": {
       "type": "string",
-      "const": "1.0.0"
+      "const": "1.1.0"
     },
     "sources": {
       "type": "array",
@@ -70,7 +70,7 @@
             "type": "string"
           },
           "customData": {
-            "type": "object"
+            "type": ["object", "null"]
           }
         },
         "required": ["name", "plotType", "plotCategory", "localParams", "uuid", "positionX", "positionY", "width", "height", "pageNumber", "archived", "scope", "customData"]
