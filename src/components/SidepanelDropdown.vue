@@ -98,6 +98,7 @@ export default {
       return []
     },
     availableSelectedGroupParams () {
+      if (this.selectedGroup === 'other') return ['clipboard', 'annotate']
       if (!config.scopes.includes(this.selectedGroup)) return []
       return this.availableParams[this.selectedGroup]
     },
