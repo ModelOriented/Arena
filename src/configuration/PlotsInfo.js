@@ -15,10 +15,11 @@ import SubsetsPerformance from '@/plots/SubsetsPerformance.vue'
 import Message from '@/plots/Message.vue'
 import DistributionCounts from '@/plots/DistributionCounts.vue'
 import DistributionHistogram from '@/plots/DistributionHistogram.vue'
+import VariableAgainstAnother from '@/plots/VariableAgainstAnother.vue'
 
 export default {
   plotComponents: {
-    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, Fairness, SubsetsPerformance, Message, DistributionCounts, DistributionHistogram
+    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, Fairness, SubsetsPerformance, Message, DistributionCounts, DistributionHistogram, VariableAgainstAnother
   },
   canMerge (slot1, slot2) {
     if (!slot1 || !slot2 || slot1 === slot2 || slot1.plotType !== slot2.plotType) return false
@@ -45,7 +46,8 @@ export default {
     CeterisParibus: ['variable', 'observation'],
     SHAPValues: ['observation'],
     Fairness: ['variable'],
-    VariableDistribution: ['variable']
+    VariableDistribution: ['variable'],
+    VariableAgainstAnother: ['variable']
   },
   isLinear (plotComponent) {
     return ['LinearDependence', 'NumericalCeterisParibus', 'ROC', 'REC'].includes(plotComponent)
