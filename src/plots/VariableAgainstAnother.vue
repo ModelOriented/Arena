@@ -65,7 +65,7 @@ export default {
       return ['linear', 'linear']
     },
     xAxisMargin () {
-      if (this.axisTypes[1] === 'linear') return 60
+      if (this.axisTypes[1] === 'linear') return 40
       return 40 + Math.max(...this.traces[0].x.map(x => x.split('<br>').length)) * 16
     },
     traces () {
