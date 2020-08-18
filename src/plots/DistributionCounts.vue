@@ -2,7 +2,7 @@
   <div class="distribution-counts-plot" v-resize:throttle.100="onResize">
     <Plotly v-bind="{ traces, config, layout, layoutPatches }" ref="plot"/>
     <div class="axis-type-input">
-      <span v-for="t in axisTypes" :key="t" :class="{ active: axisType === t }" @click="axisType = t">{{ t | firstUpper }}</span>
+      <span v-for="t in axisTypes" :key="t" :class="{ active: axisType === t }" @click="setAxisType(t)">{{ t | firstUpper }}</span>
     </div>
   </div>
 </template>
@@ -16,7 +16,8 @@ export default {
   mixins: [Resize],
   props: {
     data: Array,
-    plotType: String
+    plotType: String,
+    slotv: Object
   },
   data () {
     return {
@@ -26,7 +27,18 @@ export default {
   watch: {
     axisTypes: {
       handler () {
-        this.axisType = this.axisTypes[0]
+        if (this.customData && this.axisTypes.includes(this.customData.axisType)) {
+          this.axisType = this.customData.axisType
+        } else {
+          this.setAxisType(this.axisTypes[0])
+        }
+      },
+      immediate: true
+    },
+    customData: {
+      handler (newValue) {
+        if (!newValue) return
+        if (this.axisTypes.includes(newValue.axisType)) this.axisType = newValue.axisType
       },
       immediate: true
     }
@@ -35,6 +47,9 @@ export default {
     firstUpper: format.firstCharUpper
   },
   computed: {
+    customData () {
+      return this.slotv.customData
+    },
     axisTypes () {
       return ['count', 'density']
     },
@@ -138,6 +153,11 @@ export default {
       return { 'xaxis.range': this.range, 'margin.l': this.leftMargin }
     },
     leftMargin () { return this.$store.getters.getOption('left_margin_values') }
+  },
+  methods: {
+    setAxisType (v) {
+      this.$store.commit('setSlotCustomData', { slot: this.slotv, customData: { ...this.customData, axisType: v } })
+    }
   },
   components: {
     Plotly

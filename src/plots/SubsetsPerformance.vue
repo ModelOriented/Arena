@@ -1,7 +1,7 @@
 <template>
   <div class="subsets-performance-plot">
     <div class="score-function-input">
-      <span v-for="f in scoreFunctions" :key="f" :class="{ active: scoreFunctionSafe === f }" @click="scoreFunction = f">{{ f }}</span>
+      <span v-for="f in scoreFunctions" :key="f" :class="{ active: scoreFunctionSafe === f }" @click="setScoreFunction(f)">{{ f }}</span>
     </div>
     <div class="page-left page-button" :class="{ invisible: page <= 0}" @click="page -= 1">
       <font-awesome-icon icon="angle-left"/> Previous
@@ -23,7 +23,8 @@ export default {
   name: 'SubsetsPerformace',
   props: {
     data: Array,
-    plotType: String
+    plotType: String,
+    slotv: Object
   },
   data () {
     return {
@@ -33,11 +34,31 @@ export default {
   },
   watch: {
     data () { this.page = 0 },
-    scoreFunctions () {
-      this.scoreFunction = this.scoreFunctions.length > 0 ? this.scoreFunctions[0] : ''
+    scoreFunctions: {
+      handler () {
+        if (this.customData && this.scoreFunctions.includes(this.customData.scoreFunction)) {
+          this.scoreFunction = this.customData.scoreFunction
+        } else {
+          this.setScoreFunction(this.scoreFunctions[0])
+        }
+      },
+      immediate: true
+    },
+    customData: {
+      handler (newValue) {
+        if (!newValue) return
+        if (this.scoreFunctions.includes(newValue.scoreFunction)) this.scoreFunction = newValue.scoreFunction
+      },
+      immediate: true
+    }
+  },
+  methods: {
+    setScoreFunction (v) {
+      this.$store.commit('setSlotCustomData', { slot: this.slotv, customData: { ...this.customData, scoreFunction: v } })
     }
   },
   computed: {
+    customData () { return this.slotv.customData },
     pageSize () { return this.$store.getters.getOption('subsetsperformance_page_size') },
     pagesCount () { return Math.ceil(this.variables.length / this.pageSize) },
     scoreFunctionSafe () { return this.scoreFunctions.includes(this.scoreFunction) ? this.scoreFunction : this.scoreFunctions[0] },

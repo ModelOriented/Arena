@@ -5,7 +5,7 @@
       <div class="subplot-input" v-for="s in subplots" :key="s.name">
         <div class="checkboxes">
           <font-awesome-icon v-if="subplot === s" :icon="['fas', 'check-circle']"/>
-          <font-awesome-icon v-else :icon="['far', 'circle']" @click="subplot = s"/>
+          <font-awesome-icon v-else :icon="['far', 'circle']" @click="setSubplot(s)"/>
         </div>
         <span class="label">{{ s.name }}</span>
       </div>
@@ -14,7 +14,7 @@
         <span class="label">{{ s.subgroup }}</span>
         <div class="checkboxes">
           <font-awesome-icon v-if="privileged === s.subgroup" :icon="['fas', 'check-circle']"/>
-          <font-awesome-icon v-else :icon="['far', 'circle']" @click="privileged = s.subgroup"/>
+          <font-awesome-icon v-else :icon="['far', 'circle']" @click="setPrivileged(s.subgroup)"/>
         </div>
         <Slider v-if="selectedCutoffs" :min="0" :max="1" :start="selectedCutoffs[s.subgroup]" :values="s.cutoffs" @update="setCutoff(s.subgroup, $event)"/>
       </div>
@@ -36,31 +36,73 @@ export default {
   name: 'Fairness',
   props: {
     data: Array,
-    plotType: String
+    plotType: String,
+    slotv: Object
   },
   data () {
     return {
       privileged: null,
       selectedCutoffs: null,
-      subplot: subplots[0],
-      subplots
+      subplot: subplots[0]
     }
   },
   watch: {
     cutoffs: {
       handler () {
         if (!this.cutoffs) this.selectedCutoffs = {}
-        this.selectedCutoffs = this.cutoffs.reduce((acu, s) => {
-          let diffs = s.cutoffs.map(cutoff => Math.abs(cutoff - 0.5))
-          acu[s.subgroup] = s.cutoffs[diffs.indexOf(Math.min(...diffs))]
-          return acu
-        }, {})
-        this.privileged = null
+        if (this.customData && this.customData.cutoffs &&
+            Object.entries(this.customData.cutoffs).every(([subgroup, cutoff]) => this.cutoffs.find(c => c.subgroup === subgroup && c.cutoffs.includes(cutoff))) &&
+            this.cutoffs.every(c => Object.keys(this.customData.cutoffs).includes(c.subgroup))) {
+          this.selectedCutoffs = this.customData.cutoffs
+        } else {
+          let selectedCutoffs = this.cutoffs.reduce((acu, s) => {
+            let diffs = s.cutoffs.map(cutoff => Math.abs(cutoff - 0.5))
+            acu[s.subgroup] = s.cutoffs[diffs.indexOf(Math.min(...diffs))]
+            return acu
+          }, {})
+          this.setSelectedCutoffs(selectedCutoffs)
+        }
+      },
+      immediate: true
+    },
+    subgroupsNames: {
+      handler () {
+        if (this.customData && this.subgroupsNames.includes(this.customData.privileged)) {
+          this.privileged = this.customData.privileged
+        } else {
+          this.setPrivileged(this.subgroupsNames[0])
+        }
+      },
+      immediate: true
+    },
+    subplots: {
+      handler () {
+        if (this.customData && this.subplots.includes(this.customData.subplot)) {
+          this.subplot = this.customData.subplot
+        } else {
+          this.setSubplot(this.subplots[0])
+        }
+      },
+      immediate: true
+    },
+    customData: {
+      handler (newValue) {
+        if (!newValue) return
+        if (this.subplots.includes(newValue.subplot)) this.subplot = newValue.subplot
+        if (this.subgroupsNames.includes(newValue.privileged)) this.privileged = newValue.privileged
+        if (this.customData.cutoffs && Object.entries(this.customData.cutoffs).every(([subgroup, cutoff]) => this.cutoffs.find(c => c.subgroup === subgroup && c.cutoffs.includes(cutoff))) &&
+            this.cutoffs.every(c => Object.keys(this.customData.cutoffs).includes(c.subgroup))) {
+          this.selectedCutoffs = this.customData.cutoffs
+        }
       },
       immediate: true
     }
   },
   computed: {
+    subplots () { return subplots },
+    customData () {
+      return this.slotv.customData
+    },
     subgroupsNames () {
       return [...new Set(this.data.map(d => Object.keys(d.plotData.subgroups)).flat())]
     },
@@ -82,10 +124,16 @@ export default {
   },
   methods: {
     setCutoff (subgroup, value) {
-      this.$set(this.selectedCutoffs, subgroup, value)
+      this.setSelectedCutoffs({ ...this.selectedCutoffs, [subgroup]: value })
     },
-    setPrivileged (subgroup) {
-      this.privileged = subgroup
+    setPrivileged (v) {
+      this.$store.commit('setSlotCustomData', { slot: this.slotv, customData: { ...this.customData, privileged: v } })
+    },
+    setSubplot (v) {
+      this.$store.commit('setSlotCustomData', { slot: this.slotv, customData: { ...this.customData, subplot: v } })
+    },
+    setSelectedCutoffs (v) {
+      this.$store.commit('setSlotCustomData', { slot: this.slotv, customData: { ...this.customData, cutoffs: v } })
     }
   },
   components: {
