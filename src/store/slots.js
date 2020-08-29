@@ -65,6 +65,7 @@ const mutations = {
     if (slot.width === undefined) Vue.set(slot, 'width', 512)
     if (slot.height === undefined) Vue.set(slot, 'height', 384)
     if (slot.pageNumber === undefined) Vue.set(slot, 'pageNumber', state.pageNumber)
+    if (slot.customData === undefined) Vue.set(slot, 'customData', null)
     state.slots = [...state.slots, slot]
   },
   clearSlots (state) {
