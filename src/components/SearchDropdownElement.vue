@@ -33,10 +33,10 @@ export default {
     }).on('hold', event => {
       event.preventDefault()
 
-      let mainParamValue = this.getGlobalParam(config.mainParam)
       let slot = { ...config.searchDropdownPlots[this.paramName] }
+      let mainParamValue = this.getGlobalParam(slot.scope)
       if (!mainParamValue || !slot) return
-      slot.localParams = [{ [this.paramName]: this.paramValue, [config.mainParam]: mainParamValue }]
+      slot.localParams = [{ [this.paramName]: this.paramValue, [slot.scope]: mainParamValue }]
 
       if (this.initInfo && slot) {
         this.$store.dispatch('addSlotToPlayground', { slot, ...this.initInfo })

@@ -18,9 +18,8 @@ export default {
   ],
   url: 'https://arena.drwhy.ai',
   // All params used in app
-  params: ['variable', 'observation', 'model'],
-  // Main param that is selected in side panel and cannot be changed for once generated plot
-  mainParam: 'model',
+  params: ['variable', 'observation', 'model', 'dataset'],
+  scopes: ['model', 'dataset'],
   helpMessages: {
     1: 'Select one or more models to create plots for them',
     2: 'Hold any of generated plots to open it',
@@ -28,8 +27,8 @@ export default {
   },
   // Plots that are generated after holding a value in SearchDropdown for auxilary params.
   searchDropdownPlots: {
-    variable: { name: 'Partial Dependence', plotType: 'PartialDependence', plotCategory: 'Dataset Level' },
-    observation: { name: 'Break Down', plotType: 'Breakdown', plotCategory: 'Observation Level' }
+    variable: { name: 'Partial Dependence', plotType: 'PartialDependence', plotCategory: 'Dataset Level', scope: 'model' },
+    observation: { name: 'Break Down', plotType: 'Breakdown', plotCategory: 'Observation Level', scope: 'model' }
   },
   githubClientId: 'd7d96eec80f68c16954b',
   githubAuthorizeServer: 'https://arena.mini.pw.edu.pl/github',

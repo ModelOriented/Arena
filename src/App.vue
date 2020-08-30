@@ -59,11 +59,14 @@ export default {
     waitingParamsCorrect (newValue) {
       if (newValue.length === 0) return
       this.$store.commit('removeParamsFromWaitingList', newValue[0])
+    },
+    globalParams () {
+      this.$store.dispatch('globalParamsUpdated')
     }
   },
   computed: {
     welcomeScreenVisible () { return this.displayWelcomeScreen && !this.isElementClosed('welcome-screen') },
-    ...mapGetters(['visibleSlots', 'preview', 'isElementClosed', 'waitingParamsCorrect', 'waitingParamsConflicts', 'recentSessions'])
+    ...mapGetters(['visibleSlots', 'preview', 'isElementClosed', 'waitingParamsCorrect', 'waitingParamsConflicts', 'recentSessions', 'globalParams'])
   },
   created () {
     console.log(BUILDINFO)
@@ -78,6 +81,7 @@ export default {
       let debug = new URLSearchParams(window.location.search).get('debug')
       let githubCode = new URLSearchParams(window.location.search).get('code')
       let githubState = new URLSearchParams(window.location.search).get('state')
+      let peerServer = new URLSearchParams(window.location.search).get('peer_server')
 
       if (debug) {
         this.$store.commit('setDebug', true)
@@ -88,6 +92,10 @@ export default {
           let token = response.body
           this.$store.dispatch('loadGithubToken', token).then(() => window.close())
         }).catch(console.error)
+      }
+
+      if (peerServer) {
+        this.$store.dispatch('initPeerClient', peerServer)
       }
 
       if (demo) {

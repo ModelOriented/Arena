@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "title": "Data file",
+  "description": "Main data structure, that should be uploaded to application as .json file",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1.1.0"
+    },
+    "availableParams": {
+      "type": "object",
+      "properties": {
+        "variable": {
+          "type": "array",
+          "title": "Array of variables' names used in this data file",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "model": {
+          "type": "array",
+          "title": "Array of models' names used in this data file",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "observation": {
+          "type": "array",
+          "title": "Array of observations' names used in this data file",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "dataset": {
+          "type": "array",
+          "title": "Array of observations' names used in this data file",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": ["variable", "model", "observation", "dataset"]
+    },
+    "data": {
+      "type": "array",
+      "title": "Array of plots data",
+      "items": {
+        "type": "object",
+        "title": "Single plot object",
+        "properties": {
+          "plotComponent": {
+            "type": "string",
+            "title": "Name of vue component to plot this object",
+            "description": "Represents how the plot is build",
+            "examples": ["FeatureImportance", "LinearPartialDependency", "CategoricalPartialDependency"]
+          },
+          "plotType": {
+            "type": "string",
+            "title": "Type of plot",
+            "description": "Represents what plot presents",
+            "examples": ["FeatureImportance", "PartialDependency"]
+          },
+          "plotCategory": {
+            "type": "string",
+            "title": "Category of plot",
+            "examples": ["Local", "Global"]
+          },
+          "name": {
+            "type": "string",
+            "title": "Title of plot"
+          },
+          "params": {
+            "type": "object",
+            "title": "Plot params",
+            "description": "Represents what the data is related to.",
+            "properties": {
+              "model": {
+                "type": "string"
+              },
+              "observation": {
+                "type": "string"
+              },
+              "variable": {
+                "type": "string"
+              }
+            }
+          },
+          "data": {
+            "type": "object",
+            "title": "Plot traces",
+            "description": "This object should be formatted for specified plotComponent"
+          }
+        },
+        "required": ["plotType", "plotComponent", "plotCategory", "params", "name", "data"]
+      }
+    }
+  },
+  "required": ["version", "availableParams", "data"]
+}

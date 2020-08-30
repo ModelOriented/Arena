@@ -37,10 +37,6 @@ export default {
   mounted () {
     if (this.$refs.canvas.getContext) this.context = this.$refs.canvas.getContext('2d')
     this.onResize()
-    this.$nextTick(() => {
-      this.context.fillStyle = 'rgb(200, 0, 0)'
-      this.context.fillRect(10, 10, 5000, 5000)
-    })
     this.$refs.canvas.addEventListener('pointermove', e => {
       this.cursor = { x: e.clientX, y: e.clientY }
       if (e.buttons === 1 && this.annotationsColor !== 'erase') { // left click

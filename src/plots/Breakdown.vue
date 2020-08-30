@@ -33,6 +33,8 @@ export default {
             this.$store.commit('addSlot', {
               name: 'Ceteris Paribus',
               plotType: 'CeterisParibus',
+              plotCategory: 'Observation Level',
+              scope: 'model',
               localParams: [{ model: this.selectedModel, variable: this.selectedVariable, observation: this.selectedObservation }]
             })
           }

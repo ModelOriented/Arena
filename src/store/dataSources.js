@@ -1,18 +1,24 @@
 import jsonDatasource from '@/store/datasources/jsonDatasource.js'
 import arenarLiveDatasource from '@/store/datasources/arenarLiveDatasource.js'
+import peerDatasource from '@/store/datasources/peerDatasource.js'
 import Vue from 'vue'
 import Ajv from 'ajv'
 import uuid from 'uuid/v4'
 import config from '@/configuration/config.js'
+import Peer from 'peerjs'
 
 const ajv = new Ajv()
 ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-06.json'))
-const validatorSession = ajv.compile(require('@/store/schemas/session.schema.json'))
+/* eslint-disable camelcase */
+const validatorSession_1_0_0 = ajv.compile(require('@/store/schemas/session.schema.json'))
+const validatorSession_1_1_0 = ajv.compile(require('@/store/schemas/session-1.1.0.schema.json'))
+/* eslint-enable camelcase */
 
 const state = {
   dataSources: [
     'jsonDatasource',
-    'arenarLiveDatasource'
+    'arenarLiveDatasource',
+    'peerDatasource'
   ],
   recentURLSources: [],
   recentSessions: [],
@@ -20,7 +26,8 @@ const state = {
   sessionName: '',
   sessionLastSaved: null,
   debug: false,
-  tokenCallback: null // promise resolve function waiting for token
+  tokenCallback: null, // promise resolve function waiting for token
+  peer: null
 }
 
 const getters = {
@@ -47,6 +54,9 @@ const getters = {
   },
   tokenCallback (state) {
     return state.tokenCallback
+  },
+  peer (state) {
+    return state.peer
   }
 }
 
@@ -87,6 +97,9 @@ const mutations = {
   },
   clearTokenCallback (state) {
     Vue.set(state, 'tokenCallback', null)
+  },
+  setPeer (state, peer) {
+    Vue.set(state, 'peer', peer)
   }
 }
 
@@ -153,14 +166,19 @@ const actions = {
       colors,
       annotations,
       options,
-      version: '1.0.0',
+      version: '1.1.0',
       name: getters.sessionName,
       uuid: getters.sessionUUID,
       time: new Date().getTime()
     }
   },
   async importSession ({ getters, commit, dispatch }, session) {
-    if (!validatorSession(session)) throw new Error('Invalid session file')
+    if (validatorSession_1_0_0(session)) {
+      session.slots = session.slots.map(s => ({ ...s, scope: config.scopes[0] }))
+    } else if (validatorSession_1_1_0(session)) {
+    } else {
+      throw new Error('Invalid session file')
+    }
     commit('resetSession')
     getters.dataSources.forEach(ds => commit(ds + '/clearSources'))
     commit('clearTranslations')
@@ -245,6 +263,59 @@ const actions = {
   async loadSessionURL ({ dispatch, commit }, url) {
     let response = await Vue.http.get(url)
     await dispatch('importSession', response.body)
+  },
+  initPeer ({ commit, getters }) {
+    let peer = new Peer()
+    return new Promise((resolve, reject) => {
+      peer.on('open', () => {
+        commit('setPeer', peer)
+        resolve()
+      })
+      peer.on('error', e => {
+        commit('setPeer', null)
+        reject(e)
+      })
+      peer.on('close', () => {
+        commit('setPeer', null)
+      })
+    })
+  },
+  async initPeerServer ({ commit, getters, dispatch }) {
+    if (!getters.peer) await dispatch('initPeer')
+    getters.peer.on('connection', (conn) => {
+      conn.on('data', async (data) => {
+        try {
+          let parsed = data
+          if (!parsed.id || !parsed.type) return
+          let response = { ok: true, id: parsed.id }
+          if (parsed.type === 'getParams') {
+            response.response = getters.availableParams
+          } else if (parsed.type === 'getPlot' && parsed.params && parsed.plotType) {
+            console.log('query request')
+            console.log(parsed)
+            response.response = await dispatch('query', { params: parsed.params, plotType: parsed.plotType })
+            console.log(response)
+          } else if (parsed.type === 'getAvailableSlots' && parsed.params && parsed.scope) {
+            response.response = getters.getAvailableSlots(parsed.params, parsed.scope)
+          } else {
+            response.ok = false
+          }
+          conn.send(response)
+        } catch (e) {
+          console.error(e)
+        }
+      })
+      conn.on('open', () => {
+        dispatch('exportSession').then(s => conn.send(s)).catch(console.error)
+      })
+    })
+  },
+  async initPeerClient ({ commit, getters, dispatch }, peerId) {
+    if (!getters.peer) await dispatch('initPeer')
+    dispatch('loadData', { data: { type: 'peer', peerId } })
+  },
+  globalParamsUpdated ({ dispatch }) {
+    dispatch('peerDatasource/globalParamsUpdated')
   }
 }
 
@@ -255,7 +326,8 @@ export default {
   actions,
   modules: {
     jsonDatasource,
-    arenarLiveDatasource
+    arenarLiveDatasource,
+    peerDatasource
   },
   namespaced: false
 }

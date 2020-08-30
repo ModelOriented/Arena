@@ -1,6 +1,9 @@
 <template>
-  <div class="feature-importance--plot" v-resize:throttle.100="onResize">
+  <div class="feature-importance-plot" v-resize:throttle.100="onResize">
     <Plotly v-bind="{ traces, config, layout, layoutPatches }" @plotly_click="onPlotlyClick" ref="plot"/>
+    <div class="axis-type-input">
+      <span v-for="t in axisTypes" :key="t" :class="{ active: axisType === t }" @click="setAxisType(t)">{{ t | firstUpper }}</span>
+    </div>
   </div>
 </template>
 <script>
@@ -14,14 +17,44 @@ export default {
   mixins: [Resize],
   props: {
     data: Array,
-    plotType: String
+    plotType: String,
+    slotv: Object
   },
   data () {
     return {
-      selectedModel: null
+      selectedModel: null,
+      axisType: null
     }
   },
+  watch: {
+    axisTypes: {
+      handler () {
+        if (this.customData && this.axisTypes.includes(this.customData.axisType)) {
+          this.axisType = this.customData.axisType
+        } else {
+          this.setAxisType(this.axisTypes[0])
+        }
+      },
+      immediate: true
+    },
+    customData: {
+      handler (newValue) {
+        if (!newValue) return
+        if (this.axisTypes.includes(newValue.axisType)) this.axisType = newValue.axisType
+      },
+      immediate: true
+    }
+  },
+  filters: {
+    firstUpper: format.firstCharUpper
+  },
   computed: {
+    customData () {
+      return this.slotv.customData
+    },
+    axisTypes () {
+      return ['dropout loss', 'difference', 'scaled']
+    },
     trimmed () {
       let variables = new Set(this.data.map(d => d.plotData.variables.slice(0, this.maxVariables)).flat())
       return this.data.map(d => {
@@ -40,8 +73,27 @@ export default {
         })
       })
     },
+    transformed () {
+      return this.trimmed.map(d => {
+        let minus = this.axisType !== 'dropout loss' ? d.plotData.base : 0
+        let div = this.axisType === 'scaled' ? (Math.max(...d.plotData.dropout_loss) - minus) : 1
+        let mapping = (x) => (x - minus) / div
+        return {
+          ...d,
+          plotData: {
+            ...d.plotData,
+            dropout_loss: d.plotData.dropout_loss.map(mapping),
+            min: d.plotData.min.map(mapping),
+            max: d.plotData.max.map(mapping),
+            q1: d.plotData.q1.map(mapping),
+            q3: d.plotData.q3.map(mapping),
+            base: d.plotData.base - minus
+          }
+        }
+      })
+    },
     traces () {
-      return this.trimmed.map((d, i) => {
+      return this.transformed.map((d, i) => {
         return {
           name: d.params.model,
           type: 'bar',
@@ -58,16 +110,17 @@ export default {
           hoverinfo: 'template',
           hovertemplate: d.plotData.dropout_loss.map((x, i) => format.formatValue(d.plotData.base) + ' => ' + format.formatValue(x)),
           hoverlabel: {
-            bgcolor: this.mainParamColors[d.params.model],
+            bgcolor: this.scopesColors.model[d.params.model],
             font: { family: 'FiraSansBold', size: 16, color: 'white' }
           },
           marker: {
-            color: this.mainParamColors[d.params.model]
+            color: this.scopesColors.model[d.params.model]
           },
           insidetextanchor: 'start',
           selectedpoints: (this.selectedModel === d.params.model || this.selectedModel === null) ? undefined : [] // undefined - all selected, [] - all unselected
         }
-      }).concat(!this.displayBoxplots ? [] : this.trimmed.map((d, i) => {
+      }).concat(!this.displayBoxplots ? [] : this.transformed.map((d, i) => {
+        let iqr = d.plotData.q3.map((x, k) => x - d.plotData.q1[k])
         return {
           name: d.params.model,
           type: 'box',
@@ -83,11 +136,11 @@ export default {
             width: 1
           },
           fillcolor: (this.selectedModel === d.params.model || this.selectedModel === null) ? '#371ea3' : 'transparent',
-          lowerfence: d.plotData.min,
-          upperfence: d.plotData.max,
+          lowerfence: d.plotData.q1.map((x, k) => Math.max(x - (1.5 * iqr[k]), d.plotData.min[k])),
+          upperfence: d.plotData.q3.map((x, k) => Math.min(x + (1.5 * iqr[k]), d.plotData.max[k])),
           showlegend: false,
           hoverinfo: 'none',
-          whiskerwidth: 0
+          whiskerwidth: 0.5
         }
       }))
     },
@@ -103,7 +156,7 @@ export default {
         xaxis: {
           type: 'linear',
           title: {
-            text: 'dropout loss',
+            text: '',
             standoff: 10
           },
           gridwidth: 2,
@@ -124,7 +177,7 @@ export default {
         showlegend: false,
         margin: { l: this.leftMargin, t: 0, b: 45, r: 5 },
         dragmode: 'pan',
-        shapes: this.trimmed.map(d => {
+        shapes: this.transformed.map(d => {
           return {
             type: 'line',
             x0: d.plotData.base,
@@ -151,12 +204,12 @@ export default {
       }
     },
     minimalValue () {
-      return Math.min(...this.trimmed.map(d => {
+      return Math.min(...this.transformed.map(d => {
         return Math.min(...d.plotData.min, d.plotData.base)
       }))
     },
     maximalValue () {
-      return Math.max(...this.trimmed.map(d => {
+      return Math.max(...this.transformed.map(d => {
         return Math.max(...d.plotData.max)
       }))
     },
@@ -172,19 +225,22 @@ export default {
     maxVariables () { return this.$store.getters.getOption('featureimportance_max_variables') },
     leftMargin () { return this.$store.getters.getOption('left_margin') },
     displayBoxplots () { return this.$store.getters.getOption('featureimportance_boxplots') },
-    ...mapGetters(['mainParamColors'])
+    ...mapGetters(['scopesColors'])
   },
   methods: {
+    setAxisType (v) {
+      this.$store.commit('setSlotCustomData', { slot: this.slotv, customData: { ...this.customData, axisType: v } })
+    },
     onPlotlyClick (e) {
-      let points = e.data.points.filter(p => p.curveNumber < this.trimmed.length) // Boxplots are after all bars
+      let points = e.data.points.filter(p => p.curveNumber < this.transformed.length) // Boxplots are after all bars
       if (points.length === 0) return
       let yaxis = points[0].yaxis // All points have the same
       // I do not know why it works, I just found this by experiments
-      let barWidth = (yaxis._length - yaxis._m - yaxis._b) / (this.trimmed.length * yaxis._categories.length)
-      let barsTop = yaxis.d2p(points[0].y) - (0.5 * barWidth * this.trimmed.length) // Center - half of widths sum
+      let barWidth = (yaxis._length - yaxis._m - yaxis._b) / (this.transformed.length * yaxis._categories.length)
+      let barsTop = yaxis.d2p(points[0].y) - (0.5 * barWidth * this.transformed.length) // Center - half of widths sum
       let curveNum = Math.floor((e.data.event.pointerY - barsTop) / barWidth) // Assuming plot is at top:0
-      if (curveNum >= this.trimmed.length || curveNum < 0) return
-      let model = this.trimmed[curveNum].params.model
+      if (curveNum >= this.transformed.length || curveNum < 0) return
+      let model = this.transformed[curveNum].params.model
       // If this model is already selected, then unselect
       this.selectedModel = this.selectedModel === model ? null : model
     }
@@ -195,4 +251,21 @@ export default {
 }
 </script>
 <style>
+div.feature-importance-plot > div.axis-type-input {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-family: 'FiraSansBold';
+  white-space: nowrap;
+}
+div.feature-importance-plot > div.axis-type-input > span {
+  padding: 0 5px;
+  color: #777;
+  cursor: pointer;
+}
+div.feature-importance-plot > div.axis-type-input > span.active {
+  color: #371ea3;
+}
 </style>

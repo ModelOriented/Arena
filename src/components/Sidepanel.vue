@@ -46,7 +46,7 @@ export default {
       return [...this.slotsList.reduce((set, x) => set.add(x.plotCategory), new Set())].sort()
     },
     selectTitle () {
-      return format.firstCharUpper(config.mainParam + 's')
+      return format.firstCharUpper(config.scopes[0] + 's')
     },
     ...mapGetters(['isElementClosed'])
   },

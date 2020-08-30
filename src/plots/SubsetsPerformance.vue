@@ -1,5 +1,8 @@
 <template>
-  <div class="funnel-measure-plot">
+  <div class="subsets-performance-plot">
+    <div class="score-function-input">
+      <span v-for="f in scoreFunctions" :key="f" :class="{ active: scoreFunctionSafe === f }" @click="setScoreFunction(f)">{{ f }}</span>
+    </div>
     <div class="page-left page-button" :class="{ invisible: page <= 0}" @click="page -= 1">
       <font-awesome-icon icon="angle-left"/> Previous
     </div>
@@ -17,57 +20,87 @@ import LolipopAxis from '@/utils/lolipopAxis.js'
 const Plotly = () => import('@/components/Plotly.vue')
 
 export default {
-  name: 'FunnelMeasure',
+  name: 'SubsetsPerformace',
   props: {
     data: Array,
-    plotType: String
+    plotType: String,
+    slotv: Object
   },
   data () {
-    return { page: 0 }
+    return {
+      page: 0,
+      scoreFunction: ''
+    }
   },
   watch: {
-    data () { this.page = 0 }
+    data () { this.page = 0 },
+    scoreFunctions: {
+      handler () {
+        if (this.customData && this.scoreFunctions.includes(this.customData.scoreFunction)) {
+          this.scoreFunction = this.customData.scoreFunction
+        } else {
+          this.setScoreFunction(this.scoreFunctions[0])
+        }
+      },
+      immediate: true
+    },
+    customData: {
+      handler (newValue) {
+        if (!newValue) return
+        if (this.scoreFunctions.includes(newValue.scoreFunction)) this.scoreFunction = newValue.scoreFunction
+      },
+      immediate: true
+    }
+  },
+  methods: {
+    setScoreFunction (v) {
+      this.$store.commit('setSlotCustomData', { slot: this.slotv, customData: { ...this.customData, scoreFunction: v } })
+    }
   },
   computed: {
-    pageSize () { return this.$store.getters.getOption('funnelmeasure_page_size') },
+    customData () { return this.slotv.customData },
+    pageSize () { return this.$store.getters.getOption('subsetsperformance_page_size') },
     pagesCount () { return Math.ceil(this.variables.length / this.pageSize) },
+    scoreFunctionSafe () { return this.scoreFunctions.includes(this.scoreFunction) ? this.scoreFunction : this.scoreFunctions[0] },
     pageRange () {
       let first = this.page * this.pageSize
       return [first, first + this.pageSize]
     },
     variables () {
-      return [...new Set(this.data.map(x => Object.keys(x.plotData.lossValues)).flat())]
+      return [...new Set(this.data.map(x => Object.keys(x.plotData[this.scoreFunctionSafe].scoreValues)).flat())]
     },
     subsets () {
       return this.variables.reduce((acu, variable) => {
-        acu[variable] = [...new Set(this.data.map(x => Object.keys(x.plotData.lossValues[variable])).flat())]
+        acu[variable] = [...new Set(this.data.map(x => Object.keys(x.plotData[this.scoreFunctionSafe].scoreValues[variable])).flat())]
         return acu
       }, {})
     },
     lolipopAxis () {
-      return new LolipopAxis(this.variables.slice(...this.pageRange), this.data.slice(1).map(d => d.params.model), this.variables.slice(...this.pageRange).map(v => this.subsets[v]), 0.03, 0.03, 1000)
+      return new LolipopAxis(this.variables.slice(...this.pageRange), this.data.map(d => d.params.model), this.variables.slice(...this.pageRange).map(v => this.subsets[v]))
+    },
+    scoreFunctions () {
+      return this.data.map(d => Object.keys(d.plotData)).reduce((acu, f) => acu.filter(f2 => f.includes(f2)))
     },
     error () {
-      if (new Set(this.data.map(x => x.plotData.lossFunction)).size > 1) return 'To plot Funnel Measure all models must use the same loss function'
-      if (this.data.length < 2) return 'To plot Funnel Measure you need at least two models'
-      if (this.data.filter(x => Object.keys(x.plotData.lossValues).length !== this.variables.length).length > 0) return 'Selected models use incompatible variables'
-      let testVariableSubsets = (x, variable) => Object.keys(x.plotData.lossValues[variable]).length !== this.subsets[variable].length
+      if (this.scoreFunctions.length === 0) return 'To plot Funnel Measure all models must have common score function'
+      if (this.data.filter(x => Object.keys(x.plotData[this.scoreFunctionSafe].scoreValues).length !== this.variables.length).length > 0) return 'Selected models use incompatible variables'
+      let testVariableSubsets = (x, variable) => Object.keys(x.plotData[this.scoreFunctionSafe].scoreValues[variable]).length !== this.subsets[variable].length
       if (this.data.filter(x => this.variables.filter(v => testVariableSubsets(x, v)) > 0) > 0) return 'Selected models have incompatible variables\' subsets'
       return null
     },
     transformed () {
       if (this.error) return []
-      let ref = this.data[0].plotData.lossValues
-      return this.data.slice(1).map(x => {
-        let variables = Object.entries(x.plotData.lossValues).slice(...this.pageRange)
+      return this.data.map(x => {
+        let variables = Object.entries(x.plotData[this.scoreFunctionSafe].scoreValues).slice(...this.pageRange)
+        let base = x.plotData[this.scoreFunctionSafe].base
         let points = variables.map(([variable, subsets]) => {
-          return Object.entries(subsets).map(([subset, loss]) => {
-            let point = { y: this.lolipopAxis.getPointRange(variable, subset, x.params.model).mid, x: loss - ref[variable][subset], label: subset }
-            point.xref = point.x / ref[variable][subset]
+          return Object.entries(subsets).map(([subset, score]) => {
+            let point = { y: this.lolipopAxis.getPointRange(variable, subset, x.params.model).mid, x: score, label: subset }
+            point.xref = (point.x - base) / base
             return point
           })
         }).flat()
-        return { data: x, x: points.map(p => p.x), y: points.map(p => p.y), label: points.map(p => p.label), xref: points.map(p => p.xref) }
+        return { data: x, x: points.map(p => p.x), y: points.map(p => p.y), label: points.map(p => p.label), xref: points.map(p => p.xref), base }
       })
     },
     traces () {
@@ -80,7 +113,7 @@ export default {
           y: d.y,
           customdata: d.xref,
           text: d.label,
-          hovertemplate: '<b>%{text}</b><br>' + d.data.plotData.lossFunction + ': %{x:+.2f} (%{customdata:+.0%})',
+          hovertemplate: '<b>%{text}</b><br>' + this.scoreFunctionSafe + ': %{x:.2f} (%{customdata:+.0%})',
           hoverlabel: {
             bgcolor: this.scopesColors.model[d.data.params.model],
             font: { family: 'FiraSansBold', size: 16, color: 'white' }
@@ -97,7 +130,7 @@ export default {
         return d.x.map((x, i) => {
           return {
             type: 'line',
-            x0: 0,
+            x0: d.base,
             x1: x,
             xref: 'x',
             y0: d.y[i],
@@ -122,7 +155,7 @@ export default {
           zeroline: false,
           showspikes: true,
           title: {
-            text: 'Loss difference',
+            text: '',
             standoff: 10
           }
         },
@@ -159,22 +192,22 @@ export default {
               dash: 'dash'
             }
           }
-        }).concat([
-          {
+        }).concat(this.data.map(d => {
+          return {
             type: 'line',
-            x0: 0,
-            x1: 0,
+            x0: d.plotData[this.scoreFunctionSafe].base,
+            x1: d.plotData[this.scoreFunctionSafe].base,
             xref: 'x',
             y0: this.lolipopAxis.getHeaderRange().end,
             y1: this.lolipopAxis.axisLength,
             yref: 'y',
             line: {
-              color: this.scopesColors.model[this.data[0].params.model],
+              color: this.scopesColors.model[d.params.model],
               width: 2,
               dash: 'line'
             }
           }
-        ]).concat(this.lolipopLines),
+        })).concat(this.lolipopLines),
         annotations: this.variables.slice(...this.pageRange).map(v => {
           return {
             x: 0.05,
@@ -182,13 +215,13 @@ export default {
             yanchor: 'middle',
             bgcolor: 'white',
             text: ' ' + format.formatTitle(v) + ' ',
-            yref: 'y',
             xref: 'paper',
+            yref: 'y',
             showarrow: false
           }
-        }).concat([
-          {
-            x: 0,
+        }).concat(this.data.map(d => {
+          return {
+            x: d.plotData[this.scoreFunctionSafe].base,
             y: this.lolipopAxis.getHeaderRange().mid,
             ay: 0,
             ax: 0,
@@ -196,10 +229,10 @@ export default {
             yanchor: 'middle',
             xref: 'x',
             yref: 'y',
-            text: this.data[0].params.model,
-            font: { color: this.scopesColors.model[this.data[0].params.model] }
+            text: d.params.model,
+            font: { color: this.scopesColors.model[d.params.model] }
           }
-        ])
+        }))
       }
     },
     config () {
@@ -218,7 +251,23 @@ export default {
 }
 </script>
 <style>
-div.funnel-measure-plot > span.error {
+div.subsets-performance-plot > div.score-function-input {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-family: 'FiraSansBold';
+}
+div.subsets-performance-plot > div.score-function-input > span {
+  padding: 0 5px;
+  color: #777;
+  cursor: pointer;
+}
+div.subsets-performance-plot > div.score-function-input > span.active {
+  color: #371ea3;
+}
+div.subsets-performance-plot > span.error {
   position: absolute;
   display: inline-block;
   top: 40%;
@@ -229,22 +278,22 @@ div.funnel-measure-plot > span.error {
   font-size: 20px;
   color: #371ea3;
 }
-div.funnel-measure-plot > div.page-button {
+div.subsets-performance-plot > div.page-button {
   position: absolute;
   top: 0;
   cursor: pointer;
   z-index: 10;
 }
-div.funnel-measure-plot > div.page-button:hover {
+div.subsets-performance-plot > div.page-button:hover {
   color: #371ea8;
 }
-div.funnel-measure-plot > div.page-button.invisible {
+div.subsets-performance-plot > div.page-button.invisible {
   display: none;
 }
-div.funnel-measure-plot > div.page-left {
+div.subsets-performance-plot > div.page-left {
   left: 0;
 }
-div.funnel-measure-plot > div.page-right {
+div.subsets-performance-plot > div.page-right {
   right: 0;
 }
 </style>

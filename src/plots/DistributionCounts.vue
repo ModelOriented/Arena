@@ -1,41 +1,80 @@
 <template>
-  <div class="categorical-dependence-plot" v-resize:throttle.100="onResize">
+  <div class="distribution-counts-plot" v-resize:throttle.100="onResize">
     <Plotly v-bind="{ traces, config, layout, layoutPatches }" ref="plot"/>
+    <div class="axis-type-input">
+      <span v-for="t in axisTypes" :key="t" :class="{ active: axisType === t }" @click="setAxisType(t)">{{ t | firstUpper }}</span>
+    </div>
   </div>
 </template>
 <script>
 import Resize from '@/utils/Resize.js'
 import format from '@/utils/format.js'
-import { mapGetters } from 'vuex'
 const Plotly = () => import('@/components/Plotly.vue')
 
 export default {
-  name: 'CategoricalDependence',
+  name: 'DistributionCounts',
   mixins: [Resize],
   props: {
     data: Array,
-    plotType: String
+    plotType: String,
+    slotv: Object
+  },
+  data () {
+    return {
+      axisType: ''
+    }
+  },
+  watch: {
+    axisTypes: {
+      handler () {
+        if (this.customData && this.axisTypes.includes(this.customData.axisType)) {
+          this.axisType = this.customData.axisType
+        } else {
+          this.setAxisType(this.axisTypes[0])
+        }
+      },
+      immediate: true
+    },
+    customData: {
+      handler (newValue) {
+        if (!newValue) return
+        if (this.axisTypes.includes(newValue.axisType)) this.axisType = newValue.axisType
+      },
+      immediate: true
+    }
+  },
+  filters: {
+    firstUpper: format.firstCharUpper
   },
   computed: {
+    customData () {
+      return this.slotv.customData
+    },
+    axisTypes () {
+      return ['count', 'density']
+    },
+    colors () {
+      return this.$store.getters.scopesColors['dataset']
+    },
     traces () {
+      if (!this.axisType) return []
       return this.data.map((d, i) => {
         return {
-          name: d.params.model,
+          name: d.params.dataset,
           type: 'bar',
           orientation: 'h',
-          base: d.plotData.base,
-          y: d.plotData.x.map(y => format.addNewLines(y, this.leftMargin)),
-          x: d.plotData.y.map(x => x - d.plotData.base),
-          text: d.plotData.y.map(x => format.formatValue(x - d.plotData.base, true, ' ')),
+          y: d.plotData.names.map(y => format.addNewLines(y, this.leftMargin)),
+          x: d.plotData[this.axisType],
+          text: d.plotData[this.axisType].map(x => format.formatValue(x, false, ' ')),
           textposition: 'outside',
           hoverinfo: 'template',
-          hovertemplate: d.plotData.y.map(x => format.formatValue(x - d.plotData.base, true)),
+          hovertemplate: d.plotData[this.axisType].map(x => format.formatValue(x, false)),
           hoverlabel: {
-            bgcolor: this.scopesColors.model[d.params.model],
+            bgcolor: this.colors[d.params.dataset],
             font: { family: 'FiraSansBold', size: 16, color: 'white' }
           },
           marker: {
-            color: this.scopesColors.model[d.params.model]
+            color: this.colors[d.params.dataset]
           },
           insidetextanchor: 'start'
         }
@@ -53,7 +92,7 @@ export default {
         xaxis: {
           type: 'linear',
           title: {
-            text: this.plotType === 'AccumulatedDependence' ? 'Accumulated prediction' : 'Average prediction',
+            text: '',
             standoff: 10
           },
           gridwidth: 2,
@@ -73,8 +112,8 @@ export default {
         shapes: this.data.map(d => {
           return {
             type: 'line',
-            x0: d.plotData.base,
-            x1: d.plotData.base,
+            x0: 0,
+            x1: 0,
             y0: 0,
             y1: 1,
             yref: 'paper',
@@ -97,13 +136,11 @@ export default {
       }
     },
     minimalValue () {
-      return Math.min(...this.data.map(d => {
-        return Math.min(...d.plotData.y, d.plotData.base)
-      }))
+      return 0
     },
     maximalValue () {
       return Math.max(...this.data.map(d => {
-        return Math.max(...d.plotData.y, d.plotData.base)
+        return Math.max(...d.plotData[this.axisType])
       }))
     },
     range () {
@@ -115,8 +152,12 @@ export default {
     layoutPatches () {
       return { 'xaxis.range': this.range, 'margin.l': this.leftMargin }
     },
-    leftMargin () { return this.$store.getters.getOption('left_margin_values') },
-    ...mapGetters(['scopesColors'])
+    leftMargin () { return this.$store.getters.getOption('left_margin_values') }
+  },
+  methods: {
+    setAxisType (v) {
+      this.$store.commit('setSlotCustomData', { slot: this.slotv, customData: { ...this.customData, axisType: v } })
+    }
   },
   components: {
     Plotly
@@ -124,4 +165,20 @@ export default {
 }
 </script>
 <style>
+div.distribution-counts-plot > div.axis-type-input {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-family: 'FiraSansBold';
+}
+div.distribution-counts-plot > div.axis-type-input > span {
+  padding: 0 5px;
+  color: #777;
+  cursor: pointer;
+}
+div.distribution-counts-plot > div.axis-type-input > span.active {
+  color: #371ea3;
+}
 </style>

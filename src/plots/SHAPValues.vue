@@ -59,11 +59,11 @@ export default {
           hoverinfo: 'template',
           hovertemplate: d.plotData.mean.map((x, i) => format.formatValue(d.plotData.intercept) + ' => ' + format.formatValue(x + d.plotData.intercept)),
           hoverlabel: {
-            bgcolor: this.mainParamColors[d.params.model],
+            bgcolor: this.scopesColors.model[d.params.model],
             font: { family: 'FiraSansBold', size: 16, color: 'white' }
           },
           marker: {
-            color: this.mainParamColors[d.params.model]
+            color: this.scopesColors.model[d.params.model]
           },
           insidetextanchor: 'start',
           selectedpoints: (this.selectedModel === d.params.model || this.selectedModel === null) ? undefined : [] // undefined - all selected, [] - all unselected
@@ -153,12 +153,12 @@ export default {
     },
     minimalValue () {
       return Math.min(...this.trimmed.map(d => {
-        return Math.min(...d.plotData.min, 0) + d.plotData.intercept
+        return Math.min(...d.plotData[this.displayBoxplots ? 'min' : 'mean'], 0) + d.plotData.intercept
       }))
     },
     maximalValue () {
       return Math.max(...this.trimmed.map(d => {
-        return Math.max(...d.plotData.max, 0) + d.plotData.intercept
+        return Math.max(...d.plotData[this.displayBoxplots ? 'max' : 'mean'], 0) + d.plotData.intercept
       }))
     },
     range () {
@@ -173,7 +173,7 @@ export default {
     maxVariables () { return this.$store.getters.getOption('shapvalues_max_variables') },
     leftMargin () { return this.$store.getters.getOption('left_margin') },
     displayBoxplots () { return this.$store.getters.getOption('shapvalues_boxplots') },
-    ...mapGetters(['mainParamColors'])
+    ...mapGetters(['scopesColors'])
   },
   methods: {
     onPlotlyClick (e) {

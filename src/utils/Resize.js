@@ -13,6 +13,7 @@ export default {
   methods: {
     onResize () {
       let el = this.$refs.plot
+      if (!el) return
       if (el.$el) el = el.$el
       if (this.$refs.plot) this.width = el.offsetWidth
       if (this.$refs.plot) this.height = el.offsetHeight

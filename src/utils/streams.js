@@ -13,7 +13,7 @@ export default {
   },
   runOnChildren (obj, f) {
     return Object.keys(obj).reduce((acu, key) => {
-      acu[key] = f(obj[key])
+      acu[key] = f(obj[key], key)
       return acu
     }, {})
   },
