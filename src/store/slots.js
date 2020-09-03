@@ -187,6 +187,11 @@ const actions = {
       commit('setSlotPosition', { slot, x: 32 * leftMargin, y: 32 * topMargin })
       commit('setSlotSize', { slot, width: slotWidth * 32, height: slotHeight * 32 })
     })
+  },
+  refreshSlots ({ commit, getters }) {
+    let n = getters.pageNumber
+    commit('setPageNumber', -1)
+    Vue.nextTick(() => commit('setPageNumber', n))
   }
 }
 

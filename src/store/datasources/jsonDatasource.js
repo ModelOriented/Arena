@@ -96,7 +96,8 @@ const actions = {
       if (plotData) return { params: getters.translateParams(source, plotData.params), ...plotData }
     }
     return null
-  }
+  },
+  init () {}
 }
 
 export default {

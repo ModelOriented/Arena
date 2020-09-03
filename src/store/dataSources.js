@@ -120,6 +120,9 @@ const actions = {
       if (e.key !== 'recentSessions' && e.newValue) return
       dispatch('loadRecentSessions')
     })
+    getters.dataSources.forEach(ds => {
+      dispatch(ds + '/init')
+    })
   },
   query ({ dispatch, getters }, query) {
     // array of promises and raw objects (Promise.all will handle them)

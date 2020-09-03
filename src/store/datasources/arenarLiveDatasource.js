@@ -146,6 +146,24 @@ const actions = {
       })
     }
     return null
+  },
+  updateSource ({ getters, commit, dispatch }, source) {
+    Vue.http.get(source.address).then(response => {
+      commit('removeSource', source)
+      dispatch('loadData', { data: response.body, src: source.address, uuid: source.uuid })
+      dispatch('refreshSlots', null, { root: true })
+    }).catch(console.error)
+  },
+  refresh ({ getters, commit, dispatch }) {
+    getters.sources.forEach(source => {
+      Vue.http.get(source.address + 'timestamp').then(response => {
+        let timestamp = response.body.timestamp
+        if (timestamp > source.timestamp) dispatch('updateSource', source)
+      }).catch(console.error)
+    })
+  },
+  init ({ dispatch }) {
+    setInterval(() => dispatch('refresh'), 5000)
   }
 }
 
