@@ -46,6 +46,10 @@
       <span class="section-title"><font-awesome-icon icon="user-edit"/> Observation</span>
       <ObservationDetails />
     </div>
+    <div class="menu-container" :style="containerStyle.down" v-if="openMenu.down === 'Options'">
+      <span class="section-title"><font-awesome-icon icon="user-edit"/> Options</span>
+      <SidepanelOptions />
+    </div>
   </div>
 </template>
 <script>
@@ -53,6 +57,7 @@ import SlotsListElement from '@/components/SlotsListElement.vue'
 import SidepanelDropdown from '@/components/SidepanelDropdown.vue'
 import SidepanelHelp from '@/components/SidepanelHelp.vue'
 import ObservationDetails from '@/components/ObservationDetails.vue'
+import SidepanelOptions from '@/components/SidepanelOptions.vue'
 import interact from 'interactjs'
 import { mapMutations, mapGetters } from 'vuex'
 import config from '@/configuration/config.js'
@@ -65,7 +70,8 @@ export default {
     SlotsListElement,
     SidepanelDropdown,
     SidepanelHelp,
-    ObservationDetails
+    ObservationDetails,
+    SidepanelOptions
   },
   filters: {
     formatTitle: format.formatTitle,
@@ -78,7 +84,7 @@ export default {
       openMenu: { up: config.scopes[0] + 's', down: 'Plots' },
       availableMenus: {
         up: [...config.scopes.map(x => x + 's'), 'Other'],
-        down: ['Plots', 'Observation Details']
+        down: ['Plots', 'Observation Details', 'Options']
       },
       slotsList: [],
       lastUpperMenu: config.scopes[0] + 's',
