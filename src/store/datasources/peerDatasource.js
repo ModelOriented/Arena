@@ -137,7 +137,12 @@ const actions = {
         })
       })
     })
-  }
+  },
+  getAttributes ({ state, commit, getters }, { paramValue, paramType }) {
+    // TODO
+    return null
+  },
+  init () {}
 }
 
 export default {

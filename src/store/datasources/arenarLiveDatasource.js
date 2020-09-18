@@ -11,6 +11,7 @@ ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-06.json'))
 /* eslint-disable camelcase */
 const validator_1_0_0 = ajv.compile(require('@/store/schemas/arenarLive.schema.json'))
 const validator_1_1_0 = ajv.compile(require('@/store/schemas/arenarLive-1.1.0.schema.json'))
+const validator_1_2_0 = ajv.compile(require('@/store/schemas/arenarLive-1.2.0.schema.json'))
 /* eslint-enable camelcase */
 
 const state = {}
@@ -56,6 +57,7 @@ const isUnique = (array) => {
 const actions = {
   loadData ({ state, commit, dispatch, rootGetters }, { data, src, uuid }) {
     let params = null
+    let options = { customParams: false, attributes: false }
     if (validator_1_0_0(data)) {
       params = config.params.reduce((acu, paramType) => {
         acu[paramType] = data[paramType + 's'] || []
@@ -63,6 +65,9 @@ const actions = {
       }, {})
     } else if (validator_1_1_0(data)) {
       params = data.availableParams
+    } else if (validator_1_2_0(data)) {
+      params = data.availableParams
+      options = data.options
     } else {
       return false
     }
@@ -70,6 +75,7 @@ const actions = {
     let source = {
       availableParams: params,
       availablePlots: data.availablePlots,
+      options: options,
       uuid: uuid || uuidGenerator(),
       address: src,
       timestamp: data.timestamp,
@@ -164,6 +170,28 @@ const actions = {
   },
   init ({ dispatch }) {
     setInterval(() => dispatch('refresh'), 5000)
+  },
+  getAttributes ({ state, commit, getters }, { paramValue, paramType }) {
+    for (let source of getters.sources) {
+      if (!source.options.attributes) continue
+      let index = getters.translatedAvailableParams[source.uuid][paramType].indexOf(paramValue)
+      if (index === -1) continue
+      let originalValue = source.availableParams[paramType][index]
+      /* eslint-disable-next-line arena/no-hardcode-param-types */
+      if (paramType === 'variable' && !source.options.customParams) return null
+      let cached = source.cache.find(c => c.attributes && c.paramType === paramType && c.paramValue === originalValue)
+      if (cached) return getters.translateAttributes(source.uuid, paramType, cached.attributes)
+      return new Promise((resolve, reject) => {
+        Vue.http.get(source.address + 'attribute/' + paramType + '/' + encodeURIComponent(originalValue)).then(response => {
+          commit('addToCache', { source, slotData: { attributes: response.body, paramType, paramValue: originalValue } })
+          resolve(response.body)
+        }).catch(e => {
+          console.error(e)
+          reject(e)
+        })
+      })
+    }
+    return null
   }
 }
 

@@ -1,5 +1,6 @@
 import uuidGenerator from 'uuid/v4'
 import Ajv from 'ajv'
+import streams from '@/utils/streams.js'
 import format from '@/utils/format.js'
 import config from '@/configuration/config.js'
 import dataSourceCommon from '@/store/datasources/dataSourceCommon.js'
@@ -9,6 +10,7 @@ ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-06.json'))
 /* eslint-disable camelcase */
 const validator_1_0_0 = ajv.compile(require('@/store/schemas/data.schema.json'))
 const validator_1_1_0 = ajv.compile(require('@/store/schemas/data-1.1.0.schema.json'))
+const validator_1_2_0 = ajv.compile(require('@/store/schemas/data-1.2.0.schema.json'))
 /* eslint-enable camelcase */
 
 const state = {}
@@ -46,6 +48,7 @@ const isUnique = (array) => {
 const actions = {
   loadData ({ state, commit, dispatch, rootGetters }, { data, src, uuid }) {
     let params = null
+    let attributes = streams.createObjectWithArrays(config.params)
     if (validator_1_0_0(data)) {
       params = config.params.reduce((acu, paramType) => {
         acu[paramType] = data[paramType + 's'] || []
@@ -53,6 +56,9 @@ const actions = {
       }, {})
     } else if (validator_1_1_0(data)) {
       params = data.availableParams
+    } else if (validator_1_2_0(data)) {
+      params = data.availableParams
+      attributes = data.paramsAttributes
     } else {
       return false
     }
@@ -60,6 +66,7 @@ const actions = {
     let source = {
       availableParams: params,
       uuid: uuid || uuidGenerator(),
+      attributes,
       address: src,
       plotsData: []
     }
@@ -97,7 +104,23 @@ const actions = {
     }
     return null
   },
-  init () {}
+  init () {},
+  getAttributes ({ state, commit, getters }, { paramValue, paramType }) {
+    for (let source of getters.sources) {
+      if (!source.options.attributes) continue
+      let index = getters.translatedAvailableParams[source.uuid][paramType].indexOf(paramValue)
+      if (index !== -1) {
+        /* eslint-disable-next-line arena/no-hardcode-param-types */
+        if (paramType === 'variable') return null
+        let attrObject = source.attributes[paramType].reduce((acu, a) => {
+          acu[a.name] = a.values[index]
+          return acu
+        }, {})
+        if (Object.keys(attrObject).length > 0) return getters.translateAttributes(source.uuid, paramType, attrObject)
+      }
+    }
+    return null
+  }
 }
 
 export default {
