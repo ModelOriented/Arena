@@ -107,7 +107,6 @@ const actions = {
   init () {},
   getAttributes ({ state, commit, getters }, { paramValue, paramType }) {
     for (let source of getters.sources) {
-      if (!source.options.attributes) continue
       let index = getters.translatedAvailableParams[source.uuid][paramType].indexOf(paramValue)
       if (index !== -1) {
         /* eslint-disable-next-line arena/no-hardcode-param-types */
