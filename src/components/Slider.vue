@@ -15,7 +15,8 @@ export default {
     min: Number,
     max: Number,
     start: Number,
-    values: Array
+    values: Array,
+    updateWhenDrop: Boolean
   },
   data () {
     return {
@@ -29,7 +30,10 @@ export default {
   },
   watch: {
     position () {
-      this.$emit('update', this.position)
+      if (!this.updateWhenDrop) this.$emit('update', this.position)
+    },
+    active (newValue, oldValue) {
+      if (this.updateWhenDrop && oldValue && !newValue) this.$emit('update', this.position)
     }
   },
   created () {
