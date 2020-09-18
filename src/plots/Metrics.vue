@@ -37,7 +37,8 @@ export default {
   },
   computed: {
     measures () {
-      return [...new Set(this.data.map(d => Object.keys(d.plotData)).flat())]
+      let all = [...new Set(this.data.map(d => Object.keys(d.plotData)).flat())]
+      return all.filter(m => this.data.every(d => Object.keys(d.plotData).includes(m)))
     },
     measureRange () {
       return this.measures.reduce((acu, m) => {
