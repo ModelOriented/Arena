@@ -5,12 +5,14 @@
     </div>
     <div class="menu">
       <div class="menu-block" :style="{ width: splitPos + 'px'}">
-        <div v-for="m in availableMenus.up" :class="{ active: openMenu.up === m }" :key="m" class="menu-item" @click="$set(openMenu, 'up', openMenu.up === m ? null : m)">
+        <div v-for="m in availableMenus.up" :class="{ active: openMenu.up === m }" :key="m" class="menu-item tooltiped" @click="$set(openMenu, 'up', openMenu.up === m ? null : m)">
+          <span class="tooltip">{{ m |firstCharUpper }}</span>
           {{ m | firstCharUpper }}
         </div>
       </div>
       <div class="menu-block" :style="{ top: splitPos + 'px' }">
-        <div v-for="m in availableMenus.down" :class="{ active: openMenu.down === m }" :key="m" class="menu-item" @click="$set(openMenu, 'down', openMenu.down === m ? null : m)">
+        <div v-for="m in availableMenus.down" :class="{ active: openMenu.down === m }" :key="m" class="menu-item tooltiped" @click="$set(openMenu, 'down', openMenu.down === m ? null : m)">
+          <span class="tooltip">{{ m |firstCharUpper }}</span>
           {{ m | firstCharUpper }}
         </div>
       </div>
@@ -190,6 +192,7 @@ export default {
   background: white;
   border-left: 1px solid #ccc;
   box-sizing: border-box;
+  z-index: 1000;
 }
 .sidepanel.closed > div.menu {
   position: absolute;
@@ -202,8 +205,9 @@ export default {
   height: 32px;
   transform-origin: 16px 16px;
   transform: rotate(90deg);
-  overflow-x: hidden;
+  white-space: nowrap;
   border-left: 10px solid white;
+  background: white;
 }
 .sidepanel > div.menu > div.menu-block:first-child {
   border-left: none;
@@ -222,6 +226,13 @@ export default {
   background: #eee;
   color: #371ea3;
   font-weight: 800;
+}
+.sidepanel > div.menu > div.menu-block > div.menu-item > .tooltip {
+  transform-origin: 0 50%;
+  transform: translate(0, -10px) rotate(-90deg) translate(-100%, 0);
+  min-width: unset;
+  max-width: unset;
+  white-space: nowrap;
 }
 .sidepanel > div.menu-container {
   display: flex;
