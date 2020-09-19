@@ -4,8 +4,9 @@
     <div class="variable-containter" v-for="v in variablesNames" :key="v">
       <span class="label">{{ v | formatTitle | firstCharUpper }}</span>
       <Slider v-if="variables[v] && variables[v].type === 'numeric'" :min="variables[v].min" :max="variables[v].max" :start="attributes[v]" :values="getPoints(v, 100)" :key="attributes[v]" @update="update(v, $event)" updateWhenDrop/>
-      <PlotDropdown v-if="variables[v] && variables[v].type === 'categorical'" :values="variables[v].levels" :start="attributes[v]" :key="attributes[v]" listDown @update="update(v, $event)"/>
-      <span v-if="!variables[v]">
+      <PlotDropdown v-else-if="variables[v] && variables[v].type === 'categorical'" :values="variables[v].levels" :start="attributes[v]" :key="attributes[v]" listDown @update="update(v, $event)"/>
+      <PlotDropdown v-else-if="variables[v] && variables[v].type === 'logical'" :values="['true', 'false']" :start="attributes[v] + ''" :key="attributes[v]" listDown @update="update(v, $event === 'true')"/>
+      <span v-else>
         :
         <span style="font-weight: 800;float: right;margin-right: 15px;">{{ attributes[v] }}</span>
       </span>
@@ -61,7 +62,7 @@ export default {
     },
     variablesNames () {
       if (!this.attributes || !this.variables) return []
-      let order = ['numeric', 'categorical']
+      let order = ['numeric', 'categorical', 'logical']
       let getOrder = (v) => this.variables[v] ? order.indexOf(this.variables[v].type) : order.length
       return Object.keys(this.attributes).sort((a, b) => getOrder(a) - getOrder(b))
     },
@@ -71,10 +72,16 @@ export default {
     loadAttributes () {
       let attributes = this.attributes
       if (!this.label) return
-      this.$store.dispatch('getAttributes', { paramType: 'observation', paramValue: this.label }).then(x => {
-        if (!x || this.attributes !== attributes) return
-        this.attributes = x
-      }).catch(this.clear)
+      if (format.isCustomParam(this.label)) {
+        this.$nextTick(() => {
+          this.attributes = JSON.parse(this.label)
+        })
+      } else {
+        this.$store.dispatch('getAttributes', { paramType: 'observation', paramValue: this.label }).then(x => {
+          if (!x || this.attributes !== attributes) return
+          this.attributes = x
+        }).catch(this.clear)
+      }
     },
     clear () {
       this.attributes = null
