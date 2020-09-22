@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/docs/installation", {data:[{}],fetch:[],mutations:[]});
