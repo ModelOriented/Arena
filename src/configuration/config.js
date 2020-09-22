@@ -13,7 +13,7 @@ export default {
     {
       name: 'Employees status classification',
       url: 'https://gist.githubusercontent.com/piotrpiatyszek/82b6eadfd1d932ec79ad783ae74bf1a2/raw/cfaadd9752d7cfeb62766910a9e4c1099fe466c8/data.json',
-      session: 'https://arena.drwhy.ai/?session=https://gist.githubusercontent.com/piotrpiatyszek/0765dfca6af874494eeda8e53ffb812d/raw/03707b3dc04024911d9d3dc4883e581f6909bef3/session.json'
+      session: 'https://gist.githubusercontent.com/piotrpiatyszek/0765dfca6af874494eeda8e53ffb812d/raw/03707b3dc04024911d9d3dc4883e581f6909bef3/session.json'
     }
   ],
   url: 'https://arena.drwhy.ai',
