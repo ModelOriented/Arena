@@ -27,3 +27,5 @@ before_deploy:
 - rm -rf build/branch/$TRAVIS_BRANCH
 - cp -R dist build/branch/$TRAVIS_BRANCH
 - cp -R build/branch/master/* build/
+- mkdir -p build/branch/docs
+- cp -R build/branch/docs build/
