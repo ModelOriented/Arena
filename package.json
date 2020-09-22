@@ -19,8 +19,10 @@
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/vue-fontawesome": "^2.0.0",
     "@nuxtjs/axios": "^5.12.2",
+    "babel-plugin-prismjs": "^2.0.1",
     "core-js": "^3.6.5",
-    "nuxt": "^2.14.5"
+    "nuxt": "^2.14.5",
+    "prismjs": "^1.21.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.1.0",

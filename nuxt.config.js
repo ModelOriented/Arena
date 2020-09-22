@@ -49,7 +49,16 @@ export default {
     styleResources: {
       sass: './assets/sass/variables.sass'
     },
-    publicPath: '/'
+    publicPath: process.env.NODE_ENV === 'production' ? '/' : '/_nuxt/',
+    extend (config, { isDev, isClient }) {
+      config.module.rules.push({
+        resourceQuery: /blockType=codesrc/,
+        loader: require.resolve('./code-loader.js')
+      })
+    },
+    babel: {
+      babelrc: true
+    }
   },
 
   router: {
