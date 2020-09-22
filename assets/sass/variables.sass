@@ -1,0 +1,19 @@
+$green: #8bdcbe
+$red: #f05a71
+$darkblue: #371ea3
+$turquoise: #46bac2
+$violet: #ae2c87
+$orange: #ffa58c
+$blue: #4378bf
+$coolblack: #160e3b
+$lightgrey: #eee
+$grey: #ccc
+$darkgrey: #555
+
+@mixin mobile
+  @media (max-width: 750px)
+    @content
+
+@mixin desktop
+  @media (min-width: 751px)
+    @content

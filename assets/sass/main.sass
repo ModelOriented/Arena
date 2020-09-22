@@ -1,0 +1,20 @@
+@font-face
+  font-family: 'Fira Sans'
+  src: url('../FiraSans-Regular.otf')
+@font-face
+  font-family: 'Fira Sans Bold'
+  src: url('../FiraSans-Bold.otf')
+
+.mobile
+  @include desktop
+    display: none !important
+
+.desktop
+  @include mobile
+    display: none !important
+
+html, body
+  margin: 0
+  padding: 0
+  border: 0
+
