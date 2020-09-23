@@ -21,7 +21,9 @@
       <b>2.</b> Grab plots and move them on the grid<br>
       <b>3.</b> Observation and variable can be changed anytime using dropdown at the top bar<br>
       The whole proccess ilustrates video below<br>
-      <vimeo-player ref="player" :video-id="460888134" class="player-component" />
+      <client-only>
+        <vimeo-player ref="player" :video-id="460888134" class="player-component" />
+      </client-only>
     </DocSection>
   </div>
 </template>
