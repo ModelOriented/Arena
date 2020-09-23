@@ -7,11 +7,7 @@
 </template>
 <script>
 export default {
-  name: 'DocsInstallation',
-  data () {
-    return {
-    }
-  }
+  name: 'DocsInstallation'
 }
 </script>
 <!-- eslint-disable -->

@@ -24,13 +24,16 @@ export default {
 }
 </script>
 <style lang="sass">
-.doc-section > h2 > .link
-  color: $blue
-  font-size: 15px
-  display: inline-block
-  padding-left: 7px
-  vertical-align: middle
-  padding-bottom: 3px
-  cursor: pointer
-  text-decoration: none
+.doc-section > h2
+  font-size: 26px
+  font-family: 'Fira Sans'
+  > .link
+    color: $blue
+    font-size: 15px
+    display: inline-block
+    padding-left: 7px
+    vertical-align: middle
+    padding-bottom: 3px
+    cursor: pointer
+    text-decoration: none
 </style>

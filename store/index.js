@@ -1,6 +1,6 @@
 const docs = [
   { label: 'Installation', id: 'installation', category: 'Getting Started' },
-  { label: 'Connectors', id: 'connectors', category: 'Getting Started' },
+  { label: 'Basic Concepts', id: 'basic-concepts', category: 'Getting Started' },
   { label: 'Data sources', id: 'data-sources', category: 'Getting Started' },
   { label: 'Params', id: 'params', category: 'Getting Started' },
   { label: 'Modifying Observations', id: 'modifying-observations', category: 'Usage' },

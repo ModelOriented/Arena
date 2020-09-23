@@ -36,6 +36,9 @@ $spaces: 80px
     width: calc(100% - #{$nav_width + 3 * $spaces})
     left: $nav_width + 2 * $spaces
     top: 100px
+    font-size: 21px
+    max-width: 1000px
+    padding-bottom: 50px
     .title
       font-size: 36px
       font-family: 'Fira Sans'
@@ -43,6 +46,7 @@ $spaces: 80px
       left: 10px
       width: calc(100% - 20px)
       top: 40px
+      padding-bottom: 0
   .navigation-container
     position: absolute
     width: $nav_width

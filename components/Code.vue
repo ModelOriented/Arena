@@ -64,8 +64,10 @@ $bgcolor: #2f2f2f
       color: white
   .source
     border-radius: 5px
+    font-size: 16px
     background: $bgcolor
     padding: 10px
     color: white
     overflow-x: auto
+    font-family: monospace, monospace
 </style>
