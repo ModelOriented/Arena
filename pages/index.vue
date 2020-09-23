@@ -120,14 +120,22 @@ export default {
     font-size: 0
     font-family: 'Fira Sans'
     white-space: nowrap
+    @include mobile
+      white-space: unset
     > .column
       display: inline-block
       width: 33%
+      min-width: 400px
       height: 100%
       padding: 80px 50px
       box-sizing: border-box
       font-size: 40px
       vertical-align: top
+      white-space: nowrap
+      @include mobile
+        padding: 0 50px
+        min-width: unset
+        width: 100%
       > span
         display: block
         padding: 30px 0
