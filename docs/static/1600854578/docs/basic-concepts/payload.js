@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/docs/basic-concepts", {data:[{}],fetch:[],mutations:[]});
