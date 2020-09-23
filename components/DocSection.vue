@@ -36,4 +36,6 @@ export default {
     padding-bottom: 3px
     cursor: pointer
     text-decoration: none
+.doc-section
+  max-width: 800px
 </style>

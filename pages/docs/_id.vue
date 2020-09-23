@@ -29,12 +29,15 @@ export default {
 <style lang="sass">
 $nav_width: 300px
 $spaces: 80px
+$left_upper: calc((50% - #{($nav_width + $spaces + 800px) / 2}) + #{$nav_width + $spaces})
+$left_lower: #{$nav_width + 2 * $spaces}
 .docs
   position: relative
   .content-container
     position: relative
     width: calc(100% - #{$nav_width + 3 * $spaces})
-    left: $nav_width + 2 * $spaces
+    /* left: $nav_width + 2 * $spaces */
+    left: unquote('max(#{$left_lower}, #{$left_upper})')
     top: 100px
     font-size: 21px
     max-width: 1000px

@@ -14,14 +14,14 @@
       Arena dashboard can work with both modes at the same time.
     </DocSection>
     <DocSection name="Plots and Params">
-      There are four types of params in Arena: <b>Model</b>, <b>Dataset</b>, <b>Variable</b>, <b>Observation</b>. Each plot is created for combination of some of thease params.
+      There are four types of params in Arena: <b>Model</b>, <b>Dataset</b>, <b>Variable</b>, <b>Observation</b>. Each plot is created for combination of some of these params.
       For example Partial dependence profile can be created for model: <b>GLM</b> and variable: <b>age</b>.<br><br>
       To create a plot:<br>
       <b>1.</b> Choose Models or Datasets<br>
       <b>2.</b> Grab plots and move them on the grid<br>
       <b>3.</b> Observation and variable can be changed anytime using dropdown at the top bar<br>
-      Thw whole proccess ilustrates video below<br>
-      #TODO
+      The whole proccess ilustrates video below<br>
+      <vimeo-player ref="player" :video-id="460888134" class="player-component" />
     </DocSection>
   </div>
 </template>
@@ -30,23 +30,15 @@ export default {
   name: 'BasicConcepts'
 }
 </script>
-<!-- eslint-disable -->
-<codesrc>
-pip install dalex
-pip install requests
-# packages required for live mode
-pip install Flask
-pip install Flask-cors
-</codesrc>
-<codesrc>
-# stable version
-install.packages('arenar')
-# latest version
-remotes::install_github('ModelOriented/Arenar')
-</codesrc>
-<style lang="sass" scoped>
-img
-  max-width: 100%
-  display: block
-  margin: 30px 0
+<style lang="sass">
+.content
+  img
+    max-width: 100%
+    display: block
+    margin: 30px 0
+  .player-component
+    width: 100%
+    padding: 30px 0
+    > iframe
+      width: 100% !important
 </style>

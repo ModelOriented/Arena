@@ -23,7 +23,8 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    '@/plugins/font-awesome.js'
+    '@/plugins/font-awesome.js',
+    { src: '@/plugins/vimeo-player.js', ssr: false }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -58,7 +59,10 @@ export default {
     },
     babel: {
       babelrc: true
-    }
+    },
+    vendor: [
+      'vue-vimeo-player'
+    ]
   },
 
   router: {
