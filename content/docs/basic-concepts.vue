@@ -8,9 +8,11 @@
       <img src="@/assets/sources-tab.png">
     </DocSection>
     <DocSection name="Live and static mode">
-      As presented in the diagram above connectors can work in two modes.<br>
-      In the <b>live mode</b> connector runs simple http server. When user open a plot, then Arena requests resource and connector starts calculating it.<br>
-      In the <b>static mode</b> connector generates all possible plots and put them into JSON file.<br>
+      As presented in the diagram above connectors can work in two modes.
+      <ul>
+        <li>In the <b>live mode</b> connector runs simple http server. When user open a plot, then Arena requests resource and connector starts calculating it.</li>
+        <li>In the <b>static mode</b> connector generates all possible plots and put them into JSON file.</li>
+      </ul>
       Arena dashboard can work with both modes at the same time.
     </DocSection>
   </div>

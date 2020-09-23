@@ -3,10 +3,11 @@
     <div class="navigation-container">
       <DocsNavigation />
     </div>
-    <div class="content-container">
+    <article class="content-container">
       <span class="title">{{ title }}</span>
+      <hr>
       <component :is="content" />
-    </div>
+    </article>
   </div>
 </template>
 <script>
@@ -39,19 +40,29 @@ $left_lower: #{$nav_width + 2 * $spaces}
   .content-container
     position: relative
     width: calc(100% - #{$nav_width + 3 * $spaces})
-    /* left: $nav_width + 2 * $spaces */
+    max-width: 800px
     left: unquote('max(#{$left_lower}, #{$left_upper})')
     top: 100px
-    font-size: 21px
-    max-width: 1000px
+    font-size: 1.1em
+    font-family: 'Arial', 'Sans Serif'
     padding-bottom: 50px
     img
       max-width: 100%
       display: block
       margin: 30px 0
     .title
-      font-size: 36px
+      font-size: 40px
       font-family: 'Fira Sans'
+      color: black
+    > hr
+      color: black
+      margin-bottom: 30px
+    ol, ul
+      margin: 10px 0
+      > li
+        padding: 3px 0
+        &::marker
+          font-weight: 800
     @include mobile
       left: 10px
       width: calc(100% - 20px)

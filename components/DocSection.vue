@@ -27,6 +27,7 @@ export default {
 .doc-section > h2
   font-size: 26px
   font-family: 'Fira Sans'
+  margin-bottom: 10px
   > .link
     color: $blue
     font-size: 15px
@@ -37,5 +38,5 @@ export default {
     cursor: pointer
     text-decoration: none
 .doc-section
-  max-width: 800px
+  text-align: justify
 </style>
