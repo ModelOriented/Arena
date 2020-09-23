@@ -14,11 +14,14 @@ export default {
   name: 'Docs',
   layout: 'simple',
   computed: {
+    docId () {
+      return this.$route.params.id || this.$store.getters.docs[0].id
+    },
     content () {
-      return () => import('@/content/docs/' + this.$route.params.id)
+      return () => import('@/content/docs/' + this.docId)
     },
     doc () {
-      return this.$store.getters.docs.find(d => d.id === this.$route.params.id)
+      return this.$store.getters.docs.find(d => d.id === this.docId)
     },
     title () {
       return (this.doc || {}).label || ''
@@ -42,6 +45,10 @@ $left_lower: #{$nav_width + 2 * $spaces}
     font-size: 21px
     max-width: 1000px
     padding-bottom: 50px
+    img
+      max-width: 100%
+      display: block
+      margin: 30px 0
     .title
       font-size: 36px
       font-family: 'Fira Sans'

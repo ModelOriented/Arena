@@ -59,9 +59,9 @@ export default {
   computed: {
     links () {
       const docs = this.$store.getters.docs
-      const categories = [...new Set(docs.map(d => d.category))].map(c => docs.find(d => d.category === c)).map(d => ({ label: d.category, link: '/docs/' + d.id }))
+      const categories = [...new Set(docs.map(d => d.category))].map(c => docs.find(d => d.category === c)).map(d => ({ label: d.category, link: '/guide/' + d.id }))
       // const docsLinks = categories.map(c => ({ label: c, children: docs.filter(d => d.category === c).map(d => ({ label: d.label, link: '/docs/' + d.id })) }))
-      const links = [{ label: 'About', link: '/' }, { label: 'Guide', children: categories, link: '/docs' }]
+      const links = [{ label: 'About', link: '/' }, { label: 'Guide', children: categories, link: '/guide' }]
       return links.concat(this.manualLinks)
     },
     activeLink () {

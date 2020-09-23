@@ -13,18 +13,6 @@
       In the <b>static mode</b> connector generates all possible plots and put them into JSON file.<br>
       Arena dashboard can work with both modes at the same time.
     </DocSection>
-    <DocSection name="Plots and Params">
-      There are four types of params in Arena: <b>Model</b>, <b>Dataset</b>, <b>Variable</b>, <b>Observation</b>. Each plot is created for combination of some of these params.
-      For example Partial dependence profile can be created for model: <b>GLM</b> and variable: <b>age</b>.<br><br>
-      To create a plot:<br>
-      <b>1.</b> Choose Models or Datasets<br>
-      <b>2.</b> Grab plots and move them on the grid<br>
-      <b>3.</b> Observation and variable can be changed anytime using dropdown at the top bar<br>
-      The whole proccess ilustrates video below<br>
-      <client-only>
-        <vimeo-player ref="player" :video-id="460888134" class="player-component" />
-      </client-only>
-    </DocSection>
   </div>
 </template>
 <script>
@@ -32,15 +20,3 @@ export default {
   name: 'BasicConcepts'
 }
 </script>
-<style lang="sass">
-.content
-  img
-    max-width: 100%
-    display: block
-    margin: 30px 0
-  .player-component
-    width: 100%
-    padding: 30px 0
-    > iframe
-      width: 100% !important
-</style>

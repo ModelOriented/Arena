@@ -2,7 +2,7 @@
   <div class="docs-navigation">
     <div v-for="c in categories" :key="c" class="category" :class="{ desktop: c !== activeCategory }">
       <span class="label">{{ c }}</span>
-      <NLink v-for="d in docs.filter(d => d.category === c)" :key="d.id" :to="'/docs/' + d.id" :class="{ active: '/docs/' + d.id === $route.path }">
+      <NLink v-for="d in docs.filter(d => d.category === c)" :key="d.id" :to="'/guide/' + d.id" :class="{ active: d.id === docId }">
         {{ d.label }}
       </NLink>
     </div>
@@ -11,19 +11,18 @@
 <script>
 export default {
   name: 'DocsNavigation',
-  data () {
-    return {
-    }
-  },
   computed: {
     docs () {
       return this.$store.getters.docs
+    },
+    docId () {
+      return this.$route.params.id || this.$store.getters.docs[0].id
     },
     categories () {
       return [...new Set(this.docs.map(d => d.category))]
     },
     activeCategory () {
-      return (this.docs.find(d => '/docs/' + d.id === this.$route.path) || {}).category
+      return (this.docs.find(d => '/guide/' + d.id === this.$route.path) || {}).category
     }
   },
   methods: {}
