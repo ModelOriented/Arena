@@ -119,7 +119,6 @@ export default {
     background: white
     font-size: 0
     font-family: 'Fira Sans'
-    white-space: nowrap
     @include mobile
       white-space: unset
     > .column
@@ -133,8 +132,9 @@ export default {
       vertical-align: top
       white-space: nowrap
       @include mobile
-        padding: 0 50px
+        padding: 0 30px
         min-width: unset
+        font-size: 26px
         width: 100%
       > span
         display: block
@@ -219,6 +219,8 @@ export default {
       font-size: 40px
       font-family: 'Fira Sans'
       color: $darkgrey
+      @include mobile
+        font-size: 26px
     > .cards
       overflow-x: auto
       margin-top: 70px
