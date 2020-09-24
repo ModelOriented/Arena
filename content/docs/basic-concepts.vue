@@ -17,8 +17,3 @@
     </DocSection>
   </div>
 </template>
-<script>
-export default {
-  name: 'BasicConcepts'
-}
-</script>

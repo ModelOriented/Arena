@@ -6,8 +6,3 @@
     </DocSection>
   </div>
 </template>
-<script>
-export default {
-  name: 'ChartsOptions'
-}
-</script>

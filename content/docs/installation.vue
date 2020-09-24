@@ -11,11 +11,6 @@
     </DocSection>
   </div>
 </template>
-<script>
-export default {
-  name: 'DocsInstallation'
-}
-</script>
 <!-- eslint-disable -->
 <codesrc>
 pip install dalex

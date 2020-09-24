@@ -19,10 +19,3 @@
     </DocSection>
   </div>
 </template>
-<script>
-export default {
-  name: 'Params'
-}
-</script>
-<style lang="sass">
-</style>
