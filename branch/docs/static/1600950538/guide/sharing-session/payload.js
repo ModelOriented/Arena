@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/guide/sharing-session", {data:[{}],fetch:[],mutations:[]});
