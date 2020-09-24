@@ -204,13 +204,13 @@ export default {
       }
     },
     minimalValue () {
-      return Math.min(...this.transformed.map(d => {
-        return Math.min(...d.plotData.min, d.plotData.base)
+      return Math.min(...this.trimmed.map(d => {
+        return Math.min(...d.plotData[this.displayBoxplots ? 'min' : 'dropout_loss'], d.plotData.base)
       }))
     },
     maximalValue () {
-      return Math.max(...this.transformed.map(d => {
-        return Math.max(...d.plotData.max)
+      return Math.max(...this.trimmed.map(d => {
+        return Math.max(...d.plotData[this.displayBoxplots ? 'max' : 'dropout_loss'], d.plotData.base)
       }))
     },
     range () {

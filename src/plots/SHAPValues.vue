@@ -69,6 +69,7 @@ export default {
           selectedpoints: (this.selectedModel === d.params.model || this.selectedModel === null) ? undefined : [] // undefined - all selected, [] - all unselected
         }
       }).concat(!this.displayBoxplots ? [] : this.trimmed.map((d, i) => {
+        let iqr = d.plotData.q3.map((x, k) => x - d.plotData.q1[k])
         return {
           name: d.params.model,
           type: 'box',
@@ -84,11 +85,11 @@ export default {
             width: 1
           },
           fillcolor: (this.selectedModel === d.params.model || this.selectedModel === null) ? '#371ea3' : 'transparent',
-          lowerfence: d.plotData.min.map(v => v + d.plotData.intercept),
-          upperfence: d.plotData.max.map(v => v + d.plotData.intercept),
+          lowerfence: d.plotData.q1.map((x, k) => Math.max(x - (1.5 * iqr[k]), d.plotData.min[k])).map(x => x + d.plotData.intercept),
+          upperfence: d.plotData.q3.map((x, k) => Math.min(x + (1.5 * iqr[k]), d.plotData.max[k])).map(x => x + d.plotData.intercept),
           showlegend: false,
           hoverinfo: 'none',
-          whiskerwidth: 0
+          whiskerwidth: 0.5
         }
       }))
     },
