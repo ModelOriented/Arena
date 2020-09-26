@@ -7,26 +7,46 @@
       <span class="title">{{ title }}</span>
       <hr>
       <component :is="content" />
+      <NLink v-if="prev" :to="'/guide/' + prev.id" class="page-nav left">
+        <font-awesome-icon icon="angle-left" />
+        {{ prev.label }}
+      </NLink>
+      <NLink v-if="next" :to="'/guide/' + next.id" class="page-nav right">
+        {{ next.label }}
+        <font-awesome-icon icon="angle-right" />
+      </NLink>
     </article>
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Docs',
   layout: 'simple',
   computed: {
     docId () {
-      return this.$route.params.id || this.$store.getters.docs[0].id
+      return this.$route.params.id || this.docs[0].id
     },
     content () {
       return () => import('@/content/docs/' + this.docId)
     },
     doc () {
-      return this.$store.getters.docs.find(d => d.id === this.docId)
+      return this.docs.find(d => d.id === this.docId)
     },
     title () {
       return (this.doc || {}).label || ''
-    }
+    },
+    docIndex () {
+      return this.docs.indexOf(this.doc)
+    },
+    next () {
+      return this.docIndex < this.docs.length - 1 ? this.docs[this.docIndex + 1] : null
+    },
+    prev () {
+      return this.docIndex > 0 ? this.docs[this.docIndex - 1] : null
+    },
+    ...mapGetters(['docs'])
   }
 }
 </script>
@@ -45,7 +65,7 @@ $left_lower: #{$nav_width + 2 * $spaces}
     top: 100px
     font-size: 1.1em
     font-family: 'Arial', 'Sans Serif'
-    padding-bottom: 50px
+    padding-bottom: 80px
     img
       max-width: 100%
       display: block
@@ -68,6 +88,24 @@ $left_lower: #{$nav_width + 2 * $spaces}
       width: calc(100% - 20px)
       top: 40px
       padding-bottom: 0
+    > .page-nav
+      padding: 10px 15px
+      border: 1px solid $blue
+      border-radius: 5px
+      text-decoration: none
+      font-weight: 800
+      position: absolute
+      bottom: 20px
+      &.right
+        right: 0
+      &.left
+        left: 0
+      @include mobile
+        width: calc(100% - 30px)
+        display: block
+        position: relative
+        bottom: 0
+        margin: 10px 0
   .navigation-container
     position: absolute
     width: $nav_width
