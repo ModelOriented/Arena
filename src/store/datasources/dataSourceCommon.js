@@ -62,8 +62,8 @@ const getters = {
         let parsed = JSON.parse(fullParams[paramType])
         for (let variable in parsed) {
           let index = getters.translatedAvailableParams[source.uuid]['variable'].indexOf(variable)
-          if (index === -1) return { ...acu, [paramType]: null }
-          acu[paramType][source.availableParams['variable'][index]] = parsed[variable]
+          // if (index === -1) return { ...acu, [paramType]: null }
+          if (index !== -1) acu[paramType][source.availableParams['variable'][index]] = parsed[variable]
         }
         acu[paramType] = JSON.stringify(acu[paramType])
       } else {
