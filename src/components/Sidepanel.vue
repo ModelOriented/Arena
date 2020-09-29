@@ -89,7 +89,8 @@ export default {
       slotsList: [],
       lastUpperMenu: config.scopes[0] + 's',
       splitPos: 300,
-      splitterEvent: null
+      splitterEvent: null,
+      height: 0
     }
   },
   watch: {
