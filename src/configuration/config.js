@@ -2,8 +2,8 @@ export default {
   examples: [
     {
       name: 'Warsaw apartments',
-      url: 'https://gist.githubusercontent.com/piotrpiatyszek/d7a94e2f5d196daee8de075150aa51a1/raw/00973e459b65c412e79e3cfb97bc3c51376b6096/data.json',
-      session: 'https://gist.githubusercontent.com/piotrpiatyszek/a5a188de50230e048a6331f68778cffd/raw/90ae34aa191c3b155e9138572949cfb410256d70/session.json'
+      url: 'https://gist.githubusercontent.com/piotrpiatyszek/fe8fcce96ebd46012a9e53aa3910fc69/raw/39e488d1299e763a29c083395b4c7da8fde62c23/data.json',
+      session: 'https://gist.githubusercontent.com/piotrpiatyszek/af2f1c4ad85bc48ca8641d9b31f73dfc/raw/71a74f086c7576f912f469e5d910c18eec847d3e/session.json'
     },
     {
       name: 'FIFA Players Value',
@@ -12,8 +12,8 @@ export default {
     },
     {
       name: 'Employees status classification',
-      url: 'https://gist.githubusercontent.com/piotrpiatyszek/9e24710b794c377fa4740ee4651bf1b7/raw/b6d6036ccd8ea317920ebe977fa4c3ef9638dba6/data.json',
-      session: 'https://gist.githubusercontent.com/piotrpiatyszek/ea3713ff50f6087699473b8dba00cb0d/raw/0b66f3b74b70bfd7c4358d5e8c21be8e6538b020/session.json'
+      url: 'https://gist.githubusercontent.com/piotrpiatyszek/82b6eadfd1d932ec79ad783ae74bf1a2/raw/cfaadd9752d7cfeb62766910a9e4c1099fe466c8/data.json',
+      session: 'https://gist.githubusercontent.com/piotrpiatyszek/0765dfca6af874494eeda8e53ffb812d/raw/03707b3dc04024911d9d3dc4883e581f6909bef3/session.json'
     }
   ],
   url: 'https://arena.drwhy.ai',

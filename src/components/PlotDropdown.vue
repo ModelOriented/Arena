@@ -90,6 +90,8 @@ div.plot-dropdown > div.values {
   border: 1px solid #ddd;
   box-shadow: 0 0 8px 0 rgba(200, 200, 200, 0.5);
   z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
 }
 div.plot-dropdown > div.values > div.value {
   color: black;
