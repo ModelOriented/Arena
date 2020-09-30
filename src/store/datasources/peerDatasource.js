@@ -78,10 +78,10 @@ const actions = {
         conn
       }
       commit('addSource', source)
-      conn.on('close', () => commit('remoiveSource', source.uuid))
+      conn.on('close', () => commit('removeSource', source.uuid))
       conn.on('error', e => {
         console.error(e)
-        commit('remoiveSource', source.uuid)
+        commit('removeSource', source.uuid)
       })
       conn.on('data', async d => {
         if (validatorSession_1_1_0(d) || validatorSession_1_0_0(d)) {
