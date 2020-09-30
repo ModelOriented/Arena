@@ -4,14 +4,16 @@ export default [
     displayName: 'Maximum variables in Break Down',
     type: 'integer',
     default: 6,
-    min: 1
+    min: 1,
+    max: 30
   },
   {
     name: 'featureimportance_max_variables',
     displayName: 'Maximum variables in Feature Importance',
     type: 'integer',
     default: 7,
-    min: 1
+    min: 1,
+    max: 30
   },
   {
     name: 'featureimportance_boxplots',
@@ -24,21 +26,24 @@ export default [
     displayName: 'Maximum variables in SHAP Values',
     type: 'integer',
     default: 7,
-    min: 1
+    min: 1,
+    max: 30
   },
   {
     name: 'funnelmeasure_page_size',
     displayName: 'Maximum variables in one page of Funnel Plot',
     type: 'integer',
     default: 6,
-    min: 1
+    min: 1,
+    max: 15
   },
   {
     name: 'subsetsperformance_page_size',
     displayName: 'Maximum variables in one page of Subset Performance',
     type: 'integer',
     default: 6,
-    min: 1
+    min: 1,
+    max: 15
   },
   {
     name: 'shapvalues_boxplots',

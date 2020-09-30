@@ -66,9 +66,14 @@ export default {
     },
     async sharePeer () {
       this.message = { text: 'Connecting...', error: false }
-      await this.$store.dispatch('initPeerServer')
-      let id = this.$store.getters.peer.id
-      this.message = { text: this.baseURL + '/?peer_server=' + id, error: false }
+      try {
+        await this.$store.dispatch('initPeerServer')
+        let id = this.$store.getters.peer.id
+        this.message = { text: this.baseURL + '/?peer_server=' + id, error: false }
+      } catch (e) {
+        console.error(e)
+        this.message = { text: 'Failed to share session' + (e.message ? (': ' + e.message) : ''), error: true }
+      }
     },
     loadFiles (event) {
       for (var file of event.target.files) this.loadFile(file)

@@ -5,6 +5,16 @@ const round = (x, p = 3) => {
   return Math.round(x * (10 ** k)) / (10 ** k)
 }
 
+const isCustomParam = (param) => {
+  if (!(typeof param === 'string' || param instanceof String) || !param.startsWith('{') || !param.endsWith('}')) return false
+  try {
+    JSON.parse(param)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
 export default {
   addNewLines (label, width = 140) {
     let words = label.split('_').join(' ').split(' ')
@@ -25,7 +35,9 @@ export default {
     return output.split('<br>').filter(x => x.length > 0).join('<br>') // Remove first one or two <br>
   },
   round,
+  isCustomParam,
   formatTitle (title) {
+    if (isCustomParam(title)) return '[Custom]'
     return title.replace(/[._-]/gi, ' ')
   },
   formatValue (x, addSign = false, space = '', k = 0) {

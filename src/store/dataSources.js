@@ -137,6 +137,13 @@ const actions = {
       if (results.length >= 1) return results[0]
     })
   },
+  getAttributes ({ dispatch, getters }, query) {
+    // array of promises and raw objects (Promise.all will handle them)
+    let promises = getters.dataSources.map(ds => {
+      return dispatch(ds + '/getAttributes', query)
+    })
+    return Promise.all(promises).then(results => results.find(r => r))
+  },
   async loadURL ({ dispatch, commit }, url) {
     let response = await Vue.http.get(url)
     await dispatch('loadData', { data: response.body, src: url })

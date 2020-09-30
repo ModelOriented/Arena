@@ -1,5 +1,6 @@
 import config from '@/configuration/config.js'
 import streams from '@/utils/streams.js'
+import format from '@/utils/format.js'
 import Vue from 'vue'
 
 const state = () => {
@@ -9,6 +10,16 @@ const state = () => {
 }
 
 const getters = {
+  translateAttributes: (state, getters) => (uuid, paramType, attributes) => {
+    /* eslint-disable arena/no-hardcode-param-types */
+    if (attributes && paramType === 'observation') {
+      attributes = Object.entries(attributes).reduce((acu, [variableName, variableValue]) => {
+        return { ...acu, [getters.translateIfPossible(uuid, 'variable', variableName)]: variableValue }
+      }, {})
+    }
+    /* eslint-enable arena/no-hardcode-param-types */
+    return attributes
+  },
   availableParams (state, getters) {
     return getters.sources
       .reduce((acu, s) => {
@@ -45,8 +56,21 @@ const getters = {
   translateBackParams: (state, getters, rootState, rootGetters) => (source, fullParams) => {
     if (!rootGetters.canPublishParams(source.uuid)) return {}
     return config.params.reduce((acu, paramType) => {
-      let index = getters.translatedAvailableParams[source.uuid][paramType].indexOf(fullParams[paramType])
-      acu[paramType] = index === -1 ? null : source.availableParams[paramType][index]
+      /* eslint-disable arena/no-hardcode-param-types */
+      if (format.isCustomParam(fullParams[paramType]) && paramType === 'observation') {
+        acu[paramType] = {}
+        let parsed = JSON.parse(fullParams[paramType])
+        for (let variable in parsed) {
+          let index = getters.translatedAvailableParams[source.uuid]['variable'].indexOf(variable)
+          // if (index === -1) return { ...acu, [paramType]: null }
+          if (index !== -1) acu[paramType][source.availableParams['variable'][index]] = parsed[variable]
+        }
+        acu[paramType] = JSON.stringify(acu[paramType])
+      } else {
+        let index = getters.translatedAvailableParams[source.uuid][paramType].indexOf(fullParams[paramType])
+        acu[paramType] = index === -1 ? null : source.availableParams[paramType][index]
+      }
+      /* eslint-enable arena/no-hardcode-param-types */
       return acu
     }, {})
   },

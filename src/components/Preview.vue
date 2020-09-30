@@ -25,7 +25,7 @@ div.preview-block {
   box-shadow: 0 0 5px 0 rgba(180, 180, 180, 0.5);
   padding: 10px;
   position: absolute;
-  right: 350px;
+  right: 370px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1000000;

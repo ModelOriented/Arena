@@ -2,7 +2,7 @@
   <div class='sidepanel-dropdown'>
     <div class="options-list">
       <div class="group" v-for="g in scopes" :key="g">
-        <div class="group-name">{{ g | firstCharUpper }}</div>
+        <div class="group-name" v-if="groups.length > 1">{{ g | firstCharUpper }}</div>
         <div class="option" v-for="o in availableParams[g]" :key="o" :class="{ selected: isSelected(g, o) }" @click.self="select(g, o)">
           {{ o | formatTitle }}
           <span class="left-button">
@@ -17,8 +17,8 @@
           </div>
         </div>
       </div>
-      <div class="group">
-        <div class="group-name">Other</div>
+      <div class="group" v-if="groups.includes('other')">
+        <div class="group-name" v-if="groups.length > 1">Other</div>
         <div class="option" :class="{ selected: isSelected('other', 'clipboard') }" @click.self="select('other', 'clipboard')">Clipboard</div>
         <div class="option" :class="{ selected: isSelected('other', 'annotate') }" @click.self="select('other', 'annotate')">
           Annotate
@@ -44,13 +44,20 @@ export default {
   name: 'SidepanelDropdown',
   data () {
     return {
-      selectedGroup: config.scopes[0],
+      selectedGroup: '',
       selectedValues: [],
       colorSelectorGroup: null,
       colorSelectorValue: null
     }
   },
+  props: {
+    groups: Array,
+    trigger: String
+  },
   watch: {
+    trigger () {
+      this.$emit('updateSlotsList', this.availableSlots)
+    },
     availableSlots () {
       this.$emit('updateSlotsList', this.availableSlots)
     },
@@ -61,6 +68,14 @@ export default {
     },
     selectedValues () {
       this.$store.commit('setAnnotationsActive', this.selectedGroup === 'other' && this.selectedValues.find(v => v === 'annotate'))
+    },
+    groups: {
+      handler () {
+        if (!this.groups.includes(this.selectedGroup)) {
+          this.selectedGroup = this.groups[0]
+        }
+      },
+      immediate: true
     }
   },
   computed: {
@@ -70,7 +85,7 @@ export default {
     displayedGroup () {
       return format.firstCharUpper(this.selectedGroup)
     },
-    scopes () { return config.scopes.filter(s => this.availableParams[s].length > 0) },
+    scopes () { return config.scopes.filter(s => this.availableParams[s].length > 0).filter(s => this.groups.includes(s)) },
     /* Slots for selected params, will be emitted to Sidepanel */
     availableSlots () {
       // it forces refreshing slots id, when any slot is added to playground
@@ -155,9 +170,6 @@ div.sidepanel-dropdown > div.options-list {
   position: relative;
   z-index: 1;
   background: white;
-  max-height: 400px;
-  overflow-y: auto;
-  border-bottom: 1px solid #ccc;
 }
 div.sidepanel-dropdown > div.options-list > div.group > div.group-name {
   width: calc(100% - 60px);

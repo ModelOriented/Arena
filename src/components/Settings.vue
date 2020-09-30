@@ -20,10 +20,10 @@ export default {
       tabs: [
         { name: 'Sources', component: 'SettingsTabSources' },
         { name: 'Sessions', component: 'SettingsTabSessions' },
-        { name: 'Options', component: 'SettingsTabOptions' },
+        /* { name: 'Options', component: 'SettingsTabOptions' }, */
         { name: 'Privacy', component: 'SettingsTabPrivacy' }
       ],
-      activeTab: 'Options'
+      activeTab: 'Sessions'
     }
   },
   computed: {

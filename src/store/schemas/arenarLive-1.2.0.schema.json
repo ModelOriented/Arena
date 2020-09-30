@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "title": "Arenar live root response",
+  "description": "Data structure returned by arenar live server at /",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1.2.0"
+    },
+    "api": {
+      "type": "string",
+      "const": "arenar_api"
+    },
+    "timestamp": {
+      "type": "number"
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "customParams": { "type": "boolean" },
+        "attributes": { "type": "boolean" }
+      },
+      "required": ["customParams", "attributes"]
+    },
+    "availableParams": {
+      "type": "object",
+      "properties": {
+        "variable": {
+          "type": "array",
+          "title": "Array of variables' names used in this data file",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "model": {
+          "type": "array",
+          "title": "Array of models' names used in this data file",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "observation": {
+          "type": "array",
+          "title": "Array of observations' names used in this data file",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "dataset": {
+          "type": "array",
+          "title": "Array of datasets' names used in this data file",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": ["variable", "model", "observation", "dataset"]
+    },
+    "availablePlots": {
+      "type": "array",
+      "title": "Array of plots that server can produce",
+      "items": {
+        "type": "object",
+        "title": "Object with basic properties of each plot type",
+        "properties": {
+          "plotType": {
+            "type": "string",
+            "title": "Type of plot",
+            "description": "Represents what plot presents",
+            "examples": ["FeatureImportance", "PartialDependency"]
+          },
+          "plotCategory": {
+            "type": "string",
+            "title": "Category of plot",
+            "examples": ["Local", "Global"]
+          },
+          "name": {
+            "type": "string",
+            "title": "Title of plot"
+          },
+          "requiredParams": {
+            "type": "array",
+            "title": "Params that must be provided to calculate plot",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["plotType", "plotCategory", "requiredParams", "name"]
+      }
+    }
+  },
+  "required": ["version", "api", "timestamp", "options", "availableParams", "availablePlots"]
+}
