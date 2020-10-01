@@ -1,6 +1,6 @@
 <template>
   <div class="fairness-subplot-relative" v-resize:throttle.100="onResize">
-    <Plotly v-if="traces.length > 0" v-bind="{ traces, config, layout }" ref="plot" @plotly_hover="onHover"/>
+    <Plotly v-if="traces.length > 0" v-bind="{ traces, config, layout, layoutPatches }" ref="plot" @plotly_hover="onHover"/>
   </div>
 </template>
 <script>
@@ -10,7 +10,8 @@ import format from '@/utils/format.js'
 import streams from '@/utils/streams.js'
 import { mapGetters } from 'vuex'
 const Plotly = () => import('@/components/Plotly.vue')
-const epsilon = 0.1
+const epsilon = 0.8
+const MAX_VALUE = 1000
 const scoring = [
   { name: 'Statistical parity difference  (TP + FP)/(TP + FP + TN + FN)', key: 'STP' },
   { name: 'Equal opportynity difference    TP/(TP + FN)', key: 'TPR' },
@@ -38,7 +39,9 @@ export default {
       if (!this.metrics) return null
       return this.metrics.map(m => {
         return Object.entries(m).reduce((acu, [subgroup, metrics]) => {
-          acu[subgroup] = streams.runOnChildren(metrics, (value, metricName) => value - m[this.privileged][metricName])
+          acu[subgroup] = streams.runOnChildren(metrics, (value, metricName) => {
+            return Math.max(Math.min(value / m[this.privileged][metricName], MAX_VALUE), 1 / MAX_VALUE)
+          })
           return acu
         }, {})
       })
@@ -62,7 +65,7 @@ export default {
       return this.reformated.map(d => {
         return {
           type: 'line',
-          x0: 0,
+          x0: 1,
           x1: d.value,
           xref: 'x',
           y0: this.lolipopAxis.getPointRange(d.scoring, d.subgroup, d.model).mid,
@@ -75,7 +78,7 @@ export default {
           },
           layer: 'below'
         }
-      })
+      }).filter(l => !isNaN(l.x1) && l.x1 < MAX_VALUE && l.x1 > 1 / MAX_VALUE)
     },
     traces () {
       return this.reformated.map(d => {
@@ -91,17 +94,17 @@ export default {
             size: 8
           }
         }
-      })
+      }).filter(d => !isNaN(d.x[0]) && d.x[0] > 1 / MAX_VALUE && d.x[0] < MAX_VALUE)
     },
     layout () {
       let layout = {
         xaxis: {
-          type: 'linear',
+          type: 'log',
           title: {
             text: 'score',
             standoff: 10
           },
-          range: [-1, 1],
+          range: this.range,
           fixedrange: true,
           gridwidth: 2,
           zeroline: false
@@ -137,9 +140,9 @@ export default {
               type: 'rect',
               xref: 'x',
               yref: 'y',
-              x0: -1,
+              x0: 1 / MAX_VALUE,
               y0: this.lolipopAxis.getFacetTitleRange(s.name).end,
-              x1: -1 * epsilon,
+              x1: epsilon,
               y1: this.lolipopAxis.getFacetRange(s.name).end,
               fillcolor: '#f05a71',
               opacity: 0.03,
@@ -150,9 +153,9 @@ export default {
               type: 'rect',
               xref: 'x',
               yref: 'y',
-              x0: epsilon,
+              x0: 1 / epsilon,
               y0: this.lolipopAxis.getFacetTitleRange(s.name).end,
-              x1: 1,
+              x1: MAX_VALUE,
               y1: this.lolipopAxis.getFacetRange(s.name).end,
               fillcolor: '#f05a71',
               opacity: 0.03,
@@ -168,7 +171,7 @@ export default {
               y0: this.lolipopAxis.getFacetTitleRange(s.name).end,
               x1: epsilon,
               y1: this.lolipopAxis.getFacetRange(s.name).end,
-              layer: 'below',
+              layer: 'above',
               line: {
                 color: '#f05a71',
                 width: 1,
@@ -179,11 +182,11 @@ export default {
               type: 'line',
               xref: 'x',
               yref: 'y',
-              x0: -1 * epsilon,
+              x0: 1 / epsilon,
               y0: this.lolipopAxis.getFacetTitleRange(s.name).end,
-              x1: -1 * epsilon,
+              x1: 1 / epsilon,
               y1: this.lolipopAxis.getFacetRange(s.name).end,
-              layer: 'below',
+              layer: 'above',
               line: {
                 color: '#f05a71',
                 width: 1,
@@ -216,6 +219,26 @@ export default {
         }
       }
       return layout
+    },
+    layoutPatches () {
+      return { 'xaxis.range': this.range }
+    },
+    minimalValue () {
+      return Math.min(...this.reformated.map(d => {
+        return Math.min(d.value, epsilon)
+      }))
+    },
+    maximalValue () {
+      return Math.max(...this.reformated.map(d => {
+        return Math.max(d.value, 1 / epsilon)
+      }))
+    },
+    range () {
+      let dist = Math.max(Math.abs(Math.log10(this.maximalValue)), Math.abs(Math.log10(this.minimalValue)))
+      if (dist < 0.48) return [-0.49, 0.49]
+      else if (dist < 1) return [-1.1, 1.1]
+      else if (dist < 10) return [-2.1, 2.1]
+      else return [-3.1, 3.1]
     },
     config () {
       return {
