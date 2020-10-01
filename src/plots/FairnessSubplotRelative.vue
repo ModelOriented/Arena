@@ -226,12 +226,12 @@ export default {
     minimalValue () {
       return Math.min(...this.reformated.map(d => {
         return Math.min(d.value, epsilon)
-      }))
+      }).filter(x => x > 1 / MAX_VALUE), epsilon)
     },
     maximalValue () {
       return Math.max(...this.reformated.map(d => {
         return Math.max(d.value, 1 / epsilon)
-      }))
+      }).filter(x => x < MAX_VALUE), 1 / epsilon)
     },
     range () {
       let dist = Math.max(Math.abs(Math.log10(this.maximalValue)), Math.abs(Math.log10(this.minimalValue)))
