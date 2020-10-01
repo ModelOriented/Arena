@@ -7,8 +7,8 @@ export default {
     },
     {
       name: 'FIFA Players Value',
-      url: 'https://gist.githubusercontent.com/piotrpiatyszek/21c4380a44d4e527b47ba0a4f16b18f5/raw/0d5e2d98890162d631d70a93d76604533a183ee1/data.json',
-      session: 'https://gist.githubusercontent.com/piotrpiatyszek/e5872fb4c62a2600e30393a66ff3413a/raw/a381762b5af4cc9dcd7d4f119013b33d8b92848d/session.json'
+      url: 'https://gist.githubusercontent.com/piotrpiatyszek/af3191b582ef264d399683c4adc29f98/raw/c3566beed204b9dc73b21daf319a5ff5cc2b253f/data.json',
+      session: 'https://gist.githubusercontent.com/piotrpiatyszek/e5872fb4c62a2600e30393a66ff3413a/raw/08903b0f185506de85910d74ac163b0a8ac3dd80/session.json'
     },
     {
       name: 'Employees status classification',
