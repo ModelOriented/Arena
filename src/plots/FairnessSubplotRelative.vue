@@ -13,11 +13,11 @@ const Plotly = () => import('@/components/Plotly.vue')
 const epsilon = 0.8
 const MAX_VALUE = 1000
 const scoring = [
-  { name: 'Statistical parity difference  (TP + FP)/(TP + FP + TN + FN)', key: 'STP' },
-  { name: 'Equal opportynity difference    TP/(TP + FN)', key: 'TPR' },
-  { name: 'Predictive equality difference  FP/(FP + TN)', key: 'FPR' },
-  { name: 'Predictive parity difference    TP/(TP + FP)', key: 'PPV' },
-  { name: 'Accuracy equality difference   (TP + TN)/(TP + FP + TN + FN)', key: 'ACC' }
+  { name: 'Statistical parity ratio  (TP + FP)/(TP + FP + TN + FN)', key: 'STP' },
+  { name: 'Equal opportynity ratio    TP/(TP + FN)', key: 'TPR' },
+  { name: 'Predictive equality ratio  FP/(FP + TN)', key: 'FPR' },
+  { name: 'Predictive parity ratio    TP/(TP + FP)', key: 'PPV' },
+  { name: 'Accuracy equality ratio   (TP + TN)/(TP + FP + TN + FN)', key: 'ACC' }
 ]
 
 export default {
