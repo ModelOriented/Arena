@@ -63,7 +63,7 @@ export default {
     variablesNames () {
       if (!this.attributes || !this.variables) return []
       let order = ['numeric', 'categorical', 'logical']
-      let getOrder = (v) => this.variables[v] ? order.indexOf(this.variables[v].type) : order.length
+      let getOrder = (v) => this.variables[v] ? order.indexOf(this.variables[v].type) : -1
       return Object.keys(this.attributes).sort((a, b) => getOrder(a) - getOrder(b))
     },
     ...mapGetters(['getGlobalParam', 'pageNumber'])
