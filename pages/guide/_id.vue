@@ -4,6 +4,7 @@
       <DocsNavigation />
     </div>
     <article class="content-container">
+      <span class="warning">Guide is not completed and some features including Python integration are not released yet.</span>
       <span class="title">{{ title }}</span>
       <hr>
       <component :is="content" />
@@ -106,6 +107,17 @@ $left_lower: #{$nav_width + 2 * $spaces}
         position: relative
         bottom: 0
         margin: 10px 0
+    span.warning
+      display: block
+      padding: 20px 20px
+      margin: 10px 0
+      background: rgba($red, 0.8)
+      font-size: 20px
+      font-family: 'Fira Sans'
+      box-shadow: 0 0 2px 0 rgba($red, 0.7)
+      color: white
+      border-radius: 10px
+      border: 1px solid $red
   .navigation-container
     position: absolute
     width: $nav_width
