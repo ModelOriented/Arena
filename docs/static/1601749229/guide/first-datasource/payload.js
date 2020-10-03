@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/guide/first-datasource", {data:[{}],fetch:[],mutations:[]});
