@@ -47,8 +47,11 @@ export default {
 <style lang="sass">
 $bgcolor: #2f2f2f
 .code
+  margin: 15px 0
   .lang-select
     padding-left: 10px
+    overflow-x: auto
+    white-space: nowrap
     button
       background: white
       border: 1px solid $bgcolor
