@@ -140,7 +140,7 @@ const mutations = {
   },
   replaceSlots (state, { slot1, slot2 }) {
     if (slot1.uuid === slot2.uuid) return
-    ['name', 'plotType', 'localParams'].forEach(v => {
+    ['name', 'plotType', 'localParams', 'plotCategory', 'customData', 'scope'].forEach(v => {
       Vue.set(slot1, v, slot2[v])
     })
     state.slots = state.slots.filter(s => s.uuid !== slot2.uuid)
