@@ -84,6 +84,8 @@ $left_lower: #{$nav_width + 2 * $spaces}
         padding: 3px 0
         &::marker
           font-weight: 800
+    h4
+      margin: 15px 0 8px 0
     @include mobile
       left: 10px
       width: calc(100% - 20px)

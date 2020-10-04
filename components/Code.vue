@@ -73,4 +73,15 @@ $bgcolor: #2f2f2f
     color: white
     overflow-x: auto
     font-family: monospace, monospace
+    .token
+      &.comment
+        color: $grey
+        font-style: italic
+      &.string, &.number, &.boolean, &.builtin
+        color: $orange
+      &.operator, &.keyword
+        color: $turquoise
+      &.punctuation
+        color: $turquoise
+        opacity: 0.8
 </style>

@@ -39,4 +39,5 @@ export default {
     text-decoration: none
 .doc-section
   text-align: justify
+  line-height: 150%
 </style>
