@@ -7,7 +7,7 @@
       </div>
       <div class="right-triangle"></div>
     </div>
-    <div class="page-button" @click="n += 1" :style="scrollStyle">
+    <div class="page-button" @click="n = maxPages + 1" :style="scrollStyle">
       <div class="left-triangle"></div>
       <div class="content">
         <font-awesome-icon icon="plus"/>
