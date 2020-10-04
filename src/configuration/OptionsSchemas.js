@@ -9,7 +9,7 @@ export default [
   },
   {
     name: 'featureimportance_max_variables',
-    displayName: 'Maximum variables in Feature Importance',
+    displayName: 'Maximum variables in Variable Importance',
     type: 'integer',
     default: 7,
     min: 1,
@@ -17,13 +17,13 @@ export default [
   },
   {
     name: 'featureimportance_boxplots',
-    displayName: 'Display boxplots over Feature Importance',
+    displayName: 'Display boxplots over Variable Importance',
     type: 'boolean',
     default: true
   },
   {
     name: 'shapvalues_max_variables',
-    displayName: 'Maximum variables in SHAP Values',
+    displayName: 'Maximum variables in Shapley Values',
     type: 'integer',
     default: 7,
     min: 1,
@@ -47,13 +47,13 @@ export default [
   },
   {
     name: 'shapvalues_boxplots',
-    displayName: 'Display boxplots over SHAP Values',
+    displayName: 'Display boxplots over Shapley Values',
     type: 'boolean',
     default: false
   },
   {
     name: 'left_margin',
-    displayName: 'Left margin for variable names',
+    displayName: 'Left margin for variables names with values',
     type: 'integer',
     default: 140,
     min: 80,
@@ -61,7 +61,7 @@ export default [
   },
   {
     name: 'left_margin_values',
-    displayName: 'Left margin for variable values',
+    displayName: 'Left margin for variables values',
     type: 'integer',
     default: 90,
     min: 60,
