@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/guide/fairness", {data:[{}],fetch:[],mutations:[]});
