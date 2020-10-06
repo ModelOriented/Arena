@@ -55,14 +55,39 @@
         </a>
       </div>
     </div>
+    <div class="plots-section">
+      <span>Fancy Charts</span>
+      <div class="cards">
+        <a class="card" :href="baseURL + '/guide/fairness/#fairness-check'">
+          <img src="@/assets/fairness.png">
+        </a>
+        <a class="card" :href="baseURL + '/guide/dataset-level/#variable-importance'">
+          <img src="@/assets/variable_importance.png">
+        </a>
+        <a class="card" :href="baseURL + '/guide/observation-level/#ceteris-paribus'">
+          <img src="@/assets/ceteris_paribus.png">
+        </a>
+        <a class="card" :href="baseURL + '/guide/observation-level/#break-down'">
+          <img src="@/assets/break_down.png">
+        </a>
+        <a class="card" :href="baseURL + '/guide/model-performance/#subset-performance'">
+          <img src="@/assets/subset_performance.png">
+        </a>
+        <a class="card" :href="baseURL + '/guide/eda-charts/#variable-distribution'">
+          <img src="@/assets/variable_distribution.png">
+        </a>
+      </div>
+    </div>
   </div>
 </template>
 <script>
+import config from '@/config.js'
 export default {
   layout: 'simple',
   data () {
     return {
-      sectionMode: 'live'
+      sectionMode: 'live',
+      baseURL: config.baseURL
     }
   }
 }
@@ -230,4 +255,40 @@ export default {
         margin: 0 50px
         > img
           height: 100%
+  > .plots-section
+    position: relative
+    background: white
+    z-index: 9
+    padding: 0px 0 30px 0
+    overflow-x: auto
+    white-space: nowrap
+    > span
+      position: absolute
+      top: 20px
+      left: 5%
+      font-size: 40px
+      font-family: 'Fira Sans'
+      color: $darkgrey
+      @include mobile
+        font-size: 26px
+    > .cards
+      overflow-x: auto
+      padding-top: 70px
+      margin-top: 40px
+      scrollbar-width: none
+      &::-webkit-scrollbar
+        display: none
+      > .card
+        display: inline-block
+        height: 400px
+        margin: 0 50px
+        border: 1px solid $lightgrey
+        position: relative
+        overflow: hidden
+        box-shadow: 0 0 4px 0 rgba(200, 200, 200, 0.6)
+        > img
+          height: calc(100% + 32px)
+          position: relative
+          top: -16px
+          margin: 0 -18px
 </style>

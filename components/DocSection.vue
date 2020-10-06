@@ -5,6 +5,8 @@
   </section>
 </template>
 <script>
+import config from '@/config.js'
+
 export default {
   name: 'DocSection',
   props: {
@@ -15,7 +17,7 @@ export default {
   },
   computed: {
     baseURL () {
-      return 'https://arena.drwhy.ai/docs'
+      return config.baseURL
     },
     simplified () {
       return this.name.toLowerCase().replace(/ /g, '-')
