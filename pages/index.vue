@@ -41,20 +41,6 @@
         <LiveModeAnimation v-if="sectionMode === 'live'" />
       </div>
     </div>
-    <div class="support-section">
-      <span>Supported packages</span>
-      <div class="cards">
-        <a class="card" href="https://mlr-org.com/">
-          <img src="https://mlr3.mlr-org.com/reference/figures/logo.png">
-        </a>
-        <a class="card" href="https://scikit-learn.org">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Scikit_learn_logo_small.svg/260px-Scikit_learn_logo_small.svg.png">
-        </a>
-        <a class="card" href="https://modeloriented.github.io/DALEX/">
-          <img src="https://github.com/ModelOriented/DALEX/raw/master/man/figures/logo.png">
-        </a>
-      </div>
-    </div>
     <div class="plots-section">
       <span>Fancy Charts</span>
       <div class="cards">
@@ -75,6 +61,20 @@
         </a>
         <a class="card" :href="baseURL + '/guide/eda-charts/#variable-distribution'">
           <img src="@/assets/variable_distribution.png">
+        </a>
+      </div>
+    </div>
+    <div class="support-section">
+      <span>Supported packages</span>
+      <div class="cards">
+        <a class="card" href="https://mlr-org.com/">
+          <img src="https://mlr3.mlr-org.com/reference/figures/logo.png">
+        </a>
+        <a class="card" href="https://scikit-learn.org">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Scikit_learn_logo_small.svg/260px-Scikit_learn_logo_small.svg.png">
+        </a>
+        <a class="card" href="https://modeloriented.github.io/DALEX/">
+          <img src="https://github.com/ModelOriented/DALEX/raw/master/man/figures/logo.png">
         </a>
       </div>
     </div>
@@ -233,7 +233,7 @@ export default {
   > .support-section
     position: relative
     background: white
-    z-index: 9
+    z-index: 8
     padding: 30px 0
     overflow-x: auto
     white-space: nowrap
@@ -258,22 +258,24 @@ export default {
   > .plots-section
     position: relative
     background: white
-    z-index: 9
-    padding: 0px 0 30px 0
+    padding: 60px 0
     overflow-x: auto
     white-space: nowrap
+    background: url('../assets/grid.png')
+    box-shadow: 0 0 5px 0 rgba(180, 180, 180, 0.5)
+    z-index: 9
     > span
       position: absolute
       top: 20px
       left: 5%
       font-size: 40px
       font-family: 'Fira Sans'
-      color: $darkgrey
+      color: $darkblue
       @include mobile
         font-size: 26px
     > .cards
       overflow-x: auto
-      padding-top: 70px
+      padding-top: 10px
       margin-top: 40px
       scrollbar-width: none
       &::-webkit-scrollbar
@@ -285,7 +287,7 @@ export default {
         border: 1px solid $lightgrey
         position: relative
         overflow: hidden
-        box-shadow: 0 0 4px 0 rgba(200, 200, 200, 0.6)
+        box-shadow: 0 0 5px 0 rgba(180, 180, 180, 0.5)
         > img
           height: calc(100% + 32px)
           position: relative
