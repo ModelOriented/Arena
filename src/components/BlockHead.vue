@@ -5,7 +5,10 @@
         <span class="tooltip">Double click to edit</span>
         <span class="title-text">{{ slotv.name }}</span>
       </span>
-      <span class="tooltiped plot-help-box" v-if="description && !titleEdit"><span class="tooltip">{{ description }}</span><font-awesome-icon :icon="['far', 'question-circle']"/></span>
+      <span class="tooltiped plot-help-box" v-if="docURL && !titleEdit">
+        <span class="tooltip">Open documentation</span>
+        <a :href="docURL" target="_blank"><font-awesome-icon :icon="['far', 'question-circle']"/></a>
+      </span>
       <input v-if="titleEdit" type="text" class="title-input" :value="slotv.name" @blur="saveTitle" @keyup.enter="saveTitle" @keyup.escape="titleEdit = false" ref="titleInput">
       <div class="subtitle" v-html="usedModels"></div>
     </div>
@@ -57,9 +60,9 @@ export default {
       let sameValueParams = available.filter(avail => !this.slotv.localParams.find(local => local[avail] !== this.slotv.localParams[0][avail]))
       return sameValueParams.map(p => { return { name: p, value: this.slotv.localParams[0][p] } })
     },
-    description () {
+    docURL () {
       if (!this.slotv) return ''
-      return PlotsInfo.getPlotDesc(this.slotv.plotType)
+      return PlotsInfo.getPlotDoc(this.slotv.plotType)
     },
     ...mapGetters(['getSlotFullParams', 'availableParams', 'scopesColors'])
   },

@@ -55,11 +55,23 @@ export default {
   isBars (plotComponent) {
     return ['FeatureImportance', 'CategoricalDependence', 'CategoricalCeterisParibus', 'SHAPValues'].includes(plotComponent)
   },
-  getPlotDesc (plotType) {
-    if (plotType === 'Breakdown') return 'Break Down shows contributions of every variable to a final prediction'
-    if (plotType === 'ROC') return 'Receiver Operating Characterstic Curve is a plot of the Sensivity against the Specifity for the different thresholds. It is useful for measuring and comparing the accuracy of the classificators.'
-    if (plotType === 'REC') return 'On the x axis of the plot there is an error tolerance and on the y axis there is a percentage of observations predicted within the given tolerance.'
-    if (plotType === 'FunnelMeasure') return 'Shows difference in performance in models across partitioned dataset'
-    return ''
+  getPlotDoc (plotType) {
+    const docs = {
+      'CeterisParibus': 'https://arena.drwhy.ai/docs/guide/observation-level#ceteris-paribus',
+      'Breakdown': 'https://arena.drwhy.ai/docs/guide/observation-level#break-down',
+      'SHAPValues': 'https://arena.drwhy.ai/docs/guide/observation-level#shapley-values',
+      'FeatureImportance': 'https://arena.drwhy.ai/docs/guide/dataset-level#variable-importance',
+      'PartialDependence': 'https://arena.drwhy.ai/docs/guide/dataset-level#partial-dependence',
+      'AccumulatedDependence': 'https://arena.drwhy.ai/docs/guide/dataset-level#accumulated-dependence',
+      'Fairness': 'https://arena.drwhy.ai/docs/guide/fairness#fairness-check',
+      'Metrics': 'https://arena.drwhy.ai/docs/guide/model-performance#metrics',
+      'ROC': 'https://arena.drwhy.ai/docs/guide/model-performance#receiver-operating-characteristic',
+      'REC': 'https://arena.drwhy.ai/docs/guide/model-performance#receiver-error-characteristic',
+      'SubsetsPerformance': 'https://arena.drwhy.ai/docs/guide/model-performance#subset-performance',
+      'FunnelMeasure': 'https://arena.drwhy.ai/docs/guide/model-performance#funnel-plot',
+      'VariableDistribution': 'https://arena.drwhy.ai/docs/guide/eda-charts#variable-distribution',
+      'VariableAgainstAnother': 'https://arena.drwhy.ai/docs/guide/eda-charts#variable-against-another'
+    }
+    return docs[plotType] || ''
   }
 }
