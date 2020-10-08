@@ -6,8 +6,13 @@ import { loadFontAwesome } from './utils/fontAwesomeLoader.js'
 
 loadFontAwesome()
 
-let appendURL = new URLSearchParams(window.location.search).get('append')
-let clearStorage = new URLSearchParams(window.location.search).get('clear_storage')
+const searchParams = new URLSearchParams(window.location.search)
+if ([...searchParams.entries()].length === 0) {
+  window.location.replace('https://arena.drwhy.ai/docs')
+}
+
+let appendURL = searchParams.get('append')
+let clearStorage = searchParams.get('clear_storage')
 
 if (clearStorage) {
   localStorage.clear()
