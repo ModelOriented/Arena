@@ -43,6 +43,9 @@ export default {
     return {
       open: false,
       manualLinks: [
+        { label: 'About', link: '/' },
+        { label: 'App', link: 'https://arena.drwhy.ai?app' },
+        { label: 'Guide', link: '/guide' },
         {
           label: 'Demos',
           children: [
@@ -60,9 +63,7 @@ export default {
     links () {
       const docs = this.$store.getters.docs
       const categories = [...new Set(docs.map(d => d.category))].map(c => docs.find(d => d.category === c)).map(d => ({ label: d.category, link: '/guide/' + d.id }))
-      // const docsLinks = categories.map(c => ({ label: c, children: docs.filter(d => d.category === c).map(d => ({ label: d.label, link: '/docs/' + d.id })) }))
-      const links = [{ label: 'About', link: '/' }, { label: 'Guide', children: categories, link: '/guide' }]
-      return links.concat(this.manualLinks)
+      return this.manualLinks.map(x => x.label === 'Guide' ? { ...x, children: categories } : x)
     },
     activeLink () {
       return this.links.filter(l => l.link && this.$route.path.startsWith(l.link)).sort((a, b) => b.link.length - a.link.length).find(x => x)
