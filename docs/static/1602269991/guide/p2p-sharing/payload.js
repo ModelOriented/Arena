@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/guide/p2p-sharing", {data:[{}],fetch:[],mutations:[]});
