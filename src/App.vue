@@ -74,14 +74,16 @@ export default {
     // eslint-disable-next-line no-unused-expressions
     import('@/components/Plotly.vue')
     this.$store.dispatch('init').then(() => {
-      let dataURL = new URLSearchParams(window.location.search).get('data')
-      let demo = new URLSearchParams(window.location.search).get('demo')
-      let sessionUUID = new URLSearchParams(window.location.search).get('session_uuid')
-      let sessionURL = new URLSearchParams(window.location.search).get('session')
-      let debug = new URLSearchParams(window.location.search).get('debug')
-      let githubCode = new URLSearchParams(window.location.search).get('code')
-      let githubState = new URLSearchParams(window.location.search).get('state')
-      let peerServer = new URLSearchParams(window.location.search).get('peer_server')
+      let searchParams = new URLSearchParams(window.location.search)
+      let dataURL = searchParams.get('data')
+      let demo = searchParams.get('demo')
+      let sessionUUID = searchParams.get('session_uuid')
+      let sessionURL = searchParams.get('session')
+      let debug = searchParams.get('debug')
+      let githubCode = searchParams.get('code')
+      let githubState = searchParams.get('state')
+      let peerServer = searchParams.get('peer_server')
+      let connectorPort = searchParams.get('connector')
 
       if (debug) {
         this.$store.commit('setDebug', true)
@@ -90,7 +92,8 @@ export default {
       if (githubCode && githubState) {
         this.$http.get(config.githubAuthorizeServer + '?code=' + githubCode + '&state=' + githubState).then(response => {
           let token = response.body
-          this.$store.dispatch('loadGithubToken', token).then(() => window.close())
+          if (connectorPort) window.location.replace('http://localhost:' + connectorPort + '/?token=' + token)
+          else this.$store.dispatch('loadGithubToken', token).then(() => window.close())
         }).catch(console.error)
       }
 
