@@ -4,7 +4,6 @@
       <DocsNavigation />
     </div>
     <article class="content-container">
-      <span class="warning">Guide is not completed and some features including Python integration are not released yet.</span>
       <span class="title">{{ title }}</span>
       <hr>
       <component :is="content" />
