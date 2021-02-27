@@ -20,11 +20,11 @@ export default {
         return {
           name: d.params.model + ' - ' + d.params.variable,
           type: 'scatter',
-          mode: 'lines',
+          mode: this.plotType === 'ShapleyValuesDependence' ? 'markers' : (d.plotData.x.length > 20 ? 'lines' : 'lines+markers'),
           x: d.plotData.x,
           y: d.plotData.y,
           hoverinfo: 'none',
-          line: { shape: 'spline' },
+          line: { shape: 'shape' },
           marker: {
             color: this.scopesColors.model[d.params.model]
           }
