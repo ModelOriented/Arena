@@ -30,6 +30,7 @@ div.notification {
   margin: 20px 0;
   position: relative;
   user-select: text;
+  pointer-events: all;
 }
 div.notification > .msg {
   margin-left: 8px;

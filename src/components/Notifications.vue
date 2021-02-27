@@ -32,5 +32,6 @@ div.notifications {
   width: 300px;
   height: 100px;
   z-index: 100050;
+  pointer-events: none;
 }
 </style>
