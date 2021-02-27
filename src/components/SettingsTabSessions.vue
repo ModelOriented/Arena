@@ -86,13 +86,15 @@ export default {
         if (type === 'data:application/json;base64') {
           try {
             let parsed = JSON.parse(atob(data))
-            this.$store.dispatch('importSession', parsed)
+            this.$store.dispatch('importSession', parsed).catch(e => {
+              this.$store.dispatch('createNotification', { type: 'error', text: 'Invalid session format' })
+            })
           } catch (e) {
-            console.error('Cannot parse the file. Look to console for more details.')
+            this.message = { text: 'Cannot parse the file. Look to console for more details.', error: true }
             console.error(e)
           }
         } else {
-          console.error('File type is unsupported yet')
+          this.message = { text: 'Unsupported file type', error: true }
         }
       }
       reader.readAsDataURL(file)

@@ -7,6 +7,7 @@ import slots from '@/store/slots.js'
 import dataSources from '@/store/dataSources.js'
 import miscellaneous from '@/store/miscellaneous.js'
 import telemetry from '@/store/telemetry.js'
+import notifications from '@/store/notifications.js'
 
 Vue.use(Vuex)
 
@@ -24,7 +25,8 @@ export default new Vuex.Store({
     slots,
     dataSources,
     miscellaneous,
-    telemetry
+    telemetry,
+    notifications
   },
   strict: false,
   actions

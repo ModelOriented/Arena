@@ -145,14 +145,27 @@ const actions = {
     return Promise.all(promises).then(results => results.find(r => r))
   },
   async loadURL ({ dispatch, commit }, url) {
-    let response = await Vue.http.get(url)
-    await dispatch('loadData', { data: response.body, src: url })
-    commit('addRecentURL', url)
-  },
-  async loadData ({ dispatch, getters }, data) {
-    for (let ds of getters.dataSources) {
-      if (await dispatch(ds + '/loadData', data)) return
+    let notificationId = await dispatch('createNotification', { type: 'loading', text: 'Downloading data file' })
+    try {
+      let response = await Vue.http.get(url)
+      await dispatch('loadData', { data: response.body, src: url })
+      commit('addRecentURL', url)
+    } catch (e) {
+      dispatch('createNotification', { type: 'error', text: 'Download failed' })
+    } finally {
+      commit('delNotification', notificationId)
     }
+  },
+  async loadData ({ dispatch, getters, commit }, data) {
+    let notificationId = await dispatch('createNotification', { type: 'loading', text: 'Importing data' })
+    for (let ds of getters.dataSources) {
+      if (await dispatch(ds + '/loadData', data)) {
+        commit('delNotification', notificationId)
+        return
+      }
+    }
+    commit('delNotification', notificationId)
+    dispatch('createNotification', { type: 'error', text: 'Failed to import data' })
     console.error('Failed to load data')
   },
   exportSession ({ getters }) {
@@ -271,8 +284,16 @@ const actions = {
     commit('clearTokenCallback')
   },
   async loadSessionURL ({ dispatch, commit }, url) {
-    let response = await Vue.http.get(url)
-    await dispatch('importSession', response.body)
+    let notificationId = await dispatch('createNotification', { type: 'loading', text: 'Loading session' })
+    try {
+      let response = await Vue.http.get(url)
+      await dispatch('importSession', response.body)
+    } catch (e) {
+      console.error(e)
+      dispatch('createNotification', { type: 'error', text: 'Loading session failed' })
+    } finally {
+      commit('delNotification', notificationId)
+    }
   },
   initPeer ({ commit, getters }) {
     let peer = new Peer()

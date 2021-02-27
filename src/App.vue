@@ -5,6 +5,7 @@
     <div id="playground" :class="{ blured: settingsVisible }">
       <Block v-for="slot in visibleSlots" :key="slot.uuid" :slotv="slot" @openFullscreen="fullscreenSlot = slot"/>
     </div>
+    <Notifications />
     <Annotations />
     <DeleteZone />
     <PagesBar />
@@ -32,6 +33,7 @@ import WelcomeScreen from '@/components/WelcomeScreen.vue'
 import Annotations from '@/components/Annotations.vue'
 import config from '@/configuration/config.js'
 import PagesBar from '@/components/PagesBar.vue'
+import Notifications from '@/components/Notifications.vue'
 
 export default {
   name: 'app',
@@ -46,7 +48,8 @@ export default {
     NameConflicts,
     WelcomeScreen,
     Annotations,
-    PagesBar
+    PagesBar,
+    Notifications
   },
   data () {
     return {
