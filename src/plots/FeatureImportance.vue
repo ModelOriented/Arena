@@ -235,11 +235,10 @@ export default {
       let points = e.data.points.filter(p => p.curveNumber < this.transformed.length) // Boxplots are after all bars
       if (points.length === 0) return
       let yaxis = points[0].yaxis // All points have the same
-      // I do not know why it works, I just found this by experiments
-      let barWidth = (yaxis._length - yaxis._m - yaxis._b) / (this.transformed.length * yaxis._categories.length)
+      let barWidth = yaxis._length * (1 - this.layout.bargap) / (this.transformed.length * yaxis._categories.length)
       let barsTop = yaxis.d2p(points[0].y) - (0.5 * barWidth * this.transformed.length) // Center - half of widths sum
       let curveNum = Math.floor((e.data.event.pointerY - barsTop) / barWidth) // Assuming plot is at top:0
-      if (curveNum >= this.transformed.length || curveNum < 0) return
+      if (isNaN(curveNum) || curveNum >= this.transformed.length || curveNum < 0) return
       let model = this.transformed[curveNum].params.model
       // If this model is already selected, then unselect
       this.selectedModel = this.selectedModel === model ? null : model
