@@ -50,8 +50,8 @@ export default {
           y: d.plotData.variables.map((y, i) => format.addNewLines(format.formatTitle(y) + ' = ' + d.plotData.variables_value[i], this.leftMargin)),
           base: d.plotData.intercept,
           x: d.plotData.mean,
-          text: d.plotData.mean.map(x => format.formatValue(x, true, '  ')),
-          textposition: this.displayBoxplots ? 'inside' : 'outside',
+          text: this.displayBoxplots ? '' : d.plotData.mean.map(x => format.formatValue(x, true, '  ')),
+          textposition: 'outside',
           hovertext: d.plotData.variables,
           textfont: {
             color: this.displayBoxplots ? 'white' : '#371ea3'
@@ -92,6 +92,9 @@ export default {
           whiskerwidth: 0.5
         }
       }))
+    },
+    variables () {
+      return [...new Set(this.trimmed.map(d => d.plotData.variables).flat())]
     },
     layout () {
       return {
@@ -141,7 +144,27 @@ export default {
               dash: 'dot'
             }
           }
-        })
+        }),
+        annotations: this.displayBoxplots ? this.variables.map((v, vi) => {
+          return this.trimmed.map((d, di) => {
+            if (!d.plotData.variables.includes(v)) return
+            const bargap = 0.2
+            const margin = 0.5 * bargap / this.variables.length
+            const barWidth = (1 - bargap) / (this.variables.length * this.trimmed.length)
+            const groupWidth = 1 / this.variables.length
+            const mean = d.plotData.mean[d.plotData.variables.indexOf(v)]
+            return {
+              x: d.plotData.intercept,
+              y: 1 - (margin + (vi * groupWidth) + ((di + 0.5) * barWidth)),
+              yanchor: 'middle',
+              xanchor: mean >= 0 ? 'right' : 'left',
+              text: '   ' + format.formatValue(mean, 'true') + '   ',
+              yref: 'paper',
+              xref: 'x',
+              showarrow: false
+            }
+          })
+        }).flat().filter(x => x) : []
       }
     },
     config () {
