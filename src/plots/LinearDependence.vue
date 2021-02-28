@@ -24,7 +24,7 @@ export default {
           x: d.plotData.x,
           y: d.plotData.y,
           hoverinfo: 'none',
-          line: { shape: 'shape' },
+          line: { shape: 'linear' },
           marker: {
             color: this.scopesColors.model[d.params.model]
           }
