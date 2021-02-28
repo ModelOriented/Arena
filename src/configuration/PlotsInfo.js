@@ -16,10 +16,12 @@ import Message from '@/plots/Message.vue'
 import DistributionCounts from '@/plots/DistributionCounts.vue'
 import DistributionHistogram from '@/plots/DistributionHistogram.vue'
 import VariableAgainstAnother from '@/plots/VariableAgainstAnother.vue'
+import LinearShapleyDependence from '@/plots/LinearShapleyDependence.vue'
+import CategoricalShapleyDependence from '@/plots/CategoricalShapleyDependence.vue'
 
 export default {
   plotComponents: {
-    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, Fairness, SubsetsPerformance, Message, DistributionCounts, DistributionHistogram, VariableAgainstAnother
+    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, Fairness, SubsetsPerformance, Message, DistributionCounts, DistributionHistogram, VariableAgainstAnother, LinearShapleyDependence, CategoricalShapleyDependence
   },
   canMerge (slot1, slot2) {
     if (!slot1 || !slot2 || slot1 === slot2 || slot1.plotType !== slot2.plotType) return false
@@ -27,7 +29,7 @@ export default {
     let testSameParamName = paramType => (new Set([...slot1.localParams, ...slot2.localParams].map(params => params[paramType])).size === 1)
     let sameVariable = testSameParamName('variable')
     let sameObservation = testSameParamName('observation')
-    if (type === 'PartialDependence' || type === 'AccumulatedDependence' || type === 'CeterisParibus' || type === 'Fairness') return sameVariable
+    if (type === 'PartialDependence' || type === 'AccumulatedDependence' || type === 'CeterisParibus' || type === 'Fairness' || type === 'ShapleyValuesDependence') return sameVariable
     if (type === 'FeatureImportance') return true
     if (type === 'SHAPValues') return sameObservation
     if (type === 'ROC') return true
@@ -43,6 +45,7 @@ export default {
     FeatureImportance: [],
     PartialDependence: ['variable'],
     AccumulatedDependence: ['variable'],
+    ShapleyValuesDependence: ['variable'],
     CeterisParibus: ['variable', 'observation'],
     SHAPValues: ['observation'],
     Fairness: ['variable'],

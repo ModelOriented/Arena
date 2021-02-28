@@ -66,5 +66,19 @@ export default [
     default: 90,
     min: 60,
     max: 300
+  },
+  {
+    name: 'shapley_dependence_jitter',
+    displayName: 'Shapley dependence jitter range as per mill of chart range',
+    type: 'integer',
+    default: 4,
+    min: 0,
+    max: 100
+  },
+  {
+    name: 'shapley_dependence_error_bar',
+    displayName: 'Display error bars over Shapley dependence points',
+    type: 'boolean',
+    default: true
   }
 ]
