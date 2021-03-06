@@ -70,5 +70,27 @@ export default {
       'VariableAgainstAnother': 'https://arena.drwhy.ai/docs/guide/eda-charts#variable-against-another'
     }
     return docs[plotType] || ''
+  },
+  optionsCategories: {
+    Breakdown: ['Break Down', ['Margins', 'left_margin']],
+    FeatureImportance: ['Variable Importance', ['Margins', 'left_margin']],
+    CategoricalDependence: [['Margins', 'left_margin_values']],
+    LinearDependence: [],
+    NumericalCeterisParibus: [],
+    CategoricalCeterisParibus: [['Margins', 'left_margin_values']],
+    SHAPValues: ['Shapley Values', ['Margins', 'left_margin']],
+    HtmlWidget: [],
+    ROC: [],
+    REC: [],
+    Metrics: [],
+    FunnelMeasure: ['Funnel Plot'],
+    Fairness: [],
+    SubsetsPerformance: ['Subset Performance'],
+    Message: [],
+    DistributionCounts: [['Margins', 'left_margin_values']],
+    DistributionHistogram: [],
+    VariableAgainstAnother: [],
+    LinearShapleyDependence: ['Shapley Dependence'],
+    CategoricalShapleyDependence: [['Margins', 'left_margin_values']]
   }
 }

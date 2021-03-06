@@ -6,13 +6,14 @@
 </template>
 <script>
 import Resize from '@/utils/Resize.js'
+import OptionsMixin from '@/utils/OptionsMixin.js'
 import format from '@/utils/format.js'
 import SelectMenu from '@/components/SelectMenu.vue'
 const Plotly = () => import('@/components/Plotly.vue')
 
 export default {
   name: 'Breakdown',
-  mixins: [Resize],
+  mixins: [Resize, OptionsMixin],
   props: {
     data: Array,
     plotType: String
@@ -170,8 +171,8 @@ export default {
     layoutPatches () {
       return { 'xaxis.range': this.range, 'margin.l': this.leftMargin }
     },
-    maxVariables () { return this.$store.getters.getOption('breakdown_max_variables') },
-    leftMargin () { return this.$store.getters.getOption('left_margin') }
+    maxVariables () { return this.getOption('breakdown_max_variables') },
+    leftMargin () { return this.getOption('left_margin') }
   },
   methods: {
     onPlotlyClick (e) {

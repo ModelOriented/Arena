@@ -1,5 +1,5 @@
 <template>
-  <div class="block" ref="block" :style="style" :class="{ moving, dropzone: mode.indexOf('dropzone') != -1 }">
+  <div class="block" ref="block" :style="style" :class="{ moving, dropzone: mode.indexOf('dropzone') != -1, 'options-opened': optionsOpened }">
     <div class="overlay full" :class="{ visible: singleDropzone, active: activeDropzone === 'full' }">
       <span class="overlay-title"><font-awesome-icon icon="compress-arrows-alt"/><br>REPLACE</span>
     </div>
@@ -11,7 +11,11 @@
     </div>
     <BlockHead :slotv="slotv" :plotComponent="plotComponent" />
     <PlotProxy :slotv="slotv" ref="plot" @plotComponentUpdate="plotComponent = $event"/>
-    <span class="fullscreen-toggle tooltiped" @click="$emit('openFullscreen')"><span class="tooltip">Fullscreen</span><span><font-awesome-icon icon="expand"/></span></span>
+    <PlotOptions v-if="optionsOpened" :slotv="slotv" :plotComponent="plotComponent" @close="optionsOpened = false" />
+    <div class="bottom-buttons">
+      <span class="options-toggle tooltiped" v-if="hasOptions" @click="optionsOpened = !optionsOpened"><span class="tooltip">Options</span><span><font-awesome-icon icon="cog"/></span></span>
+      <span class="fullscreen-toggle tooltiped" @click="$emit('openFullscreen')"><span class="tooltip">Fullscreen</span><span><font-awesome-icon icon="expand"/></span></span>
+    </div>
     <!-- resize edges -->
     <div class="handle handle-left"/>
     <div class="handle handle-top"/>
@@ -31,6 +35,7 @@ import PlotsInfo from '@/configuration/PlotsInfo.js'
 import PlotProxy from '@/components/PlotProxy.vue'
 import BlockHead from '@/components/BlockHead.vue'
 import zIndexIncrementor from '@/utils/zIndexIncrementor.js'
+import PlotOptions from '@/components/PlotOptions.vue'
 import uuid from 'uuid/v4'
 
 export default {
@@ -44,7 +49,8 @@ export default {
       plotComponent: '', // for legend colors
       uuid: uuid(), // should never be changed
       moving: false,
-      interactable: null
+      interactable: null,
+      optionsOpened: false
     }
   },
   props: {
@@ -63,6 +69,9 @@ export default {
         width: this.slotv.width + 'px',
         height: this.slotv.height + 'px'
       }
+    },
+    hasOptions () {
+      return this.plotComponent ? (PlotsInfo.optionsCategories[this.plotComponent] || []).length > 0 : false
     }
   },
   mounted () { this.initInteractions() },
@@ -76,7 +85,8 @@ export default {
   },
   components: {
     BlockHead,
-    PlotProxy
+    PlotProxy,
+    PlotOptions
   }
 }
 </script>
@@ -149,20 +159,30 @@ div.block > .overlay.left.active {
 div.block > .overlay.visible {
   visibility: visible;
 }
-div.block > .plot-proxy {
+div.block > .plot-proxy, div.block > .plot-options {
   height: calc(100% - 74px);
   width: calc(100% - 20px);
   left: 10px;
   bottom: 10px;
   position: absolute;
 }
-div.block > span.fullscreen-toggle {
+div.block > .plot-options {
+  z-index: 10;
+}
+div.block > div.bottom-buttons {
   position: absolute;
-  right: 10px;
+  right: 5px;
   bottom: 10px;
   font-size: 13px;
-  cursor: pointer;
   color: #371ea3;
+  z-index: 20;
+}
+div.block > div.bottom-buttons > * {
+  cursor: pointer;
+  margin: 0 5px;
+}
+div.block.options-opened > div.plot-proxy {
+  filter: blur(4px);
 }
 
 /*

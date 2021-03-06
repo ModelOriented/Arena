@@ -16,11 +16,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import format from '@/utils/format.js'
+import OptionsMixin from '@/utils/OptionsMixin.js'
 import LolipopAxis from '@/utils/lolipopAxis.js'
 const Plotly = () => import('@/components/Plotly.vue')
 
 export default {
   name: 'SubsetsPerformace',
+  mixins: [OptionsMixin],
   props: {
     data: Array,
     plotType: String,
@@ -59,7 +61,7 @@ export default {
   },
   computed: {
     customData () { return this.slotv.customData },
-    pageSize () { return this.$store.getters.getOption('subsetsperformance_page_size') },
+    pageSize () { return this.getOption('subsetsperformance_page_size') },
     pagesCount () { return Math.ceil(this.variables.length / this.pageSize) },
     scoreFunctionSafe () { return this.scoreFunctions.includes(this.scoreFunction) ? this.scoreFunction : this.scoreFunctions[0] },
     pageRange () {

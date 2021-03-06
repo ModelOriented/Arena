@@ -6,10 +6,12 @@
 <script>
 import { mapGetters } from 'vuex'
 import format from '@/utils/format.js'
+import OptionsMixin from '@/utils/OptionsMixin.js'
 const Plotly = () => import('@/components/Plotly.vue')
 
 export default {
   name: 'LinearShapleyDependence',
+  mixins: [OptionsMixin],
   props: {
     data: Array,
     plotType: String
@@ -81,7 +83,7 @@ export default {
         modeBarButtonsToRemove: ['lasso2d', 'autoScale2d', 'select2d', 'hoverCompareCartesian', 'hoverClosestCartesian', 'toImage']
       }
     },
-    ...mapGetters(['scopesColors', 'getOption'])
+    ...mapGetters(['scopesColors'])
   },
   methods: {
     onPlotlyClick () {

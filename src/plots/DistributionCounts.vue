@@ -7,13 +7,14 @@
   </div>
 </template>
 <script>
+import OptionsMixin from '@/utils/OptionsMixin.js'
 import Resize from '@/utils/Resize.js'
 import format from '@/utils/format.js'
 const Plotly = () => import('@/components/Plotly.vue')
 
 export default {
   name: 'DistributionCounts',
-  mixins: [Resize],
+  mixins: [Resize, OptionsMixin],
   props: {
     data: Array,
     plotType: String,
@@ -152,7 +153,7 @@ export default {
     layoutPatches () {
       return { 'xaxis.range': this.range, 'margin.l': this.leftMargin }
     },
-    leftMargin () { return this.$store.getters.getOption('left_margin_values') }
+    leftMargin () { return this.getOption('left_margin_values') }
   },
   methods: {
     setAxisType (v) {
