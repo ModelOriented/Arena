@@ -52,12 +52,6 @@ export default {
     VariableDistribution: ['variable'],
     VariableAgainstAnother: ['variable']
   },
-  isLinear (plotComponent) {
-    return ['LinearDependence', 'NumericalCeterisParibus', 'ROC', 'REC'].includes(plotComponent)
-  },
-  isBars (plotComponent) {
-    return ['FeatureImportance', 'CategoricalDependence', 'CategoricalCeterisParibus', 'SHAPValues'].includes(plotComponent)
-  },
   getPlotDoc (plotType) {
     const docs = {
       'CeterisParibus': 'https://arena.drwhy.ai/docs/guide/observation-level#ceteris-paribus',
