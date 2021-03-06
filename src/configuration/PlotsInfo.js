@@ -18,10 +18,11 @@ import DistributionHistogram from '@/plots/DistributionHistogram.vue'
 import VariableAgainstAnother from '@/plots/VariableAgainstAnother.vue'
 import LinearShapleyDependence from '@/plots/LinearShapleyDependence.vue'
 import CategoricalShapleyDependence from '@/plots/CategoricalShapleyDependence.vue'
+import ShapleyValuesVariableImportance from '@/plots/ShapleyValuesVariableImportance.vue'
 
 export default {
   plotComponents: {
-    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, Fairness, SubsetsPerformance, Message, DistributionCounts, DistributionHistogram, VariableAgainstAnother, LinearShapleyDependence, CategoricalShapleyDependence
+    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, Fairness, SubsetsPerformance, Message, DistributionCounts, DistributionHistogram, VariableAgainstAnother, LinearShapleyDependence, CategoricalShapleyDependence, ShapleyValuesVariableImportance
   },
   canMerge (slot1, slot2) {
     if (!slot1 || !slot2 || slot1 === slot2 || slot1.plotType !== slot2.plotType) return false
@@ -30,7 +31,7 @@ export default {
     let sameVariable = testSameParamName('variable')
     let sameObservation = testSameParamName('observation')
     if (type === 'PartialDependence' || type === 'AccumulatedDependence' || type === 'CeterisParibus' || type === 'Fairness' || type === 'ShapleyValuesDependence') return sameVariable
-    if (type === 'FeatureImportance') return true
+    if (type === 'FeatureImportance' || type === 'ShapleyValuesVariableImportance') return true
     if (type === 'SHAPValues') return sameObservation
     if (type === 'ROC') return true
     if (type === 'REC') return true
@@ -50,7 +51,8 @@ export default {
     SHAPValues: ['observation'],
     Fairness: ['variable'],
     VariableDistribution: ['variable'],
-    VariableAgainstAnother: ['variable']
+    VariableAgainstAnother: ['variable'],
+    ShapleyValuesVariableImportance: []
   },
   getPlotDoc (plotType) {
     const docs = {
@@ -91,6 +93,7 @@ export default {
     DistributionHistogram: [],
     VariableAgainstAnother: [],
     LinearShapleyDependence: ['Shapley Dependence'],
-    CategoricalShapleyDependence: [['Margins', 'left_margin_values']]
+    CategoricalShapleyDependence: [['Margins', 'left_margin_values']],
+    ShapleyValuesVariableImportance: ['Variable Importance', ['Margins', 'left_margin']]
   }
 }
