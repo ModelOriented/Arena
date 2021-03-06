@@ -38,6 +38,7 @@ export default {
           gridwidth: 2,
           fixedrange: true,
           zeroline: false,
+          showspikes: true,
           title: {
             text: this.data.length > 0 ? format.formatTitle(this.data[0].params.variable) : '',
             standoff: 10
@@ -45,6 +46,7 @@ export default {
         },
         yaxis: {
           type: 'linear',
+          showspikes: true,
           title: {
             text: this.plotType === 'AccumulatedDependence' ? 'Accumulated prediction' : 'Average prediction',
             standoff: 10
@@ -66,7 +68,7 @@ export default {
     config () {
       return {
         displaylogo: false,
-        displayModeBar: true,
+        displayModeBar: false,
         staticPlot: false,
         modeBarButtonsToRemove: ['lasso2d', 'autoScale2d', 'select2d', 'hoverCompareCartesian', 'hoverClosestCartesian', 'toImage']
       }

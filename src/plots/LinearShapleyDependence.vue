@@ -48,6 +48,7 @@ export default {
         xaxis: {
           type: 'linear',
           gridwidth: 2,
+          showspikes: true,
           fixedrange: true,
           zeroline: false,
           title: {
@@ -62,6 +63,7 @@ export default {
             standoff: 10
           },
           gridwidth: 2,
+          showspikes: true,
           fixedrange: true,
           zeroline: false
         },
@@ -78,7 +80,7 @@ export default {
     config () {
       return {
         displaylogo: false,
-        displayModeBar: true,
+        displayModeBar: false,
         staticPlot: false,
         modeBarButtonsToRemove: ['lasso2d', 'autoScale2d', 'select2d', 'hoverCompareCartesian', 'hoverClosestCartesian', 'toImage']
       }

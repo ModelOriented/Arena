@@ -44,7 +44,7 @@ export default {
         xaxis: {
           type: 'linear',
           title: {
-            text: this.plotType === 'AccumulatedDependence' ? 'Accumulated prediction' : 'Average prediction',
+            text: 'Contribution',
             standoff: 10
           },
           gridwidth: 2,
@@ -58,14 +58,17 @@ export default {
           color: '#371ea3'
         },
         hovermode: 'closest',
+        boxmode: 'group',
+        boxgap: 0.1,
+        boxgroupgap: 0.1,
         showlegend: false,
         margin: { l: this.leftMargin, t: 0, b: 45, r: 5 },
         dragmode: 'pan',
         shapes: this.data.map(d => {
           return {
             type: 'line',
-            x0: d.plotData.base,
-            x1: d.plotData.base,
+            x0: 0,
+            x1: 0,
             y0: 0,
             y1: 1,
             yref: 'paper',
