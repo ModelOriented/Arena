@@ -1,17 +1,22 @@
 # Arena - Interactive XAI dashboard
 
-![](docs/animated_images.gif)
+[![](docs/animated_images.gif)](https://arena.drwhy.ai)
 
-## Examples
+## How to use it
+
+Arena dashboard is available at [`https://arena.drwhy.ai/?app`](https://arena.drwhy.ai/?app). Needed data can be generated using:
+
+* **R** - [ArenaR](https://github.com/ModelOriented/ArenaR)
+* **Python** - [dalex](https://python.drwhy.ai)
+
+## [Examples](https://arena.drwhy.ai/docs/guide/first-datasource)
+
+## Demos
 * [Apartments from 2009-2010 price per m2](https://arena.drwhy.ai/?demo=0)  
 * [FIFA 20 Players value](https://arena.drwhy.ai/?demo=1)  
 * [HR classification](https://arena.drwhy.ai/?demo=2)  
 
-## How to use it
-Arena dashboard is available at `https://arena.drwhy.ai`. All you need is to generate data.  
-**R** - [ArenaR](https://github.com/piotrpiatyszek/ArenaR)
-
-## Build
+## Local Build
 
 ### Compiles and hot-reloads for development
 ```
