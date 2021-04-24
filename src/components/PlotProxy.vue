@@ -1,6 +1,6 @@
 <template>
   <div class="plot-proxy">
-    <span class="msg" v-if="loading || waitingForRender">Loading...</span>
+    <Loading v-if="loading || waitingForRender || (progress !== 1 && renderPlot)" :progress="progress" />
     <span class="msg" v-if="!renderPlot && !error && !loading && slotData.length === 0 && !waitingForRender">Cannot load plot data!</span>
     <span class="msg" v-if="!plotComponent && !renderPlot && !error && !loading && slotData.length > 0 && !waitingForRender">
       Cannot load plot data. Plot type is probably not supported for thease params.
@@ -10,6 +10,7 @@
   </div>
 </template>
 <script>
+import Loading from '@/components/Loading.vue'
 import PlotsInfo from '@/configuration/PlotsInfo.js'
 import { mapActions, mapGetters } from 'vuex'
 import equal from 'fast-deep-equal/es6'
@@ -25,19 +26,26 @@ export default {
       error: null, // type of error
       loading: null, // time of last pending query
       waitingForRender: false,
-      slotData: [] // data returned from query(fullParams)
+      slotData: [], // data returned from query(fullParams)
+      progress: null
     }
   },
   watch: {
     fullParams: { // Reload slot data, when params change
       handler (newValue, oldValue) {
-        if (!equal(newValue, oldValue)) this.loadSlotData()
+        if (!equal(newValue, oldValue)) {
+          this.progress = null
+          this.loadSlotData()
+        }
       },
       immediate: true
     },
     'slotv.plotType': { // Reload slot data, when plot type change
       handler (newValue, oldValue) {
-        if (newValue !== oldValue) this.loadSlotData()
+        if (newValue !== oldValue) {
+          this.progress = null
+          this.loadSlotData()
+        }
       },
       immediate: true
     },
@@ -68,6 +76,9 @@ export default {
     renderPlot () {
       return this.plotVisible && this.plotComponent
     },
+    textProgress () {
+      return this.progress === null ? '' : (Math.round(this.progress * 100) + '%')
+    },
     ...mapGetters(['getSlotFullParams'])
   },
   methods: {
@@ -81,6 +92,14 @@ export default {
         if (this.loading === time) this.loading = null
         // Do not update if results are the same (ex. variable param changed in FeatureImportance plot)
         let getPlotData = (slotData) => slotData.plotData
+        if (!result.every(r => r.computations === undefined || r.computations.isDone)) {
+          this.progress = result.map(r => r.computations === undefined ? 1 : r.computations.progress).reduce((acu, x) => (x === null || acu === null) ? null : acu + (x / result.length), 0)
+          setTimeout(() => {
+            this.loadSlotData()
+          }, 1000)
+        } else {
+          this.progress = 1
+        }
         if (new Set([...this.slotData.map(getPlotData), ...result.map(getPlotData)]).size === new Set(this.slotData).size &&
           new Set(this.slotData.map(getPlotData)).size === new Set(result.map(getPlotData)).size &&
           this.slotData.length === result.length) return
@@ -98,7 +117,7 @@ export default {
     },
     ...mapActions(['query'])
   },
-  components: PlotsInfo.plotComponents
+  components: { ...PlotsInfo.plotComponents, Loading }
 }
 </script>
 <style>
@@ -108,6 +127,12 @@ div.plot-proxy > div.plot {
   position: absolute;
   left: 0;
   top: 0;
+}
+div.plot-proxy > .loading {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 9;
 }
 div.plot-proxy > span.msg {
   position: absolute;

@@ -41,6 +41,9 @@ const mutations = {
   addToCache (state, { source, slotData }) {
     Vue.set(source, 'cache', [...source.cache, slotData])
   },
+  removeFromCache (state, { source, slotData }) {
+    Vue.set(source, 'cache', source.cache.filter(c => c !== slotData))
+  },
   addPendingRequest (state, { source, pendingRequest }) {
     Vue.set(source, 'pendingRequests', [...source.pendingRequests, pendingRequest])
   },
@@ -141,6 +144,10 @@ const actions = {
             plotData: data.data,
             plotComponent: data.plotComponent
           }
+          slotData.computations = {
+            isDone: data.isDone === undefined ? true : data.isDone,
+            progress: (data.progress === undefined || data.prograss === -1) ? null : data.progress
+          }
           commit('addToCache', { source, slotData })
           pendingRequest.resolve(slotData)
           commit('removePendingRequest', { source, pendingRequest })
@@ -166,10 +173,15 @@ const actions = {
         let timestamp = response.body.timestamp
         if (timestamp > source.timestamp) dispatch('updateSource', source)
       }).catch(console.error)
+      let toUpdate = source.cache.filter(c => c.computations && !c.computations.isDone)
+      toUpdate.forEach(cached => {
+        commit('removeFromCache', { source, slotData: cached })
+      })
+      // if (toUpdate.length > 0) dispatch('refreshSlots', null, { root: true })
     })
   },
   init ({ dispatch }) {
-    setInterval(() => dispatch('refresh'), 5000)
+    setInterval(() => dispatch('refresh'), 3000)
   },
   getAttributes ({ state, commit, getters }, { paramValue, paramType }) {
     for (let source of getters.sources) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="categorical-dependence-plot" v-resize:throttle.100="onResize">
+  <div class="categorical-shapley-dependence-plot" v-resize:throttle.100="onResize">
     <Plotly v-bind="{ traces, config, layout, layoutPatches }" ref="plot"/>
   </div>
 </template>
@@ -22,25 +22,13 @@ export default {
       return this.data.map((d, i) => {
         return {
           name: d.params.model,
-          type: 'bar',
+          type: 'box',
           orientation: 'h',
-          base: d.plotData.observation['_yhat_'],
           y: d.plotData.x.map(y => format.addNewLines(y, this.leftMargin)),
-          x: d.plotData.y.map(x => x - d.plotData.observation['_yhat_']),
-          textposition: 'outside',
-          textfont: {
-            color: '#371ea8'
-          },
-          hoverinfo: 'text',
-          text: d.plotData.y.map(x => format.formatValue(x - d.plotData.observation['_yhat_'], true)),
-          hoverlabel: {
-            bgcolor: this.scopesColors.model[d.params.model],
-            font: { family: 'FiraSansBold', size: 16, color: 'white' }
-          },
+          x: d.plotData.mean,
           marker: {
             color: this.scopesColors.model[d.params.model]
-          },
-          insidetextanchor: 'start'
+          }
         }
       })
     },
@@ -56,7 +44,7 @@ export default {
         xaxis: {
           type: 'linear',
           title: {
-            text: 'prediction',
+            text: 'Contribution',
             standoff: 10
           },
           gridwidth: 2,
@@ -69,21 +57,25 @@ export default {
           size: 14,
           color: '#371ea3'
         },
+        hovermode: 'closest',
+        boxmode: 'group',
+        boxgap: 0.1,
+        boxgroupgap: 0.1,
         showlegend: false,
         margin: { l: this.leftMargin, t: 0, b: 45, r: 5 },
         dragmode: 'pan',
-        hovermode: 'closest',
         shapes: this.data.map(d => {
           return {
             type: 'line',
-            x0: d.plotData.observation['_yhat_'],
-            x1: d.plotData.observation['_yhat_'],
+            x0: 0,
+            x1: 0,
             y0: 0,
             y1: 1,
             yref: 'paper',
             xref: 'x',
             line: {
               color: 'black',
+              dash: 'dot',
               width: 2
             }
           }
@@ -100,18 +92,18 @@ export default {
     },
     minimalValue () {
       return Math.min(...this.data.map(d => {
-        return Math.min(...d.plotData.y, d.plotData.observation['_yhat_'], d.plotData.min)
+        return Math.min(...d.plotData.mean)
       }))
     },
     maximalValue () {
       return Math.max(...this.data.map(d => {
-        return Math.max(...d.plotData.y, d.plotData.observation['_yhat_'], d.plotData.max)
+        return Math.max(...d.plotData.mean)
       }))
     },
     range () {
       let len = this.maximalValue - this.minimalValue
       // margin = 0.5 * totalMarginInPixels * rangeInScale / ( rangeInPixels = width - totalMarginInPixels - plotlyMargin )
-      let margin = 0.5 * 80 * len / (this.width - 120 - this.leftMargin - 5)
+      let margin = 0.5 * 120 * len / (this.width - 120 - this.leftMargin - 5)
       return [this.minimalValue - margin, this.maximalValue + margin]
     },
     layoutPatches () {

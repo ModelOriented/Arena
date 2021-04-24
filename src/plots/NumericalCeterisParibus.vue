@@ -20,11 +20,11 @@ export default {
         return [{
           name: d.params.model + ' - ' + d.params.variable,
           type: 'scatter',
-          mode: 'lines',
+          mode: d.plotData.x.length > 20 ? 'lines' : 'lines+markers',
           x: [...d.plotData.x, d.plotData.observation[d.plotData.variable]],
           y: [...d.plotData.y, d.plotData.observation['_yhat_']],
           hoverinfo: 'none',
-          line: { shape: 'spline' },
+          line: { shape: 'linear' },
           marker: {
             color: this.scopesColors.model[d.params.model]
           },

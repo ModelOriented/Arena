@@ -83,6 +83,8 @@ export default {
           q1: numerical.map(x => x.q1),
           q3: numerical.map(x => x.q3),
           median: numerical.map(x => x.median),
+          pointpos: 0,
+          jitter: 1,
           line: {
             width: 1,
             color: this.colors[d.params.dataset]
@@ -96,7 +98,7 @@ export default {
         } else {
           trace['y'] = categorical.map(x => format.addNewLines(x, 100))
         }
-        // trace[firstNumerical ? 'y' : 'x'] = numerical.map(x => x.outliers)
+        trace[firstNumerical ? 'y' : 'x'] = numerical.map(x => Array.isArray(x.outliers) ? x.outliers : [x.outliers]).map(x => x.length === 0 ? [Math.inf] : x)
       } else if (this.subdata.type === 'table') {
         trace = {
           name: d.params.dataset,

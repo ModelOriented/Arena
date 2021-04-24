@@ -83,7 +83,9 @@ const actions = {
       if (Object.values(obj).includes(undefined)) return
       source.plotsData.push(obj)
     })
-
+    Object.freeze(source.plotData)
+    Object.freeze(source.availableParams)
+    Object.freeze(source.attributes)
     let waitingParams = {
       uuid: source.uuid,
       params: source.availableParams
