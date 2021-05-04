@@ -50,7 +50,7 @@
         <li>Maximum variables in Shapley Values</li>
       </ul>
       <h4>Connector options</h4>
-      <Code :langs="['Python', 'R']" :syntax="['py', 'r']" :sources="[code2, code3]" />
+      <Code :langs="['Python', 'Python (dalex <= 1.1.0)', 'R']" :syntax="['py', 'py', 'r']" :sources="[code4, code2, code3]" />
     </DocSection>
   </div>
 </template>
@@ -82,4 +82,11 @@ create_arena(
   # Number of random paths
   shap_B = value
 )
+</codesrc>
+<!-- 4 - shap python > 1.1.0 arguments -->
+<codesrc>
+# Number of random paths
+arena.set_option('ShapleyValues', 'B', value)
+# Number of parallel processes
+arena.set_option('ShapleyValues', 'cpus', value)
 </codesrc>
