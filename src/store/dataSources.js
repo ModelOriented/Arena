@@ -168,7 +168,7 @@ const actions = {
     dispatch('createNotification', { type: 'error', text: 'Failed to import data' })
     console.error('Failed to load data')
   },
-  exportSession ({ getters }) {
+  exportSession ({ getters, dispatch }) {
     let sources = getters.dataSources.map(ds => getters[ds + '/sources'])
       .flat()
       .sort((a, b) => a.timestamp - b.timestamp)
@@ -179,6 +179,9 @@ const actions = {
           uuid: source.uuid
         }
       })
+    if (sources.find(s => s.address.startsWith('UPLOAD'))) {
+      dispatch('createNotification', { type: 'warning', text: 'There are manualy uploaded data sources. They will not be available in shared session.' })
+    }
     let slots = getters.allSlots
     let colors = getters.manualColors
     let annotations = getters.annotations
