@@ -30,7 +30,8 @@ export default {
     variable: { name: 'Partial Dependence', plotType: 'PartialDependence', plotCategory: 'Dataset Level', scope: 'model' },
     observation: { name: 'Break Down', plotType: 'Breakdown', plotCategory: 'Observation Level', scope: 'model' }
   },
-  githubClientId: 'd7d96eec80f68c16954b',
+  githubClientId_https: 'd7d96eec80f68c16954b',
+  githubClientId_http: '6d8ede55c3c23b0b1a0f',
   githubAuthorizeServer: 'https://arena.mini.pw.edu.pl/github',
   telemetryServer: 'https://arena.mini.pw.edu.pl/telemetry'
 }

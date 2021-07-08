@@ -263,7 +263,9 @@ const actions = {
     if (!token) {
       return new Promise((resolve, reject) => {
         commit('setTokenCallback', resolve)
-        window.open('https://github.com/login/oauth/authorize?client_id=' + config.githubClientId + '&state=' + uuid() + '&scope=gist')
+        const protocol = window.location.protocol.slice(0, -1)
+        const clientId = config['githubClientId_' + protocol]
+        window.open('https://github.com/login/oauth/authorize?client_id=' + clientId + '&state=' + protocol + '_' + uuid() + '&scope=gist')
       })
     } else {
       return token
