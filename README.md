@@ -13,8 +13,8 @@ Arena dashboard is available at [`https://arena.drwhy.ai/?app`](https://arena.dr
 
 ## Demos
 * [Apartments from 2009-2010 price per m2](https://arena.drwhy.ai/?demo=0)  
-* [FIFA 20 Players value](https://arena.drwhy.ai/?demo=1)  
 * [HR classification](https://arena.drwhy.ai/?demo=2)  
+* [FIFA 20 Players value](https://arena.drwhy.ai/?demo=1)  
 
 ## Local Build
 
