@@ -65,7 +65,7 @@ export default {
       return ['linear', 'linear']
     },
     xAxisMargin () {
-      if (this.axisTypes[1] === 'linear') return 40
+      if (this.axisTypes[0] === 'linear') return 40
       return 40 + Math.max(...this.traces[0].x.map(x => x.split('<br>').length)) * 16
     },
     traces () {
@@ -79,7 +79,7 @@ export default {
         trace = {
           name: d.params.dataset,
           type: 'box',
-          orientation: firstNumerical ? 'v' : 'h',
+          orientation: firstNumerical ? 'h' : 'v',
           q1: numerical.map(x => x.q1),
           q3: numerical.map(x => x.q3),
           median: numerical.map(x => x.median),
@@ -93,30 +93,31 @@ export default {
           upperfence: numerical.map(x => x.uf),
           showlegend: false
         }
-        if (firstNumerical) {
-          trace['x'] = categorical.map(x => format.addNewLines(x, 0.7 * this.width / this.subdata.secondary.length))
+        if (!firstNumerical) {
+          trace['x'] = categorical.map(x => format.addNewLines(x, 0.7 * this.width / this.subdata.first.length))
         } else {
           trace['y'] = categorical.map(x => format.addNewLines(x, 100))
         }
-        trace[firstNumerical ? 'y' : 'x'] = numerical.map(x => Array.isArray(x.outliers) ? x.outliers : [x.outliers]).map(x => x.length === 0 ? [Math.inf] : x)
+        trace[firstNumerical ? 'x' : 'y'] = numerical.map(x => Array.isArray(x.outliers) ? x.outliers : [x.outliers]).map(x => x.length === 0 ? [Math.inf] : x)
       } else if (this.subdata.type === 'table') {
+        const transpose = m => m[0].map((x, i) => m.map(x => x[i]))
         trace = {
           name: d.params.dataset,
-          z: this.subdata.counts,
-          x: this.subdata.secondary.map(x => format.addNewLines(x, 0.7 * this.width / this.subdata.secondary.length)),
-          y: this.subdata.first.map(x => format.addNewLines(x, 100)),
+          z: transpose(this.subdata.counts),
+          x: this.subdata.first.map(x => format.addNewLines(x, 0.7 * this.width / this.subdata.first.length)),
+          y: this.subdata.secondary.map(x => format.addNewLines(x, 100)),
           type: 'heatmap',
-          hovertemplate: format.formatTitle(this.axisVariable) + ': %{x}<br>' + format.formatTitle(this.firstVariable) + ': %{y}<br>Count: <b>%{z}</b><extra></extra>',
+          hovertemplate: format.formatTitle(this.axisVariable) + ': %{y}<br>' + format.formatTitle(this.firstVariable) + ': %{x}<br>Count: <b>%{z}</b><extra></extra>',
           hoverongaps: false,
           colorscale: [[0, '#c7f5bf'], [0.25, '#8bdcbe'], [0.5, '#46bac2'], [0.75, '#4378bf'], [1, '#371ea3']]
         }
       } else if (this.subdata.type === 'scatter') {
         trace = {
-          x: this.subdata.secondary,
-          y: this.subdata.first,
+          y: this.subdata.secondary,
+          x: this.subdata.first,
           type: 'scatter',
           mode: 'markers',
-          hovertemplate: format.formatTitle(this.axisVariable) + ': %{x}<br>' + format.formatTitle(this.firstVariable) + ': %{y}<extra></extra>',
+          hovertemplate: format.formatTitle(this.axisVariable) + ': %{y}<br>' + format.formatTitle(this.firstVariable) + ': %{x}<extra></extra>',
           marker: {
             width: 1,
             color: this.colors[d.params.dataset]
@@ -128,17 +129,17 @@ export default {
     heatmapAnnotations () {
       if (!this.subdata || this.subdata.type !== 'table') return []
       let max = Math.max(...this.subdata.counts.flat())
-      return this.subdata.first.map((y, yi) => {
-        return this.subdata.secondary.map((x, xi) => {
+      return this.subdata.secondary.map((y, yi) => {
+        return this.subdata.first.map((x, xi) => {
           return {
             xref: 'x',
             yref: 'y',
-            x: format.addNewLines(x, 0.7 * this.width / this.subdata.secondary.length),
+            x: format.addNewLines(x, 0.7 * this.width / this.subdata.first.length),
             y: format.addNewLines(y, 100),
-            text: this.subdata.counts[yi][xi],
+            text: this.subdata.counts[xi][yi],
             showarrow: false,
             font: {
-              color: this.subdata.counts[yi][xi] > (0.7 * max) ? '#8bdcbe' : '#371ea8'
+              color: this.subdata.counts[xi][yi] > (0.7 * max) ? '#8bdcbe' : '#371ea8'
             }
           }
         })
@@ -147,19 +148,19 @@ export default {
     layout () {
       return {
         yaxis: {
-          type: this.axisTypes[0],
+          type: this.axisTypes[1],
           gridwidth: 2,
           fixedrange: true,
           zeroline: false,
           title: {
-            text: format.formatTitle(this.firstVariable),
+            text: format.formatTitle(this.axisVariable),
             standoff: 10
           }
         },
         xaxis: {
-          type: this.axisTypes[1],
+          type: this.axisTypes[0],
           title: {
-            text: '',
+            text: format.formatTitle(this.firstVariable),
             standoff: 10
           },
           gridwidth: 2,
@@ -175,8 +176,8 @@ export default {
         hovermode: 'closest',
         showlegend: false,
         margin: {
-          l: this.axisTypes[0] === 'linear' ? 45 : 130,
-          t: 0,
+          l: this.axisTypes[1] === 'linear' ? 60 : 130,
+          t: 15,
           b: this.xAxisMargin,
           r: 5
         },
@@ -209,8 +210,7 @@ export default {
 <style>
 div.variable-against-another-plot > .axis-dropdown {
   position: absolute;
-  bottom: -3px;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 0px;
+  top: -10px;
 }
 </style>
