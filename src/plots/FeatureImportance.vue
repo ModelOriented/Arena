@@ -8,13 +8,14 @@
 </template>
 <script>
 import Resize from '@/utils/Resize.js'
+import OptionsMixin from '@/utils/OptionsMixin.js'
 import format from '@/utils/format.js'
 import { mapGetters } from 'vuex'
 const Plotly = () => import('@/components/Plotly.vue')
 
 export default {
   name: 'FeatureImportance',
-  mixins: [Resize],
+  mixins: [Resize, OptionsMixin],
   props: {
     data: Array,
     plotType: String,
@@ -222,9 +223,9 @@ export default {
     layoutPatches () {
       return { 'xaxis.range': this.range, 'margin.l': this.leftMargin }
     },
-    maxVariables () { return this.$store.getters.getOption('featureimportance_max_variables') },
-    leftMargin () { return this.$store.getters.getOption('left_margin') },
-    displayBoxplots () { return this.$store.getters.getOption('featureimportance_boxplots') },
+    maxVariables () { return this.getOption('featureimportance_max_variables') },
+    leftMargin () { return this.getOption('left_margin') },
+    displayBoxplots () { return this.getOption('featureimportance_boxplots') },
     ...mapGetters(['scopesColors'])
   },
   methods: {
@@ -235,11 +236,10 @@ export default {
       let points = e.data.points.filter(p => p.curveNumber < this.transformed.length) // Boxplots are after all bars
       if (points.length === 0) return
       let yaxis = points[0].yaxis // All points have the same
-      // I do not know why it works, I just found this by experiments
-      let barWidth = (yaxis._length - yaxis._m - yaxis._b) / (this.transformed.length * yaxis._categories.length)
+      let barWidth = yaxis._length * (1 - this.layout.bargap) / (this.transformed.length * yaxis._categories.length)
       let barsTop = yaxis.d2p(points[0].y) - (0.5 * barWidth * this.transformed.length) // Center - half of widths sum
       let curveNum = Math.floor((e.data.event.pointerY - barsTop) / barWidth) // Assuming plot is at top:0
-      if (curveNum >= this.transformed.length || curveNum < 0) return
+      if (isNaN(curveNum) || curveNum >= this.transformed.length || curveNum < 0) return
       let model = this.transformed[curveNum].params.model
       // If this model is already selected, then unselect
       this.selectedModel = this.selectedModel === model ? null : model

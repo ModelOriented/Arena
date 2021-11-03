@@ -145,17 +145,30 @@ const actions = {
     return Promise.all(promises).then(results => results.find(r => r))
   },
   async loadURL ({ dispatch, commit }, url) {
-    let response = await Vue.http.get(url)
-    await dispatch('loadData', { data: response.body, src: url })
-    commit('addRecentURL', url)
-  },
-  async loadData ({ dispatch, getters }, data) {
-    for (let ds of getters.dataSources) {
-      if (await dispatch(ds + '/loadData', data)) return
+    let notificationId = await dispatch('createNotification', { type: 'loading', text: 'Downloading data file' })
+    try {
+      let response = await Vue.http.get(url)
+      await dispatch('loadData', { data: response.body, src: url })
+      commit('addRecentURL', url)
+    } catch (e) {
+      dispatch('createNotification', { type: 'error', text: 'Download failed' })
+    } finally {
+      commit('delNotification', notificationId)
     }
+  },
+  async loadData ({ dispatch, getters, commit }, data) {
+    let notificationId = await dispatch('createNotification', { type: 'loading', text: 'Importing data' })
+    for (let ds of getters.dataSources) {
+      if (await dispatch(ds + '/loadData', data)) {
+        commit('delNotification', notificationId)
+        return
+      }
+    }
+    commit('delNotification', notificationId)
+    dispatch('createNotification', { type: 'error', text: 'Failed to import data' })
     console.error('Failed to load data')
   },
-  exportSession ({ getters }) {
+  exportSession ({ getters, dispatch }) {
     let sources = getters.dataSources.map(ds => getters[ds + '/sources'])
       .flat()
       .sort((a, b) => a.timestamp - b.timestamp)
@@ -166,6 +179,9 @@ const actions = {
           uuid: source.uuid
         }
       })
+    if (sources.find(s => s.address.startsWith('UPLOAD'))) {
+      dispatch('createNotification', { type: 'warning', text: 'There are manualy uploaded data sources. They will not be available in shared session.' })
+    }
     let slots = getters.allSlots
     let colors = getters.manualColors
     let annotations = getters.annotations
@@ -247,7 +263,9 @@ const actions = {
     if (!token) {
       return new Promise((resolve, reject) => {
         commit('setTokenCallback', resolve)
-        window.open('https://github.com/login/oauth/authorize?client_id=' + config.githubClientId + '&state=' + uuid() + '&scope=gist')
+        const protocol = window.location.protocol.slice(0, -1)
+        const clientId = config['githubClientId_' + protocol]
+        window.open('https://github.com/login/oauth/authorize?client_id=' + clientId + '&state=' + protocol + '_' + uuid() + '&scope=gist')
       })
     } else {
       return token
@@ -271,8 +289,16 @@ const actions = {
     commit('clearTokenCallback')
   },
   async loadSessionURL ({ dispatch, commit }, url) {
-    let response = await Vue.http.get(url)
-    await dispatch('importSession', response.body)
+    let notificationId = await dispatch('createNotification', { type: 'loading', text: 'Loading session' })
+    try {
+      let response = await Vue.http.get(url)
+      await dispatch('importSession', response.body)
+    } catch (e) {
+      console.error(e)
+      dispatch('createNotification', { type: 'error', text: 'Loading session failed' })
+    } finally {
+      commit('delNotification', notificationId)
+    }
   },
   initPeer ({ commit, getters }) {
     let peer = new Peer()

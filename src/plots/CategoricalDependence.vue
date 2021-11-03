@@ -6,12 +6,13 @@
 <script>
 import Resize from '@/utils/Resize.js'
 import format from '@/utils/format.js'
+import OptionsMixin from '@/utils/OptionsMixin.js'
 import { mapGetters } from 'vuex'
 const Plotly = () => import('@/components/Plotly.vue')
 
 export default {
   name: 'CategoricalDependence',
-  mixins: [Resize],
+  mixins: [Resize, OptionsMixin],
   props: {
     data: Array,
     plotType: String
@@ -115,7 +116,7 @@ export default {
     layoutPatches () {
       return { 'xaxis.range': this.range, 'margin.l': this.leftMargin }
     },
-    leftMargin () { return this.$store.getters.getOption('left_margin_values') },
+    leftMargin () { return this.getOption('left_margin_values') },
     ...mapGetters(['scopesColors'])
   },
   components: {

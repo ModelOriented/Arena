@@ -13,11 +13,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import format from '@/utils/format.js'
+import OptionsMixin from '@/utils/OptionsMixin.js'
 import LolipopAxis from '@/utils/lolipopAxis.js'
 const Plotly = () => import('@/components/Plotly.vue')
 
 export default {
   name: 'FunnelMeasure',
+  mixins: [OptionsMixin],
   props: {
     data: Array,
     plotType: String
@@ -29,7 +31,7 @@ export default {
     data () { this.page = 0 }
   },
   computed: {
-    pageSize () { return this.$store.getters.getOption('funnelmeasure_page_size') },
+    pageSize () { return this.getOption('funnelmeasure_page_size') },
     pagesCount () { return Math.ceil(this.variables.length / this.pageSize) },
     pageRange () {
       let first = this.page * this.pageSize

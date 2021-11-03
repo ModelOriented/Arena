@@ -5,6 +5,7 @@
     <div id="playground" :class="{ blured: settingsVisible }">
       <Block v-for="slot in visibleSlots" :key="slot.uuid" :slotv="slot" @openFullscreen="fullscreenSlot = slot"/>
     </div>
+    <Notifications />
     <Annotations />
     <DeleteZone />
     <PagesBar />
@@ -32,6 +33,7 @@ import WelcomeScreen from '@/components/WelcomeScreen.vue'
 import Annotations from '@/components/Annotations.vue'
 import config from '@/configuration/config.js'
 import PagesBar from '@/components/PagesBar.vue'
+import Notifications from '@/components/Notifications.vue'
 
 export default {
   name: 'app',
@@ -46,7 +48,8 @@ export default {
     NameConflicts,
     WelcomeScreen,
     Annotations,
-    PagesBar
+    PagesBar,
+    Notifications
   },
   data () {
     return {
@@ -94,7 +97,10 @@ export default {
           let token = response.body
           if (connectorPort) window.location.replace('http://localhost:' + connectorPort + '/?token=' + token)
           else this.$store.dispatch('loadGithubToken', token).then(() => window.close())
-        }).catch(console.error)
+        }).catch(e => {
+          console.error(e)
+          this.$store.dispatch('createNotification', { type: 'error', text: 'Failed to authorize' })
+        })
       }
 
       if (peerServer) {
@@ -107,11 +113,13 @@ export default {
           dataURL = config.examples[nr].url
           sessionURL = config.examples[nr].session
         } catch (e) {
-          console.error('Failed to load demo', e)
+          console.error(e)
+          this.$store.dispatch('createNotification', { type: 'error', text: 'Failed to find demo' })
+          dataURL = sessionURL = null
         }
       }
       if (sessionURL) {
-        this.$store.dispatch('loadSessionURL', sessionURL).catch(console.error)
+        this.$store.dispatch('loadSessionURL', sessionURL)
         this.displayWelcomeScreen = false
       } else if (sessionUUID) {
         let session = this.recentSessions.find(s => s.uuid === sessionUUID)
@@ -120,7 +128,7 @@ export default {
           this.displayWelcomeScreen = false
         }
       } else if (dataURL) {
-        this.$store.dispatch('loadURL', dataURL).catch(console.error)
+        this.$store.dispatch('loadURL', dataURL)
         this.displayWelcomeScreen = false
       }
 
@@ -142,7 +150,7 @@ export default {
       }
 
       window.addEventListener('storage', e => {
-        if (e.key === 'append' && e.newValue) this.$store.dispatch('loadURL', e.newValue).catch(console.error)
+        if (e.key === 'append' && e.newValue) this.$store.dispatch('loadURL', e.newValue)
         if (e.key === 'githubToken' && e.newValue) this.$store.dispatch('loadGithubToken', e.newValue).catch(console.error)
       })
     })

@@ -16,11 +16,14 @@ import Message from '@/plots/Message.vue'
 import DistributionCounts from '@/plots/DistributionCounts.vue'
 import DistributionHistogram from '@/plots/DistributionHistogram.vue'
 import VariableAgainstAnother from '@/plots/VariableAgainstAnother.vue'
+import LinearShapleyDependence from '@/plots/LinearShapleyDependence.vue'
+import CategoricalShapleyDependence from '@/plots/CategoricalShapleyDependence.vue'
+import ShapleyValuesVariableImportance from '@/plots/ShapleyValuesVariableImportance.vue'
 import RegressionFairness from '@/plots/RegressionFairness.vue'
 
 export default {
   plotComponents: {
-    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, Fairness, SubsetsPerformance, Message, DistributionCounts, DistributionHistogram, VariableAgainstAnother, RegressionFairness
+    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, Fairness, SubsetsPerformance, Message, DistributionCounts, DistributionHistogram, VariableAgainstAnother, RegressionFairness, LinearShapleyDependence, CategoricalShapleyDependence, ShapleyValuesVariableImportance
   },
   canMerge (slot1, slot2) {
     if (!slot1 || !slot2 || slot1 === slot2 || slot1.plotType !== slot2.plotType) return false
@@ -28,8 +31,8 @@ export default {
     let testSameParamName = paramType => (new Set([...slot1.localParams, ...slot2.localParams].map(params => params[paramType])).size === 1)
     let sameVariable = testSameParamName('variable')
     let sameObservation = testSameParamName('observation')
-    if (type === 'PartialDependence' || type === 'AccumulatedDependence' || type === 'CeterisParibus' || type === 'Fairness') return sameVariable
-    if (type === 'FeatureImportance') return true
+    if (type === 'PartialDependence' || type === 'AccumulatedDependence' || type === 'CeterisParibus' || type === 'Fairness' || type === 'ShapleyValuesDependence') return sameVariable
+    if (type === 'FeatureImportance' || type === 'ShapleyValuesVariableImportance') return true
     if (type === 'SHAPValues') return sameObservation
     if (type === 'ROC') return true
     if (type === 'REC') return true
@@ -44,17 +47,13 @@ export default {
     FeatureImportance: [],
     PartialDependence: ['variable'],
     AccumulatedDependence: ['variable'],
+    ShapleyValuesDependence: ['variable'],
     CeterisParibus: ['variable', 'observation'],
     SHAPValues: ['observation'],
     Fairness: ['variable'],
     VariableDistribution: ['variable'],
-    VariableAgainstAnother: ['variable']
-  },
-  isLinear (plotComponent) {
-    return ['LinearDependence', 'NumericalCeterisParibus', 'ROC', 'REC'].includes(plotComponent)
-  },
-  isBars (plotComponent) {
-    return ['FeatureImportance', 'CategoricalDependence', 'CategoricalCeterisParibus', 'SHAPValues'].includes(plotComponent)
+    VariableAgainstAnother: ['variable'],
+    ShapleyValuesVariableImportance: []
   },
   getPlotDoc (plotType) {
     const docs = {
@@ -74,5 +73,28 @@ export default {
       'VariableAgainstAnother': 'https://arena.drwhy.ai/docs/guide/eda-charts#variable-against-another'
     }
     return docs[plotType] || ''
+  },
+  optionsCategories: {
+    Breakdown: ['Break Down', ['Margins', 'left_margin']],
+    FeatureImportance: ['Variable Importance', ['Margins', 'left_margin']],
+    CategoricalDependence: [['Margins', 'left_margin_values']],
+    LinearDependence: [],
+    NumericalCeterisParibus: [],
+    CategoricalCeterisParibus: [['Margins', 'left_margin_values']],
+    SHAPValues: ['Shapley Values', ['Margins', 'left_margin']],
+    HtmlWidget: [],
+    ROC: [],
+    REC: [],
+    Metrics: [],
+    FunnelMeasure: ['Funnel Plot'],
+    Fairness: [],
+    SubsetsPerformance: ['Subset Performance'],
+    Message: [],
+    DistributionCounts: [['Margins', 'left_margin_values']],
+    DistributionHistogram: [],
+    VariableAgainstAnother: [],
+    LinearShapleyDependence: ['Shapley Dependence'],
+    CategoricalShapleyDependence: [['Margins', 'left_margin_values']],
+    ShapleyValuesVariableImportance: ['Variable Importance', ['Margins', 'left_margin']]
   }
 }
