@@ -14,10 +14,10 @@ deploy:
     all_branches: true
     repo: ModelOriented/Arena
 before_install:
-- add-apt-repository ppa:deadsnakes/ppa
-- apt-get update
-- apt-get -y install python3.8 python3.8-distutils
-- curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3.8 get-pip.py && rm get-pip.py
+- sudo add-apt-repository ppa:deadsnakes/ppa
+- sudo apt-get update
+- sudo apt-get -y install python3.8 python3.8-distutils
+- sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3.8 get-pip.py && rm get-pip.py
 - python --version
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_d496dfbd0e99_key -iv $encrypted_d496dfbd0e99_iv
