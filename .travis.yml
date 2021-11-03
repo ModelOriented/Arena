@@ -17,7 +17,7 @@ before_install:
 - sudo add-apt-repository -y ppa:deadsnakes/ppa
 - sudo apt-get update
 - sudo apt-get -y install python3.8 python3.8-distutils
-- sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3.8 get-pip.py && rm get-pip.py
+- sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3.8 get-pip.py && rm -f get-pip.py
 - python --version
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_d496dfbd0e99_key -iv $encrypted_d496dfbd0e99_iv
