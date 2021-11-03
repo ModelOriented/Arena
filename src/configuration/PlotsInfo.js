@@ -16,10 +16,11 @@ import Message from '@/plots/Message.vue'
 import DistributionCounts from '@/plots/DistributionCounts.vue'
 import DistributionHistogram from '@/plots/DistributionHistogram.vue'
 import VariableAgainstAnother from '@/plots/VariableAgainstAnother.vue'
+import RegressionFairness from '@/plots/RegressionFairness.vue'
 
 export default {
   plotComponents: {
-    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, Fairness, SubsetsPerformance, Message, DistributionCounts, DistributionHistogram, VariableAgainstAnother
+    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, Fairness, SubsetsPerformance, Message, DistributionCounts, DistributionHistogram, VariableAgainstAnother, RegressionFairness
   },
   canMerge (slot1, slot2) {
     if (!slot1 || !slot2 || slot1 === slot2 || slot1.plotType !== slot2.plotType) return false
