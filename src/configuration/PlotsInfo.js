@@ -19,10 +19,11 @@ import VariableAgainstAnother from '@/plots/VariableAgainstAnother.vue'
 import LinearShapleyDependence from '@/plots/LinearShapleyDependence.vue'
 import CategoricalShapleyDependence from '@/plots/CategoricalShapleyDependence.vue'
 import ShapleyValuesVariableImportance from '@/plots/ShapleyValuesVariableImportance.vue'
+import RegressionFairness from '@/plots/RegressionFairness.vue'
 
 export default {
   plotComponents: {
-    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, Fairness, SubsetsPerformance, Message, DistributionCounts, DistributionHistogram, VariableAgainstAnother, LinearShapleyDependence, CategoricalShapleyDependence, ShapleyValuesVariableImportance
+    Breakdown, FeatureImportance, CategoricalDependence, LinearDependence, NumericalCeterisParibus, CategoricalCeterisParibus, SHAPValues, HtmlWidget, ROC, REC, Metrics, FunnelMeasure, Fairness, SubsetsPerformance, Message, DistributionCounts, DistributionHistogram, VariableAgainstAnother, RegressionFairness, LinearShapleyDependence, CategoricalShapleyDependence, ShapleyValuesVariableImportance
   },
   canMerge (slot1, slot2) {
     if (!slot1 || !slot2 || slot1 === slot2 || slot1.plotType !== slot2.plotType) return false
