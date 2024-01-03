@@ -21,7 +21,7 @@
     "fuse.js": "^4.0.0-beta",
     "interactjs": "^1.10.11",
     "peerjs": "github:peers/peerjs#master",
-    "plotly.js": "^1.58.5",
+    "plotly.js": "^2.25.2",
     "stats-webpack-plugin": "^0.7.0",
     "uuid": "^3.4.0",
     "vue": "^2.6.14",
